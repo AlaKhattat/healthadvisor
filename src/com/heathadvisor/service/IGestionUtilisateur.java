@@ -5,10 +5,19 @@
  */
 package com.heathadvisor.service;
 
+import com.healthadvisor.entities.Utilisateur;
+import java.util.List;
+
 /**
  *
  * @author khattout
  */
 public interface IGestionUtilisateur {
+    
+    public void AjouterUtilisateur(Utilisateur utilisateur);
+    public void ModifierUtilisateur(Utilisateur utilisateur);
+    public void SupprimerUtilisateurCin(String cin);
+    public List<Utilisateur> ListUtilisateurs();
+    public Utilisateur AfficherUtilisateurCin(String cin);
     
 }
