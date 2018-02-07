@@ -7,11 +7,9 @@ package com.healthadvisor.entities;
 
 /**
  *
- * @author asus
+ * @author Tarek
  */
-
-public class Aliment 
-{
-  private String nom_aliment;
-    
+public class UtilisateurSondage {
+    private Utilisateur u;
+    private Sondage s;
 }
