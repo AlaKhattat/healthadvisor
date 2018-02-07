@@ -9,7 +9,6 @@ import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Utilisateur;
 import com.heathadvisor.service.IGestionMedecin;
 import com.heathadvisor.service.IGestionUtilisateur;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,7 +55,23 @@ public class GestionUtilisateur implements IGestionUtilisateur{
 
     @Override
     public void ModifierUtilisateur(Utilisateur utilisateur) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+                Statement stm =database.getConnexion().createStatement();
+
+           String sql="UPDATE utilisateur SET nom="+utilisateur.getNom()
+                   +", prenom="+utilisateur.getPrenom()
+                   +", email='"+utilisateur.getEmail()
+                   +"', date_naiss="+utilisateur.getDate_naiss()
+                   +"', sexe="+utilisateur.getSexe()
+                   +"', pays="+utilisateur.getPays()
+                   +"', vile="+utilisateur.getVille()
+                   +" WHERE cin="+utilisateur.getCin();
+            stm.executeUpdate(sql);
+           System.out.println("Utilisateur bien modifiÃ©");
+           
+        }catch(SQLException e){
+           System.out.println(e.getMessage());
+       }
     }
 
     @Override
@@ -74,7 +89,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
 
     @Override
     public List<Utilisateur> ListUtilisateurs() {
-           ArrayList<Utilisateur> listutil= new ArrayList<>();
+    ArrayList<Utilisateur> listutil= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from utilisateur" ;
@@ -94,7 +109,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
 
     @Override
     public Utilisateur AfficherUtilisateurCin(String cin) {
-        Utilisateur util =null;
+    Utilisateur util =null;
         try {
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from utilisateur where cin='"+cin+"'" ;

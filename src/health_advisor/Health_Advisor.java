@@ -58,11 +58,10 @@ public class Health_Advisor extends Application {
         
         java.util.Date date=new java.util.Date("13/10/1995");
         System.out.println("hello");
-        GestionUtilisateur gest_util=new GestionUtilisateur();
-        Utilisateur util=new Utilisateur("12345678", "ala", "khattat", "ala@ala.ala", date, "homme", "tunisie", "ariana");
-        gest_util.AjouterUtilisateur(util);
+        GestionMedecin gest_med=new GestionMedecin();
         
-        
+        Medecin med=new Medecin("medecin","generaliste","rue25","esprit",125,"12345678", "ala", "khattat", "ala@ala.ala", date, "homme", "tunisie", "ariana");
+        gest_med.AjouterMedecin(med);
         
         
         
