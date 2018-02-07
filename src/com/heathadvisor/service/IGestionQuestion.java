@@ -1,0 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.heathadvisor.service;
+
+import com.healthadvisor.entities.Question;
+
+/**
+ *
+ * @author Tarek
+ */
+public interface IGestionQuestion {
+    
+    public void ajouterQuestion(Question q);
+    public void supprimerQuestion(Question q);
+    public void updateQuestion (Question q);
+    public void afficherQuestion (Question q);
+}

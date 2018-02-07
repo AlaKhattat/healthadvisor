@@ -12,6 +12,11 @@ package com.healthadvisor.entities;
 public class Sondage {
     private String nomSondage;
 
+    public Sondage(String nomSondage) {
+        this.nomSondage = nomSondage;
+    }
+    
+
     public String getNomSondage() {
         return nomSondage;
     }
