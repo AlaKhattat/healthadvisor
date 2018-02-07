@@ -34,11 +34,11 @@ public class GestionMedecin implements IGestionMedecin{
             Statement stm =database.getConnexion().createStatement();
             String sql="Insert into medecin (login,specialite,adresse,diplome,rating) "+ " values (?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
-            preparedStmt.setString(1,medecin.getNom());
-            preparedStmt.setString(2,medecin.getNom());
-            preparedStmt.setString(3,medecin.getNom());
-            preparedStmt.setString(4,medecin.getNom());
-            preparedStmt.setString(5,medecin.getNom());
+            preparedStmt.setString(1,medecin.getLogin());
+            preparedStmt.setString(2,medecin.getSpecilaite());
+            preparedStmt.setString(3,medecin.getAdresse());
+            preparedStmt.setString(4,medecin.getDiplome());
+            preparedStmt.setInt(5,medecin.getRating());
 
               preparedStmt.executeUpdate();
 

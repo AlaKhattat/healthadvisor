@@ -5,6 +5,10 @@
  */
 package health_advisor;
 
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.impl.service.GestionMedecin;
+import com.healthadvisor.impl.service.GestionUtilisateur;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,7 +49,13 @@ public class Health_Advisor extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        
+        java.util.Date date=new java.util.Date("13/10/1995");
+        System.out.println("hello");
+        GestionUtilisateur gest_util=new GestionUtilisateur();
+        Utilisateur util=new Utilisateur("12345678", "ala", "khattat", "ala@ala.ala", date, "homme", "tunisie", "ariana");
+        gest_util.AjouterUtilisateur(util);
     }
     
 }
