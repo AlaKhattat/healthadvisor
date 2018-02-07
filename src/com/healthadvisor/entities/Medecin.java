@@ -18,7 +18,7 @@ public class Medecin extends Utilisateur {
     private String diplome;
     private int rating;
 
-    
+
     public Medecin(String login, String specilaite, String adresse, String diplome, int rating, String cin, String nom, String prenom, String email, Date date_naiss, String sexe, String pays, String ville) {
         super(cin, nom, prenom, email, date_naiss, sexe, pays, ville);
         this.login = login;
@@ -27,6 +27,10 @@ public class Medecin extends Utilisateur {
         this.diplome = diplome;
         this.rating = rating;
     }
+   
+
+    
+   
 
     public String getLogin() {
         return login;
