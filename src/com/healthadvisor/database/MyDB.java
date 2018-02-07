@@ -34,7 +34,7 @@ public class MyDB
         try
         {
               this.con = DriverManager.getConnection(url,user,pwd);
-              System.out.println("Connexion etablis avec succes");
+              System.out.println("Connexion établie avec succès");
         }
        catch(SQLException e)
        {

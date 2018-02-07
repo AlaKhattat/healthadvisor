@@ -38,4 +38,22 @@ public class Reponse {
     public void setReponse(String reponse) {
         this.reponse = reponse;
     }
+
+    public Medecin getMedecin() {
+        return medecin;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setMedecin(Medecin medecin) {
+        this.medecin = medecin;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+    
+    
 }

@@ -56,7 +56,7 @@ public class GestionQuestion implements IGestionQuestion{
             prep.executeUpdate();
             System.out.println("Question supprimée.");
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println("Question non supprimée !");
         }
     }
 
@@ -69,7 +69,7 @@ public class GestionQuestion implements IGestionQuestion{
             prep.executeUpdate();
             System.out.println("Question mise à jour.");
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println("Erreur de mise à jour !");
         }
     }
 
@@ -79,11 +79,9 @@ public class GestionQuestion implements IGestionQuestion{
           
         try {
             Statement stm = myDB.getConnexion().createStatement();
-            ResultSet rest= 
-                    stm.executeQuery("select * from question");
-                 System.out.println("ID | QUESTION | ID_PATIENT");   
-            while(rest.next()){
-                System.out.println(rest.getInt(1)+" | "+rest.getString(2)+" | "+rest.getString(3));     
+            ResultSet r= stm.executeQuery("select * from question");  
+            while(r.next()){
+                System.out.println("ID = "+r.getInt(1)+" | QUESTION = "+r.getString(2)+" | ID_PATIENT = "+r.getString(3));     
             }
            
         } catch (SQLException ex) {
