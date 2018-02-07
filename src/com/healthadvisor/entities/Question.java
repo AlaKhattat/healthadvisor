@@ -16,7 +16,7 @@ public class Question {
     private int id;
     private String question;
     private List<Reponse> listeReponses = new ArrayList<Reponse>() ;
-    private Patient p;
+    private Patient patient;
 
     public int getId() {
         return id;

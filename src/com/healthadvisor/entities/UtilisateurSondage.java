@@ -10,6 +10,6 @@ package com.healthadvisor.entities;
  * @author Tarek
  */
 public class UtilisateurSondage {
-    private Utilisateur u;
-    private Sondage s;
+    private Utilisateur utilisateur_s;
+    private Sondage sondage;
 }
