@@ -15,7 +15,6 @@ import java.util.List;
 public class Question {
     private int id;
     private String question;
-    private List<Reponse> listeReponses = new ArrayList<Reponse>() ;
     private Patient patient;
 
     public Question(int id, String question, Patient patient) {
@@ -41,4 +40,14 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    
 }
