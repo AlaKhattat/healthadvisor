@@ -12,4 +12,6 @@ package com.healthadvisor.entities;
 public class UtilisateurSondage {
     private Utilisateur utilisateur_s;
     private Sondage sondage;
+    
+    
 }

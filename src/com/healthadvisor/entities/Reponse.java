@@ -15,6 +15,14 @@ public class Reponse {
     private Medecin medecin;
     private Question question;
 
+    public Reponse(int id, String reponse, Medecin medecin, Question question) {
+        this.id = id;
+        this.reponse = reponse;
+        this.medecin = medecin;
+        this.question = question;
+    }
+    
+
     public int getId() {
         return id;
     }

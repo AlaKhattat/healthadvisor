@@ -18,6 +18,14 @@ public class Question {
     private List<Reponse> listeReponses = new ArrayList<Reponse>() ;
     private Patient patient;
 
+    public Question(int id, String question, Patient patient) {
+        this.id = id;
+        this.question = question;
+        this.patient = patient;
+    }
+    
+    
+
     public int getId() {
         return id;
     }
