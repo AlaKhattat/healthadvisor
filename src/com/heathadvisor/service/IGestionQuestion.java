@@ -15,6 +15,6 @@ public interface IGestionQuestion {
     
     public void ajouterQuestion(Question q);
     public void supprimerQuestion(Question q);
-    public void updateQuestion (Question q);
-    public void afficherQuestion (Question q);
+    public void updateQuestion (int id, String question);
+    public void afficherQuestion (); 
 }

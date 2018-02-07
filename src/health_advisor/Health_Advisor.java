@@ -9,6 +9,10 @@ import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.impl.service.GestionMedecin;
 import com.healthadvisor.impl.service.GestionUtilisateur;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.Question;
+import com.healthadvisor.impl.service.GestionQuestion;
+import java.security.Provider;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 
 /**
  *
@@ -56,6 +61,12 @@ public class Health_Advisor extends Application {
         GestionUtilisateur gest_util=new GestionUtilisateur();
         Utilisateur util=new Utilisateur("12345678", "ala", "khattat", "ala@ala.ala", date, "homme", "tunisie", "ariana");
         gest_util.AjouterUtilisateur(util);
+        
+        
+        
+        
+        
+        
     }
     
 }
