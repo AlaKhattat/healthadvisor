@@ -53,14 +53,10 @@ public class Health_Advisor extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        //launch(args);
-        
-     
-        
-        
-        
-        
+    public static void main(String[] args)
+    {
+        //launch(args);    
+        System.out.println("hello WANNACRY if you see this that mean everything is OKAY");       
     }
     
 }
