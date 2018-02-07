@@ -9,9 +9,21 @@ package com.healthadvisor.entities;
  *
  * @author asus
  */
-
-public class Aliment 
+public enum Type_Aliment 
 {
-  private String nom_aliment;
-    
+    matiereGrasse,
+    laitier,
+    legumes,
+    fruits,
+    viandes,
+    volailles,
+    poissons,
+    haricot_sec,
+    ouefs,
+    noix,
+    pains,
+    cereales,
+    riz,
+    pates
+     
 }

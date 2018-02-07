@@ -7,11 +7,16 @@ package com.healthadvisor.entities;
 
 /**
  *
- * @author asus
+ * @author Tarek
  */
+public class Sondage {
+    private String nomSondage;
 
-public class Aliment 
-{
-  private String nom_aliment;
-    
+    public String getNomSondage() {
+        return nomSondage;
+    }
+
+    public void setNomSondage(String nomSondage) {
+        this.nomSondage = nomSondage;
+    }
 }
