@@ -6,6 +6,9 @@
 package health_advisor;
 
 import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.impl.service.GestionMedecin;
+import com.healthadvisor.impl.service.GestionUtilisateur;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
@@ -53,22 +56,10 @@ public class Health_Advisor extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
-        
-        java.util.Date myDate = new java.util.Date("13/02/2018");
-        Patient p = new Patient("tarek", "pass", "1", "tarek", "kilani", "tarek@kilani", myDate, "homme", "tunisie", "tunis");
-        Question q = new Question(3, "ma question", p);
+        //launch(args);
         
         
         
-        GestionReponse gr = new GestionReponse();
-        Medecin m = new Medecin("tarek", "spec", "addr", "dip", 5, "1", "tarek", "kilani", "tarek@kilani", myDate, "homme", "tunisie", "tunis");
-        Reponse r= new Reponse(5, "ma reponse", m, q);
-        gr.ajouterReponse(r);
-        //gr.supprimerReponse(r);
-        
-        gr.updateReponse(5, "mynew answer");
-        gr.afficherReponse();
     }
     
 }

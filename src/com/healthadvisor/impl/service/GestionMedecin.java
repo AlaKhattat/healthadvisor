@@ -30,15 +30,15 @@ public class GestionMedecin implements IGestionMedecin{
 
     @Override
     public void AjouterMedecin(Medecin medecin) {
- try {
+        try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into medecin (login,specialite,adresse,diplome,rating) "+ " values (?,?,?,?,?)";
+            String sql="Insert into medecin (login_med,specialite,adresse,diplome,rating) "+ " values (?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
-            preparedStmt.setString(1,medecin.getNom());
-            preparedStmt.setString(2,medecin.getNom());
-            preparedStmt.setString(3,medecin.getNom());
-            preparedStmt.setString(4,medecin.getNom());
-            preparedStmt.setString(5,medecin.getNom());
+            preparedStmt.setString(1,medecin.getLogin());
+            preparedStmt.setString(2,medecin.getSpecilaite());
+            preparedStmt.setString(3,medecin.getAdresse());
+            preparedStmt.setString(4,medecin.getDiplome());
+            preparedStmt.setInt(5,medecin.getRating());
 
               preparedStmt.executeUpdate();
 
@@ -50,12 +50,26 @@ public class GestionMedecin implements IGestionMedecin{
 
     @Override
     public void ModifierMedecin(Medecin medecin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+                Statement stm =database.getConnexion().createStatement();
+
+           String sql="UPDATE utilisateur SET login_med="+medecin.getNom()
+                   +", specialite="+medecin.getSpecilaite()
+                   +", adresse='"+medecin.getAdresse()
+                   +"', diplome="+medecin.getDiplome()
+                   +"', rating="+medecin.getRating()
+                   +" WHERE cin="+medecin.getCin();
+            stm.executeUpdate(sql);
+           System.out.println("Medecin bien modifiÃ©");
+           
+        }catch(SQLException e){
+           System.out.println(e.getMessage());
+       }    
     }
 
     @Override
     public void SupprimerMedecinCin(String cin) {
- try {
+        try {
             Statement stm =database.getConnexion().createStatement();
             String sql="Delete from medein where cin='"+cin+"'" ;
             stm.executeUpdate(sql);
@@ -67,7 +81,7 @@ public class GestionMedecin implements IGestionMedecin{
 
     @Override
     public List<Medecin> ListMedecin() {
-        ArrayList<Medecin> listmed= new ArrayList<>();
+    ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from medecin" ;
@@ -126,7 +140,7 @@ public class GestionMedecin implements IGestionMedecin{
 
     @Override
     public List<Medecin> AfficherMedecinAdresse(String adresse) {
-ArrayList<Medecin> listmed= new ArrayList<>();
+    ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from medecin adresse='"+adresse+"'" ;
