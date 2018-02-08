@@ -149,18 +149,29 @@ public class GestionAliment implements IGestionAliment
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
     @Override
-    public List<Aliment> rechercherAlimentAvancee(Aliment aliment) 
+    public List<Aliment> rechercherAlimentAvancee(String aliment) 
     {
        ArrayList<Aliment>aliments = new ArrayList<>();
        try
        {
-           String query ="select * from aliment where nom_aliment like ? or quantite like ? or valeur_energetique like ? or type_aliment like ?";
+           String query ="select * from aliment where nom_aliment like ? or quantite=? or valeur_energetique=? or type_aliment like ?";
            PreparedStatement statement = database.getConnexion().prepareStatement(query);
-           statement.setString(1, '%'+aliment.getNom_aliment()+'%');          
-           statement.setFloat(2, '%'+aliment.getQuantite()+'%');
-           statement.setFloat(3,'%'+aliment.getValeur_energetique()+'%');
-           statement.setString(4,'%'+aliment.totalTypeAliment()+'%');
+           statement.setString(1, '%'+aliment+'%');          
+           try   //this will generate an exception if it's impossible to parse a string to float
+           {
+                statement.setFloat(2,Float.parseFloat(aliment));
+                statement.setFloat(3,Float.parseFloat(aliment));
+           }
+           catch(NumberFormatException | SQLException ex)//if the parsing is impossible the default value of query parameter will be 0.0
+           {      
+               System.out.println("erreur impossible de convertir: "+ex.getMessage());
+               statement.setFloat(2,0.0f);
+               statement.setFloat(3,0.0f);   
+           }
+          
+           statement.setString(4,'%'+aliment+'%');
            ResultSet result = statement.executeQuery();
            while(result.next())
            {
