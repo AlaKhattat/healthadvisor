@@ -38,9 +38,11 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             preparedStmt.setString(2,utilisateur.getNom());
             preparedStmt.setString(3,utilisateur.getPrenom());
             preparedStmt.setString(4,utilisateur.getEmail());
+            
             java.util.Date utilStartDate = utilisateur.getDate_naiss();
             java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
             preparedStmt.setDate(5, sqlStartDate );
+            
             preparedStmt.setString(6,utilisateur.getSexe());
             preparedStmt.setString(7,utilisateur.getPays());
             preparedStmt.setString(8,utilisateur.getVille());
@@ -92,11 +94,11 @@ public class GestionUtilisateur implements IGestionUtilisateur{
     ArrayList<Utilisateur> listutil= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from utilisateur" ;
+            String sql="SELECT * FROM utilisateur" ;
             ResultSet rs = stm.executeQuery(sql);
-            
             while(rs.next()){
-                Utilisateur util= new Utilisateur(rs.getString(0),rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7));
+                System.out.println("recuperation des donnees");
+                Utilisateur util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"));
                 listutil.add(util);
             }
             
@@ -114,9 +116,9 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from utilisateur where cin='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
-            
-            util= new Utilisateur(rs.getString(0),rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4), rs.getString(5), rs.getString(6), rs.getString(7));
-            
+                        while(rs.next()){
+                            util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"));
+                        }
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {

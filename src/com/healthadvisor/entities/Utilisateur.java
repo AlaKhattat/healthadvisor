@@ -97,6 +97,11 @@ private String ville;
         this.ville = ville;
     }
 
+    @Override
+    public String toString() {
+        return "Utilisateur{" + "cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", date_naiss=" + date_naiss + ", sexe=" + sexe + ", pays=" + pays + ", ville=" + ville + '}';
+    }
+
 
     
 }

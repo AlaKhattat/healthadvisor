@@ -11,7 +11,10 @@ import com.healthadvisor.impl.service.GestionMedecin;
 import com.healthadvisor.impl.service.GestionUtilisateur;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
+import com.healthadvisor.entities.Rendez_Vous;
+import com.healthadvisor.impl.service.GestionPatient;
 import com.healthadvisor.impl.service.GestionQuestion;
+import com.healthadvisor.impl.service.GestionRendezVous;
 import java.security.Provider;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -56,16 +59,34 @@ public class Health_Advisor extends Application {
     public static void main(String[] args) {
         //launch(args);
         
-        java.util.Date date=new java.util.Date("13/10/1995");
-        System.out.println("hello");
-        GestionMedecin gest_med=new GestionMedecin();
-        
-        Medecin med=new Medecin("medecin","generaliste","rue25","esprit",125,"12345678", "ala", "khattat", "ala@ala.ala", date, "homme", "tunisie", "ariana");
-        gest_med.AjouterMedecin(med);
-        
-        
-        
-        
     }
     
 }
+/*
+ GestionUtilisateur gest_ut=new GestionUtilisateur();
+        GestionMedecin get_med=new GestionMedecin();
+        GestionPatient get_p=new GestionPatient();
+        get_med.SupprimerMedecinCin("124");
+ Utilisateur u=new Utilisateur("324", "skander", "lengliz", "ska@ska", date, "homme", "tunisie", "ariana");
+        gest_ut.AjouterUtilisateur(u);
+        Patient p =new Patient("324", "skander","324");
+        get_p.AjouterPatient(p);
+        Medecin m= new Medecin("324", "generaliste", "rue2", "alala", 12458,"324","skander","324");
+        get_med.AjouterMedecin(m);
+        System.out.println(gest_ut.ListUtilisateurs());
+        for(int i=0;i<gest_ut.ListUtilisateurs().size();i++){
+            System.out.println("utilisateur :"+gest_ut.ListUtilisateurs().get(i)+"\n");
+        }
+         for(int i=0;i<get_med.ListMedecin().size();i++){
+            System.out.println("medecins :"+get_med.ListMedecin().get(i)+"\n");
+        }
+          for(int i=0;i<get_p.ListPatient().size();i++){
+            System.out.println("patients :"+get_p.ListPatient().get(i)+"\n");
+        }
+
+ java.util.Date date=new java.util.Date("13/10/1995");
+        GestionRendezVous gr=new GestionRendezVous();
+        Rendez_Vous r=new Rendez_Vous(0,date, "456", "324");
+        
+        gr.AjouterRendezVous(r);
+*/
