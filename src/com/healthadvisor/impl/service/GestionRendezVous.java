@@ -11,6 +11,7 @@ import com.heathadvisor.service.IGestionRendezVous;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,21 +30,21 @@ public class GestionRendezVous implements IGestionRendezVous{
     public void AjouterRendezVous(Rendez_Vous rendezvous) {
        try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into rendez_vous (date_heure,user_id,med_id) "+" values (?,?,?)";
+            String sql="Insert into rendez_vous (date_heure,user_id,med_id,statut) "+" values (?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             java.util.Date utilStartDate = rendezvous.getDate_heure();
             java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
             preparedStmt.setDate(1,sqlStartDate);
             preparedStmt.setString(2,rendezvous.getPatient_id());
             preparedStmt.setString(3,rendezvous.getMedecin_id());
-         
-
+            preparedStmt.setString(4,rendezvous.getStatut_rendezvous().name());
+     
             preparedStmt.executeUpdate();
 
             System.out.println("Insertion avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
         }        }
 
     @Override
@@ -55,7 +56,12 @@ public class GestionRendezVous implements IGestionRendezVous{
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
         }        }
+
+    @Override
+    public List<Rendez_Vous> ListRendez_Vous() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

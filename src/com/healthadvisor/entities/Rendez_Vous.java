@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.entities;
 
+import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import java.util.Date;
 
 /**
@@ -16,13 +17,27 @@ public class Rendez_Vous {
     private Date date_heure;
     private String patient_id;
     private String medecin_id;
+    private StatutRendezVousEnum statut_rendezvous;
 
-    public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id) {
+    public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id, StatutRendezVousEnum statut_rendezvous) {
         this.id = id;
         this.date_heure = date_heure;
         this.patient_id = patient_id;
         this.medecin_id = medecin_id;
+        this.statut_rendezvous = statut_rendezvous;
     }
+
+    
+    
+    public StatutRendezVousEnum getStatut_rendezvous() {
+        return statut_rendezvous;
+    }
+
+    public void setStatut_rendezvous(StatutRendezVousEnum statut_rendezvous) {
+        this.statut_rendezvous = statut_rendezvous;
+    }
+
+
 
     public int getId() {
         return id;

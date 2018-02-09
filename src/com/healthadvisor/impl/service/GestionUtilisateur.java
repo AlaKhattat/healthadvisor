@@ -52,7 +52,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             System.out.println("Insertion avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
         }       }
 
     @Override
@@ -85,7 +85,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
 
@@ -105,7 +105,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listutil;     }
 
@@ -122,7 +122,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
         }
         return util;    
     }
