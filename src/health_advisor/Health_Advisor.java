@@ -12,8 +12,14 @@ import com.healthadvisor.impl.service.GestionUtilisateur;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
+import com.healthadvisor.entities.ReponsesPossibles;
+import com.healthadvisor.entities.Sondage;
+import com.healthadvisor.entities.UserReponse;
 import com.healthadvisor.impl.service.GestionQuestion;
 import com.healthadvisor.impl.service.GestionReponse;
+import com.healthadvisor.impl.service.GestionReponsesPossibles;
+import com.healthadvisor.impl.service.GestionSondage;
+import com.healthadvisor.impl.service.GestionUserReponse;
 import java.security.Provider;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -57,7 +63,16 @@ public class Health_Advisor extends Application {
      */
     public static void main(String[] args) {
         //launch(args);
- 
-    
-}
+        
+        
+        
+       /* UserReponse ur = new UserReponse("tarek",2);
+        gur.ajouterUserReponse(ur);
+        */
+               GestionUserReponse gur = new GestionUserReponse();
+
+        gur.afficherUserReponse();
+}       
+        
+        
 }

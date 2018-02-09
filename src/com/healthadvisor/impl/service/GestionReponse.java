@@ -77,7 +77,7 @@ public class GestionReponse implements IGestionReponse{
 
     @Override
     public void afficherReponse() {
-        List<Reponse> reponses = new ArrayList<>();
+        //List<Reponse> reponses = new ArrayList<>();
           
         try {
             Statement stm = myDB.getConnexion().createStatement();

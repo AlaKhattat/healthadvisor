@@ -75,7 +75,7 @@ public class GestionQuestion implements IGestionQuestion{
 
     @Override
     public void afficherQuestion() {
-        List<Question> questions = new ArrayList<>();
+        //List<Question> questions = new ArrayList<>();
           
         try {
             Statement stm = myDB.getConnexion().createStatement();
