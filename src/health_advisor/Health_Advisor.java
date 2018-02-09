@@ -59,7 +59,7 @@ public class Health_Advisor extends Application {
      */
     public static void main(String[] args) {
         //launch(args);
-      
+        System.out.println("Hello world");
     }
     
 }
