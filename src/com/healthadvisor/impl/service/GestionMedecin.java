@@ -45,7 +45,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("Insertion avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }    }
 
     @Override
@@ -74,7 +74,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }    }
 
     @Override
@@ -93,7 +93,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listmed;    }
 
@@ -102,7 +102,7 @@ public class GestionMedecin implements IGestionMedecin{
         Medecin med =null;
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from medecin where login_med='"+cin+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN_MED='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             
                  med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
@@ -111,7 +111,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return med;    
     }    
@@ -121,7 +121,7 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from medecin specialite='"+specialite+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.SPECIALITE='"+specialite+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
@@ -132,7 +132,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listmed;  }
 
@@ -141,7 +141,7 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from medecin adresse='"+adresse+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.ADRESSE='"+adresse+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
@@ -152,7 +152,7 @@ public class GestionMedecin implements IGestionMedecin{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listmed;     }
     

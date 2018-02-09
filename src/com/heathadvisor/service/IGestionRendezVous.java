@@ -6,6 +6,7 @@
 package com.heathadvisor.service;
 
 import com.healthadvisor.entities.Rendez_Vous;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,7 @@ import com.healthadvisor.entities.Rendez_Vous;
 public interface IGestionRendezVous {
     
     public void AjouterRendezVous(Rendez_Vous rendezvous);
+    public List<Rendez_Vous> ListRendez_Vous();
     public void supprimerRendezVous(int id_rendezvous);
     
     

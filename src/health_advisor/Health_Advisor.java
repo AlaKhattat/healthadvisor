@@ -12,6 +12,7 @@ import com.healthadvisor.impl.service.GestionUtilisateur;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Rendez_Vous;
+import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.impl.service.GestionPatient;
 import com.healthadvisor.impl.service.GestionQuestion;
 import com.healthadvisor.impl.service.GestionRendezVous;
@@ -58,7 +59,7 @@ public class Health_Advisor extends Application {
      */
     public static void main(String[] args) {
         //launch(args);
-        
+      
     }
     
 }

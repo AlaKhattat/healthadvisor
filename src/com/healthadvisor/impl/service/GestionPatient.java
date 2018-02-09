@@ -7,9 +7,7 @@ package com.healthadvisor.impl.service;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Patient;
-import com.heathadvisor.service.IGestionMedecin;
 import com.heathadvisor.service.IGestionPatient;
-import com.heathadvisor.service.IGestionUtilisateur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +44,7 @@ public class GestionPatient implements IGestionPatient{
             System.out.println("Insertion avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }       }
 
     @Override
@@ -73,7 +71,7 @@ public class GestionPatient implements IGestionPatient{
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }      }
 
     @Override
@@ -93,7 +91,7 @@ public class GestionPatient implements IGestionPatient{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listp;    }
 
@@ -112,7 +110,7 @@ public class GestionPatient implements IGestionPatient{
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return patient;    }
 
