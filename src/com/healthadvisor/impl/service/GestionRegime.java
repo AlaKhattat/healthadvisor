@@ -6,7 +6,6 @@
 package com.healthadvisor.impl.service;
 
 import com.healthadvisor.database.MyDB;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
