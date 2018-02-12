@@ -19,6 +19,6 @@ public interface IGestionAliment
     public boolean modifierAliment(Aliment aliment);
     public List<Aliment> afficherAliment();
     public Aliment rechercherAliment(Aliment aliment);
-    public List<Aliment> rechercherAlimentAvancee(Aliment aliment);
+    public List<Aliment> rechercherAlimentAvancee(String aliment);
     public float calculerTotalValeurEnergetique();
 }
