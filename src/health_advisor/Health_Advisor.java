@@ -68,8 +68,9 @@ public class Health_Advisor extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
+        //launch(args);
+        System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
     }
     
 }
