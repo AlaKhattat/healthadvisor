@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.healthadvisor.impl.service;
+package com.healthadvisor.service.impl;
 
+import com.healthadvisor.service.impl.GestionAliment;
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.Regime;

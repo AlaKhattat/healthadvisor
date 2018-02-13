@@ -7,7 +7,6 @@ package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Aliment;
-import java.io.Console;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -149,10 +148,45 @@ public class GestionAliment implements IGestionAliment
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
-
     @Override
-    public List<Aliment> rechercherAlimentAvancee(String aliment) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Aliment> rechercherAlimentAvancee(String aliment) 
+    {
+       ArrayList<Aliment>aliments = new ArrayList<>();
+       try
+       {
+           String query ="select * from aliment where nom_aliment like ? or quantite=? or valeur_energetique=? or type_aliment like ?";
+           PreparedStatement statement = database.getConnexion().prepareStatement(query);
+           statement.setString(1, '%'+aliment+'%');          
+           //this will generate an exception if it's impossible to parse a string to float
+           try
+           {
+                statement.setFloat(2,Float.parseFloat(aliment));
+                statement.setFloat(3,Float.parseFloat(aliment));
+           }
+           catch(NumberFormatException | SQLException ex)//if the parsing is impossible the default value of query parameter will be 0.0
+           {      
+               System.out.println("erreur impossible de convertir: "+ex.getMessage());
+               statement.setFloat(2,0.0f);
+               statement.setFloat(3,0.0f);   
+           }
+          
+           statement.setString(4,'%'+aliment+'%');
+           ResultSet result = statement.executeQuery();
+           while(result.next())
+           {
+               Aliment a = new Aliment(result.getString("nom_aliment"),Aliment.explodeAliment(result.getString("type_aliment")),result.getFloat("valeur_energetique"),result.getFloat("quantite"));
+               aliments.add(a);
+               System.out.println(a);
+           }
+          
+       }
+       catch(SQLException exception)
+       {
+             System.out.println("Echec de recherche erreur: state:"+exception.getSQLState()+" message:"+exception.getMessage());  
+       }  
+    return aliments;
     }
+
+
+  
 }
