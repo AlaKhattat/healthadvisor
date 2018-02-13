@@ -42,7 +42,7 @@ public class Health_Advisor extends Application {
     private double y = 0;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/FXMLRechercheMedecin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/recherchemedecin/FXMLRechercheMedecin.fxml"));
         
          root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

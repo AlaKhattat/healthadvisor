@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package login_fx;
+package com.healthadvisor.javafx.login_fx;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,7 +24,7 @@ public class Login_fx extends Application {
     private double y = 0;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/loginfx/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         
          root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
