@@ -6,8 +6,10 @@
 package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
+import com.heathadvisor.service.IGestionQuestion;
 import com.heathadvisor.service.IGestionReponse;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,6 +91,39 @@ public class GestionReponse implements IGestionReponse{
         } catch (SQLException ex) {
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public List<Reponse> ListReponse() {
+        ArrayList<Reponse> listr= new ArrayList<>();
+        try {
+            Statement stm =myDB.getConnexion().createStatement();
+            String sql="select * from reponse" ;
+            ResultSet r = stm.executeQuery(sql);
+
+            while(r.next()){
+                System.out.println("recuperation ...");
+                Reponse reponse = new Reponse();
+                
+                int idReponse = r.getInt("ID_REPONSE");
+                String textReponse =r.getString("REPONSE");
+                String loginMedecin = r.getString("ID_MEDECIN");
+                reponse.setId(idReponse);
+                reponse.setReponse(textReponse);
+                GestionMedecin gm=new GestionMedecin();
+                reponse.setMedecin(gm.AfficherMedecinCin(loginMedecin));
+                GestionQuestion gq = new GestionQuestion();
+                Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
+                reponse.setQuestion(question);
+                System.out.println("reponse :"+reponse);
+                listr.add(reponse);
+            }
+            
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(IGestionReponse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listr;
     }
     
 }

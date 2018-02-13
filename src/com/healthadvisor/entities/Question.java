@@ -16,11 +16,30 @@ public class Question {
     private int id;
     private String question;
     private Patient patient;
+    private ArrayList<Reponse> reponses;
 
-    public Question(int id, String question, Patient patient) {
+    @Override
+    public String toString() {
+        return "Question{" + "id=" + id + ", question=" + question + ", patient=" + patient + ", reponses=" + reponses + '}';
+    }
+
+
+    public Question(int id, String question, Patient patient, ArrayList<Reponse> reponses) {
         this.id = id;
         this.question = question;
         this.patient = patient;
+        this.reponses = reponses;
+    }
+
+    public Question() {
+    }
+
+    public ArrayList<Reponse> getReponses() {
+        return reponses;
+    }
+
+    public void setReponses(ArrayList<Reponse> reponses) {
+        this.reponses = reponses;
     }
     
     

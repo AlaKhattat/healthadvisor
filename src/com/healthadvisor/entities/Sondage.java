@@ -10,18 +10,31 @@ package com.healthadvisor.entities;
  * @author Tarek
  */
 public class Sondage {
-    private String nomSondage;
+    private int id;
+    private String nom;
 
-    public Sondage(String nomSondage) {
-        this.nomSondage = nomSondage;
+    public Sondage(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     
 
-    public String getNomSondage() {
-        return nomSondage;
-    }
-
-    public void setNomSondage(String nomSondage) {
-        this.nomSondage = nomSondage;
-    }
+    
 }

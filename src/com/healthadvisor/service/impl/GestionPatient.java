@@ -100,14 +100,16 @@ public class GestionPatient implements IGestionPatient{
         
     Patient patient =null;
         try {
+            System.out.println("recuperation");
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from patient where login_p='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
-            
+            while (rs.next()) {
             patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
-            
-            
-            System.out.println("Recuperation avec succes");
+            System.out.println("Le Patient :"+patient);
+            System.out.println("Recuperation avec succes");   
+            }
+           
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);

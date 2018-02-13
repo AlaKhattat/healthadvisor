@@ -74,20 +74,62 @@ public class GestionQuestion implements IGestionQuestion{
     }
 
     @Override
-    public void afficherQuestion() {
-        List<Question> questions = new ArrayList<>();
-          
+    public Question afficherQuestion(int id) {
+        //List<Question> questions = new ArrayList<>();
+         
         try {
             Statement stm = myDB.getConnexion().createStatement();
-            ResultSet r= stm.executeQuery("select * from question");  
+            ResultSet r= stm.executeQuery("select * from question where ID="+id);  
             while(r.next()){
-                System.out.println("ID = "+r.getInt(1)+" | QUESTION = "+r.getString(2)+" | ID_PATIENT = "+r.getString(3));     
+                Question question = new Question();
+                int idQuestion = r.getInt("ID");
+                String textQuestion =r.getString("QUESTION");
+                String loginPatient = r.getString("ID_PATIENT");
+                question.setId(idQuestion);
+                GestionPatient gp=new GestionPatient();
+                question.setPatient(gp.AfficherPatientCin(loginPatient));
+                question.setQuestion(textQuestion);
+                return question;
             }
+            
            
         } catch (SQLException ex) {
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
+
+    @Override
+    public List<Question> ListQuestion() {
+        ArrayList<Question> listq= new ArrayList<>();
+        try {
+            Statement stm =myDB.getConnexion().createStatement();
+            String sql="select * from question" ;
+            ResultSet r = stm.executeQuery(sql);
+
+            while(r.next()){
+                Question question = new Question();
+                int idQuestion = r.getInt("ID");
+                String textQuestion =r.getString("QUESTION");
+                String loginPatient = r.getString("ID_PATIENT");
+                question.setId(idQuestion);
+                question.setQuestion(textQuestion);
+                GestionPatient gp = new GestionPatient();
+                Patient patient = gp.AfficherPatientCin(loginPatient);
+                question.setPatient(patient);
+                listq.add(question);
+            }
+            
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(IGestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listq;
+    }
+
+
+
+    
     
     
 }
