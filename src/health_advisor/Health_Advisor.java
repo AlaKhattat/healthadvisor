@@ -65,14 +65,8 @@ public class Health_Advisor extends Application {
         //launch(args);
         
         
-        
-       /* UserReponse ur = new UserReponse("tarek",2);
-        gur.ajouterUserReponse(ur);
-        */
-               GestionUserReponse gur = new GestionUserReponse();
-
-        gur.afficherUserReponse();
-}       
+       
+    }       
         
         
 }
