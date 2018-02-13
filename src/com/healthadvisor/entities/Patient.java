@@ -11,16 +11,25 @@ import java.util.Date;
  *
  * @author khattout
  */
-public class Patient extends Utilisateur{
+public class Patient {
     
     private String login;
     private String password;
+    private String cin_user;
 
-   
-    public Patient(String login, String password, String cin, String nom, String prenom, String email, Date date_naiss, String sexe, String pays, String ville) {
-        super(cin, nom, prenom, email, date_naiss, sexe, pays, ville);
+    public Patient(String login, String password, String cin_user) {
         this.login = login;
         this.password = password;
+        this.cin_user = cin_user;
+    }
+ 
+   
+    public String getCin_user() {
+        return cin_user;
+    }
+
+    public void setCin_user(String cin_user) {
+        this.cin_user = cin_user;
     }
 
     public String getLogin() {
@@ -39,4 +48,10 @@ public class Patient extends Utilisateur{
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "Patient{" + "login=" + login + ", password=" + password + ", cin_user=" + cin_user + '}';
+    }
+
+    
 }

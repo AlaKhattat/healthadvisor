@@ -11,34 +11,36 @@ import java.util.Date;
  *
  * @author khattout
  */
-public class Medecin extends Utilisateur {
-    private String login;
+public class Medecin extends Patient {
+    private String login_med;
     private String specilaite;
     private String adresse;
     private String diplome;
     private int rating;
 
-
-    public Medecin(String login, String specilaite, String adresse, String diplome, int rating, String cin, String nom, String prenom, String email, Date date_naiss, String sexe, String pays, String ville) {
-        super(cin, nom, prenom, email, date_naiss, sexe, pays, ville);
-        this.login = login;
+    public Medecin(String login_med, String specilaite, String adresse, String diplome, int rating, String login, String password, String cin_user) {
+        super(login, password, cin_user);
+        this.login_med = login_med;
         this.specilaite = specilaite;
         this.adresse = adresse;
         this.diplome = diplome;
         this.rating = rating;
     }
-   
+
+    public String getLogin_med() {
+        return login_med;
+    }
+
+    public void setLogin_med(String login_med) {
+        this.login_med = login_med;
+    }
+
+
+  
 
     
    
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public String getSpecilaite() {
         return specilaite;
@@ -70,6 +72,11 @@ public class Medecin extends Utilisateur {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Medecin{" + "login=" + login_med + ", specilaite=" + specilaite + ", adresse=" + adresse + ", diplome=" + diplome + ", rating=" + rating + '}';
     }
 
     

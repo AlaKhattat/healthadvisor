@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.healthadvisor.impl.service;
+package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Patient;
@@ -75,7 +75,7 @@ public class GestionQuestion implements IGestionQuestion{
 
     @Override
     public void afficherQuestion() {
-        //List<Question> questions = new ArrayList<>();
+        List<Question> questions = new ArrayList<>();
           
         try {
             Statement stm = myDB.getConnexion().createStatement();
@@ -88,35 +88,6 @@ public class GestionQuestion implements IGestionQuestion{
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    public List<Question> ListQuestion() {
-        
-        ArrayList<Question> listq= new ArrayList<>();
-        try {
-            Statement stm =myDB.getConnexion().createStatement();
-            String sql="select * from question" ;
-            ResultSet r = stm.executeQuery(sql);
-            
-            while(r.next()){
-                Statement stm2 =myDB.getConnexion().createStatement();
-                String sql2="select * from patient where ID_PATIENT="+ r.getString("ID_PATIENT");
-                ResultSet r2 = stm.executeQuery(sql2);
-            while(r2.next()){
-                Patient p = new Patient(r.getString("LOGIN_P"),r.getString("PASSWORD"),r.getString("CIN_USER"));}
-                
-            //Question question= new Question(r.getInt("ID"),r.getString("QUESTION"), );
-              //  listq.add(question);
-            }
-            
-            System.out.println("Recuperation avec succes");
-           // stm.executeQuery(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(IGestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listq;
-    }
-    
     
     
 }

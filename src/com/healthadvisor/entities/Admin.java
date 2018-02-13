@@ -33,6 +33,12 @@ public class Admin {
     public void setPassword_admin(String password_admin) {
         this.password_admin = password_admin;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" + "login_admin=" + login_admin + ", password_admin=" + password_admin + '}';
+    }
+    
    
     
 }

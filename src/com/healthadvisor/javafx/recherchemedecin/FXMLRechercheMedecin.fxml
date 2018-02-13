@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="518.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinController">
+   <children>
+      <ImageView fitHeight="409.0" fitWidth="789.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../../../../../../Desktop/PI%20DEV/images/Dollarphotoclub_84298213.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="188.0" layoutY="41.0" prefHeight="62.0" prefWidth="439.0" text="TROUVEZ VOTRE MEDECIN" textFill="#17125b">
+         <font>
+            <Font name="Calibri Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="248.0" layoutY="103.0" prefWidth="320.0" text="Et prenez rendez-vous maintenant" textFill="#c93120">
+         <font>
+            <Font name="BONDONI Regular" size="20.0" />
+         </font></Label>
+      <JFXTabPane layoutY="160.0" prefHeight="249.0" prefWidth="789.0" stylesheets="@../../style/TabPane.css">
+         <tabs>
+            <Tab text="Recherche Par Spécialité ">
+               <content>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="789.0" stylesheets="@../style/TabPane.css">
+                     <children>
+                        <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="48.0" prefHeight="43.0" prefWidth="375.0" promptText="Spécilaité" />
+                        <JFXTextField labelFloat="true" layoutX="429.0" layoutY="65.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
+                        <JFXButton layoutX="609.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="J'ai Déjà Mon Médecin">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="25.0" prefHeight="43.0" prefWidth="375.0" promptText="Rechercher Votre Médecin" />
+                        <JFXTextField labelFloat="true" layoutX="416.0" layoutY="43.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
+                        <JFXButton layoutX="604.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

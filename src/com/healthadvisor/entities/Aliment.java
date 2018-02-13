@@ -5,8 +5,9 @@
  */
 package com.healthadvisor.entities;
 
+import com.healthadvisor.enumeration.Type_Aliment;
 import java.util.ArrayList;
-import com.heathadvisor.service.IGestionAliment;
+
 
 
 /**
@@ -18,8 +19,8 @@ public class Aliment
 {
   private String nom_aliment;
   private ArrayList<Type_Aliment>type_aliment;
-  private float valeur_energetique;
-  private float quantite;
+  private float valeur_energetique; //valeur energitique par calorie
+  private float quantite; //quantite du produit soit en g ou en litre
   public Aliment()
   {
    nom_aliment = "";

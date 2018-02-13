@@ -3,16 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.healthadvisor.impl.service;
+package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
-import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
-import com.healthadvisor.entities.Utilisateur;
-import com.heathadvisor.service.IGestionMedecin;
 import com.heathadvisor.service.IGestionPatient;
-import com.heathadvisor.service.IGestionUtilisateur;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,18 +32,19 @@ public class GestionPatient implements IGestionPatient{
     public void AjouterPatient(Patient patient) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into patient (patient,password) "+" values (?,?)";
+            String sql="Insert into patient (login_p,password,cin_user) "+" values (?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,patient.getLogin());
             preparedStmt.setString(2,patient.getPassword());
+            preparedStmt.setString(3,patient.getCin_user());
          
 
-              preparedStmt.executeUpdate();
+            preparedStmt.executeUpdate();
 
             System.out.println("Insertion avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionUtilisateur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }       }
 
     @Override
@@ -58,7 +54,7 @@ public class GestionPatient implements IGestionPatient{
 
            String sql="UPDATE patient SET login_p="+patient.getLogin()
                    +", password="+patient.getPassword()
-                   +" WHERE cin="+patient.getCin();
+                   +" WHERE cin_user="+patient.getCin_user();
             stm.executeUpdate(sql);
            System.out.println("Patient bien modifiÃ©");
            
@@ -70,16 +66,17 @@ public class GestionPatient implements IGestionPatient{
     public void SupprimerPatientCin(String cin) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Delete from patient where cin='"+cin+"'" ;
+            String sql="Delete from patient where login_p='"+cin+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }      }
 
     @Override
     public List<Patient> ListPatient() {
+        
     ArrayList<Patient> listp= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
@@ -87,32 +84,33 @@ public class GestionPatient implements IGestionPatient{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Patient patient= new Patient(rs.getString(0),rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDate(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                Patient patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
                 listp.add(patient);
             }
             
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return listp;     }
+        return listp;    }
 
     @Override
     public Patient AfficherPatientCin(String cin) {
+        
     Patient patient =null;
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from patient where cin='"+cin+"'" ;
+            String sql="select * from patient where login_p='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             
-            patient= new Patient(rs.getString(0),rs.getString(1), rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7), rs.getString(8), rs.getString(9), rs.getString(10));
+            patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
             
             
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(IGestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return patient;    }
 
