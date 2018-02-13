@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.healthadvisor.impl.service;
+package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.Sondage;
+import com.healthadvisor.service.impl.GestionQuestion;
 import com.heathadvisor.service.IGestionSondage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

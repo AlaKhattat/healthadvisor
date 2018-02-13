@@ -15,6 +15,11 @@ public class Reponse {
     private Medecin medecin;
     private Question question;
 
+
+    public Reponse() {
+    }
+    
+    
     public Reponse(int id, String reponse, Medecin medecin, Question question) {
         this.id = id;
         this.reponse = reponse;
@@ -55,5 +60,8 @@ public class Reponse {
         this.question = question;
     }
     
-    
+    @Override
+    public String toString() {
+        return "Reponse{" + "id=" + id + ", reponse=" + reponse + ", medecin=" + medecin + ", question=" + question + '}';
+    }
 }

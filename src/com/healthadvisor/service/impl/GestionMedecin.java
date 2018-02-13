@@ -104,9 +104,9 @@ public class GestionMedecin implements IGestionMedecin{
             Statement stm =database.getConnexion().createStatement();
             String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN_MED='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
-            
+            while(rs.next()){
                  med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
-            
+            }
             
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);

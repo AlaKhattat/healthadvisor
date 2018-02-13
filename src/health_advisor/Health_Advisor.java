@@ -20,12 +20,12 @@ import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.entities.UserReponse;
-import com.healthadvisor.impl.service.GestionQuestion;
-import com.healthadvisor.impl.service.GestionReponse;
-import com.healthadvisor.impl.service.GestionReponsesPossibles;
-import com.healthadvisor.impl.service.GestionSondage;
-import com.healthadvisor.impl.service.GestionUserReponse;
+import com.healthadvisor.service.impl.GestionReponse;
+import com.healthadvisor.service.impl.GestionReponsesPossibles;
+import com.healthadvisor.service.impl.GestionSondage;
+import com.healthadvisor.service.impl.GestionUserReponse;
 import java.security.Provider;
+import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -81,8 +81,7 @@ public class Health_Advisor extends Application {
         //launch(args);
         
         
-       
+              
     }       
-        
         
 }
