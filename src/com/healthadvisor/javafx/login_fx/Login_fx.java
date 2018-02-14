@@ -6,6 +6,7 @@
 package com.healthadvisor.javafx.login_fx;
 
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +25,7 @@ public class Login_fx extends Application {
     private double y = 0;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         
          root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
