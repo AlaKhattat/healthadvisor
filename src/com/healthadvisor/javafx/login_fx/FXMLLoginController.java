@@ -51,6 +51,10 @@ public class FXMLLoginController implements Initializable {
     private Label SignIn;
     @FXML
     private FontAwesomeIconView homeSignIn;
+    @FXML
+    private JFXTextField passwordsignup;
+    @FXML
+    private JFXPasswordField passwordsiginin;
 
     /**
      * Initializes the controller class.
