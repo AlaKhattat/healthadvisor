@@ -5,15 +5,26 @@
  */
 package com.healthadvisor.javafx.login_fx;
 
+import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -44,17 +55,23 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private AnchorPane AnchorSignIn;
     @FXML
-    private JFXButton SignUpButton;
-    @FXML
     private Label SignUp;
     @FXML
     private Label SignIn;
     @FXML
     private FontAwesomeIconView homeSignIn;
     @FXML
-    private JFXTextField passwordsignup;
-    @FXML
     private JFXPasswordField passwordsiginin;
+    @FXML
+    private JFXTextField pays;
+    @FXML
+    private JFXTextField cin;
+    @FXML
+    private JFXTextField ville;
+    @FXML
+    private JFXComboBox<String> sexe;
+    @FXML
+    private DatePicker date_naiss;
 
     /**
      * Initializes the controller class.
@@ -62,7 +79,9 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-       
+       String[] sexelist={"Homme","Femme"};
+        ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
+        sexe.setItems(sl);
     }    
 
 
@@ -71,11 +90,7 @@ public class FXMLLoginController implements Initializable {
         AnchorSignUp.toFront();
         AnchorSignIn.setOpacity(0.0);
         AnchorSignUp.setOpacity(1.0);
-        /*username.setOpacity(1);
-        nom.setOpacity(1);
-        prenom.setOpacity(1);
-        email.setOpacity(1);
-        SignUp.setOpacity(1);*/
+        
     }
 
     @FXML
@@ -84,6 +99,19 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void homesignupAction(MouseEvent event) {
+ String cin=this.cin.getText();
+ String nom=this.nom.getText();
+ String prenom=this.prenom.getText();
+ String email=this.email.getText();
+ LocalDate localDate =date_naiss.getValue();
+ Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+ Date date = Date.from(instant);
+ String sexe=this.sexe.getValue();
+ String pays=this.pays.getText();
+ String ville=this.ville.getText();
+        GestionUtilisateur gu=new GestionUtilisateur();
+        Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville);
+        gu.AjouterUtilisateur(u);
     }
 
     @FXML

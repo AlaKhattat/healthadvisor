@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -16,24 +18,27 @@
                <children>
                   <JFXButton fx:id="signin" defaultButton="true" layoutY="113.0" onMouseClicked="#SigniInAction" prefHeight="52.0" prefWidth="134.0" text="Sign In" />
                   <JFXButton fx:id="signup" layoutY="182.0" onAction="#SignUpAction" prefHeight="52.0" prefWidth="134.0" text="Sign Up" />
-                  <AnchorPane fx:id="AnchorSignUp" layoutX="496.0" layoutY="2.0" prefHeight="412.0" prefWidth="394.0" style="-fx-background-color: #fff;">
+                  <AnchorPane fx:id="AnchorSignUp" layoutX="496.0" layoutY="2.0" style="-fx-background-color: #fff;">
                      <children>
-                        <JFXTextField fx:id="nom" labelFloat="true" layoutX="87.0" layoutY="73.0" prefHeight="41.0" prefWidth="230.0" promptText="First Name" />
-                        <JFXTextField fx:id="prenom" labelFloat="true" layoutX="87.0" layoutY="140.0" prefHeight="41.0" prefWidth="230.0" promptText="Last Name " />
-                        <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="214.0" prefHeight="41.0" prefWidth="230.0" promptText="Email" />
-                        <JFXTextField fx:id="passwordsignup" labelFloat="true" layoutX="87.0" layoutY="296.0" prefHeight="42.0" prefWidth="230.0" promptText="Password" />
-                        <JFXButton fx:id="SignUpButton" contentDisplay="GRAPHIC_ONLY" layoutX="214.0" layoutY="338.0" />
+                        <JFXTextField fx:id="nom" labelFloat="true" layoutX="87.0" layoutY="73.0" prefHeight="41.0" prefWidth="119.0" promptText="Nom" />
+                        <JFXTextField fx:id="prenom" labelFloat="true" layoutX="87.0" layoutY="140.0" prefHeight="41.0" prefWidth="119.0" promptText="Prenom" />
+                        <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="214.0" prefHeight="41.0" prefWidth="119.0" promptText="Email" />
+                        <JFXTextField fx:id="pays" labelFloat="true" layoutX="87.0" layoutY="296.0" prefHeight="42.0" prefWidth="119.0" promptText="Pays" />
                         <FontAwesomeIconView fx:id="homesignup" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="180.0" layoutY="397.0" onMouseClicked="#homesignupAction" size="40" />
                         <Label fx:id="SignUp" layoutX="160.0" layoutY="24.0" text="Sign Up" textFill="#0b6183">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
+                        <JFXTextField fx:id="cin" labelFloat="true" layoutX="234.0" layoutY="73.0" prefHeight="41.0" prefWidth="119.0" promptText="Cin" />
+                        <JFXTextField fx:id="ville" labelFloat="true" layoutX="234.0" layoutY="297.0" prefHeight="41.0" prefWidth="119.0" promptText="Ville" />
+                        <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="234.0" layoutY="229.0" prefHeight="25.0" prefWidth="119.0" promptText="Sexe" />
+                        <DatePicker fx:id="date_naiss" layoutX="233.0" layoutY="169.0" prefHeight="25.0" prefWidth="119.0" promptText="Date Naissance" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="AnchorSignIn" layoutX="496.0" prefHeight="412.0" prefWidth="394.0" style="-fx-background-color: #fff; -fx-border-radius: 0.8em;">
                      <children>
-                        <JFXTextField fx:id="username" labelFloat="true" layoutX="90.0" layoutY="122.0" prefHeight="42.0" prefWidth="230.0" promptText="Username" styleClass="input" stylesheets="@../../../../../../login_fx/src/login_fx/login.css">
+                        <JFXTextField fx:id="username" labelFloat="true" layoutX="90.0" layoutY="122.0" prefHeight="42.0" prefWidth="230.0" promptText="Pseudo" styleClass="input" stylesheets="@../../../../../../login_fx/src/login_fx/login.css">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -48,7 +53,7 @@
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <FontAwesomeIconView fx:id="homeSignIn" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="191.0" layoutY="359.0" onMouseClicked="#homeAction" size="40" />
+                        <FontAwesomeIconView fx:id="homeSignIn" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="191.0" layoutY="359.0" onMouseClicked="#homeAction" size="40" text="" />
                      </children>
                   </AnchorPane>
                </children>
