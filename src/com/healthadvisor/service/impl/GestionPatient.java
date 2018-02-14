@@ -31,6 +31,7 @@ public class GestionPatient implements IGestionPatient{
     @Override
     public void AjouterPatient(Patient patient) {
         try {
+            System.out.println("Ajout...");
             Statement stm =database.getConnexion().createStatement();
             String sql="Insert into patient (login_p,password,cin_user) "+" values (?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
@@ -50,8 +51,8 @@ public class GestionPatient implements IGestionPatient{
     @Override
     public void ModifierPatient(Patient patient) {
         try{
-                Statement stm =database.getConnexion().createStatement();
-
+           System.out.println("Modification...");
+           Statement stm =database.getConnexion().createStatement();
            String sql="UPDATE patient SET login_p="+patient.getLogin()
                    +", password="+patient.getPassword()
                    +" WHERE cin_user="+patient.getCin_user();
@@ -65,6 +66,7 @@ public class GestionPatient implements IGestionPatient{
     @Override
     public void SupprimerPatientCin(String cin) {
         try {
+            System.out.println("Suppression...");
             Statement stm =database.getConnexion().createStatement();
             String sql="Delete from patient where login_p='"+cin+"'" ;
             stm.executeUpdate(sql);
@@ -79,6 +81,7 @@ public class GestionPatient implements IGestionPatient{
         
     ArrayList<Patient> listp= new ArrayList<>();
         try {
+            System.out.println("Recupération...");
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from patient" ;
             ResultSet rs = stm.executeQuery(sql);
@@ -100,7 +103,7 @@ public class GestionPatient implements IGestionPatient{
         
     Patient patient =null;
         try {
-            System.out.println("recuperation");
+            System.out.println("Recupération...");
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from patient where login_p='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);

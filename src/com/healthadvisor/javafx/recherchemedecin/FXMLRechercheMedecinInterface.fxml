@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
@@ -11,8 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="518.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="518.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinInterfaceController">
+    <children>
       <ImageView fitHeight="409.0" fitWidth="789.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../../../../../../../../Desktop/PI%20DEV/images/Dollarphotoclub_84298213.jpg" />
