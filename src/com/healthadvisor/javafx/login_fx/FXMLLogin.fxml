@@ -21,7 +21,7 @@
                         <JFXTextField fx:id="nom" labelFloat="true" layoutX="87.0" layoutY="73.0" prefHeight="41.0" prefWidth="230.0" promptText="First Name" />
                         <JFXTextField fx:id="prenom" labelFloat="true" layoutX="87.0" layoutY="140.0" prefHeight="41.0" prefWidth="230.0" promptText="Last Name " />
                         <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="214.0" prefHeight="41.0" prefWidth="230.0" promptText="Email" />
-                        <JFXTextField labelFloat="true" layoutX="87.0" layoutY="296.0" prefHeight="42.0" prefWidth="230.0" promptText="Password" />
+                        <JFXTextField fx:id="passwordsignup" labelFloat="true" layoutX="87.0" layoutY="296.0" prefHeight="42.0" prefWidth="230.0" promptText="Password" />
                         <JFXButton fx:id="SignUpButton" contentDisplay="GRAPHIC_ONLY" layoutX="214.0" layoutY="338.0" />
                         <FontAwesomeIconView fx:id="homesignup" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="180.0" layoutY="397.0" onMouseClicked="#homesignupAction" size="40" />
                         <Label fx:id="SignUp" layoutX="160.0" layoutY="24.0" text="Sign Up" textFill="#0b6183">
@@ -38,7 +38,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXPasswordField labelFloat="true" layoutX="93.0" layoutY="206.0" prefHeight="42.0" prefWidth="230.0" promptText="Password">
+                        <JFXPasswordField fx:id="passwordsiginin" labelFloat="true" layoutX="93.0" layoutY="206.0" prefHeight="42.0" prefWidth="230.0" promptText="Password">
                            <font>
                               <Font size="14.0" />
                            </font>
