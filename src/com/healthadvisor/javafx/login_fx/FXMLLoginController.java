@@ -16,24 +16,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
+ * FXML Controller class
  *
  * @author khattout
  */
-public class FXMLDocumentController implements Initializable {
-    
-    private Label label;
+public class FXMLLoginController implements Initializable {
+
     @FXML
     private JFXButton signin;
     @FXML
     private JFXButton signup;
     @FXML
     private JFXTextField username;
-    @FXML
-    private JFXPasswordField password;
-    @FXML
-    private FontAwesomeIconView home;
     @FXML
     private JFXTextField nom;
     @FXML
@@ -42,23 +39,39 @@ public class FXMLDocumentController implements Initializable {
     private JFXTextField email;
     @FXML
     private FontAwesomeIconView homesignup;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    @FXML
+    private AnchorPane AnchorSignUp;
+    @FXML
+    private AnchorPane AnchorSignIn;
+    @FXML
+    private JFXButton SignUpButton;
+    @FXML
+    private Label SignUp;
+    @FXML
+    private Label SignIn;
+    @FXML
+    private FontAwesomeIconView homeSignIn;
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
     }    
 
-    @FXML
-    private void SigniInAction(ActionEvent event) {
-    }
 
     @FXML
     private void SignUpAction(ActionEvent event) {
+        AnchorSignUp.toFront();
+        AnchorSignIn.setOpacity(0.0);
+        AnchorSignUp.setOpacity(1.0);
+        /*username.setOpacity(1);
+        nom.setOpacity(1);
+        prenom.setOpacity(1);
+        email.setOpacity(1);
+        SignUp.setOpacity(1);*/
     }
 
     @FXML
@@ -67,6 +80,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void homesignupAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void SigniInAction(MouseEvent event) {
+         AnchorSignIn.setOpacity(1);
+         AnchorSignUp.setOpacity(0);
     }
     
 }
