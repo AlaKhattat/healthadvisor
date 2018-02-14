@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.questionreponse.QuestionController">
+   <children>
+      <TableView fx:id="tableID" layoutY="-1.0" prefHeight="363.0" prefWidth="641.0">
+        <columns>
+          <TableColumn fx:id="questionID" prefWidth="520.0" text="Question" />
+          <TableColumn fx:id="consulterID" prefWidth="120.0" text="Consulter" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnID" layoutY="361.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="641.0" text="Poser une question" />
+   </children>
+</AnchorPane>

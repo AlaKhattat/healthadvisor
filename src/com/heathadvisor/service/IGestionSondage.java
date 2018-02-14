@@ -5,8 +5,10 @@
  */
 package com.heathadvisor.service;
 
+import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.Sondage;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,4 +19,5 @@ public interface IGestionSondage {
     public void supprimerSondage(Sondage s);
     public void updateSondage (int id, String nom);
     public void afficherSondage (); 
+    public ArrayList <Sondage> ListSondage();
 }

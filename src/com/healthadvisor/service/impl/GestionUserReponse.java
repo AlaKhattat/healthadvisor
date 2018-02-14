@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,6 +63,31 @@ public class GestionUserReponse implements IGestionUserReponse{
         } catch (SQLException ex) {
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public ArrayList<UserReponse> ListUserReponse() {
+        ArrayList<UserReponse> listur = new ArrayList<>();
+        
+        try {
+            Statement stm = myDB.getConnexion().createStatement();
+            String sql = "select * from user_reponse";
+            ResultSet r = stm.executeQuery(sql);
+            
+            while(r.next()){
+                UserReponse ur = new UserReponse();
+                String idUser = r.getString("ID_USER");
+                int idReponse = r.getInt("ID_REPONSE");
+                ur.setId_reponse(idReponse);
+                ur.setLogin(idUser);
+                listur.add(ur);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionUserReponse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listur;
     }
     
 }

@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package com.healthadvisor.javafx.questionreponse;
 
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.service.impl.GestionQuestion;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -30,24 +30,29 @@ public class QuestionController implements Initializable {
      */
     
     @FXML
-    private TableView<Question> tableId;
+    private TableView<Question> tableID;
 
     @FXML
-    private TableColumn<Question, Question> columnId;
+    private TableColumn<Question, String> questionID;
 
     @FXML
-    private Button btnId;
+    private TableColumn<?, ?> consulterID;
+
+    @FXML
+    private Button btnID;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        ObservableList<Question> observQuestion = FXCollections.observableArrayList();
         GestionQuestion gq = new GestionQuestion();
-        
-        
-        
+        ObservableList<Question> listq = FXCollections.observableArrayList();
+            for (Question q : gq.ListQuestion() ){
+                listq.add(q);
+            }
+        questionID.setCellValueFactory(new PropertyValueFactory<Question,String>("question"));
+        tableID.setItems(listq);
     }    
     
 }

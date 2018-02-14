@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,6 +85,37 @@ public class GestionReponsesPossibles implements IGestionReponsesPossibles{
         } catch (SQLException ex) {
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public ArrayList<ReponsesPossibles> ListReponsesPossibles() {
+        ArrayList<ReponsesPossibles> listrp = new ArrayList<>();
+        
+        
+        try {
+            Statement stm = myDB.getConnexion().createStatement();
+            String sql= "select * from reponses_possibles";
+            ResultSet r = stm.executeQuery(sql);
+            
+            while (r.next()){
+                ReponsesPossibles rp = new ReponsesPossibles();
+                int id = r.getInt("ID_REPONSE");
+                String reponseText = r.getString("REPONSE");
+                int idSondage = r.getInt("ID_REPONSE");
+                rp.setId_reponse(id);
+                rp.setReponse(reponseText);
+                rp.setId_sondage(idSondage);
+                listrp.add(rp);
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionReponsesPossibles.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listrp;
+        
+        
     }
     
 }

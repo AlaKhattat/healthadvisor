@@ -5,8 +5,10 @@
  */
 package com.heathadvisor.service;
 
+import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.entities.Sondage;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +19,7 @@ public interface IGestionReponsesPossibles {
     public void ajouterReponsesPossibles(ReponsesPossibles r);
     public void supprimerReponsesPossibles(ReponsesPossibles r);
     public void updateReponsesPossibles(int id_reponse, String reponse);
-    public void afficherReponsesPossibles(int id_sondage); 
+    public void afficherReponsesPossibles(int id_sondage);
+    public ArrayList <ReponsesPossibles> ListReponsesPossibles();
     
 }

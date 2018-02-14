@@ -5,6 +5,8 @@
  */
 package com.healthadvisor.entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Tarek
@@ -13,10 +15,15 @@ public class Sondage {
     private int id;
     private String nom;
 
+    public Sondage() {
+    }
+
     public Sondage(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
+    
+
 
     public int getId() {
         return id;

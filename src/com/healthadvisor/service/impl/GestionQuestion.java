@@ -100,7 +100,7 @@ public class GestionQuestion implements IGestionQuestion{
     }
 
     @Override
-    public List<Question> ListQuestion() {
+    public ArrayList<Question> ListQuestion() {
         ArrayList<Question> listq= new ArrayList<>();
         try {
             Statement stm =myDB.getConnexion().createStatement();

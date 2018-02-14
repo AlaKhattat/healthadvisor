@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package com.healthadvisor.javafx.sondage;
 
+import com.healthadvisor.javafx.questionreponse.questionMain;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,21 +23,19 @@ import javafx.stage.Stage;
  *
  * @author Tarek
  */
-public class QuestionMain extends Application {
+public class SondageMain extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Question.fxml"));
-        System.out.println(loader.getLocation());
-        System.out.println();
-        Parent p = loader.load();
-           Scene scene = new Scene(p);
-        
-        primaryStage.setTitle("Hello World!");
+    public void start(Stage primaryStage) {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/sondage/Test.fxml"));
+        try {
+        Parent root=loader.load();
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(questionMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
