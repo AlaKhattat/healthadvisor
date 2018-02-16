@@ -39,7 +39,7 @@ public class GestionQuestion implements IGestionQuestion{
             
             prep.setInt(1,q.getId());
             prep.setString(2 , q.getQuestion());
-            prep.setString(3, q.getPatient().getLogin());
+            prep.setString(3, q.getId_patient());
             prep.executeUpdate();
        
             System.out.println("Question ajoutée.");
@@ -57,6 +57,18 @@ public class GestionQuestion implements IGestionQuestion{
             System.out.println("Question supprimée.");
         } catch (SQLException ex) {
             System.out.println("Question non supprimée !");
+        }
+    }
+    
+    @Override
+    public void supprimerQuestion(int id_question) {
+        try {
+            PreparedStatement prep = myDB.getConnexion().prepareStatement("delete from question where ID=?");
+            prep.setInt(1 , id_question);
+            prep.executeUpdate();
+            System.out.println("Question supprimée.");
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -87,7 +99,7 @@ public class GestionQuestion implements IGestionQuestion{
                 String loginPatient = r.getString("ID_PATIENT");
                 question.setId(idQuestion);
                 GestionPatient gp=new GestionPatient();
-                question.setPatient(gp.AfficherPatientCin(loginPatient));
+                question.setId_patient(loginPatient);
                 question.setQuestion(textQuestion);
                 return question;
             }
@@ -114,9 +126,7 @@ public class GestionQuestion implements IGestionQuestion{
                 String loginPatient = r.getString("ID_PATIENT");
                 question.setId(idQuestion);
                 question.setQuestion(textQuestion);
-                GestionPatient gp = new GestionPatient();
-                Patient patient = gp.AfficherPatientCin(loginPatient);
-                question.setPatient(patient);
+                question.setId_patient(loginPatient);
                 listq.add(question);
             }
             
@@ -126,8 +136,6 @@ public class GestionQuestion implements IGestionQuestion{
         }
         return listq;
     }
-
-
 
     
     

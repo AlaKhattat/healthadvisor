@@ -17,6 +17,7 @@ public interface IGestionQuestion {
     
     public void ajouterQuestion(Question q);
     public void supprimerQuestion(Question q);
+    public void supprimerQuestion(int id_question);
     public void updateQuestion (int id, String question);
     public Question afficherQuestion (int id); 
     public ArrayList <Question> ListQuestion();

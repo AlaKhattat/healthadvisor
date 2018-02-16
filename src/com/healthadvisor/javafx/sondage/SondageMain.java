@@ -27,7 +27,7 @@ public class SondageMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/sondage/Test.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("Sondage.fxml"));
         try {
         Parent root=loader.load();
         Scene scene = new Scene(root);

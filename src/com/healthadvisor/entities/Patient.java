@@ -52,6 +52,7 @@ public class Patient {
     public String toString() {
         return "Patient{" + "login=" + login + ", password=" + password + ", cin_user=" + cin_user + '}';
     }
+    
 
     
 }

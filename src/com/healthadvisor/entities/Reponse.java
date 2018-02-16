@@ -12,20 +12,30 @@ package com.healthadvisor.entities;
 public class Reponse {
     private int id;
     private String reponse;
-    private Medecin medecin;
+    private String id_medecin;
     private Question question;
 
 
     public Reponse() {
     }
-    
-    
-    public Reponse(int id, String reponse, Medecin medecin, Question question) {
+
+    public Reponse(int id, String reponse, String id_medecin, Question question) {
         this.id = id;
         this.reponse = reponse;
-        this.medecin = medecin;
+        this.id_medecin = id_medecin;
         this.question = question;
     }
+
+    public String getId_medecin() {
+        return id_medecin;
+    }
+
+    public void setId_medecin(String id_medecin) {
+        this.id_medecin = id_medecin;
+    }
+    
+    
+    
     
 
     public int getId() {
@@ -44,17 +54,13 @@ public class Reponse {
         this.reponse = reponse;
     }
 
-    public Medecin getMedecin() {
-        return medecin;
-    }
+
 
     public Question getQuestion() {
         return question;
     }
 
-    public void setMedecin(Medecin medecin) {
-        this.medecin = medecin;
-    }
+ 
 
     public void setQuestion(Question question) {
         this.question = question;
@@ -62,6 +68,6 @@ public class Reponse {
     
     @Override
     public String toString() {
-        return "Reponse{" + "id=" + id + ", reponse=" + reponse + ", medecin=" + medecin + ", question=" + question + '}';
+        return "Reponse{" + "id=" + id + ", reponse=" + reponse + ", medecin=" + id_medecin + ", question=" + question + '}';
     }
 }
