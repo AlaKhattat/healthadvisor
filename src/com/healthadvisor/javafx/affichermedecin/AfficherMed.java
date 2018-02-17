@@ -103,26 +103,17 @@ public class AfficherMed extends Application {
 
   @Override
   public void start(final Stage stage) throws Exception {
-       //Application.setUserAgentStylesheet(getClass().getResource("fxmlaffichermedecin.css")
-        //.toExternalForm());
- /*
-    pagination = new Pagination(28, 0);
-    pagination.setPrefWidth(200);
-    pagination.setPrefHeight(62);
-    pagination.setMinSize(pagination.USE_COMPUTED_SIZE, pagination.USE_COMPUTED_SIZE);
-    pagination.setLayoutX(400);
-    pagination.setLayoutY(565);
-    pagination.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
-*/
+
     AnchorPane anchor = new AnchorPane();
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-    //AnchorPane.setTopAnchor(pagination, 10.0);
-   // AnchorPane.setRightAnchor(pagination, 10.0);
-    //AnchorPane.setBottomAnchor(pagination, 10.0);
-    //AnchorPane.setLeftAnchor(pagination, 10.0);
-    anchor.getChildren().add(createPage());
+  
+    ScrollPane p=new ScrollPane();
+    p.setPrefSize(550, 600);
+
+    p.setContent(createPage());
+    anchor.getChildren().add(p);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
     stage.setTitle("PaginationSample");
