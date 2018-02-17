@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -70,8 +71,9 @@ public class FXMLLoginController implements Initializable {
     private JFXTextField ville;
     @FXML
     private JFXComboBox<String> sexe;
-    @FXML
     private DatePicker date_naiss;
+    @FXML
+    private JFXDatePicker date;
 
     /**
      * Initializes the controller class.
@@ -103,7 +105,8 @@ public class FXMLLoginController implements Initializable {
  String nom=this.nom.getText();
  String prenom=this.prenom.getText();
  String email=this.email.getText();
- LocalDate localDate =date_naiss.getValue();
+ 
+ LocalDate localDate =date.getValue();
  Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
  Date date = Date.from(instant);
  String sexe=this.sexe.getValue();
