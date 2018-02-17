@@ -6,13 +6,14 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.afficherprofilemed.FXMLProfileMedController">
+<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilemed.FXMLProfileMedController">
     <stylesheets>
         <URL value="@fxmlprofilemed.css" />
     </stylesheets>
@@ -66,12 +67,12 @@
       </JFXTextField>
       <JFXComboBox fx:id="specialite" labelFloat="true" layoutX="310.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
       <Rating disable="true" layoutX="210.0" layoutY="89.0" partialRating="true" />
-      <JFXTextField fx:id="login" editable="false" labelFloat="true" layoutX="310.0" layoutY="448.0" prefHeight="25.0" prefWidth="160.0" promptText="Pseudo">
+      <JFXTextField fx:id="login" editable="false" labelFloat="true" layoutX="310.0" layoutY="460.0" prefHeight="25.0" prefWidth="160.0" promptText="Pseudo">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="310.0" layoutY="509.0" prefHeight="25.0" prefWidth="160.0" promptText="Mot de Passe">
+      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="310.0" layoutY="521.0" prefHeight="25.0" prefWidth="160.0" promptText="Mot de Passe">
          <font>
             <Font size="14.0" />
          </font>
@@ -86,5 +87,12 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
+      <Label layoutX="281.0" layoutY="402.0" text="Paramètres d'authentification" textFill="#8c0b0b">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutX="269.0" layoutY="433.0" prefHeight="6.0" prefWidth="270.0" />
+      <Separator layoutX="269.0" layoutY="580.0" prefHeight="6.0" prefWidth="270.0" />
    </children>
 </AnchorPane>
