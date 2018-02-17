@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.afficherprofilemed.FXMLProfileMedController">
+    <stylesheets>
+        <URL value="@fxmlprofilemed.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="136.0" fitWidth="110.0" layoutX="54.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@doctoricon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="232.0" layoutY="33.0" text="Mon Profile">
+         <font>
+            <Font name="Magneto Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="nom" editable="false" labelFloat="true" layoutX="29.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Nom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="prenom" editable="false" labelFloat="true" layoutX="29.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Prenom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="29.0" layoutY="333.0" prefHeight="25.0" prefWidth="160.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="pays" editable="false" labelFloat="true" layoutX="29.0" layoutY="509.0" prefHeight="25.0" prefWidth="160.0" promptText="Pays">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="ville" editable="false" labelFloat="true" layoutX="29.0" layoutY="568.0" prefHeight="25.0" prefWidth="160.0" promptText="Ville">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXDatePicker fx:id="date" defaultColor="#132a5b" editable="false" layoutX="29.0" layoutY="400.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
+      <JFXComboBox fx:id="sexe" layoutX="29.0" layoutY="460.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
+      <JFXTextField fx:id="adresse" editable="false" labelFloat="true" layoutX="310.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Adresse">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="diplome" editable="false" labelFloat="true" layoutX="310.0" layoutY="333.0" prefHeight="25.0" prefWidth="160.0" promptText="Diplome">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="specialite" labelFloat="true" layoutX="310.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
+      <Rating disable="true" layoutX="210.0" layoutY="89.0" partialRating="true" />
+      <JFXTextField fx:id="login" editable="false" labelFloat="true" layoutX="310.0" layoutY="448.0" prefHeight="25.0" prefWidth="160.0" promptText="Pseudo">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="310.0" layoutY="509.0" prefHeight="25.0" prefWidth="160.0" promptText="Mot de Passe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="modifier" layoutX="14.0" layoutY="631.0" onMouseClicked="#modifierMedecin" prefHeight="30.0" prefWidth="118.0" text="Modifier">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="confirmer" layoutX="183.0" layoutY="631.0" onMouseClicked="#validerModifMedecin" text="Confirmer Modification">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

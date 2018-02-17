@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="600.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController">
+    <stylesheets>
+        <URL value="@fxmlinscrimedecin.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="163.0" fitWidth="139.0" layoutX="33.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@doctoricon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="16.0" layoutY="270.0" prefHeight="28.0" prefWidth="221.0" text="Inscription en tant q'un medecin" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <JFXTextField fx:id="diplome" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="397.0" prefHeight="25.0" prefWidth="253.0" promptText="Diplome" styleClass="text" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="adresse" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="307.0" prefHeight="25.0" prefWidth="253.0" promptText="Adresse" styleClass="text" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="spécialite" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="230.0" prefHeight="25.0" prefWidth="253.0" promptText="Spécialité" styleClass="text" unFocusColor="#fffafa" />
+      <Label layoutX="249.0" layoutY="33.0" prefHeight="28.0" prefWidth="323.0" text="Remplissez les champs suivant" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <JFXButton fx:id="valider" layoutX="471.0" layoutY="457.0" onMouseClicked="#validerInscri" prefHeight="25.0" prefWidth="101.0" text="Valider" textFill="WHITE">
+         <effect>
+            <DropShadow color="WHITE" />
+         </effect>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="login" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="88.0" prefHeight="25.0" prefWidth="253.0" promptText="Pseudo" styleClass="text" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="password" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="154.0" prefHeight="25.0" prefWidth="253.0" promptText="Mot de passe" styleClass="text" unFocusColor="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

@@ -87,7 +87,7 @@ public class GestionQuestion implements IGestionQuestion{
                 String loginPatient = r.getString("ID_PATIENT");
                 question.setId(idQuestion);
                 GestionPatient gp=new GestionPatient();
-                question.setPatient(gp.AfficherPatientCin(loginPatient));
+                question.setPatient(gp.AfficherPatientLogin(loginPatient));
                 question.setQuestion(textQuestion);
                 return question;
             }
@@ -115,7 +115,7 @@ public class GestionQuestion implements IGestionQuestion{
                 question.setId(idQuestion);
                 question.setQuestion(textQuestion);
                 GestionPatient gp = new GestionPatient();
-                Patient patient = gp.AfficherPatientCin(loginPatient);
+                Patient patient = gp.AfficherPatientLogin(loginPatient);
                 question.setPatient(patient);
                 listq.add(question);
             }

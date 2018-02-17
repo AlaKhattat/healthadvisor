@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
@@ -42,9 +44,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="25.0" prefHeight="43.0" prefWidth="375.0" promptText="Rechercher Votre Médecin" />
                         <JFXTextField labelFloat="true" layoutX="416.0" layoutY="43.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
                         <JFXButton layoutX="604.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
+                        <JFXTextField labelFloat="true" layoutX="36.0" layoutY="44.0" prefHeight="25.0" prefWidth="359.0" promptText="Rechercher Votre Medecin" />
                      </children></AnchorPane>
                </content>
             </Tab>

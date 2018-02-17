@@ -1,0 +1,8 @@
+.anchor {
+    -fx-background-image:url("contact.png");
+}
+
+.text{
+        -fx-text-fill: white;
+
+}

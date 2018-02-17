@@ -26,6 +26,7 @@ import com.healthadvisor.service.impl.GestionSondage;
 import com.healthadvisor.service.impl.GestionUserReponse;
 import java.security.Provider;
 import java.util.ArrayList;
+import java.util.Date;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -80,7 +81,11 @@ public class Health_Advisor extends Application {
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
         //launch(args);
         
-        
+        GestionUtilisateur gu=new GestionUtilisateur();
+        java.util.Date utilStartDate = new Date(2017, 03, 15);
+        java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
+        Utilisateur u=new Utilisateur("10002563", "qsdqsd", "qsdsdqs", "qsdqsd", sqlStartDate, "Homme", "Tunisie", "Ariana");
+        gu.ModifierUtilisateur(u);
               
     }       
         

@@ -58,15 +58,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="134.0" layoutY="-48.0" prefHeight="537.0" prefWidth="388.0" styleClass="anchor" stylesheets="@login.css">
-               <children>
-                  <Label alignment="CENTER_RIGHT" layoutX="56.0" layoutY="438.0" prefHeight="37.0" prefWidth="213.0" text="Bienvenue" textAlignment="CENTER" textFill="#06678a" textOverrun="CENTER_WORD_ELLIPSIS">
-                     <font>
-                        <Font name="Ebrima" size="30.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
+            <AnchorPane layoutX="134.0" layoutY="-48.0" prefHeight="537.0" prefWidth="388.0" styleClass="anchor" stylesheets="@login.css" />
          </children>
       </AnchorPane>
    </children>

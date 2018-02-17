@@ -57,17 +57,10 @@ public class GestionUtilisateur implements IGestionUtilisateur{
 
     @Override
     public void ModifierUtilisateur(Utilisateur utilisateur) {
+        System.out.println("Modification Utilisateur...");
         try{
                 Statement stm =database.getConnexion().createStatement();
-
-           String sql="UPDATE utilisateur SET nom="+utilisateur.getNom()
-                   +", prenom="+utilisateur.getPrenom()
-                   +", email='"+utilisateur.getEmail()
-                   +"', date_naiss="+utilisateur.getDate_naiss()
-                   +"', sexe="+utilisateur.getSexe()
-                   +"', pays="+utilisateur.getPays()
-                   +"', vile="+utilisateur.getVille()
-                   +" WHERE cin="+utilisateur.getCin();
+           String sql="UPDATE utilisateur SET nom='"+utilisateur.getNom()+"', prenom='"+utilisateur.getPrenom()+"', email='"+utilisateur.getEmail()+"', date_naiss='"+utilisateur.getDate_naiss()+"', sexe='"+utilisateur.getSexe()+"', 'pays="+utilisateur.getPays()+"', ville='"+utilisateur.getVille()+"' WHERE cin='"+utilisateur.getCin()+"'";
             stm.executeUpdate(sql);
            System.out.println("Utilisateur bien modifiÃ©");
            

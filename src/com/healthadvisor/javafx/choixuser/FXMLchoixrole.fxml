@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="710.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.choixuser.FXMLchoixroleController">
+    <stylesheets>
+        <URL value="@fxmlchoixrole.css" />
+    </stylesheets>
+   <children>
+      <Circle fx:id="patient" layoutX="172.0" layoutY="169.0" onMouseEntered="#patientHover" onMouseExited="#patientExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <DropShadow />
+         </effect>
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#0c9ad7" />
+                  <Stop color="#0a2c39" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Circle>
+      <Circle fx:id="medecin" layoutX="517.0" layoutY="169.0" onMouseEntered="#medecinHover" onMouseExited="#medecinExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <DropShadow />
+         </effect>
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#0c9ad7" />
+                  <Stop color="#17242c" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Circle>
+      <ImageView fitHeight="111.0" fitWidth="110.0" layoutX="106.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="462.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="109.0" layoutY="274.0" text="Patient" textFill="WHITE">
+         <font>
+            <Font name="Magneto Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="456.0" layoutY="274.0" text="Médecin" textFill="WHITE">
+         <font>
+            <Font name="Magneto Bold" size="32.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

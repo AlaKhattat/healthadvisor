@@ -50,13 +50,11 @@ public class GestionMedecin implements IGestionMedecin{
 
     @Override
     public void ModifierMedecin(Medecin medecin) {
+        System.out.println("Modification Medecin...");
         try{
                 Statement stm =database.getConnexion().createStatement();
 
-           String sql="UPDATE medecin SET specialite="+medecin.getSpecilaite()
-                   +", adresse='"+medecin.getAdresse()
-                   +"', diplome="+medecin.getDiplome()
-                   +" WHERE login_med="+medecin.getLogin_med();
+           String sql="UPDATE medecin SET specialite='"+medecin.getSpecilaite()+"', adresse='"+medecin.getAdresse()+"', diplome='"+medecin.getDiplome()+"', rating='"+medecin.getRating()+"' WHERE login_med='"+medecin.getLogin_med()+"'";
            stm.executeUpdate(sql);
            System.out.println("Medecin bien modifiÃ©");
            
@@ -66,10 +64,10 @@ public class GestionMedecin implements IGestionMedecin{
     }
 
     @Override
-    public void SupprimerMedecinCin(String cin) {
+    public void SupprimerMedecinLogin(String login) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Delete from medecin where login_med='"+cin+"'" ;
+            String sql="Delete from medecin where login_med='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
            // stm.executeQuery(sql);
@@ -98,11 +96,11 @@ public class GestionMedecin implements IGestionMedecin{
         return listmed;    }
 
     @Override
-    public Medecin AfficherMedecinCin(String cin) {
+    public Medecin AfficherMedecinLogin(String login) {
         Medecin med =null;
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN_MED='"+cin+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN_MED='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
                  med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
