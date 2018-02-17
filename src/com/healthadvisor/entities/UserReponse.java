@@ -13,6 +13,11 @@ public class UserReponse {
     private String login;
     private int id_reponse;
 
+    public UserReponse() {
+    }
+    
+    
+
     public UserReponse(String login, int id_reponse) {
         this.login = login;
         this.id_reponse = id_reponse;

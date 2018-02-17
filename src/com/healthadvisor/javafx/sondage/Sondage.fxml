@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.sondage.SondageController">
+   <children>
+      <TableView fx:id="tableID" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="columnID" prefWidth="599.0" text="Sondages" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

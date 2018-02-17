@@ -42,7 +42,7 @@ public class GestionReponse implements IGestionReponse{
             
             prep.setInt(1,r.getId());
             prep.setString(2 , r.getReponse());
-            prep.setString(3, r.getMedecin().getLogin());
+            prep.setString(3, r.getId_medecin());
             prep.setInt(4, r.getQuestion().getId());
             prep.executeUpdate();
        
@@ -63,7 +63,19 @@ public class GestionReponse implements IGestionReponse{
             System.out.println("Réponse non supprimée !");
         }
     }
-
+    
+    @Override
+    public void supprimerReponse(int id_reponse) {
+        try {
+            PreparedStatement prep = myDB.getConnexion().prepareStatement("delete from reponse where ID_REPONSE=?");
+            prep.setInt(1 , id_reponse);
+            prep.executeUpdate();
+            System.out.println("Réponse supprimée.");
+        } catch (SQLException ex) {
+            System.out.println("Réponse non supprimée !");
+        }
+    }
+    
     @Override
     public void updateReponse(int id, String reponse) {
         try {
@@ -111,11 +123,12 @@ public class GestionReponse implements IGestionReponse{
                 reponse.setId(idReponse);
                 reponse.setReponse(textReponse);
                 GestionMedecin gm=new GestionMedecin();
-                reponse.setMedecin(gm.AfficherMedecinLogin(loginMedecin));
+                reponse.setId_medecin(loginMedecin);
+                reponse.setId_medecin(loginMedecin);
                 GestionQuestion gq = new GestionQuestion();
                 Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
                 reponse.setQuestion(question);
-                System.out.println("reponse :"+reponse);
+                
                 listr.add(reponse);
             }
             
@@ -125,5 +138,40 @@ public class GestionReponse implements IGestionReponse{
         }
         return listr;
     }
+
+    @Override
+    public List<Reponse> ListReponse(int id_question) {
+        ArrayList<Reponse> listr= new ArrayList<>();
+        try {
+            Statement stm =myDB.getConnexion().createStatement();
+            String sql="select * from reponse where ID_QUESTION="+id_question ;
+            ResultSet r = stm.executeQuery(sql);
+
+            while(r.next()){
+                System.out.println("recuperation ...");
+                Reponse reponse = new Reponse();
+                
+                int idReponse = r.getInt("ID_REPONSE");
+                String textReponse =r.getString("REPONSE");
+                String loginMedecin = r.getString("ID_MEDECIN");
+                reponse.setId(idReponse);
+                reponse.setReponse(textReponse);
+                GestionMedecin gm=new GestionMedecin();
+                reponse.setId_medecin(loginMedecin);
+                GestionQuestion gq = new GestionQuestion();
+                Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
+                reponse.setQuestion(question);
+                
+                listr.add(reponse);
+            }
+            
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(IGestionReponse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listr;
+    }
+
+    
     
 }

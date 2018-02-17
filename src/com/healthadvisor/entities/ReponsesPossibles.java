@@ -14,6 +14,11 @@ public class ReponsesPossibles {
     private String reponse;
     private int id_sondage;
 
+    public ReponsesPossibles() {
+    }
+
+    
+    
     public ReponsesPossibles(int id_reponse, String reponse, int id_sondage) {
         this.id_reponse = id_reponse;
         this.reponse = reponse;

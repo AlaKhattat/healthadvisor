@@ -16,7 +16,9 @@ import java.util.List;
 public interface IGestionReponse {
     public void ajouterReponse(Reponse r);
     public void supprimerReponse(Reponse r);
+    public void supprimerReponse(int id_reponse);
     public void updateReponse (int id, String reponse);
     public void afficherReponse (); 
     public List <Reponse> ListReponse();
+    public List <Reponse> ListReponse(int id_question);
 }

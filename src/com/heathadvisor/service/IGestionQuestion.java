@@ -6,6 +6,7 @@
 package com.heathadvisor.service;
 
 import com.healthadvisor.entities.Question;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,8 @@ public interface IGestionQuestion {
     
     public void ajouterQuestion(Question q);
     public void supprimerQuestion(Question q);
+    public void supprimerQuestion(int id_question);
     public void updateQuestion (int id, String question);
     public Question afficherQuestion (int id); 
-    public List <Question> ListQuestion();
+    public ArrayList <Question> ListQuestion();
 }

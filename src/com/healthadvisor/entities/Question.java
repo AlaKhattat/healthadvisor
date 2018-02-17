@@ -7,6 +7,7 @@ package com.healthadvisor.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -15,34 +16,23 @@ import java.util.List;
 public class Question {
     private int id;
     private String question;
-    private Patient patient;
-    private ArrayList<Reponse> reponses;
-
-    @Override
-    public String toString() {
-        return "Question{" + "id=" + id + ", question=" + question + ", patient=" + patient + ", reponses=" + reponses + '}';
-    }
+   // private Patient patient;
+    private String id_patient;
 
 
-    public Question(int id, String question, Patient patient, ArrayList<Reponse> reponses) {
+
+    public Question(int id, String question,String id_patient) {
         this.id = id;
         this.question = question;
-        this.patient = patient;
-        this.reponses = reponses;
+        this.id_patient = id_patient;
     }
 
+ 
+    
     public Question() {
     }
 
-    public ArrayList<Reponse> getReponses() {
-        return reponses;
-    }
 
-    public void setReponses(ArrayList<Reponse> reponses) {
-        this.reponses = reponses;
-    }
-    
-    
 
     public int getId() {
         return id;
@@ -60,13 +50,18 @@ public class Question {
         this.question = question;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getId_patient() {
+        return id_patient;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setId_patient(String id_patient) {
+        this.id_patient = id_patient;
     }
-    
+
+       @Override
+    public String toString() {
+        return this.question; //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

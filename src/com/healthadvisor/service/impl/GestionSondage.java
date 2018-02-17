@@ -89,5 +89,34 @@ public class GestionSondage implements IGestionSondage{
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public ArrayList<Sondage> ListSondage() {
+    
+    ArrayList<Sondage> lists = new ArrayList<>();
+    
+        try {
+            Statement stm = myDB.getConnexion().createStatement();
+            String sql = "select * from sondage";
+            ResultSet r = stm.executeQuery(sql);
+            
+            while(r.next()){
+                Sondage sondage = new Sondage();
+                int id = r.getInt("ID_SONDAGE");
+                String nom = r.getString("NOM_SONDAGE");
+                
+                sondage.setId(id);
+                sondage.setNom(nom);
+                lists.add(sondage);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionSondage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return lists;
+       
+    }
+       
+    
     
 }
