@@ -33,8 +33,8 @@
                <content>
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="789.0" stylesheets="@../style/TabPane.css">
                      <children>
-                        <JFXComboBox labelFloat="true" layoutX="14.0" layoutY="48.0" prefHeight="43.0" prefWidth="375.0" promptText="Spécilaité" />
-                        <JFXTextField labelFloat="true" layoutX="429.0" layoutY="65.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
+                        <JFXComboBox fx:id="specialite" labelFloat="true" layoutX="14.0" layoutY="48.0" prefHeight="43.0" prefWidth="375.0" promptText="Spécilaité" />
+                        <JFXTextField fx:id="adresse" labelFloat="true" layoutX="429.0" layoutY="65.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
                         <JFXButton layoutX="609.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
                      </children>
                   </AnchorPane>
@@ -44,9 +44,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXTextField labelFloat="true" layoutX="416.0" layoutY="43.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
+                        <JFXTextField fx:id="adresse2" labelFloat="true" layoutX="416.0" layoutY="43.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
                         <JFXButton layoutX="604.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
-                        <JFXTextField labelFloat="true" layoutX="36.0" layoutY="44.0" prefHeight="25.0" prefWidth="359.0" promptText="Rechercher Votre Medecin" />
+                        <JFXTextField fx:id="recherche" labelFloat="true" layoutX="36.0" layoutY="44.0" prefHeight="25.0" prefWidth="359.0" promptText="Rechercher Votre Medecin" />
                      </children></AnchorPane>
                </content>
             </Tab>

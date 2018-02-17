@@ -81,7 +81,9 @@ public class Health_Advisor extends Application {
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
         //launch(args);
       
-      
+      GestionRendezVous gr=new GestionRendezVous();
+        System.out.println(gr.RecupererPatient("456"));
+        System.out.println(gr.RecupererMedecin("324"));
       
         
               

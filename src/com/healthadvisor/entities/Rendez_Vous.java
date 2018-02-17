@@ -17,9 +17,28 @@ public class Rendez_Vous {
     private Date date_heure;
     private String patient_id;
     private String medecin_id;
-    private StatutRendezVousEnum statut_rendezvous;
+    private String statut_rendezvous;
+    private String docteur;
+    private String patient;
 
-    public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id, StatutRendezVousEnum statut_rendezvous) {
+    public String getDocteur() {
+        return docteur;
+    }
+
+    public void setDocteur(String docteur) {
+        this.docteur = docteur;
+    }
+
+    public String getPatient() {
+        return patient;
+    }
+
+    public void setPatient(String patient) {
+        this.patient = patient;
+    }
+    
+public  Rendez_Vous(){}
+    public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id, String statut_rendezvous) {
         this.id = id;
         this.date_heure = date_heure;
         this.patient_id = patient_id;
@@ -29,11 +48,11 @@ public class Rendez_Vous {
 
     
     
-    public StatutRendezVousEnum getStatut_rendezvous() {
+    public String getStatut_rendezvous() {
         return statut_rendezvous;
     }
 
-    public void setStatut_rendezvous(StatutRendezVousEnum statut_rendezvous) {
+    public void setStatut_rendezvous(String statut_rendezvous) {
         this.statut_rendezvous = statut_rendezvous;
     }
 
@@ -69,6 +88,11 @@ public class Rendez_Vous {
 
     public void setMedecin_id(String medecin_id) {
         this.medecin_id = medecin_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Rendez_Vous{" + "id=" + id + ", date_heure=" + date_heure + ", patient_id=" + patient_id + ", medecin_id=" + medecin_id + ", statut_rendezvous=" + statut_rendezvous + '}';
     }
     
     

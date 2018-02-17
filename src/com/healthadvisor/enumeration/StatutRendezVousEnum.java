@@ -11,15 +11,15 @@ package com.healthadvisor.enumeration;
  */
 public enum StatutRendezVousEnum {
      /**
-     * NEW
+     * RDV En Cours
      */
     ENCOURS,
     /**
-     * VIEWED
+     * RDV Validé
      */
     VALIDE,
     /**
-     * VIEWED
+     * RDV Annulé
      */
     ANNULE;
 }
