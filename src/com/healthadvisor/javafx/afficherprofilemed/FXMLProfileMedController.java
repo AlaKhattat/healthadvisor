@@ -20,6 +20,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -149,11 +150,10 @@ public class FXMLProfileMedController implements Initializable {
         this.prenom.setText(u.getPrenom());
         this.email.setText(u.getEmail());
         
-       /* Date input = u.getDate_naiss();
-        Instant instant = input.toInstant();
-        ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
-        LocalDate date = zdt.toLocalDate();
-        this.date.setValue(date);*/
+        Date date = u.getDate_naiss();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+        this.date.setValue(res);
         
         this.pays.setText(u.getPays());
         this.ville.setText(u.getVille());
