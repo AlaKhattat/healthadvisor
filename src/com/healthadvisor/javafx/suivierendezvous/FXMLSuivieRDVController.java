@@ -97,7 +97,7 @@ public class FXMLSuivieRDVController implements Initializable {
        //Fetch the selected row
         Rendez_Vous selectedForEdit = tableView.getSelectionModel().getSelectedItem();
         if (selectedForEdit == null) {
-            AlertMaker.showErrorMessage("No book selected", "Please select a book for edit.");
+            AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
         try {
@@ -126,24 +126,24 @@ public class FXMLSuivieRDVController implements Initializable {
     private void supprimerStatut(ActionEvent event) {
               Rendez_Vous selectedForDeletion = tableView.getSelectionModel().getSelectedItem();
         if (selectedForDeletion == null) {
-            AlertMaker.showErrorMessage("No book selected", "Please select a book for deletion.");
+            AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Deleting book");
-        alert.setContentText("Are you sure want to delete the book " + selectedForDeletion.getPatient()+ " ?");
+        alert.setTitle("Suppression  Rendez_vous");
+        alert.setContentText("Etes_Vous sur de supprimer le Rendez_Vous du patient " + selectedForDeletion.getPatient()+ " ?");
         Optional<ButtonType> answer = alert.showAndWait();
         if (answer.get() == ButtonType.OK) {
             Boolean result = gr.supprimerRendezVous(selectedForDeletion.getId());
             if (result) {
-                AlertMaker.showSimpleAlert("Book deleted", selectedForDeletion.getPatient()+ " was deleted successfully.");
+                AlertMaker.showSimpleAlert("Rendez_vous supprimer", selectedForDeletion.getPatient()+ "a été supprimer avec succès");
                 list.remove(selectedForDeletion);
             } else {
-                AlertMaker.showSimpleAlert("Failed", selectedForDeletion.getPatient()+ " could not be deleted");
+                AlertMaker.showSimpleAlert("Erreur", selectedForDeletion.getPatient()+ " n'a pas été supprimé");
             }
         } else {
-            AlertMaker.showSimpleAlert("Deletion cancelled", "Deletion process cancelled");
+            AlertMaker.showSimpleAlert("Suppression annulé", "Processus de suppression annulé");
         }
     }
 
