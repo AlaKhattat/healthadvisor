@@ -116,7 +116,64 @@ public class AfficherMed extends Application {
     anchor.getChildren().add(p);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
-    stage.setTitle("PaginationSample");
+    stage.setTitle("List Medecin");
     stage.show();
+  }
+  
+  public VBox createPageSpécialite(String spec) {
+    VBox box = new VBox();
+        GestionMedecin gm=new GestionMedecin();
+        for(Medecin m:gm.AfficherMedecinSpecialite(spec)){
+       
+        VBox element = new VBox();
+        element.setPadding(new Insets(10, 50, 50, 50));
+        element.setSpacing(10);
+        element.setFillWidth(true);
+        JFXButton prdv=new JFXButton("Prendre RDV");
+        prdv.setPrefWidth(142);
+        prdv.setPrefHeight(40);
+        prdv.setLayoutX(254);
+        prdv.setLayoutY(5);
+        Rating r=new Rating();
+        r.setPartialRating(true);
+        r.setRating(3);
+        Pane p=new Pane();
+        p.setPrefWidth(410);
+        p.setPrefHeight(49);
+        p.setLayoutX(-1);
+        p.setLayoutY(192);
+        p.getChildren().add(prdv);
+        p.getChildren().add(r);
+            Label nom=new Label("Dr "+m.getLogin_med());
+        nom.setPrefWidth(211);
+        nom.setPrefHeight(32);
+        nom.setMinWidth(nom.USE_COMPUTED_SIZE);
+        nom.setLayoutX(168);
+        nom.setLayoutY(32);
+            Label specialite=new Label(m.getSpecilaite());
+        specialite.setPrefWidth(211);
+        specialite.setPrefHeight(32);
+        specialite.setLayoutX(168);
+        specialite.setLayoutY(71); 
+            Label adresse=new Label(m.getAdresse());
+        adresse.setPrefWidth(211);
+        adresse.setPrefHeight(32);
+        adresse.setLayoutX(168);
+        adresse.setLayoutY(111);
+        Circle c=new Circle();
+        c.setRadius(56);
+        c.setLayoutX(70);
+        c.setLayoutY(71);
+        c.setFill(Color.AQUAMARINE);
+            AnchorPane anc = new AnchorPane();
+            anc.setPrefWidth(410);
+            anc.setPrefHeight(241);
+            anc.getChildren().addAll(p,nom,specialite,adresse,c);
+
+      element.getChildren().add(anc);
+      box.getChildren().add(element);
+    }
+  
+    return box;
   }
 }

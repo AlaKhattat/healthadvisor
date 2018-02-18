@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.editstatutrdv.FXMLEditStatutRDVController;
 import com.healthadvisor.service.impl.GestionRendezVous;
+import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -31,6 +32,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -53,6 +55,8 @@ public class FXMLSuivieRDVController implements Initializable {
     private TableColumn<Rendez_Vous, String> patientCol;
     @FXML
     private TableColumn<Rendez_Vous, String> statutCol;
+    @FXML
+    private AnchorPane root;
 
     /**
      * Initializes the controller class.
@@ -68,7 +72,6 @@ public class FXMLSuivieRDVController implements Initializable {
         docteurCol.setCellValueFactory(new PropertyValueFactory<>("docteur"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
         statutCol.setCellValueFactory(new PropertyValueFactory<>("statut_rendezvous"));
-        //availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
     }
 
     private void loadData() {
@@ -126,6 +129,8 @@ public class FXMLSuivieRDVController implements Initializable {
     private void supprimerStatut(ActionEvent event) {
               Rendez_Vous selectedForDeletion = tableView.getSelectionModel().getSelectedItem();
         if (selectedForDeletion == null) {
+            JFXButton b= new JFXButton("OK");
+            //AlertMaker.showMaterialDialog(root, tableView, b, "Aucun Rendez_Vous n'est sélectinoné", null);
             AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
@@ -150,7 +155,7 @@ public class FXMLSuivieRDVController implements Initializable {
     @FXML
     private void refresh(ActionEvent event) {
                 loadData();
-
+                
     }
     
 }
