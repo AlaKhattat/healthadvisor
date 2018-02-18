@@ -74,12 +74,12 @@ public class FXMLSuivieRDVController implements Initializable {
     private void loadData() {
         list.clear();
         for(Rendez_Vous r:gr.ListRendez_Vous()){
-            int id=r.getId();
             String docteur=gr.RecupererMedecin(r.getMedecin_id());
             String patient=gr.RecupererPatient(r.getPatient_id());
             Date date=r.getDate_heure();
             String statut =r.getStatut_rendezvous();
             Rendez_Vous rdv =new Rendez_Vous();
+            rdv.setId(r.getId());
             rdv.setDate_heure(date);
             rdv.setMedecin_id(r.getMedecin_id());
             rdv.setPatient_id(r.getPatient_id());

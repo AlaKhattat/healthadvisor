@@ -74,6 +74,7 @@ public class FXMLEditStatutRDVController implements Initializable {
      
       private void handleEditOperation() {
          Rendez_Vous r=new Rendez_Vous(id,dater, patient_id, medecin_id,statut.getValue());
+          System.out.println(r);
           if (gr.ModifierRendezVous(r)) {
             AlertMaker.showSimpleAlert("Success", "Rendez_Vous Mis a Jour");
         } else {

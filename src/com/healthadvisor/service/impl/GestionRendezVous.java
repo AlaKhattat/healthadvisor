@@ -115,7 +115,17 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
 
     @Override
     public boolean ModifierRendezVous(Rendez_Vous rdv) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try{
+           System.out.println("Modification RDV...");
+           Statement stm =database.getConnexion().createStatement();
+           String sql="UPDATE rendez_vous SET statut='"+rdv.getStatut_rendezvous()+"' WHERE id='"+rdv.getId()+"'";
+           stm.executeUpdate(sql);
+           System.out.println("Rendez_vous bien modifiÃ©");
+           return true;
+           
+        }catch(SQLException e){
+           System.out.println(e.getMessage());
+       }      
+    return false;}
     
 }
