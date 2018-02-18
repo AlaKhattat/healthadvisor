@@ -19,5 +19,6 @@ public interface IGestionPatient {
     public List<Patient> ListPatient();
     public Patient AfficherPatientLogin(String login);
     public Patient AfficherPatientCin(String cin);
+    
 
 }

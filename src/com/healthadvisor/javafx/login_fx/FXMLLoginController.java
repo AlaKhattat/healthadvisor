@@ -25,6 +25,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -97,6 +98,10 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void homeAction(MouseEvent event) {
+        //Sign IN
+        String usernamesigin=this.username.getText();
+        String password=this.passwordsiginin.getText();
+      
     }
 
     @FXML

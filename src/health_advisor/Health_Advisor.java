@@ -20,6 +20,7 @@ import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.entities.UserReponse;
+import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.GestionReponse;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
@@ -81,9 +82,8 @@ public class Health_Advisor extends Application {
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
         //launch(args);
       
-      GestionRendezVous gr=new GestionRendezVous();
-        System.out.println(gr.RecupererPatient("456"));
-        System.out.println(gr.RecupererMedecin("324"));
+     SendEmail.send("alaeddine.khattat@esprit.tn","aqzsedrftgyh","alakhattat17@gmail.com","hello javatpoint","How r u?");  
+
       
         
               

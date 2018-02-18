@@ -153,5 +153,7 @@ public class GestionMedecin implements IGestionMedecin{
             Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listmed;     }
+
+ 
     
 }

@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,9 +33,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -95,12 +100,23 @@ public class FXMLSuivieRDVController implements Initializable {
         System.out.println();
         tableView.setItems(list);
     }
+    Image img=new Image("/com/healthadvisor/ressources/question.png");
+       Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Aucun Rendez_Vous n'est sélectionné")
+                    .text("  Sélectionnez un Rendez_Vous")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+
     @FXML
     private void modifierStatut(ActionEvent event) {
        //Fetch the selected row
         Rendez_Vous selectedForEdit = tableView.getSelectionModel().getSelectedItem();
         if (selectedForEdit == null) {
-            AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
+         
+            notif.show();
+            //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
         try {
@@ -131,7 +147,9 @@ public class FXMLSuivieRDVController implements Initializable {
         if (selectedForDeletion == null) {
             JFXButton b= new JFXButton("OK");
             //AlertMaker.showMaterialDialog(root, tableView, b, "Aucun Rendez_Vous n'est sélectinoné", null);
-            AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
+                       notif.showWarning();
+
+            //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
 
