@@ -35,7 +35,7 @@ public class GestionMedecin implements IGestionMedecin{
             String sql="Insert into medecin (login_med,specialite,adresse,diplome,rating) "+ " values (?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,medecin.getLogin());
-            preparedStmt.setString(2,medecin.getSpecilaite());
+            preparedStmt.setString(2,medecin.getSpecialite());
             preparedStmt.setString(3,medecin.getAdresse());
             preparedStmt.setString(4,medecin.getDiplome());
             preparedStmt.setInt(5,medecin.getRating());
@@ -54,7 +54,7 @@ public class GestionMedecin implements IGestionMedecin{
         try{
                 Statement stm =database.getConnexion().createStatement();
 
-           String sql="UPDATE medecin SET specialite='"+medecin.getSpecilaite()+"', adresse='"+medecin.getAdresse()+"', diplome='"+medecin.getDiplome()+"', rating='"+medecin.getRating()+"' WHERE login_med='"+medecin.getLogin_med()+"'";
+           String sql="UPDATE medecin SET specialite='"+medecin.getSpecialite()+"', adresse='"+medecin.getAdresse()+"', diplome='"+medecin.getDiplome()+"', rating='"+medecin.getRating()+"' WHERE login_med='"+medecin.getLogin_med()+"'";
            stm.executeUpdate(sql);
            System.out.println("Medecin bien modifiÃ©");
            
@@ -64,16 +64,19 @@ public class GestionMedecin implements IGestionMedecin{
     }
 
     @Override
-    public void SupprimerMedecinLogin(String login) {
+    public boolean SupprimerMedecinLogin(String login) {
         try {
             Statement stm =database.getConnexion().createStatement();
             String sql="Delete from medecin where login_med='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
+            return true;
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
-        }    }
+        } 
+        return false;
+    }
 
     @Override
     public List<Medecin> ListMedecin() {

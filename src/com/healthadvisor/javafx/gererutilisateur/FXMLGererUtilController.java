@@ -5,13 +5,16 @@
  */
 package com.healthadvisor.javafx.gererutilisateur;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.javafx.detailsm.FXMLDetailsMController;
 import com.healthadvisor.javafx.detailsp.FXMLDetailsPController;
 import com.healthadvisor.javafx.editstatutrdv.FXMLEditStatutRDVController;
 import com.healthadvisor.javafx.suivierendezvous.AlertMaker;
 import com.healthadvisor.javafx.suivierendezvous.LibraryAssistantUtil;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import java.io.IOException;
@@ -47,8 +50,11 @@ import org.controlsfx.control.Notifications;
  */
 public class FXMLGererUtilController implements Initializable {
   ObservableList<Patient> list = FXCollections.observableArrayList();
+  ObservableList<Medecin> listM = FXCollections.observableArrayList();
+
     GestionPatient gp= new GestionPatient();
     GestionUtilisateur gu=new GestionUtilisateur();
+    GestionMedecin gm=new GestionMedecin();
     @FXML
     private TableColumn<Patient, String> nomCol;
     @FXML
@@ -59,6 +65,16 @@ public class FXMLGererUtilController implements Initializable {
     private TableColumn<Patient, String> paysCol;
     @FXML
     private TableView<Patient> tableViewP;
+    @FXML
+    private TableColumn<Medecin, String> nomMCol;
+    @FXML
+    private TableColumn<Medecin, String> prenomMCol;
+    @FXML
+    private TableColumn<Medecin, String> sexeMCol;
+    @FXML
+    private TableView<Medecin> tableViewM;
+    @FXML
+    private TableColumn<Medecin, String> specialiteCol;
 
     /**
      * Initializes the controller class.
@@ -68,6 +84,8 @@ public class FXMLGererUtilController implements Initializable {
         // TODO
         initColP();
         loadDataP();
+        initColM();
+        loadDataM();
         
     }    
    private void initColP() {
@@ -78,20 +96,46 @@ public class FXMLGererUtilController implements Initializable {
     }
 
     private void loadDataP() {
-        list.clear();
-        for(Patient r:gp.ListPatient()){
-          Utilisateur u=gu.AfficherUtilisateurCin(r.getCin_user());
-          Patient p=new Patient();
-          p.setLogin(r.getLogin());
-          p.setNom(u.getNom());
-          p.setPrenom(u.getPrenom());
-          p.setPays(u.getPays());
-          p.setCin_user(r.getCin_user());
-          p.setSexe(u.getSexe());
-            list.add(p);
-        }
+         list.clear();
+         gp.ListPatient().stream().map((r) -> {
+             Utilisateur u=gu.AfficherUtilisateurCin(r.getCin_user());
+             Patient p=new Patient();
+             p.setLogin(r.getLogin());
+             p.setNom(u.getNom());
+             p.setPrenom(u.getPrenom());
+             p.setPays(u.getPays());
+             p.setCin_user(r.getCin_user());
+             p.setSexe(u.getSexe());
+          return p;
+      }).forEachOrdered((p) -> {
+          list.add(p);
+      });
      
         tableViewP.setItems(list);
+    }
+     private void initColM() {
+        nomMCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomMCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        sexeMCol.setCellValueFactory(new PropertyValueFactory<>("sexe"));
+        specialiteCol.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+    }
+
+    private void loadDataM() {
+        listM.clear();
+        gm.ListMedecin().stream().map((m) -> {
+            Patient p=gp.AfficherPatientLogin(m.getLogin_med());
+            Utilisateur u=gu.AfficherUtilisateurCin(p.getCin_user());
+            Medecin med=new Medecin();
+            med.setNom(u.getNom());
+            med.setPrenom(u.getPrenom());
+            med.setLogin_med(m.getLogin_med());
+            med.setSexe(u.getSexe());
+            med.setSpecialite(m.getSpecialite());
+          return med;
+      }).forEachOrdered((med) -> {
+          listM.add(med);
+      });
+        tableViewM.setItems(listM);
     }
        Image img=new Image("/com/healthadvisor/ressources/question.png");
        Notifications notif=Notifications.create()
@@ -173,6 +217,69 @@ public class FXMLGererUtilController implements Initializable {
     private void refreshP(ActionEvent event) {
                         loadDataP();
 
+    }
+
+    @FXML
+    private void afficherDetailsM(ActionEvent event) {
+                 //Fetch the selected row
+        Medecin selectedForEdit = tableViewM.getSelectionModel().getSelectedItem();
+        if (selectedForEdit == null) {
+            notif.show();
+            //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/detailsm/FXMLDetailsM.fxml"));
+            Parent parent = loader.load();
+
+            FXMLDetailsMController controller = (FXMLDetailsMController) loader.getController();
+            controller.inflateUI(selectedForEdit);
+
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Details Medecin");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            LibraryAssistantUtil.setStageIcon(stage);
+
+            stage.setOnCloseRequest((e) -> {
+                refreshP(new ActionEvent());
+            });
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void SupprimerM(ActionEvent event) {
+        Medecin selectedForDeletion = tableViewM.getSelectionModel().getSelectedItem();
+        if (selectedForDeletion == null) {
+            //JFXButton b= new JFXButton("OK");
+            //AlertMaker.showMaterialDialog(root, tableView, b, "Aucun Rendez_Vous n'est sélectinoné", null);
+            notif.show();
+            //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Suppression  Medecin");
+        alert.setContentText("Etes_Vous sur de supprimer le medecin " + selectedForDeletion.getNom()+" "+selectedForDeletion.getPrenom()+ " ?");
+        Optional<ButtonType> answer = alert.showAndWait();
+        if (answer.get() == ButtonType.OK) {
+            Boolean result = gm.SupprimerMedecinLogin(selectedForDeletion.getLogin_med());
+            if (result) {
+            notifsucces.show();
+            listM.remove(selectedForDeletion);
+            } else {
+                AlertMaker.showSimpleAlert("Erreur", selectedForDeletion.getNom()+" "+selectedForDeletion.getPrenom()+ " n'a pas été supprimé");
+            }
+        } else {
+            AlertMaker.showSimpleAlert("Suppression annulé", "Processus de suppression annulé");
+        }
+    }
+
+    @FXML
+    private void refreshM(ActionEvent event) {
+                        loadDataM();
     }
     
 }

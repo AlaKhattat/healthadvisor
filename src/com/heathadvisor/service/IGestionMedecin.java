@@ -15,7 +15,7 @@ import java.util.List;
 public interface IGestionMedecin {
     public void AjouterMedecin(Medecin medecin);
     public void ModifierMedecin(Medecin medecin);
-    public void SupprimerMedecinLogin(String login);
+    public boolean SupprimerMedecinLogin(String login);
     public List<Medecin> ListMedecin();
     public Medecin AfficherMedecinLogin(String login);
     public List<Medecin> AfficherMedecinSpecialite(String specialite);

@@ -62,7 +62,50 @@
             </Tab>
             <Tab text="Gérer Medecin">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewM" layoutX="13.0" layoutY="41.0" prefHeight="333.0" prefWidth="675.0">
+                           <columns>
+                              <TableColumn fx:id="nomMCol" prefWidth="150.0" text="Nom" />
+                              <TableColumn fx:id="prenomMCol" minWidth="0.0" prefWidth="174.0" text="Prenom" />
+                              <TableColumn fx:id="sexeMCol" minWidth="0.0" prefWidth="172.0" text="Sexe" />
+                              <TableColumn fx:id="specialiteCol" minWidth="0.0" prefWidth="178.0" text="Specialite" />
+                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#afficherDetailsM" text="Afficher Details">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/info.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#SupprimerM" text="Supprimer">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#refreshM" text="rafraichir">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/refresh.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                 </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </children></AnchorPane>
                </content>
             </Tab>
          </tabs>

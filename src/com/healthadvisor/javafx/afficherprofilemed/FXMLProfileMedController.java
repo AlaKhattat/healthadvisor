@@ -145,7 +145,7 @@ public class FXMLProfileMedController implements Initializable {
         Medecin m= gm.AfficherMedecinLogin(p.getLogin());
         
         sexe.setValue(u.getSexe());
-        specialite.setValue(m.getSpecilaite());
+        specialite.setValue(m.getSpecialite());
         this.nom.setText(u.getNom());
         this.prenom.setText(u.getPrenom());
         this.email.setText(u.getEmail());

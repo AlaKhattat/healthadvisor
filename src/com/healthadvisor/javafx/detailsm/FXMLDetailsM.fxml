@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="637.0" prefWidth="500.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.detailsm.FXMLDetailsMController">
+    <stylesheets>
+        <URL value="@fxmldetailsm.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField fx:id="nom" labelFloat="true" layoutX="128.0" layoutY="127.0" prefHeight="25.0" prefWidth="245.0" promptText="Nom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="prenom" labelFloat="true" layoutX="128.0" layoutY="192.0" prefHeight="25.0" prefWidth="245.0" promptText="Prenom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="email" labelFloat="true" layoutX="128.0" layoutY="256.0" prefHeight="25.0" prefWidth="245.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="date" labelFloat="true" layoutX="128.0" layoutY="324.0" prefHeight="25.0" prefWidth="245.0" promptText="Date De Naissance">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="cin" labelFloat="true" layoutX="128.0" layoutY="74.0" prefHeight="25.0" prefWidth="245.0" promptText="Cin">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="specialite" labelFloat="true" layoutX="128.0" layoutY="392.0" prefHeight="25.0" prefWidth="245.0" promptText="Specialite">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="sexe" labelFloat="true" layoutX="128.0" layoutY="459.0" prefHeight="25.0" prefWidth="245.0" promptText="Sexe">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="ville" labelFloat="true" layoutX="128.0" layoutY="527.0" prefHeight="25.0" prefWidth="245.0" promptText="Ville">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="37.0" prefWidth="173.0" text="Détails Medecin">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="quitter" layoutX="292.0" layoutY="582.0" onMouseClicked="#quitter" prefHeight="37.0" prefWidth="81.0" text="Quitter" />
+   </children>
+</AnchorPane>

@@ -74,7 +74,7 @@ public class AfficherMed extends Application {
         nom.setMinWidth(nom.USE_COMPUTED_SIZE);
         nom.setLayoutX(168);
         nom.setLayoutY(32);
-            Label specialite=new Label(m.getSpecilaite());
+            Label specialite=new Label(m.getSpecialite());
         specialite.setPrefWidth(211);
         specialite.setPrefHeight(32);
         specialite.setLayoutX(168);
@@ -150,7 +150,7 @@ public class AfficherMed extends Application {
         nom.setMinWidth(nom.USE_COMPUTED_SIZE);
         nom.setLayoutX(168);
         nom.setLayoutY(32);
-            Label specialite=new Label(m.getSpecilaite());
+            Label specialite=new Label(m.getSpecialite());
         specialite.setPrefWidth(211);
         specialite.setPrefHeight(32);
         specialite.setLayoutX(168);

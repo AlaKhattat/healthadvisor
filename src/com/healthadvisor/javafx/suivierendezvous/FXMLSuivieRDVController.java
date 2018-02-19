@@ -81,7 +81,7 @@ public class FXMLSuivieRDVController implements Initializable {
 
     private void loadData() {
         list.clear();
-        for(Rendez_Vous r:gr.ListRendez_Vous()){
+        gr.ListRendez_Vous().stream().map((r) -> {
             String docteur=gr.RecupererMedecin(r.getMedecin_id());
             String patient=gr.RecupererPatient(r.getPatient_id());
             Date date=r.getDate_heure();
@@ -94,8 +94,10 @@ public class FXMLSuivieRDVController implements Initializable {
             rdv.setDocteur(docteur);
             rdv.setPatient(patient);
             rdv.setStatut_rendezvous(statut);
+            return rdv;
+        }).forEachOrdered((rdv) -> {
             list.add(rdv);
-        }
+        });
      
         System.out.println();
         tableView.setItems(list);
