@@ -17,11 +17,12 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
  
 public class sendSMS {
-	public String sendSms(String msg,String send,String numb) {
+	public String sendSms(String send,String date,String adresse,String numb) {
 		try {
 			// Construct data
 			String apiKey = "apikey=" + "8FirtCdp6sE-QrOydbneBzuudhk63sbB5buk536Yqa	";
-			String message = "&message=" + msg;
+                        String ad="Bonjour,vous avez RDV avec le Dr "+send+"le "+date+"au "+adresse;
+			String message = "&message=" + ad;
 			String sender = "&sender=" + send;
 			String numbers = "&numbers=" +"+216"+numb;
 			
