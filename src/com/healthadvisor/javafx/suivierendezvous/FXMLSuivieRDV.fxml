@@ -71,9 +71,30 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#modifierStatut" text="Modifier Statut" />
-                  <MenuItem mnemonicParsing="false" onAction="#supprimerStatut" text="Supprimer RDV" />
-                  <MenuItem mnemonicParsing="false" onAction="#refresh" text="refresh" />
+                <MenuItem mnemonicParsing="false" onAction="#modifierStatut" text="Modifier Statut">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../ressources/update.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#supprimerStatut" text="Supprimer RDV">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../ressources/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#refresh" text="refresh">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../ressources/refresh.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
               </items>
             </ContextMenu>
          </contextMenu>

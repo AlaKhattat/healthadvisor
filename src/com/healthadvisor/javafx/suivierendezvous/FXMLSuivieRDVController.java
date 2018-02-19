@@ -108,6 +108,14 @@ public class FXMLSuivieRDVController implements Initializable {
                     .hideAfter(Duration.seconds(5))
                     .position(Pos.TOP_RIGHT)
                     .darkStyle();
+        Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
+       Notifications notifsucces=Notifications.create()
+               .graphic(new ImageView(imgsucces))
+                    .title("Suppression Rendez_Vous")
+                    .text("Rendez-Vous Supprimé")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
 
     @FXML
     private void modifierStatut(ActionEvent event) {
@@ -145,9 +153,9 @@ public class FXMLSuivieRDVController implements Initializable {
     private void supprimerStatut(ActionEvent event) {
               Rendez_Vous selectedForDeletion = tableView.getSelectionModel().getSelectedItem();
         if (selectedForDeletion == null) {
-            JFXButton b= new JFXButton("OK");
+            //JFXButton b= new JFXButton("OK");
             //AlertMaker.showMaterialDialog(root, tableView, b, "Aucun Rendez_Vous n'est sélectinoné", null);
-                       notif.showWarning();
+                       notif.show();
 
             //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
@@ -160,7 +168,8 @@ public class FXMLSuivieRDVController implements Initializable {
         if (answer.get() == ButtonType.OK) {
             Boolean result = gr.supprimerRendezVous(selectedForDeletion.getId());
             if (result) {
-                AlertMaker.showSimpleAlert("Rendez_vous supprimer", selectedForDeletion.getPatient()+ "a été supprimer avec succès");
+notifsucces.show();
+//AlertMaker.showSimpleAlert("Rendez_vous supprimer", selectedForDeletion.getPatient()+ "a été supprimer avec succès");
                 list.remove(selectedForDeletion);
             } else {
                 AlertMaker.showSimpleAlert("Erreur", selectedForDeletion.getPatient()+ " n'a pas été supprimé");

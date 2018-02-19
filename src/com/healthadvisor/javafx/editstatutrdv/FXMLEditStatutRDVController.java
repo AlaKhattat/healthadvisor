@@ -76,9 +76,9 @@ public class FXMLEditStatutRDVController implements Initializable {
          Rendez_Vous r=new Rendez_Vous(id,dater, patient_id, medecin_id,statut.getValue());
           System.out.println(r);
           if (gr.ModifierRendezVous(r)) {
-            AlertMaker.showSimpleAlert("Success", "Rendez_Vous Mis a Jour");
+            AlertMaker.showSimpleAlert("Succes", "Rendez_Vous Mis a Jour");
         } else {
-            AlertMaker.showErrorMessage("Failed", "Erreur lors de la mise à jour");
+            AlertMaker.showErrorMessage("Erreur", "Erreur lors de la mise à jour");
         }
     }
 

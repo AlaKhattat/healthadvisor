@@ -26,7 +26,7 @@ public class Medecin extends Patient {
         this.diplome = diplome;
         this.rating = rating;
     }
-
+public Medecin(){}
     public String getLogin_med() {
         return login_med;
     }

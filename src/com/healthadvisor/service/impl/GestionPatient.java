@@ -62,17 +62,19 @@ public class GestionPatient implements IGestionPatient{
        }       }
 
     @Override
-    public void SupprimerPatientLogin(String login) {
+    public boolean SupprimerPatientLogin(String login) {
         try {
             System.out.println("Suppression...");
             Statement stm =database.getConnexion().createStatement();
             String sql="Delete from patient where login_p='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
+            return true;
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
-        }      }
+        } 
+    return false;}
 
     @Override
     public List<Patient> ListPatient() {

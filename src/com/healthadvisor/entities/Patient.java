@@ -16,11 +16,48 @@ public class Patient {
     private String login;
     private String password;
     private String cin_user;
+    private String nom;
+    private String prenom;
+    private String sexe;
+    private String pays;
 
+public Patient(){}
     public Patient(String login, String password, String cin_user) {
         this.login = login;
         this.password = password;
         this.cin_user = cin_user;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
  
    
