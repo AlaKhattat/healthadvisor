@@ -21,8 +21,8 @@ public class sendSMS {
 		try {
 			// Construct data
 			String apiKey = "apikey=" + "8FirtCdp6sE-QrOydbneBzuudhk63sbB5buk536Yqa	";
-                        String ad="Bonjour,vous avez RDV avec le Dr "+send+"le "+date+"au "+adresse;
-			String message = "&message=" + ad;
+                        String msg="Bonjour,vous avez RDV avec le Dr "+send+"le "+date+"au "+adresse;
+			String message = "&message=" + msg;
 			String sender = "&sender=" + send;
 			String numbers = "&numbers=" +"+216"+numb;
 			
