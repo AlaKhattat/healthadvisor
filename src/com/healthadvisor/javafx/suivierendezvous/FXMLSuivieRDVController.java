@@ -102,6 +102,7 @@ public class FXMLSuivieRDVController implements Initializable {
         System.out.println();
         tableView.setItems(list);
     }
+    
     Image img=new Image("/com/healthadvisor/ressources/question.png");
        Notifications notif=Notifications.create()
                .graphic(new ImageView(img))
@@ -110,7 +111,7 @@ public class FXMLSuivieRDVController implements Initializable {
                     .hideAfter(Duration.seconds(5))
                     .position(Pos.TOP_RIGHT)
                     .darkStyle();
-        Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
+    Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
        Notifications notifsucces=Notifications.create()
                .graphic(new ImageView(imgsucces))
                     .title("Suppression Rendez_Vous")
@@ -124,7 +125,6 @@ public class FXMLSuivieRDVController implements Initializable {
        //Fetch the selected row
         Rendez_Vous selectedForEdit = tableView.getSelectionModel().getSelectedItem();
         if (selectedForEdit == null) {
-         
             notif.show();
             //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
@@ -153,7 +153,7 @@ public class FXMLSuivieRDVController implements Initializable {
 
     @FXML
     private void supprimerStatut(ActionEvent event) {
-              Rendez_Vous selectedForDeletion = tableView.getSelectionModel().getSelectedItem();
+        Rendez_Vous selectedForDeletion = tableView.getSelectionModel().getSelectedItem();
         if (selectedForDeletion == null) {
             //JFXButton b= new JFXButton("OK");
             //AlertMaker.showMaterialDialog(root, tableView, b, "Aucun Rendez_Vous n'est sélectinoné", null);
@@ -162,7 +162,6 @@ public class FXMLSuivieRDVController implements Initializable {
             //AlertMaker.showErrorMessage("Aucun Rendez_Vous n'est sélectinoné", "Sélectionnez un Rendez_Vous !");
             return;
         }
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Suppression  Rendez_vous");
         alert.setContentText("Etes_Vous sur de supprimer le Rendez_Vous du patient " + selectedForDeletion.getPatient()+ " ?");
@@ -170,8 +169,8 @@ public class FXMLSuivieRDVController implements Initializable {
         if (answer.get() == ButtonType.OK) {
             Boolean result = gr.supprimerRendezVous(selectedForDeletion.getId());
             if (result) {
-notifsucces.show();
-//AlertMaker.showSimpleAlert("Rendez_vous supprimer", selectedForDeletion.getPatient()+ "a été supprimer avec succès");
+            notifsucces.show();
+            //AlertMaker.showSimpleAlert("Rendez_vous supprimer", selectedForDeletion.getPatient()+ "a été supprimer avec succès");
                 list.remove(selectedForDeletion);
             } else {
                 AlertMaker.showSimpleAlert("Erreur", selectedForDeletion.getPatient()+ " n'a pas été supprimé");
@@ -183,8 +182,7 @@ notifsucces.show();
 
     @FXML
     private void refresh(ActionEvent event) {
-                loadData();
-                
+                loadData();         
     }
     
 }

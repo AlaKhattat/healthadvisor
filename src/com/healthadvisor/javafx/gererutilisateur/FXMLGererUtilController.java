@@ -85,9 +85,9 @@ public class FXMLGererUtilController implements Initializable {
         initColP();
         loadDataP();
         initColM();
-        loadDataM();
-        
+        loadDataM();  
     }    
+    
    private void initColP() {
         nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -113,6 +113,7 @@ public class FXMLGererUtilController implements Initializable {
      
         tableViewP.setItems(list);
     }
+    
      private void initColM() {
         nomMCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomMCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
