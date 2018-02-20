@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="com.healthadvisor.javafx.afficherprofilpatient.FXMLProfilePatientController">
+<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilpatient.FXMLProfilePatientController">
     <stylesheets>
         <URL value="@fxmlprofilepatient.css" />
     </stylesheets>
@@ -27,27 +27,27 @@
             <Font name="Magneto Bold" size="25.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="nom" editable="false" labelFloat="true" layoutX="44.0" layoutY="202.0" prefHeight="25.0" prefWidth="161.0" promptText="Nom">
+      <JFXTextField fx:id="nom" editable="false" labelFloat="true" layoutX="44.0" layoutY="162.0" prefHeight="25.0" prefWidth="161.0" promptText="Nom">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="prenom" editable="false" labelFloat="true" layoutX="44.0" layoutY="257.0" prefHeight="25.0" prefWidth="161.0" promptText="Prenom">
+      <JFXTextField fx:id="prenom" editable="false" labelFloat="true" layoutX="44.0" layoutY="217.0" prefHeight="25.0" prefWidth="161.0" promptText="Prenom">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="44.0" layoutY="311.0" prefHeight="25.0" prefWidth="161.0" promptText="Email">
+      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="44.0" layoutY="271.0" prefHeight="25.0" prefWidth="161.0" promptText="Email">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="pays" editable="false" labelFloat="true" layoutX="44.0" layoutY="469.0" prefHeight="25.0" prefWidth="161.0" promptText="Pays">
+      <JFXTextField fx:id="pays" editable="false" labelFloat="true" layoutX="44.0" layoutY="429.0" prefHeight="25.0" prefWidth="161.0" promptText="Pays">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="Ville" editable="false" labelFloat="true" layoutX="44.0" layoutY="524.0" prefHeight="25.0" prefWidth="161.0" promptText="Ville">
+      <JFXTextField fx:id="Ville" editable="false" labelFloat="true" layoutX="44.0" layoutY="484.0" prefHeight="25.0" prefWidth="161.0" promptText="Ville">
          <font>
             <Font size="14.0" />
          </font>
@@ -62,8 +62,8 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="date" editable="false" layoutX="44.0" layoutY="372.0" prefHeight="25.0" prefWidth="161.0" promptText="Date de naissance" />
-      <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="44.0" layoutY="419.0" prefHeight="25.0" prefWidth="161.0" promptText="Sexe" />
+      <JFXDatePicker fx:id="date" editable="false" layoutX="44.0" layoutY="332.0" prefHeight="25.0" prefWidth="161.0" promptText="Date de naissance" />
+      <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="44.0" layoutY="379.0" prefHeight="25.0" prefWidth="161.0" promptText="Sexe" />
       <Label layoutX="268.0" layoutY="338.0" prefHeight="40.0" prefWidth="248.0" text="Paramètres d'authentification" textFill="#8c0b0b">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -73,5 +73,6 @@
       <Separator layoutX="303.0" layoutY="538.0" prefHeight="9.0" prefWidth="239.0" />
       <JFXButton fx:id="modifier" layoutX="40.0" layoutY="636.0" onMouseClicked="#modifierPatient" prefHeight="25.0" prefWidth="84.0" text="Modifier" />
       <JFXButton fx:id="confirmer" layoutX="192.0" layoutY="636.0" onMouseClicked="#confirmerPatient" prefHeight="25.0" prefWidth="161.0" text="Confirmer Modification" />
+      <JFXTextField fx:id="numtel" labelFloat="true" layoutX="44.0" layoutY="535.0" prefHeight="25.0" prefWidth="161.0" promptText="Téléphone" />
    </children>
 </AnchorPane>

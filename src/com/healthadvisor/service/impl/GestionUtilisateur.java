@@ -32,7 +32,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
     public void AjouterUtilisateur(Utilisateur utilisateur) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into utilisateur (cin,nom,prenom,email,date_naiss,sexe,pays,ville) "+" values (?,?,?,?,?,?,?,?)";
+            String sql="Insert into utilisateur (cin,nom,prenom,email,date_naiss,sexe,pays,ville,num_tel) "+" values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,utilisateur.getCin());
             preparedStmt.setString(2,utilisateur.getNom());
@@ -46,6 +46,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             preparedStmt.setString(6,utilisateur.getSexe());
             preparedStmt.setString(7,utilisateur.getPays());
             preparedStmt.setString(8,utilisateur.getVille());
+            preparedStmt.setInt(9,utilisateur.getNum_tel());
 
               preparedStmt.executeUpdate();
 
@@ -60,7 +61,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
         System.out.println("Modification Utilisateur...");
         try{
                 Statement stm =database.getConnexion().createStatement();
-           String sql="UPDATE utilisateur SET nom='"+utilisateur.getNom()+"', prenom='"+utilisateur.getPrenom()+"', email='"+utilisateur.getEmail()+"', date_naiss='"+utilisateur.getDate_naiss()+"', sexe='"+utilisateur.getSexe()+"', 'pays="+utilisateur.getPays()+"', ville='"+utilisateur.getVille()+"' WHERE cin='"+utilisateur.getCin()+"'";
+           String sql="UPDATE utilisateur SET nom='"+utilisateur.getNom()+"', prenom='"+utilisateur.getPrenom()+"', email='"+utilisateur.getEmail()+"', date_naiss='"+utilisateur.getDate_naiss()+"', sexe='"+utilisateur.getSexe()+"', 'pays="+utilisateur.getPays()+"', ville='"+utilisateur.getVille()+"', num_tel='"+utilisateur.getNum_tel()+"' WHERE cin='"+utilisateur.getCin()+"'";
             stm.executeUpdate(sql);
            System.out.println("Utilisateur bien modifiÃ©");
            
@@ -91,7 +92,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
                 System.out.println("recuperation des donnees");
-                Utilisateur util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"));
+                Utilisateur util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"), rs.getInt("num_tel"));
                 listutil.add(util);
             }
             
@@ -110,7 +111,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
             String sql="select * from utilisateur where cin='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
                         while(rs.next()){
-                            util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"));
+                            util= new Utilisateur(rs.getString("cin"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getDate("date_naiss"), rs.getString("sexe"), rs.getString("pays"), rs.getString("ville"),rs.getInt("num_tel"));
                         }
             System.out.println("Recuperation avec succes");
            // stm.executeQuery(sql);

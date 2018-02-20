@@ -29,6 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javax.swing.text.html.HTMLEditorKit;
 
 /**
  * FXML Controller class
@@ -60,6 +61,8 @@ public class FXMLProfilePatientController implements Initializable {
     @FXML
     private JFXButton confirmer;
     String[] sexelist={"Homme","Femme"};
+    @FXML
+    private JFXTextField numtel;
 
     /**
      * Initializes the controller class.
@@ -88,6 +91,12 @@ public class FXMLProfilePatientController implements Initializable {
         this.pays.setText(u.getPays());
         this.login.setText(p.getLogin());
         this.password.setText(p.getPassword());
+        StringBuilder sb = new StringBuilder();
+sb.append("");
+sb.append(u.getNum_tel());
+String str = sb.toString();
+                
+        this.numtel.setText(str);
     }    
 
     @FXML
@@ -117,10 +126,11 @@ public class FXMLProfilePatientController implements Initializable {
  String login=this.login.getText();
  String ville=this.Ville.getText();
  String password=this.password.getText();
-
+ String num_tel=this.numtel.getText();
+ int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur("11111111", nom, prenom, email, date, sexe, pays, ville);
+        Utilisateur u=new Utilisateur("11111111", nom, prenom, email, date, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
         Patient p=new Patient(login, password, u.getCin());

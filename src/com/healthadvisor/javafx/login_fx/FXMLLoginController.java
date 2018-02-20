@@ -75,6 +75,8 @@ public class FXMLLoginController implements Initializable {
     private DatePicker date_naiss;
     @FXML
     private JFXDatePicker date;
+    @FXML
+    private JFXTextField numtel;
 
     /**
      * Initializes the controller class.
@@ -117,8 +119,10 @@ public class FXMLLoginController implements Initializable {
  String sexe=this.sexe.getValue();
  String pays=this.pays.getText();
  String ville=this.ville.getText();
+ String num_tel=this.numtel.getText();
+ int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville);
+        Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville,num);
         gu.AjouterUtilisateur(u);
     }
 

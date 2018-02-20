@@ -21,8 +21,17 @@ private Date date_naiss;
 private String sexe;
 private String pays;
 private String ville;
+private int num_tel;
 
-    public Utilisateur(String cin, String nom, String prenom, String email, Date date_naiss, String sexe, String pays, String ville) {
+    public int getNum_tel() {
+        return num_tel;
+    }
+
+    public void setNum_tel(int num_tel) {
+        this.num_tel = num_tel;
+    }
+
+    public Utilisateur(String cin, String nom, String prenom, String email, Date date_naiss, String sexe, String pays, String ville,int num_tel) {
         this.cin = cin;
         this.nom = nom;
         this.prenom = prenom;
@@ -31,6 +40,7 @@ private String ville;
         this.sexe = sexe;
         this.pays = pays;
         this.ville = ville;
+        this.num_tel=num_tel;
     }
 
     public String getCin() {

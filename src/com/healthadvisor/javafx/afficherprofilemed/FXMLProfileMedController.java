@@ -124,6 +124,8 @@ public class FXMLProfileMedController implements Initializable {
 "Rhumatologie",
 "Santé publique et médecine préventive",
 "Urologie"};
+    @FXML
+    private JFXTextField numtel;
     /**
      * Initializes the controller class.
      */
@@ -161,6 +163,13 @@ public class FXMLProfileMedController implements Initializable {
         this.login.setText(p.getLogin());
         this.password.setText(p.getPassword());
         this.diplome.setText(m.getDiplome());
+        StringBuilder sb = new StringBuilder();
+        sb.append("");
+        sb.append(u.getNum_tel());
+        String str = sb.toString();
+                
+        this.numtel.setText(str);
+        
     }    
 
     @FXML
@@ -199,10 +208,11 @@ public class FXMLProfileMedController implements Initializable {
  String password=this.password.getText();
  String diplome=this.diplome.getText();
  String adresse=this.adresse.getText();
-
+ String num_tel=this.numtel.getText();
+         int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur("10002563", nom, prenom, email, date, sexe, pays, ville);
+        Utilisateur u=new Utilisateur("10002563", nom, prenom, email, date, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
         Patient p=new Patient(login, password, u.getCin());

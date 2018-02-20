@@ -28,33 +28,33 @@
             <Font name="Magneto Bold" size="20.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="nom" editable="false" labelFloat="true" layoutX="29.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Nom">
+      <JFXTextField fx:id="nom" editable="false" labelFloat="true" layoutX="29.0" layoutY="177.0" prefHeight="25.0" prefWidth="160.0" promptText="Nom">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="prenom" editable="false" labelFloat="true" layoutX="29.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Prenom">
+      <JFXTextField fx:id="prenom" editable="false" labelFloat="true" layoutX="29.0" layoutY="234.0" prefHeight="25.0" prefWidth="160.0" promptText="Prenom">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="29.0" layoutY="333.0" prefHeight="25.0" prefWidth="160.0" promptText="Email">
+      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="29.0" layoutY="301.0" prefHeight="25.0" prefWidth="160.0" promptText="Email">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="pays" editable="false" labelFloat="true" layoutX="29.0" layoutY="509.0" prefHeight="25.0" prefWidth="160.0" promptText="Pays">
+      <JFXTextField fx:id="pays" editable="false" labelFloat="true" layoutX="29.0" layoutY="477.0" prefHeight="25.0" prefWidth="160.0" promptText="Pays">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="ville" editable="false" labelFloat="true" layoutX="29.0" layoutY="568.0" prefHeight="25.0" prefWidth="160.0" promptText="Ville">
+      <JFXTextField fx:id="ville" editable="false" labelFloat="true" layoutX="29.0" layoutY="529.0" prefHeight="25.0" prefWidth="160.0" promptText="Ville">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="date" defaultColor="#132a5b" editable="false" layoutX="29.0" layoutY="400.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
-      <JFXComboBox fx:id="sexe" layoutX="29.0" layoutY="460.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
+      <JFXDatePicker fx:id="date" defaultColor="#132a5b" editable="false" layoutX="29.0" layoutY="368.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
+      <JFXComboBox fx:id="sexe" layoutX="29.0" layoutY="428.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
       <JFXTextField fx:id="adresse" editable="false" labelFloat="true" layoutX="310.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Adresse">
          <font>
             <Font size="14.0" />
@@ -94,5 +94,10 @@
       </Label>
       <Separator layoutX="269.0" layoutY="433.0" prefHeight="6.0" prefWidth="270.0" />
       <Separator layoutX="269.0" layoutY="580.0" prefHeight="6.0" prefWidth="270.0" />
+      <JFXTextField fx:id="numtel" labelFloat="true" layoutX="29.0" layoutY="580.0" prefHeight="25.0" prefWidth="160.0" promptText="Téléphone">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

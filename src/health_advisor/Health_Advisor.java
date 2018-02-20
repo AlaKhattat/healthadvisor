@@ -25,6 +25,7 @@ import com.healthadvisor.service.impl.GestionReponse;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
 import com.healthadvisor.service.impl.GestionUserReponse;
+import com.healthadvisor.sms.sendSMS;
 import java.security.Provider;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,7 +82,9 @@ public class Health_Advisor extends Application {
     public static void main(String[] args) {
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
         //launch(args);
-
+        
+sendSMS ss = new sendSMS();
+ss.sendSms("votre rendez vous est", "50947957");
         
               
     }       
