@@ -7,17 +7,25 @@ package com.healthadvisor.javafx.sondage;
 
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Sondage;
+import com.healthadvisor.javafx.questionreponse.questionMain;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionSondage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -32,6 +40,10 @@ public class SondageController implements Initializable {
     private TableView<Sondage> tableID;
     @FXML
     private TableColumn<Sondage, String> columnID;
+    @FXML
+    private Button repondreBtnID;
+    
+    public static Sondage sondage;
 
     /**
      * Initializes the controller class.
@@ -48,5 +60,19 @@ public class SondageController implements Initializable {
         columnID.setCellValueFactory(new PropertyValueFactory<Sondage,String>("nom"));
         tableID.setItems(lists);
     }    
+
+    @FXML
+    private void repondreBtnAction(ActionEvent event) throws IOException {
+        //SondageMain sm = new SondageMain();
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterSondage.fxml"));
+        Parent root=loader.load();
+        Scene s = tableID.getScene();
+        s.setRoot(root);
+    }
+
+    @FXML
+    private void tableViewEvent(MouseEvent event) {
+        sondage = tableID.getSelectionModel().getSelectedItem();
+    }
     
 }

@@ -10,5 +10,6 @@
       <TextArea fx:id="questionID" layoutX="13.0" layoutY="74.0" prefHeight="200.0" prefWidth="600.0" />
       <Label fx:id="labelID" layoutX="14.0" layoutY="33.0" text="Tapez votre question ..." />
       <Button fx:id="btnID" layoutX="245.0" layoutY="311.0" mnemonicParsing="false" onAction="#partagerQuestion" text="Partager question" />
+      <Button fx:id="btnRetour" layoutX="245.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="25.0" prefWidth="110.0" text="Retour" />
    </children>
 </AnchorPane>

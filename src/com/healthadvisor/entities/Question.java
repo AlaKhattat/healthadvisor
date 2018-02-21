@@ -5,6 +5,8 @@
  */
 package com.healthadvisor.entities;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Button;
@@ -18,22 +20,31 @@ public class Question {
     private String question;
    // private Patient patient;
     private String id_patient;
+    private Timestamp date_publication;
 
-
-
-    public Question(int id, String question,String id_patient) {
-        this.id = id;
+    public Question(int id,String question, String id_patient, Timestamp date_publication) {
+        this.id=id;
         this.question = question;
         this.id_patient = id_patient;
+        this.date_publication = date_publication;
     }
+
 
  
     
     public Question() {
     }
 
+    public Timestamp getDate_publication() {
+        return date_publication;
+    }
+
+    public void setDate_publication(Timestamp date_publication) {
+        this.date_publication = date_publication;
+    }
 
 
+    
     public int getId() {
         return id;
     }

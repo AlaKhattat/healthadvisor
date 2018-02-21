@@ -79,8 +79,7 @@ public class Health_Advisor extends Application {
     public static void main(String[] args) {
         //System.out.println("HELLO WANNA CRY IF YOU SEE THIS THAT MEAN EVERYTHING OR NOTHING JUST THROW UP HAHA");
         //launch(args);
-      
-      
+
       
         
               

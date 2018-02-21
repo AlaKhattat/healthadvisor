@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,17 +35,18 @@ public class GestionQuestion implements IGestionQuestion{
     @Override
     public void ajouterQuestion(Question q) {
         try {
-            String query = "insert into question (ID,QUESTION,ID_PATIENT) values (?,?,?)";
+            String query = "insert into question (QUESTION,ID_PATIENT,date_publication,modification_etat) values (?,?,?,false)";
             PreparedStatement prep= myDB.getConnexion().prepareStatement(query);
             
-            prep.setInt(1,q.getId());
-            prep.setString(2 , q.getQuestion());
-            prep.setString(3, q.getId_patient());
+            
+            prep.setString(1 , q.getQuestion());
+            prep.setString(2, q.getId_patient());
+            prep.setTimestamp(3, q.getDate_publication());
             prep.executeUpdate();
        
             System.out.println("Question ajoutée.");
         } catch (SQLException ex) {
-            System.out.println("Question non ajoutée !");
+            System.out.println(ex);
          }
     }
 
@@ -75,13 +77,14 @@ public class GestionQuestion implements IGestionQuestion{
     @Override
     public void updateQuestion(int id, String question) {
         try {
-            PreparedStatement prep = myDB.getConnexion().prepareStatement("update question set QUESTION=? where ID=?");
+            PreparedStatement prep = myDB.getConnexion().prepareStatement("update question set QUESTION=?, date_publication=?, modification_etat=? where ID="+id);
             prep.setString(1 , question);
-            prep.setInt(2,id);
+            prep.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
+            prep.setBoolean(3, true);
             prep.executeUpdate();
             System.out.println("Question mise à jour.");
         } catch (SQLException ex) {
-            System.out.println("Erreur de mise à jour !");
+            System.out.println(ex);
         }
     }
 
@@ -97,10 +100,12 @@ public class GestionQuestion implements IGestionQuestion{
                 int idQuestion = r.getInt("ID");
                 String textQuestion =r.getString("QUESTION");
                 String loginPatient = r.getString("ID_PATIENT");
-                question.setId(idQuestion);
+                Timestamp date = r.getTimestamp("date_publication");
+                //question.setId(idQuestion);
                 GestionPatient gp=new GestionPatient();
                 question.setId_patient(loginPatient);
                 question.setQuestion(textQuestion);
+                question.setDate_publication(date);
                 return question;
             }
             
@@ -124,9 +129,11 @@ public class GestionQuestion implements IGestionQuestion{
                 int idQuestion = r.getInt("ID");
                 String textQuestion =r.getString("QUESTION");
                 String loginPatient = r.getString("ID_PATIENT");
+                Timestamp date = r.getTimestamp("date_publication");
                 question.setId(idQuestion);
                 question.setQuestion(textQuestion);
                 question.setId_patient(loginPatient);
+                question.setDate_publication(date);
                 listq.add(question);
             }
             

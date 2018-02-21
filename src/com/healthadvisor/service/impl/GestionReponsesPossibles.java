@@ -88,23 +88,21 @@ public class GestionReponsesPossibles implements IGestionReponsesPossibles{
     }
 
     @Override
-    public ArrayList<ReponsesPossibles> ListReponsesPossibles() {
+    public ArrayList<ReponsesPossibles> ListReponsesPossibles(int id_sondage) {
         ArrayList<ReponsesPossibles> listrp = new ArrayList<>();
         
         
         try {
             Statement stm = myDB.getConnexion().createStatement();
-            String sql= "select * from reponses_possibles";
+            String sql= "select reponse from reponses_possibles where ID_SONDAGE="+id_sondage;
             ResultSet r = stm.executeQuery(sql);
             
             while (r.next()){
                 ReponsesPossibles rp = new ReponsesPossibles();
-                int id = r.getInt("ID_REPONSE");
                 String reponseText = r.getString("REPONSE");
-                int idSondage = r.getInt("ID_REPONSE");
-                rp.setId_reponse(id);
+                
                 rp.setReponse(reponseText);
-                rp.setId_sondage(idSondage);
+                
                 listrp.add(rp);
                 
                 

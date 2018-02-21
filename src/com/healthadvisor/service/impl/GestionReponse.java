@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,18 +38,20 @@ public class GestionReponse implements IGestionReponse{
     @Override
     public void ajouterReponse(Reponse r) {
         try {
-            String query = "insert into reponse (ID_REPONSE,REPONSE,ID_MEDECIN,ID_QUESTION) values (?,?,?,?)";
+            String query = "insert into reponse (REPONSE,ID_MEDECIN,ID_QUESTION,date_publication,modification_etat) values (?,?,?,?,false)";
             PreparedStatement prep= myDB.getConnexion().prepareStatement(query);
             
-            prep.setInt(1,r.getId());
-            prep.setString(2 , r.getReponse());
-            prep.setString(3, r.getId_medecin());
-            prep.setInt(4, r.getQuestion().getId());
+            
+            prep.setString(1 , r.getReponse());
+            prep.setString(2, r.getId_medecin());
+            prep.setInt(3, r.getQuestion().getId());
+            //prep.setDate(4, );
+            prep.setTimestamp(4, r.getDate_publication());
             prep.executeUpdate();
        
             System.out.println("Réponse ajoutée.");
         } catch (SQLException ex) {
-            System.out.println("Réponse non ajoutée !");
+            System.out.println(ex);
          }
     }
 
@@ -79,9 +82,10 @@ public class GestionReponse implements IGestionReponse{
     @Override
     public void updateReponse(int id, String reponse) {
         try {
-            PreparedStatement prep = myDB.getConnexion().prepareStatement("update reponse set REPONSE=? where ID_REPONSE=?");
+            PreparedStatement prep = myDB.getConnexion().prepareStatement("update reponse set REPONSE=?, date_publication=?, modification_etat=? where ID_REPONSE="+id);
             prep.setString(1 , reponse);
-            prep.setInt(2,id);
+            prep.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
+            prep.setBoolean(3, true);
             prep.executeUpdate();
             System.out.println("Réponse mise à jour.");
         } catch (SQLException ex) {
@@ -120,6 +124,7 @@ public class GestionReponse implements IGestionReponse{
                 int idReponse = r.getInt("ID_REPONSE");
                 String textReponse =r.getString("REPONSE");
                 String loginMedecin = r.getString("ID_MEDECIN");
+                Timestamp date = r.getTimestamp("date_publication");
                 reponse.setId(idReponse);
                 reponse.setReponse(textReponse);
                 GestionMedecin gm=new GestionMedecin();
@@ -127,7 +132,7 @@ public class GestionReponse implements IGestionReponse{
                 GestionQuestion gq = new GestionQuestion();
                 Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
                 reponse.setQuestion(question);
-                
+                reponse.setDate_publication(date);
                 listr.add(reponse);
             }
             
@@ -153,10 +158,12 @@ public class GestionReponse implements IGestionReponse{
                 int idReponse = r.getInt("ID_REPONSE");
                 String textReponse =r.getString("REPONSE");
                 String loginMedecin = r.getString("ID_MEDECIN");
+                Timestamp date = r.getTimestamp("date_publication");
                 reponse.setId(idReponse);
                 reponse.setReponse(textReponse);
                 GestionMedecin gm=new GestionMedecin();
                 reponse.setId_medecin(loginMedecin);
+                reponse.setDate_publication(date);
                 GestionQuestion gq = new GestionQuestion();
                 Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
                 reponse.setQuestion(question);

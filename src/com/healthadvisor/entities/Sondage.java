@@ -18,8 +18,8 @@ public class Sondage {
     public Sondage() {
     }
 
-    public Sondage(int id, String nom) {
-        this.id = id;
+    public Sondage(String nom) {
+        
         this.nom = nom;
     }
     

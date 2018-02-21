@@ -10,9 +10,13 @@ import com.healthadvisor.entities.Question;
 import com.healthadvisor.service.impl.GestionQuestion;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -55,6 +60,11 @@ public class QuestionController implements Initializable {
     private Button btnConsulter;
     
     public static Question question; 
+    public static Patient patient = new Patient("ahmed", "pass", "1");
+    @FXML
+    private TextField searchBarID;
+    @FXML
+    private TableColumn<Question, Timestamp> dateID;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -67,10 +77,35 @@ public class QuestionController implements Initializable {
                 
                 utilisateurID.setCellValueFactory(new PropertyValueFactory<Question,String>("id_patient"));
                 questionID.setCellValueFactory(new PropertyValueFactory<Question,String>("question"));
-                Button btnConsulter = new Button("Consulter");
+                dateID.setCellValueFactory(new PropertyValueFactory<Question,Timestamp>("date_publication"));
+                //Button btnConsulter = new Button("Consulter");
                 //consulterID.setCellValueFactory(new PropertyValueFactory<Question,Button>("btnConsulter"));
             }
         tableID.setItems(listq);
+        
+        
+        //SearhBar filters
+        FilteredList<Question> filteredData = new FilteredList<>(listq, e -> true);
+        searchBarID.setOnKeyReleased(e->{
+            searchBarID.textProperty().addListener((observableValue, oldValue, newValue)->{
+                filteredData.setPredicate((Predicate<? super Question>) q -> {
+                    if (newValue == null || newValue.isEmpty()){
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (q.getQuestion().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    }
+                    else if(q.getId_patient().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } 
+                    return false;
+                });
+            });
+            SortedList<Question> sortedQuestion = new SortedList<>(filteredData);
+            sortedQuestion.comparatorProperty().bind(tableID.comparatorProperty());
+            tableID.setItems(sortedQuestion);
+        });
         
     }    
 

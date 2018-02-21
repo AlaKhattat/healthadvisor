@@ -27,12 +27,15 @@ public class SondageMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("Sondage.fxml"));
+        
+        Parent root;
         try {
-        Parent root=loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            root = FXMLLoader.load(getClass().getResource("Sondage.fxml"));
+            Scene scene = new Scene(root);
+        
+            primaryStage.setTitle("Sondages");
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException ex) {
             Logger.getLogger(questionMain.class.getName()).log(Level.SEVERE, null, ex);
         }

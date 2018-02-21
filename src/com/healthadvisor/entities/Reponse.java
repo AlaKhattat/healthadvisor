@@ -5,6 +5,9 @@
  */
 package com.healthadvisor.entities;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author Tarek
@@ -14,18 +17,31 @@ public class Reponse {
     private String reponse;
     private String id_medecin;
     private Question question;
+    private Timestamp date_publication;
 
 
     public Reponse() {
     }
 
-    public Reponse(int id, String reponse, String id_medecin, Question question) {
-        this.id = id;
+    public Reponse(int id,String reponse, String id_medecin, Question question, Timestamp date_publication) {
+        this.id=id;
         this.reponse = reponse;
+        
         this.id_medecin = id_medecin;
         this.question = question;
+        this.date_publication = date_publication;
     }
 
+    public Timestamp getDate_publication() {
+        return date_publication;
+    }
+
+    public void setDate_publication(Timestamp date_publication) {
+        this.date_publication = date_publication;
+    }
+
+    
+    
     public String getId_medecin() {
         return id_medecin;
     }
@@ -68,6 +84,6 @@ public class Reponse {
     
     @Override
     public String toString() {
-        return "Reponse{" + "id=" + id + ", reponse=" + reponse + ", medecin=" + id_medecin + ", question=" + question + '}';
+        return reponse;
     }
 }

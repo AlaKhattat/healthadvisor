@@ -19,8 +19,7 @@ public class ReponsesPossibles {
 
     
     
-    public ReponsesPossibles(int id_reponse, String reponse, int id_sondage) {
-        this.id_reponse = id_reponse;
+    public ReponsesPossibles(String reponse, int id_sondage) {
         this.reponse = reponse;
         this.id_sondage = id_sondage;
     }

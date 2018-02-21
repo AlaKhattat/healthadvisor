@@ -20,6 +20,6 @@ public interface IGestionReponsesPossibles {
     public void supprimerReponsesPossibles(ReponsesPossibles r);
     public void updateReponsesPossibles(int id_reponse, String reponse);
     public void afficherReponsesPossibles(int id_sondage);
-    public ArrayList <ReponsesPossibles> ListReponsesPossibles();
+    public ArrayList <ReponsesPossibles> ListReponsesPossibles(int id_sondage);
     
 }
