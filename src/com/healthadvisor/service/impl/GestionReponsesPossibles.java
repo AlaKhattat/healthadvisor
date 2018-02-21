@@ -94,13 +94,15 @@ public class GestionReponsesPossibles implements IGestionReponsesPossibles{
         
         try {
             Statement stm = myDB.getConnexion().createStatement();
-            String sql= "select reponse from reponses_possibles where ID_SONDAGE="+id_sondage;
+            String sql= "select * from reponses_possibles where ID_SONDAGE="+id_sondage;
             ResultSet r = stm.executeQuery(sql);
             
             while (r.next()){
                 ReponsesPossibles rp = new ReponsesPossibles();
+                int idReponse = r.getInt("ID_REPONSE");
                 String reponseText = r.getString("REPONSE");
                 
+                rp.setId_reponse(idReponse);
                 rp.setReponse(reponseText);
                 
                 listrp.add(rp);
