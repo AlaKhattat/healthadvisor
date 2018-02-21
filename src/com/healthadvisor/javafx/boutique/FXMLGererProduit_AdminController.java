@@ -79,5 +79,14 @@ public class FXMLGererProduit_AdminController implements Initializable {
         
     
     }
+
+    @FXML
+    private void ModifierProduit_Admin(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void SupprimerProduit_Admin(ActionEvent event) {
+    }
     
 }
