@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.javafx.sondage;
 
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.javafx.questionreponse.questionMain;
@@ -44,6 +45,7 @@ public class SondageController implements Initializable {
     private Button repondreBtnID;
     
     public static Sondage sondage;
+    public static Patient patient = new Patient("ahmed", "pass", "1");
 
     /**
      * Initializes the controller class.
