@@ -51,11 +51,9 @@ public class GestionPatient implements IGestionPatient{
     @Override
     public void ModifierPatient(Patient patient) {
         try{
-           System.out.println("Modification...");
+           System.out.println("Modification Patient...");
            Statement stm =database.getConnexion().createStatement();
-           String sql="UPDATE patient SET login_p="+patient.getLogin()
-                   +", password="+patient.getPassword()
-                   +" WHERE cin_user="+patient.getCin_user();
+           String sql="UPDATE patient SET login_p='"+patient.getLogin()+"', password='"+patient.getPassword()+"' WHERE cin_user='"+patient.getCin_user()+"'";
             stm.executeUpdate(sql);
            System.out.println("Patient bien modifiÃ©");
            
@@ -64,17 +62,19 @@ public class GestionPatient implements IGestionPatient{
        }       }
 
     @Override
-    public void SupprimerPatientCin(String cin) {
+    public boolean SupprimerPatientLogin(String login) {
         try {
             System.out.println("Suppression...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="Delete from patient where login_p='"+cin+"'" ;
+            String sql="Delete from patient where login_p='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
+            return true;
            // stm.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
-        }      }
+        } 
+    return false;}
 
     @Override
     public List<Patient> ListPatient() {
@@ -99,13 +99,13 @@ public class GestionPatient implements IGestionPatient{
         return listp;    }
 
     @Override
-    public Patient AfficherPatientCin(String cin) {
+    public Patient AfficherPatientLogin(String login) {
         
     Patient patient =null;
         try {
             System.out.println("Recupération...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from patient where login_p='"+cin+"'" ;
+            String sql="select * from patient where login_p='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
             patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
@@ -119,5 +119,25 @@ public class GestionPatient implements IGestionPatient{
         }
         return patient;    }
 
+    @Override
+    public Patient AfficherPatientCin(String cin) {
+        Patient patient =null;
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="select * from patient where cin_user='"+cin+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+            patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+            System.out.println("Recuperation avec succes");   
+            }
+           
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return patient;     }
+
+  
     
 }

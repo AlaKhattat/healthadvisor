@@ -132,6 +132,9 @@ public class GestionQuestion implements IGestionQuestion{
                 Timestamp date = r.getTimestamp("date_publication");
                 question.setId(idQuestion);
                 question.setQuestion(textQuestion);
+                GestionPatient gp = new GestionPatient();
+                Patient patient = gp.AfficherPatientLogin(loginPatient);
+                question.setId_patient(patient.getLogin());
                 question.setId_patient(loginPatient);
                 question.setDate_publication(date);
                 listq.add(question);

@@ -13,26 +13,61 @@ import java.util.Date;
  */
 public class Medecin extends Patient {
     private String login_med;
-    private String specilaite;
+    private String specialite;
     private String adresse;
     private String diplome;
     private int rating;
+    private String nom;
+    private String prenom;
+    private String sexe;
 
     public Medecin(String login_med, String specilaite, String adresse, String diplome, int rating, String login, String password, String cin_user) {
         super(login, password, cin_user);
         this.login_med = login_med;
-        this.specilaite = specilaite;
+        this.specialite = specilaite;
         this.adresse = adresse;
         this.diplome = diplome;
         this.rating = rating;
     }
-
+public Medecin(){}
     public String getLogin_med() {
         return login_med;
     }
 
     public void setLogin_med(String login_med) {
         this.login_med = login_med;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 
 
@@ -42,13 +77,6 @@ public class Medecin extends Patient {
    
 
 
-    public String getSpecilaite() {
-        return specilaite;
-    }
-
-    public void setSpecilaite(String specilaite) {
-        this.specilaite = specilaite;
-    }
 
     public String getAdresse() {
         return adresse;
@@ -76,7 +104,7 @@ public class Medecin extends Patient {
 
     @Override
     public String toString() {
-        return "Medecin{" + "login=" + login_med + ", specilaite=" + specilaite + ", adresse=" + adresse + ", diplome=" + diplome + ", rating=" + rating + '}';
+        return "Medecin{" + "login=" + login_med + ", specilaite=" + specialite + ", adresse=" + adresse + ", diplome=" + diplome + ", rating=" + rating + '}';
     }
 
     

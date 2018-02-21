@@ -16,7 +16,9 @@ public interface IGestionRendezVous {
     
     public void AjouterRendezVous(Rendez_Vous rendezvous);
     public List<Rendez_Vous> ListRendez_Vous();
-    public void supprimerRendezVous(int id_rendezvous);
-    
+    public boolean supprimerRendezVous(int id_rendezvous);
+    public String RecupererMedecin(String id_medecin);
+    public String RecupererPatient(String id_patient);
+    public boolean ModifierRendezVous(Rendez_Vous rdv);
     
 }

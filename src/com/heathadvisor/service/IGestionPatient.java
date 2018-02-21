@@ -15,7 +15,10 @@ import java.util.List;
 public interface IGestionPatient {
     public void AjouterPatient(Patient patient);
     public void ModifierPatient(Patient patient);
-    public void SupprimerPatientCin(String cin);
+    public boolean SupprimerPatientLogin(String login);
     public List<Patient> ListPatient();
+    public Patient AfficherPatientLogin(String login);
     public Patient AfficherPatientCin(String cin);
+    
+
 }

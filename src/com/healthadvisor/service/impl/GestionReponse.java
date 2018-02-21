@@ -129,6 +129,7 @@ public class GestionReponse implements IGestionReponse{
                 reponse.setReponse(textReponse);
                 GestionMedecin gm=new GestionMedecin();
                 reponse.setId_medecin(loginMedecin);
+                reponse.setId_medecin(loginMedecin);
                 GestionQuestion gq = new GestionQuestion();
                 Question question = gq.afficherQuestion(r.getInt("ID_QUESTION"));
                 reponse.setQuestion(question);

@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -24,6 +25,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -70,8 +72,11 @@ public class FXMLLoginController implements Initializable {
     private JFXTextField ville;
     @FXML
     private JFXComboBox<String> sexe;
-    @FXML
     private DatePicker date_naiss;
+    @FXML
+    private JFXDatePicker date;
+    @FXML
+    private JFXTextField numtel;
 
     /**
      * Initializes the controller class.
@@ -95,6 +100,10 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void homeAction(MouseEvent event) {
+        //Sign IN
+        String usernamesigin=this.username.getText();
+        String password=this.passwordsiginin.getText();
+      
     }
 
     @FXML
@@ -103,14 +112,17 @@ public class FXMLLoginController implements Initializable {
  String nom=this.nom.getText();
  String prenom=this.prenom.getText();
  String email=this.email.getText();
- LocalDate localDate =date_naiss.getValue();
+ 
+ LocalDate localDate =date.getValue();
  Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
  Date date = Date.from(instant);
  String sexe=this.sexe.getValue();
  String pays=this.pays.getText();
  String ville=this.ville.getText();
+ String num_tel=this.numtel.getText();
+ int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville);
+        Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville,num);
         gu.AjouterUtilisateur(u);
     }
 

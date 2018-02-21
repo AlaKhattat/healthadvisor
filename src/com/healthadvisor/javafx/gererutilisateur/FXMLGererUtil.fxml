@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.gererutilisateur.FXMLGererUtilController">
+   <children>
+      <JFXTabPane prefHeight="245.0" prefWidth="400.0">
+         <tabs>
+            <Tab text="Gérer Patient">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewP" layoutX="14.0" layoutY="60.0" prefHeight="333.0" prefWidth="675.0">
+                          <columns>
+                            <TableColumn fx:id="nomCol" prefWidth="150.0" text="Nom" />
+                            <TableColumn fx:id="prenomCol" minWidth="0.0" prefWidth="174.0" text="Prenom" />
+                              <TableColumn fx:id="sexeCol" minWidth="0.0" prefWidth="172.0" text="Sexe" />
+                              <TableColumn fx:id="paysCol" minWidth="0.0" prefWidth="178.0" text="Pays" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#afficherDetailsP" text="Afficher Details">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/info.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#SupprimerP" text="Supprimer">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#refreshP" text="rafraichir">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/refresh.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></MenuItem>
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Gérer Medecin">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewM" layoutX="13.0" layoutY="41.0" prefHeight="333.0" prefWidth="675.0">
+                           <columns>
+                              <TableColumn fx:id="nomMCol" prefWidth="150.0" text="Nom" />
+                              <TableColumn fx:id="prenomMCol" minWidth="0.0" prefWidth="174.0" text="Prenom" />
+                              <TableColumn fx:id="sexeMCol" minWidth="0.0" prefWidth="172.0" text="Sexe" />
+                              <TableColumn fx:id="specialiteCol" minWidth="0.0" prefWidth="178.0" text="Specialite" />
+                           </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#afficherDetailsM" text="Afficher Details">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/info.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#SupprimerM" text="Supprimer">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                    <MenuItem mnemonicParsing="false" onAction="#refreshM" text="rafraichir">
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../ressources/refresh.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </MenuItem>
+                                 </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</StackPane>
