@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="pan_ajoutP" prefHeight="540.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLProduitController">
+   <children>
+      <TextField fx:id="ref" layoutX="106.0" layoutY="39.0" />
+      <TextField fx:id="nom" layoutX="106.0" layoutY="73.0" />
+      <Label layoutX="25.0" layoutY="43.0" text="Reference" />
+      <Label layoutX="31.0" layoutY="77.0" text="Nom" />
+      <Label layoutX="25.0" layoutY="122.0" text="Prix vente" />
+      <Label layoutX="22.0" layoutY="184.0" text="URL Image" />
+      <Label layoutX="25.0" layoutY="290.0" text="ID patient" />
+      <TextField fx:id="prix" layoutX="106.0" layoutY="127.0" />
+      <TextField fx:id="id_patient" layoutX="101.0" layoutY="286.0" />
+      <Button fx:id="btn" layoutX="71.0" layoutY="361.0" mnemonicParsing="false" onAction="#AjouterProduit" prefHeight="25.0" prefWidth="104.0" text="Ajouter" />
+      <Label layoutX="25.0" layoutY="239.0" text="Type" />
+      <Label layoutX="290.0" layoutY="22.0" text="Description" />
+      <TextArea fx:id="desc" layoutX="283.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" />
+      <ChoiceBox fx:id="type_p" layoutX="106.0" layoutY="235.0" prefWidth="150.0" />
+      <Button fx:id="btn_modif" layoutX="204.0" layoutY="361.0" mnemonicParsing="false" onAction="#ModifierProduit" prefHeight="25.0" prefWidth="90.0" text="Modifier" />
+      <Button fx:id="btn_supprimer" layoutX="320.0" layoutY="361.0" mnemonicParsing="false" onAction="#SupprimerProduit" prefHeight="25.0" prefWidth="82.0" text="Supprimer" />
+      <Button fx:id="btn_img" layoutX="101.0" layoutY="180.0" mnemonicParsing="false" onAction="#ParcourirImage" prefHeight="25.0" prefWidth="82.0" text="Parcourir . . ." />
+      <Label fx:id="lbl_url" layoutX="101.0" layoutY="212.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label layoutX="283.0" layoutY="290.0" text="Promotion" />
+      <TextField fx:id="txt_promotion" layoutX="361.0" layoutY="286.0" />
+      <Label layoutX="280.0" layoutY="323.0" text="Quantite" />
+      <TextField fx:id="txt_quantite" layoutX="361.0" layoutY="319.0" />
+      <Button fx:id="btnInterface_filtre" layoutX="483.0" layoutY="18.0" mnemonicParsing="false" onAction="#InterfaceFiltre" prefHeight="25.0" prefWidth="69.0" text="Filtre" />
+      <Button fx:id="btnInterface_panier" layoutX="573.0" layoutY="18.0" mnemonicParsing="false" onAction="#InterfacePanier" prefHeight="25.0" prefWidth="75.0" text="panier" />
+      <Button fx:id="btnInterface_Publie" layoutX="537.0" layoutY="65.0" mnemonicParsing="false" onAction="#InterfacePublie" prefHeight="25.0" prefWidth="75.0" text="publie" />
+   </children>
+</AnchorPane>

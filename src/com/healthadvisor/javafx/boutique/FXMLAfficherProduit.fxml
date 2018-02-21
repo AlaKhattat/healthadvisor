@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLAfficherProduitController">
+   <children>
+      <AnchorPane fx:id="filtre" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="989.0">
+         <children>
+            <Label layoutX="651.0" layoutY="14.0" text="Type :" />
+            <Label layoutX="10.0" layoutY="14.0" text="Promotion :" />
+            <Label layoutX="30.0" layoutY="39.0" text="Min" />
+            <Label layoutX="29.0" layoutY="76.0" text="Max" />
+            <TextField fx:id="txt_promMIN" layoutX="61.0" layoutY="35.0" />
+            <TextField fx:id="txt_promMAX" layoutX="61.0" layoutY="72.0" />
+            <Label layoutX="450.0" layoutY="14.0" text="Prix :" />
+            <Label layoutX="453.0" layoutY="39.0" text="Min" />
+            <Label layoutX="452.0" layoutY="76.0" text="Max" />
+            <TextField fx:id="txt_prixMIN" layoutX="489.0" layoutY="35.0" />
+            <TextField fx:id="txt_prixMAX" layoutX="489.0" layoutY="72.0" />
+            <Label layoutX="230.0" layoutY="14.0" text="Date de publication  entre :" />
+            <Label layoutX="242.0" layoutY="39.0" text="Min" />
+            <Label layoutX="241.0" layoutY="76.0" text="Max" />
+            <CheckBox fx:id="check_IMG" layoutX="653.0" layoutY="76.0" mnemonicParsing="false" text="Image" />
+            <Button fx:id="btn_filtre" layoutX="726.0" layoutY="72.0" mnemonicParsing="false" onAction="#Recherche_Avancee" prefHeight="25.0" prefWidth="127.0" text="Rechercher" />
+            <DatePicker fx:id="date_min" layoutX="272.0" layoutY="35.0" />
+            <DatePicker fx:id="date_max" layoutX="272.0" layoutY="72.0" />
+            <ComboBox fx:id="ch_type" layoutX="651.0" layoutY="35.0" prefWidth="150.0" />
+            <Button fx:id="btn_passer" layoutX="869.0" layoutY="10.0" mnemonicParsing="false" onAction="#Passer" prefHeight="25.0" prefWidth="106.0" text="Panier" />
+            <Button fx:id="btnInterface_Ajout" layoutX="869.0" layoutY="44.0" mnemonicParsing="false" onAction="#InterfaceAjouter" prefHeight="25.0" prefWidth="106.0" text="Ajouter Produit" />
+            <Button fx:id="btnInterface_Publie" layoutX="869.0" layoutY="81.0" mnemonicParsing="false" onAction="#InterfacePublie" prefHeight="25.0" prefWidth="106.0" text="Publie" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="lst_produits" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="761.0" />
+   </children>
+</AnchorPane>
