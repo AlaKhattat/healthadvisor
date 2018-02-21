@@ -5,8 +5,8 @@
  */
 package com.healthadvisor.service.impl;
 
-import com.healthadvisor.service.impl.GestionAliment;
 import com.healthadvisor.database.MyDB;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
@@ -16,8 +16,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import com.heathadvisor.service.IGestionRegime;
+
 /**
  *
  * @author asus
@@ -44,8 +46,12 @@ public class GestionRegime implements IGestionRegime
           PreparedStatement statement = database.getConnexion().prepareStatement(query);//adding diet in diet table
           statement.setString(1, regime.getId_regime());
           statement.setString(2,regime.regime_type());
-          statement.setDate(3,regime.getDate_debut());
-          statement.setDate(4,regime.getDate_fin());
+          java.util.Date datedebut= regime.getDate_debut();
+          java.sql.Date datedebutsql=new java.sql.Date(datedebut.getTime());
+           java.util.Date datefin= regime.getDate_debut();
+          java.sql.Date datefinsql=new java.sql.Date(datedebut.getTime());
+          statement.setDate(3,datedebutsql);
+          statement.setDate(4,datefinsql);
           System.out.println(" dd"+ statement.executeUpdate());
           for(int i = 0; i < regime.getAliments().size(); i++) //adding foods in diet_food table
           {
@@ -119,19 +125,23 @@ public class GestionRegime implements IGestionRegime
         {
             String query="select * from  aliment_regime";
             String query2="select * from regime_sport";
+            
             Statement statement = database.getConnexion().createStatement();
             ResultSet result = statement.executeQuery(query);
+           
             while(result.next())
             {
               Regime r= new Regime();
               r.setId_regime(result.getString("id_regime"));
+                System.out.println("hjjkhjkhj");
               r = rechercherRegime(r);  
               List<Aliment>aliments = gestion_aliment.rechercherAlimentAvancee(result.getString("nom_aliment"));
-              
+             
               if(regimes.contains(r)==false)//check if the diet don't exist
               {
                   r.setAliments(aliments);
                   regimes.add(r);
+              
               }
               else //if the diet exist food will be add directly to the diet 
               {
@@ -145,6 +155,7 @@ public class GestionRegime implements IGestionRegime
               }
             }
             /*****************************************************regime_sport*********************************************************/
+            
             result = statement.executeQuery(query2);
             while(result.next())
             {
@@ -199,8 +210,8 @@ public class GestionRegime implements IGestionRegime
             if(result!=null)
             {
                 result.next();
-                r = new Regime(result.getString("id_regime"),Type_Regime.valueOf(result.getString("type")),result.getDate("date_debut"),result.getDate("date_fin"));
-            
+                r = new Regime(result.getString("id_regime"),Type_Regime.valueOf(result.getString("type")),result.getInt("duree"),result.getString("description_regime"));
+                System.out.println("reg  hgvhbj:"+r);
             }
           }
           catch(SQLException exception)

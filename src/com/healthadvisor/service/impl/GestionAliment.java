@@ -7,6 +7,7 @@ package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Aliment;
+import java.io.Console;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,8 +37,7 @@ public class GestionAliment implements IGestionAliment
     @Override
     public boolean ajouterAliment(Aliment aliment) 
     {
-        
-       
+         
         try
         {       
           String query="insert into aliment values (?,?,?,?)"; 

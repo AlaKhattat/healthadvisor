@@ -6,9 +6,10 @@
 package com.healthadvisor.entities;
 
 import com.healthadvisor.enumeration.Type_Regime;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -23,6 +24,8 @@ public class Regime
   private Type_Regime type_regime;
   private Date date_debut ;
   private Date date_fin;
+  private String description;
+  private int duree;
 
     public Regime() 
     {
@@ -37,9 +40,20 @@ public class Regime
         this.date_debut = date_debut;
         this.date_fin = date_fin;
         this.type_regime = type;
+        
     }
+      public Regime(String id_regime, Type_Regime type_regime,int duree,String description ) 
+    {
+        this.id_regime = id_regime;
+        this.description=description;
+        this.duree = duree;
+        this.type_regime = type_regime;
+        
+    }
+  
 
-    public Regime(String id_regime, List<Aliment> aliments, List<Sport> sports, Type_Regime type_regime, Date date_debut, Date date_fin) {
+    public Regime(String id_regime, List<Aliment> aliments, List<Sport> sports, Type_Regime type_regime, Date date_debut, Date date_fin)
+    {
         this.id_regime = id_regime;
         this.aliments = aliments;
         this.sports = sports;
@@ -48,11 +62,13 @@ public class Regime
         this.date_fin = date_fin;
     }
     
-    public Regime(String id_regime, Type_Regime type_regime, Date date_debut, Date date_fin) {
+    public Regime(String id_regime, Type_Regime type_regime, Date date_debut, Date date_fin,String description) 
+    {
         this.id_regime = id_regime;
         this.type_regime = type_regime;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.description = description;
     }
     
     public Regime(String id_regime, Date date_debut, Date date_fin) 
@@ -101,6 +117,15 @@ public class Regime
     {
         this.date_fin = date_fin;
     }
+   public String getDescription() 
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
     public boolean verifierFinRegimeDate()
     {
         if(date_fin.compareTo(date_debut)< 0)
@@ -117,20 +142,24 @@ public class Regime
 
    @Override
     public boolean equals(Object obj) 
-    {
-        
+    {      
         if(obj!=null && obj instanceof Regime)
         {
             Regime regime = (Regime)obj;
             if(id_regime.equals(regime.id_regime))
             {
-                
-           
+              
                 return true;
             }
         }
      
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+       
+        return 5;
     }
    
    public String totalTypeRegime()
@@ -173,5 +202,31 @@ public class Regime
      }
      return ch;
    }
+    public String splitDescription(String ch)
+    {
+        String total="";
+     if(ch!=null)
+     {
+      String[] list = ch.split("\\s");
+      
+      int cmpt=0;
+      for(String i:list)
+      {
+          if(cmpt < 30)
+          {
+               total+=i+" ";
+               cmpt+=i.length();
+          }
+          else
+          {
+              total+=" \n"+i+" ";
+              cmpt = 0;
+          }
+       
+      }
+     }
+      return total;
+    }
+   
   
 }

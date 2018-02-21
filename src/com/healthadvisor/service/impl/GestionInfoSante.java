@@ -6,6 +6,7 @@
 package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
+import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.InfoSante;
 import com.heathadvisor.service.IGestionInfoSante;
 import java.sql.PreparedStatement;
@@ -32,14 +33,15 @@ public class GestionInfoSante implements IGestionInfoSante
         
          try
         {       
-          String query="insert into information_sante values (?,?,?,?,?,?)"; 
+          String query="insert into information_sante values (?,?,?,?,?,?,?)"; 
           PreparedStatement statement = database.getConnexion().prepareStatement(query);
-          statement.setFloat(1, info.getTaille());
-          statement.setFloat(2,info.getPoids());
-          statement.setString(3,info.totalAllergies());
-          statement.setString(4,info.totalMaladies());
-          statement.setString(5,info.getLogin());
-          statement.setString(6,info.getSexe());
+          statement.setDouble(1, info.getTaille());
+          statement.setDouble(2,info.getPoids());
+          statement.setInt(3, info.getAge());
+          statement.setString(4,info.totalAllergies());
+          statement.setString(5,info.totalMaladies());
+          statement.setString(6,info.getLogin());
+          statement.setString(7,info.getSexe());
           
             System.out.println(" dd"+ statement.executeUpdate());
           System.out.println("ajouter avec succes");
@@ -76,16 +78,18 @@ public class GestionInfoSante implements IGestionInfoSante
         //taille	poids	allergies	maladies	login	sexe
         try
         {
-            String query="update information_sante set taille=?,poids=?,allergies=?,maladies=?,sexe=? where login=?";
+            String query="update information_sante set taille=?,poids=?,age=?,allergies=?,maladies=?,sexe=? where login=?";
             PreparedStatement statement = database.getConnexion().prepareStatement(query);
-            statement.setFloat(1, info.getTaille());
-            statement.setFloat(2,info.getPoids());
-            statement.setString(3,info.totalAllergies());
-            statement.setString(4,info.totalMaladies());
-            statement.setString(5,info.getSexe());
-            statement.setString(6,info.getLogin());
+            statement.setDouble(1, info.getTaille());
+            statement.setDouble(2,info.getPoids());
+            statement.setInt(3, info.getAge());
+            statement.setString(4,info.totalAllergies());
+            statement.setString(5,info.totalMaladies());
+            statement.setString(6,info.getSexe());
+            statement.setString(7,info.getLogin());
             System.out.println(statement.executeUpdate());
             System.out.println("modifier avec succes");
+            
         }
         catch(SQLException exception)
         {
@@ -108,7 +112,7 @@ public class GestionInfoSante implements IGestionInfoSante
             if(result!=null)
             {
                 result.next();
-                a = new InfoSante(result.getFloat("taille"),result.getFloat("poids"), InfoSante.explodeAliment(result.getString("allergies")),InfoSante.explodeAliment(result.getString("maladies")),result.getString("sexe"),result.getString("login"));
+                a = new InfoSante(result.getFloat("taille"),result.getFloat("poids"),result.getInt("age"),InfoSante.explodeAliment(result.getString("allergies")),InfoSante.explodeAliment(result.getString("maladies")),result.getString("sexe"),result.getString("login"));
             }
           }
           catch(SQLException exception)

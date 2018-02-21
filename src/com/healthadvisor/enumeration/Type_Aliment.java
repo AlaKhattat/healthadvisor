@@ -22,8 +22,11 @@ public enum Type_Aliment
     ouefs,
     noix,
     pains,
+    cacao,
     cereales,
     riz,
-    pates
-     
+    pates,
+    thes
+    
+    
 }

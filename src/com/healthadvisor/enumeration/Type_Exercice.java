@@ -11,8 +11,12 @@ package com.healthadvisor.enumeration;
  */
 public enum Type_Exercice
 {
-     cardio,
-     musculation_jambe,
-     musculation_fessier
-     
+     poitrine,
+     abdo,
+     jambe,
+     fessier,
+     quadriceps,
+     biceps,
+     triceps,
+     dos
 }

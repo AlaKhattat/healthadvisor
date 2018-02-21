@@ -15,8 +15,9 @@ import java.util.List;
  */
 public class InfoSante 
 {
-  private float taille;
-  private float poids;
+  private double taille;
+  private double poids;
+  private int age;
   private List<String>allergies;
   private List<String>maladies; 
   private String sexe;
@@ -39,18 +40,28 @@ public class InfoSante
         this.maladies = maladies;
         this.sexe = sexe;
   }
-
-  public InfoSante(float taille, float poids, String sexe,String login) 
+  public InfoSante(float taille, float poids,int age, List<String> allergies, List<String> maladies, String sexe,String login) 
   {
         this.taille = taille;
         this.poids = poids;
+        this.allergies = allergies;
+        this.maladies = maladies;
+        this.sexe = sexe;
+        this.age = age;
+  }
+
+  public InfoSante(double taille, double poids, String sexe,String login,int age) 
+  {
+        this.taille = taille;
+        this.poids = poids;
+        this.age = age;
         this.sexe = sexe;
         allergies = new ArrayList<>();
         maladies = new ArrayList<>();
         this.login = login;
   }
 
-    public float getTaille() 
+    public double getTaille() 
     {
         return taille;
     }
@@ -60,12 +71,20 @@ public class InfoSante
         this.taille = taille;
     }
 
-    public float getPoids() 
+    public double getPoids() 
     {
         return poids;
     }
 
-    public void setPoids(float poids)
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setPoids(double poids)
     {
         this.poids = poids;
     }
@@ -114,7 +133,7 @@ public class InfoSante
     @Override
     public String toString() 
     {
-        return "taille=" + taille + " poids=" + poids + " allergies=" + allergies + " maladies=" + maladies + " sexe=" + sexe+" login="+login;
+        return "taille=" + taille + " poids=" + poids + " allergies=" + allergies + " maladies=" + maladies + " sexe=" + sexe+" login="+login+" age="+age;
     }
     public String totalMaladies()
     {
@@ -135,6 +154,59 @@ public class InfoSante
      type.addAll(Arrays.asList(list));
      return type;
     }
-    
+    public double calculIMC(InfoSante info)
+    {
+        //IMC = poids(kg)/(taille*taille)m
+        double IMC = info.poids/((Math.pow(info.taille/100,2)));
+        return Math.round(IMC*100.0)/100.0;
+    }
+    public double calculPoidIdeal(InfoSante info)
+    {
+       //(homme)=H(taille en cm)−100−((H−150)/4)
+      //(femme)=H(taille en cm)−100−((H−150)/2,5
+       double poidIdeal = 0;
+       if("HOMME".equals(info.sexe))
+       {
+           poidIdeal = (info.taille)-100-((info.taille-150)/4);
+       }
+       else if("FEMME".equals(info.sexe))
+       {
+           poidIdeal = (info.taille)-100-((info.taille-150)/2.5);
+       }
+       return poidIdeal;
+    }
+    public String interpreterIMC(double IMC)
+    {
+       String result ="";
+      if(IMC < 16.5)
+      {
+            result ="vous etes en etat de Famine suivez un de nos regime";
+      }
+      else if(IMC >= 16.5 && IMC < 18.5 )
+      {
+          result="vous etes en etat de Maigreur suivez un de nos regime";
+      }
+      else if(IMC >= 18.5 && IMC < 25 )
+      {
+          result="vous avez une Corpulence normale ";
+      }
+      else if(IMC >= 25 && IMC < 30 )
+      {
+          result="vous etes en etat de Surpoids suivez un de nos regimes";
+      }
+      else if(IMC >= 30 && IMC < 35 )
+      {
+          result="vous etes en etat d'Obesite moderee suivez un de nos regimes";
+      }
+      else if(IMC >= 35 && IMC < 40 )
+      {
+          result="vous etes en etat d'Obesite severe suivez un de nos regime";
+      }
+      else
+      {
+          result="vous etes en etat Obesité morbide suivez un de nos regime";      
+      }
+      return result;
+    }
     
 }

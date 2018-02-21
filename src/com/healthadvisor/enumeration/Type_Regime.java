@@ -11,7 +11,7 @@ package com.healthadvisor.enumeration;
  */
 public enum Type_Regime 
 {
-  diaretuque,
-  maigreur
- 
+  diabetique,
+  maigreur,
+  fasting
 }
