@@ -6,6 +6,10 @@
 package com.healthadvisor.javafx.bienetre;
 
 import com.jfoenix.controls.JFXDecorator;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -33,7 +37,6 @@ public class BIENETRE extends Application {
         decorator.setCustomMaximize(false);
         decorator.setBorder(Border.EMPTY);
         Scene scene = new Scene(decorator);
- 
         scene.getStylesheets().add(BIENETRE.class.getResource("styles.css").toExternalForm());
         stage.initStyle(StageStyle.UNDECORATED);
          
@@ -50,6 +53,9 @@ public class BIENETRE extends Application {
      
         launch(args);
         System.out.println("TOTO");
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date dt = new Date();
+       
     }
     
 }
