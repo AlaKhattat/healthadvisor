@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane fx:id="pane" headerText="CALCUL IMC" prefHeight="545.0" prefWidth="737.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.AjoutIMCViewController">
+<DialogPane fx:id="pane" headerText="CALCUL IMC" prefHeight="545.0" prefWidth="737.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.FXMLAjoutIMCViewController">
    <header>
       <Label text="                                                                       CALCUL IMC" textAlignment="CENTER" />
    </header>

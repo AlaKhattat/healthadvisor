@@ -44,7 +44,7 @@ import javafx.stage.Stage;
  *
  * @author asus
  */
-public class AjoutIMCViewController implements Initializable {
+public class FXMLAjoutIMCViewController implements Initializable {
 
     @FXML
     private JFXTextField poid;
@@ -104,7 +104,7 @@ public class AjoutIMCViewController implements Initializable {
     }
 
     public static void setPatient(Patient patient) {
-        AjoutIMCViewController.patient = patient;
+        FXMLAjoutIMCViewController.patient = patient;
     }
 
    
@@ -159,7 +159,7 @@ public class AjoutIMCViewController implements Initializable {
 
     public void startIMCAJOUT() throws Exception {
         stage = new Stage();
-        Parent root = FXMLLoader.load(AjoutIMCViewController.class.getResource("AjoutIMCView.fxml"));
+        Parent root = FXMLLoader.load(FXMLAjoutIMCViewController.class.getResource("FXMLAjoutIMCView.fxml"));
         Scene sc = new Scene(root);
         stage.setScene(sc);
         stage.show();
@@ -197,7 +197,7 @@ public class AjoutIMCViewController implements Initializable {
                 spin.setVisible(false);
                 IMC = info.calculIMC(info);
                    Platform.runLater(() -> {
-                       AjoutIMCViewController.stage.close();
+                       FXMLAjoutIMCViewController.stage.close();
                 });
                  
                

@@ -28,7 +28,7 @@ public class BIENETRE extends Application {
     @Override
     public void start(Stage stage) throws Exception {
        	
-     Parent root  = FXMLLoader.load(getClass().getResource("ImcView.fxml"));      
+     Parent root  = FXMLLoader.load(getClass().getResource("FXMLImcView.fxml"));      
       JFXDecorator decorator = new JFXDecorator(stage, root);
         decorator.setCustomMaximize(false);
         decorator.setBorder(Border.EMPTY);

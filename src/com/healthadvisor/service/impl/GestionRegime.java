@@ -8,6 +8,7 @@ package com.healthadvisor.service.impl;
 import com.healthadvisor.database.MyDB;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.healthadvisor.entities.Aliment;
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
 import com.healthadvisor.enumeration.Type_Regime;
@@ -35,9 +36,7 @@ public class GestionRegime implements IGestionRegime
     
     @Override
     public boolean ajouterRegime(Regime regime) 
-    {
-        
-      
+    { 
         try
         {       
           String query="insert into regime values (?,?,?,?)"; 
@@ -75,9 +74,30 @@ public class GestionRegime implements IGestionRegime
         catch(SQLException exception)
         {
             System.out.println("Echec d'ajout erreur: state:"+exception.getSQLState()+" message:"+exception.getMessage());
-        }
-      
+        }      
       return true;   
+    }
+    public void suivreRegime(Regime regime,Patient p)
+    {
+        //ID_USER	ID_REGIME	ID_SPORT	DATE_DEBUT	DUREE
+       try
+        {       
+          String query="insert into regime_user values (?,?,?,?,?)"; 
+          PreparedStatement statement = database.getConnexion().prepareStatement(query);//adding diet in diet table
+          statement.setString(1, p.getCin_user());
+          statement.setString(2,regime.getId_regime());
+          statement.setString(3,regime.totalTypeSport());
+          java.util.Date datedebut= regime.getDate_debut();
+          java.sql.Date datedebutsql=new java.sql.Date(datedebut.getTime());
+          statement.setDate(4,datedebutsql);
+          statement.setInt(5,regime.getDuree());
+          System.out.println(" dd"+ statement.executeUpdate());
+          System.out.println("ajouter avec succes");
+        }
+        catch(SQLException exception)
+        {
+            System.out.println("Echec d'ajout erreur: state:"+exception.getSQLState()+" message:"+exception.getMessage());
+        }   
     }
 
     @Override

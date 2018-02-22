@@ -67,7 +67,7 @@ import javax.swing.JComboBox;
  *
  * @author danml
  */
-public class ImcController implements Initializable {
+public class FXMLImcController implements Initializable {
 
     private AnchorPane pourcentage;
     @FXML
@@ -214,8 +214,8 @@ public class ImcController implements Initializable {
     private void calculIMC(MouseEvent event) 
     {
        
-        AjoutIMCViewController cont = new AjoutIMCViewController();
-        AjoutIMCViewController.setPatient(patient);
+        FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
+        FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
         
          GestionInfoSante ginfo = new GestionInfoSante();
@@ -226,17 +226,17 @@ public class ImcController implements Initializable {
                 @Override
                 public void run() 
                 {
-                  if(AjoutIMCViewController.IMC > 0)
+                  if(FXMLAjoutIMCViewController.IMC > 0)
                   {
                     
                       Platform.runLater(() -> {
-                          animationCercle(fp,AjoutIMCViewController.IMC);
+                          animationCercle(fp,FXMLAjoutIMCViewController.IMC);
                           
-                          System.out.println("okk imc:"+AjoutIMCViewController.IMC);
+                          System.out.println("okk imc:"+FXMLAjoutIMCViewController.IMC);
                          
                           time2.cancel();
                           time2.purge();
-                          AjoutIMCViewController.IMC =0;
+                          FXMLAjoutIMCViewController.IMC =0;
                       });
                                      
                   }
@@ -244,7 +244,7 @@ public class ImcController implements Initializable {
             }, 3600, 200);
                
        } catch (Exception ex) {
-            Logger.getLogger(ImcController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLImcController.class.getName()).log(Level.SEVERE, null, ex);
         }
       
     }
@@ -279,7 +279,7 @@ public class ImcController implements Initializable {
                  {
                      Platform.runLater(() -> {
                          interpretIMC.setTextFill(Color.CORAL);
-                         interpretIMC.setText(info.interpreterIMC(AjoutIMCViewController.IMC));
+                         interpretIMC.setText(info.interpreterIMC(FXMLAjoutIMCViewController.IMC));
                          imcRegime.setText(Double.toString(progress.getProgress()));
                          poidRegime.setText(Double.toString(info.getPoids()));
                          imcIdealRegime.setText(Double.toString(info.calculPoidIdeal(info))+" Kg");
@@ -467,7 +467,7 @@ public class ImcController implements Initializable {
                 this.listeAliments.getItems().add(aliment.getNom_aliment());
             }
         }
-        
+        regimeSport();
     }
   
     public void chargerSport()
@@ -503,9 +503,43 @@ public class ImcController implements Initializable {
          this.lesSports.setDisable(true);       
       } 
     }
-   /* public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
+    public  void validerRegime()
     {
-        //tout personne avec une maladies superieur a 2 ne sont pas traité uniquement le cas d'un diabetique est traité
+        Regime regime = new Regime();
+        if(this.dureeRegime.getValue().equals("le temps que sa prendra")==true)
+        {
+            regime.setDuree(-1);
+        }
+        else
+        {
+            if(this.dureeRegime.getValue().equals("2 Semaine")==true)
+            {
+                int duree = Integer.parseInt(this.dureeRegime.getValue());
+                regime.setDuree(duree);
+            }
+            else if(this.dureeRegime!=null)
+            {
+                 int duree = Integer.parseInt(this.dureeRegime.getValue());
+                regime.setDuree(duree*4);
+            }
+        }
+        regime.setId_regime(this.regimePropose.getValue());
+       if(this.siSport.isSelected())
+       {
+         List<Sport>listSport = new ArrayList<>();
+         for(int i = 0; i < this.lesSports.getChildren().size(); i++)
+         {
+            JFXCheckBox sport =(JFXCheckBox) this.lesSports.getChildren().get(i);
+            Sport sp = new Sport();
+            sp.setNom_sport(sport.getText());
+            listSport.add(sp);
+         }
+        regime.setSports(listSport);
+       }
+    }
+    public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
+    {
+        //toutes personne avec une maladies superieur a 2 ne sont pas traité uniquement le cas d'un diabetique est traité
         //tout les aliments dont la personne est allergique est filtré et sont enlevé de sa liste 
         System.out.println("aller:"+AllergiesAliments+"reg:"+regimes);
         List<Regime>regime = new ArrayList<>();
@@ -530,15 +564,10 @@ public class ImcController implements Initializable {
                             System.out.println("tt:"+r.getAliments().remove(k));  
                             tabTypeAliment.remove(k);
                             bo = true;
-                            System.out.println("TOTO");    
-                            
+                            System.out.println("TOTO");                                
                         }
                 }
-                    
-                         
-                    
-                    
-                   
+                                                                                                     
                 }
             }
             if(bo == true)
@@ -551,6 +580,6 @@ public class ImcController implements Initializable {
     
         return regime;
     }
-    */
+    
     
 }

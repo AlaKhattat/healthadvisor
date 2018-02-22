@@ -27,7 +27,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.ImcController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.FXMLImcController">
    <children>
       <JFXTabPane layoutX="138.0" layoutY="100.0" prefHeight="684.0" prefWidth="1105.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -329,12 +329,12 @@
                                                 <JFXListView fx:id="listeAliments" onMouseClicked="#modifierAllergies" prefHeight="179.0" prefWidth="399.0" />
                                                 <HBox prefHeight="41.0" prefWidth="395.0" spacing="190.0">
                                                    <children>
-                                                      <JFXRadioButton fx:id="siSport" onMouseClicked="#regimeSport" selected="true" text="+ Sports" textFill="GREEN">
+                                                      <JFXRadioButton fx:id="siSport" onAction="#regimeSport" onMouseClicked="#regimeSport" selected="true" text="+ Sports" textFill="GREEN">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="sport" />
                                                          </toggleGroup>
                                                       </JFXRadioButton>
-                                                      <JFXRadioButton fx:id="sansSport" layoutX="10.0" layoutY="10.0" onMouseClicked="#regimeSport" selected="true" text="Sans Sport" textFill="RED" toggleGroup="$sport" />
+                                                      <JFXRadioButton fx:id="sansSport" layoutX="10.0" layoutY="10.0" onAction="#regimeSport" onMouseClicked="#regimeSport" selected="true" text="Sans Sport" textFill="RED" toggleGroup="$sport" />
                                                    </children>
                                                    <VBox.margin>
                                                       <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
