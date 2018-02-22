@@ -7,6 +7,7 @@ package com.healthadvisor.javafx.inscrimedecin;
 
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
@@ -121,7 +122,7 @@ public class FXMLInscriMedecinController implements Initializable {
         String diplome=this.diplome.getText();
          GestionMedecin gm=new GestionMedecin();
          GestionPatient gp= new GestionPatient();
-         Patient p=new Patient(login, password, "10002563");
+         Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
          gp.AjouterPatient(p);
          Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,login, password, p.getCin_user());
          gm.AjouterMedecin(medecin);

@@ -16,7 +16,7 @@
         <URL value="@fxmlchoixrole.css" />
     </stylesheets>
    <children>
-      <Circle fx:id="patient" layoutX="172.0" layoutY="169.0" onMouseEntered="#patientHover" onMouseExited="#patientExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="patient" layoutX="172.0" layoutY="169.0" onMouseClicked="#InscriPatient" onMouseEntered="#patientHover" onMouseExited="#patientExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
          <effect>
             <DropShadow />
          </effect>
@@ -29,7 +29,7 @@
             </RadialGradient>
          </fill>
       </Circle>
-      <Circle fx:id="medecin" layoutX="517.0" layoutY="169.0" onMouseEntered="#medecinHover" onMouseExited="#medecinExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="medecin" layoutX="517.0" layoutY="169.0" onMouseClicked="#InscriMedecin" onMouseEntered="#medecinHover" onMouseExited="#medecinExit" radius="83.0" stroke="BLACK" strokeType="INSIDE">
          <effect>
             <DropShadow />
          </effect>

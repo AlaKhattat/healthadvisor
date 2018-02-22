@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLHomeViewController">
+    <stylesheets>
+        <URL value="@fxmlhomeview.css" />
+    </stylesheets>
+   <children>
+      <JFXToolbar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="1200.0">
+         <left>
+            <JFXHamburger fx:id="hamburger" styleClass="jfx-hamburger" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <Label fx:id="txtCurrentWindow" prefHeight="40.0" prefWidth="199.0" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;" styleClass="card-title" text="HEALTH_ADVISOR" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <JFXButton BorderPane.alignment="CENTER">
+               <graphic>
+                  <JFXButton>
+                     <graphic>
+                        <JFXButton />
+                     </graphic>
+                  </JFXButton>
+               </graphic>
+            </JFXButton>
+         </right>
+      </JFXToolbar>
+      <AnchorPane fx:id="holderPane" layoutX="200.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="66.0" prefHeight="662.0" prefWidth="187.0" />
+   </children>
+</AnchorPane>

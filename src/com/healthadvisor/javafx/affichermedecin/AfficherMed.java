@@ -112,7 +112,7 @@ public class AfficherMed extends Application {
     ScrollPane p=new ScrollPane();
     p.setPrefSize(550, 600);
 
-    p.setContent(createPage());
+    p.setContent(createPageSpécialite("Chirurgie cardiaque"));
     anchor.getChildren().add(p);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
