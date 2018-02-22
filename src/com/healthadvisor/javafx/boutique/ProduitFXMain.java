@@ -25,7 +25,7 @@ public class ProduitFXMain extends Application {
     
     @Override
    public void start(Stage primaryStage) {
-   FXMLLoader loader= new FXMLLoader(getClass().getResource("FXMLProduit.fxml"));
+  FXMLLoader loader= new FXMLLoader(getClass().getResource("FXMLProduit.fxml"));
         
         try{
             Parent root=loader.load();
@@ -36,7 +36,7 @@ public class ProduitFXMain extends Application {
         }catch(IOException ex){
             
         }
-       /*FXMLLoader loaderAffichage= new FXMLLoader(getClass().getResource("FXMLTestChart.fxml"));
+       /*FXMLLoader loaderAffichage= new FXMLLoader(getClass().getResource("FXMLGererProduit_Admin.fxml"));
         try{
             
            

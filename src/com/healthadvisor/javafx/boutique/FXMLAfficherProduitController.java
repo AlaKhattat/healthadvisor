@@ -41,6 +41,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -276,22 +277,27 @@ public class FXMLAfficherProduitController implements Initializable {
                    panier.add(nb_pdt);
                     }
                 }
-                else{
-                TextInputDialog dialog = new TextInputDialog("1");
-                dialog.setTitle("Nombre de produits");
-                dialog.setHeaderText(null);
-                dialog.setContentText("SVP Entrez le nombre de produit :");
+                else
+                {
+                 List<Integer> lst_qte=new ArrayList<>();
+                 for(int i=0;i<p.getQuantite();i++){
+                     lst_qte.add(i+1);
+                 }
+                ChoiceDialog<Integer> dialog = new ChoiceDialog<>(1, lst_qte);
+                dialog.setTitle("Choice Dialog");
+                dialog.setHeaderText("Look, a Choice Dialog");
+                dialog.setContentText("Choisissez nbre de produit:");
 
-                Optional<String> result = dialog.showAndWait();
+                Optional<Integer> result = dialog.showAndWait();
                 if (result.isPresent()){
-                   if(MAJ_Nbr_Produits(p) != -1){
-                       
-                       panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+  Integer.parseInt(result.get()));
+                   if(MAJ_Nbr_Produits(p) != -1)
+                   {
+                           panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+ result.get());
                    }
                 else{
                    ArrayList<Object> nb_pdt=new ArrayList<>();
                    nb_pdt.add(0,p.getReference());
-                   nb_pdt.add(1, Integer.parseInt(result.get()));
+                   nb_pdt.add(1, result.get());
                    panier.add(nb_pdt);
                                        }
             
