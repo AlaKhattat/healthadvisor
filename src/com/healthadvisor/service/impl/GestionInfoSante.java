@@ -25,6 +25,7 @@ public class GestionInfoSante implements IGestionInfoSante
     public GestionInfoSante() 
     {
         database = MyDB.getInstance();
+      
     }
      
     @Override
@@ -106,6 +107,7 @@ public class GestionInfoSante implements IGestionInfoSante
           try
           {
             String query="select * from information_sante where login=?";
+              System.out.println(database.getConnexion().toString());
             PreparedStatement statement = database.getConnexion().prepareStatement(query);
             statement.setString(1,login);
             ResultSet result = statement.executeQuery();
@@ -119,7 +121,7 @@ public class GestionInfoSante implements IGestionInfoSante
           {
               System.out.println("Echec de recherche erreur: state:"+exception.getSQLState()+" message:"+exception.getMessage());           
           }
-          return a;    
+          return a;   
     }
 
    
