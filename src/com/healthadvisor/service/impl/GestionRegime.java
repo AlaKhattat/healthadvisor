@@ -81,12 +81,13 @@ public class GestionRegime implements IGestionRegime
     {
         //ID_USER	ID_REGIME	ID_SPORT	DATE_DEBUT	DUREE
        try
-        {       
+        { 
+            System.out.println("login:"+p.getLogin());
           String query="insert into regime_user values (?,?,?,?,?)"; 
           PreparedStatement statement = database.getConnexion().prepareStatement(query);//adding diet in diet table
-          statement.setString(1, p.getCin_user());
+          statement.setString(1, p.getLogin());
           statement.setString(2,regime.getId_regime());
-          statement.setString(3,regime.totalTypeSport());
+          statement.setString(3,regime.totalDesSport());
           java.util.Date datedebut= regime.getDate_debut();
           java.sql.Date datedebutsql=new java.sql.Date(datedebut.getTime());
           statement.setDate(4,datedebutsql);
