@@ -45,7 +45,7 @@ public class SondageController implements Initializable {
     private Button repondreBtnID;
     
     public static Sondage sondage;
-    public static Patient patient = new Patient("ahmed", "pass", "1");
+    //public static Patient patient = new Patient("ahmed", "pass", "1");
 
     /**
      * Initializes the controller class.

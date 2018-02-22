@@ -7,6 +7,7 @@ package com.healthadvisor.javafx.sondage;
 
 import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.entities.UserReponse;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javafx.questionreponse.QuestionController;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
@@ -111,7 +112,7 @@ public class ConsulterSondageController implements Initializable {
     @FXML
     private void btnEnvoyerAction(ActionEvent event) {
         
-        UserReponse ur = new UserReponse(SondageController.patient.getLogin(), (Integer)g.getSelectedToggle().getUserData() );
+        UserReponse ur = new UserReponse(FXMLLoginController.pseudo, (Integer)g.getSelectedToggle().getUserData() );
         GestionReponsesPossibles grp = new GestionReponsesPossibles();
         GestionUserReponse gur = new GestionUserReponse();
         gur.ajouterUserReponse(ur);

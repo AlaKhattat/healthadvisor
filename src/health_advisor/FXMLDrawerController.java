@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -29,13 +30,21 @@ public class FXMLDrawerController implements Initializable {
     @FXML
     private JFXButton paymentBtn;
     @FXML
-    private JFXButton exitBtn;
-    @FXML
     private JFXButton exitBtn2;
     @FXML
-    private JFXButton exitBtn21;
-    @FXML
     private JFXButton exitBtn1;
+    @FXML
+    private JFXButton geolocalisation;
+    @FXML
+    private JFXButton questionreponse;
+    @FXML
+    private JFXButton sondage;
+    @FXML
+    private JFXButton bienetre;
+    @FXML
+    private JFXButton article;
+    @FXML
+    private JFXButton evenement;
 
     /**
      * Initializes the controller class.
@@ -49,6 +58,30 @@ public class FXMLDrawerController implements Initializable {
     private void exit(ActionEvent event) {
                 Platform.exit();
 
+    }
+
+    @FXML
+    private void btnGeolocalAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void questionreponseAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void sondageAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void bienetreAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void articleAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void evenementAction(MouseEvent event) {
     }
     
 }

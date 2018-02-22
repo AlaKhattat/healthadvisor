@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="1176.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.ListeEvenementFXMLController">
+   <children>
+      <TableView fx:id="tabEvt" layoutX="20.0" layoutY="19.0" prefHeight="556.0" prefWidth="1137.0">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="nomCol" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="dateCol" prefWidth="102.0" text="Date" />
+            <TableColumn fx:id="heureCol" prefWidth="104.0" text="Heure" />
+            <TableColumn fx:id="endroitCol" prefWidth="117.0" text="Endroit" />
+            <TableColumn fx:id="typeCol" prefWidth="105.0" text="Type" />
+            <TableColumn fx:id="maxpCol" prefWidth="112.0" text="Max participants" />
+            <TableColumn fx:id="imgCol" prefWidth="111.0" text="Image" />
+            <TableColumn fx:id="supCol" prefWidth="113.0" text="Suppression" />
+            <TableColumn fx:id="modifCol" prefWidth="115.0" text="Modification" />
+            <TableColumn fx:id="affichCol" prefWidth="107.0" text="Affichage" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

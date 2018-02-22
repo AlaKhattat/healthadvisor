@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -45,7 +46,7 @@ public class FXMLHomeViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-          
+         
    HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
@@ -65,10 +66,20 @@ public class FXMLHomeViewController implements Initializable {
             AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
             AnchorPane recherche = FXMLLoader.load(getClass().getResource(Routes.RechercheMedecin));
             AnchorPane suivie = FXMLLoader.load(getClass().getResource(Routes.InscriPatient));
-            //AnchorPane welcome = FXMLLoader.load(getClass().getResource(Routes.WELCOMEVIEW));
+            AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
+            AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
+            AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
+            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
+            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
+            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+
             setNode(acceuil);
             drawer.setSidePane(sidePane);
-
+            ScrollPane ss=new ScrollPane();
+            ss.setContent(sidePane);
+            drawer.getChildren().add(ss);
             for (Node node : sidePane.getChildren()) {
                 if (node.getAccessibleText() != null) {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
@@ -81,14 +92,42 @@ public class FXMLHomeViewController implements Initializable {
                                 drawer.close();                               
                                 setNode(recherche);
                                 break;
-                            case "sondage":
+                            case "sign":
                                 drawer.close();
                                 setNode(login);
                                 break;
+                            case "symptome":
+                                drawer.close();                                
+                                setNode(Symptome);
+                                break;    
+                            case "geolocalisation":
+                                drawer.close();                                
+                                setNode(Geolocalisation);
+                                break;
+                            case "boutique":
+                                drawer.close();                                
+                                setNode(Boutique);
+                                break; 
+                            case "questionreponse":
+                                drawer.close();                                
+                                setNode(QuestionReponse);
+                                break;
+                            case "sondage":
+                                drawer.close();                                
+                                setNode(Sondage);
+                                break;  
+                            case "bienetre":
+                                drawer.close();                                
+                                setNode(BienEtre);
+                                break;
                             case "evenement":
                                 drawer.close();                                
-                                setNode(suivie);
-                                break;                                
+                                setNode(Evenement);
+                                break;
+                            case "article":
+                                drawer.close();                                
+                                setNode(Article);
+                                break;                                   
                         }
                     });
                 }
@@ -103,6 +142,7 @@ public class FXMLHomeViewController implements Initializable {
 
     private void setNode(Node node) {
         holderPane.getChildren().clear();
+        
         holderPane.getChildren().add((Node) node);
     } 
     

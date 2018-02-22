@@ -19,5 +19,13 @@ public class Routes {
     public static String GererUtilisateur="/com/healthadvisor/javafx/gererutilisateur/FXMLGererUtil.fxml";
     public static String HOMEVIEW="/health_advisor/FXMLHomeView.fxml";
     public static String AFFICHERMEDECIN="/com/healthadvisor/javafx/affichermedecin/FXMLAfficherMedecin.fxml";
+    public static String GEOLOCALISATION="/com/healthadvisor/javafx/geolocalisation/MapsFXML.fxml";
+    public static String SYMPTOME="/com/healthadvisor/javafx/analysesymptome/SymptomeFXML.fxml";
+    public static String BOUTIQUE="/com/healthadvisor/javafx/boutique/FXMLProduit.fxml";
+    public static String QUESTIONREPONSE ="/com/healthadvisor/javafx/questionreponse/question.fxml";
+    public static String SONDAGE ="/com/healthadvisor/javafx/sondage/Sondage.fxml";
+    public static String BIENETRE ="/com/healthadvisor/javafx/bienetre/FXMLImcView.fxml";
+    public static String EVENEMENT ="/com/healthadvisor/javafx/evenement/NaviguerEvenementsFXML.fxml";
+    public static String ARTICLE ="/com/healthadvisor/javafx/article/NaviguerArticlesFXML.fxml";
     
 }

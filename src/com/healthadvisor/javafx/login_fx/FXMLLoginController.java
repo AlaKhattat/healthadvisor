@@ -22,6 +22,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -86,10 +87,11 @@ public class FXMLLoginController implements Initializable {
     private JFXDatePicker date;
     @FXML
     private JFXTextField numtel;
-
     GestionPatient gp=new GestionPatient();
     public static String pseudo;
     public static String Identifiant;
+                public static ArrayList<ArrayList> panier;
+
     /**
      * Initializes the controller class.
      */
@@ -113,12 +115,14 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private void homeAction(MouseEvent event) throws IOException {
         //Sign IN
+        
         String usernamesigin=this.username.getText();
         pseudo=usernamesigin;
         String password=this.passwordsiginin.getText();
         Patient p= gp.AfficherPatientLogin(pseudo);
         if(p!=null){
             if (p.getPassword().equalsIgnoreCase(password)) {
+            panier=new ArrayList<>();
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.RechercheMedecin)); 
             Parent root=loader.load();
             Stage stage = new Stage(StageStyle.DECORATED);

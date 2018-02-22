@@ -6,6 +6,7 @@
 package com.healthadvisor.javafx.questionreponse;
 
 import com.healthadvisor.entities.Question;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionQuestion;
 import java.io.IOException;
 import java.net.URL;
@@ -55,7 +56,7 @@ public class AjouterQuestionController implements Initializable {
     private void partagerQuestion(ActionEvent event) throws IOException {
         //questionMain qm = new questionMain();
         GestionQuestion gq = new GestionQuestion();
-        Question q = new Question(0,questionID.getText(), QuestionController.patient.getLogin(),new java.sql.Timestamp(new java.util.Date().getTime()));
+        Question q = new Question(0,questionID.getText(),FXMLLoginController.pseudo,new java.sql.Timestamp(new java.util.Date().getTime()));
         gq.ajouterQuestion(q);
         
         Alert alerte = new Alert(AlertType.INFORMATION);
