@@ -6,11 +6,13 @@
 package com.healthadvisor.javafx.analysesymptome;
 
 
+import com.healthadvisor.entities.AccessToken;
 import com.healthadvisor.entities.BodyParts;
 import com.healthadvisor.entities.Maladie;
 import com.healthadvisor.entities.SubBodyParts;
 import com.healthadvisor.entities.Symptome;
 import com.healthadvisor.service.impl.GestionBodyParts;
+import com.healthadvisor.service.impl.GestionMaladie;
 import com.healthadvisor.service.impl.GestionSubBodyPartSymptome;
 import com.healthadvisor.service.impl.GestionSubBodyParts;
 import com.jfoenix.controls.JFXSpinner;
@@ -209,7 +211,7 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnEnvoyerAction(ActionEvent event) throws IOException{
-        /*String Symptomes="";
+        String Symptomes="";
         ObservableList<Node>ols=PaneBox.getChildren();
         for(Node x : ols){
             Symptome s=(Symptome)x.getUserData();
@@ -222,14 +224,7 @@ if(subbodypart.disableProperty().getValue()==true){
         GestionMaladie gm =new GestionMaladie();
         AccessToken token=new AccessToken();
         ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
-        ResultatAnalyse=l;*/
-        String Symptomes="";
-        ObservableList<Node>ols=PaneBox.getChildren();
-        for(Node x : ols){
-            Symptome s=(Symptome)x.getUserData();
-           Symptomes=Symptomes+"\""+s.getId()+"\",";
-        }
-        System.out.println(Symptomes);
+        ResultatAnalyse=l;
         FXMLLoader loader=new FXMLLoader(getClass().getResource("ResultatAnalyseFXML.fxml"));
         Parent root=loader.load();
         Scene s = btnValider.getScene();
@@ -251,7 +246,7 @@ if(subbodypart.disableProperty().getValue()==true){
     
     public void initialize(URL url, ResourceBundle rb) {
         ResultatAnalyse=new ArrayList<>();
-        ArrayList<String> list=new ArrayList<>();
+        /*ArrayList<String> list=new ArrayList<>();
         list.add("Hello");
         list.add("hfdcjghbcns");
         list.add("lsnvjshnvljsdkv");
@@ -261,7 +256,7 @@ if(subbodypart.disableProperty().getValue()==true){
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
-        ResultatAnalyse.add(m);
+        ResultatAnalyse.add(m);*/
         listsymptomes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         String[] sexelist={"Homme","Femme","Garçon","Fille"};
         ObservableList<String> ObservListsexe = FXCollections.observableArrayList(sexelist);
