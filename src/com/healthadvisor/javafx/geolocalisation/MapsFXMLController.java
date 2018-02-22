@@ -1,0 +1,210 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.healthadvisor.javafx.geolocalisation;
+
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Side;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebEvent;
+import javafx.scene.web.WebView;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * FXML Controller class
+ *
+ * @author Firassov
+ */
+public class MapsFXMLController implements Initializable {
+    WebView webView ;
+    WebEngine webEngine;
+    @FXML
+    private TextField seachPlacestxt;
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem menuItem;
+    @FXML
+    private RadioButton RdBtnPharmacie;
+    @FXML
+    private RadioButton RdBtnHopital;
+    @FXML
+    private RadioButton RdBtnDocteur;
+    @FXML
+    private RadioButton RdBtnPhysio;
+    @FXML
+    private RadioButton RdBtnGym;
+    @FXML
+    private RadioButton RdBtnSpa;
+    @FXML
+    private StackPane stackPane;
+    @FXML
+    private ToggleGroup toggleGrp;
+    public int Markercount;
+    @FXML
+    private Button btnClear;
+    /***************************ON Action Methods*********************************************/
+    @FXML
+    private void SearchPlaceskeyPressed(javafx.scene.input.KeyEvent event) {
+        String ch="";
+             try {
+    URL urll = new URL("https://maps.googleapis.com/maps/api/place/autocomplete/json?location=34.0,9.0&radius=550000&strictbounds&language=fr&input="+seachPlacestxt.getText().replaceAll(" ", "%20")+"&key=AIzaSyAEYqaQdCb6HLtaY-As2thm_np77ZhtEOo");
+    
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(urll.openStream(), "UTF-8"))) {
+        for (String line; (line = reader.readLine()) != null;) {
+           ch=ch+line;
+        }
+    }   catch (IOException ex) {
+            System.out.println(ex);
+        }
+                 JSONObject obj = new JSONObject(ch);
+                 JSONArray arr=obj.getJSONArray("predictions");
+                 ArrayList<MenuItem> listItems=new ArrayList<>();
+                    for (int i = 0; i < arr.length(); i++)
+                    {
+                        MenuItem m =new MenuItem(arr.getJSONObject(i).getString("description"));
+                        String placeID=arr.getJSONObject(i).getString("place_id");
+                        m.setOnAction((event2) -> {
+                            
+                            seachPlacestxt.setText(m.getText());
+                            String ch2="";
+                            try {
+                                URL url2 =new URL("https://maps.googleapis.com/maps/api/place/details/json?placeid="+placeID+"&key=AIzaSyAEYqaQdCb6HLtaY-As2thm_np77ZhtEOo");
+                                
+                            try (BufferedReader reader = new BufferedReader(new InputStreamReader(url2.openStream(), "UTF-8"))) {
+                                for (String line; (line = reader.readLine()) != null;) {
+                                   ch2=ch2+line;
+                                }
+                            }   catch (IOException ex) {
+                                    System.out.println(ex);
+                                }
+                            JSONObject obj2 = new JSONObject(ch2);
+                 Double lat=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+                 Double lng=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+                                webEngine.executeScript("map.setCenter({lat: "+lat+",lng:"+lng+"});\n" +
+                                                        "map.setZoom(14);  // Why 17? Because it looks good.");
+                                Markercount=PlacesMaker(lat, lng, webEngine,toggleGrp.getSelectedToggle().getUserData().toString(),Markercount);
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(MapsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                           
+                           
+                        });
+                        m.setUserData(arr.getJSONObject(i).getString("place_id"));
+                        listItems.add(m);
+                    }
+                    contextMenu.getItems().clear();
+                    contextMenu.getItems().addAll(listItems);
+                    contextMenu.show(seachPlacestxt, Side.BOTTOM, 0, 0);
+    }catch(MalformedURLException | JSONException e){
+                 System.out.println(e);
+    }  
+    }
+    @FXML
+    private void menuvalidationAction(Event event) {
+        seachPlacestxt.setText(menuItem.getText());
+    }
+    @FXML
+    private void onBtnClearAction(ActionEvent event) {
+        webEngine.executeScript("deleteMarkers();");
+        Markercount=0;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        Markercount=0;
+        
+        webView = new WebView();
+        webEngine = webView.getEngine();
+        URL urlGoogleMaps = getClass().getResource("Map.html");
+        webEngine.load(urlGoogleMaps.toExternalForm());
+        stackPane.getChildren().add(webView);
+        RdBtnPharmacie.setUserData("pharmacy");
+        RdBtnHopital.setUserData("hospital");
+        RdBtnDocteur.setUserData("doctor");
+        RdBtnGym.setUserData("gym");
+        RdBtnPhysio.setUserData("physiotherapist");
+        RdBtnSpa.setUserData("spa");
+
+    }
+
+    
+    
+public static int PlacesMaker(Double lat,Double lng,WebEngine webEngine,String type,int markercount){
+    
+                   String ch="";
+             try {
+    URL urll = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+lat+","+lng+"&radius=2000&types="+type+"&key=AIzaSyAEYqaQdCb6HLtaY-As2thm_np77ZhtEOo");
+        
+
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(urll.openStream(), "UTF-8"))) {
+        for (String line; (line = reader.readLine()) != null;) {
+           ch=ch+line;
+        }
+    }   catch (IOException ex) {
+            System.out.println(ex);
+        }
+        //parcourir JSON
+        JSONObject obj = new JSONObject(ch);
+        JSONArray arr=obj.getJSONArray("results");
+        for (int i = 0; i < arr.length(); i++)
+        {
+            
+            
+            webEngine.executeScript("var marker"+markercount+i+" = new google.maps.Marker({position: new google.maps.LatLng("+arr.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat")+","
+                    +arr.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng")+"),"
+                    + "map: map,"
+                    + "draggable: false,"
+                    + "icon: 'img/"+type+".png'});"
+                    + "markers.push(marker"+markercount+i+");"
+                    + "var infobulle"+markercount+i+" = new google.maps.InfoWindow({"
+                    + "content: \""+arr.getJSONObject(i).getString("name")+"\"});"
+                    + "google.maps.event.addListener(marker"+markercount+i+", 'mouseover', function() {"
+                    + "infobulle"+markercount+i+".open(map, marker"+markercount+i+");"
+                    + "});"
+                    + "google.maps.event.addListener(marker"+markercount+i+", 'mouseout', function() {"
+                    + "infobulle"+markercount+i+".close();"
+                    + "});");
+            markercount++;
+            
+        }
+                
+    }  catch(MalformedURLException | JSONException e){
+                 System.out.println(e);
+    }  
+             return markercount;
+    }
+
+    
+    
+
+    
+}
