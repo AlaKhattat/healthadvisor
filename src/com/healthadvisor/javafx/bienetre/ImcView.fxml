@@ -33,7 +33,7 @@
         <tabs>
           <Tab text="CALCUL IMC">
             <content>
-                  <GridPane>
+                  <GridPane prefHeight="600.0" prefWidth="1000.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                      </columnConstraints>
@@ -50,11 +50,11 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="453.0" prefWidth="900.0">
                                  <children>
-                                    <AnchorPane layoutX="26.0" layoutY="52.0" prefHeight="429.0" prefWidth="1057.0" styleClass="card-unpadded">
+                                    <AnchorPane layoutX="8.0" layoutY="52.0" prefHeight="376.0" prefWidth="984.0" styleClass="card-unpadded">
                                        <children>
-                                          <GridPane layoutY="-4.0" prefHeight="380.0" prefWidth="966.0" AnchorPane.topAnchor="-4.0">
+                                          <GridPane layoutY="-4.0" prefHeight="356.0" prefWidth="966.0" AnchorPane.topAnchor="-4.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -94,7 +94,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </GridPane>
-                                                <AnchorPane prefHeight="128.0" prefWidth="458.0" style="-fx-background-color: #f2f6fc; -fx-background-radius: 15;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="6" GridPane.rowSpan="2147483647">
+                                                <AnchorPane prefHeight="88.0" prefWidth="512.0" style="-fx-background-color: #f2f6fc; -fx-background-radius: 15;" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="6" GridPane.rowSpan="2147483647">
                                                    <children>
                                                       <Label alignment="CENTER" prefHeight="23.0" prefWidth="446.0" text="L'indice de masse corporelle (IMC)  " textFill="RED" />
                                                       <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="4.0" layoutY="26.0" prefHeight="23.0" prefWidth="446.0" text="L'IMC est un indice comparatif sur une échelle de 70 points. Elle permet " />
@@ -106,12 +106,12 @@
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="15.0" prefHeight="26.0" prefWidth="741.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Calculer votre imc ici" textFill="GREEN" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="17.0" prefHeight="26.0" prefWidth="741.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Calculer votre imc ici" textFill="GREEN" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </GridPane>
-                        <GridPane prefHeight="72.0" prefWidth="1000.0" GridPane.rowIndex="1">
+                        <GridPane prefHeight="156.0" prefWidth="1000.0" GridPane.rowIndex="1">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="619.0" minWidth="10.0" prefWidth="345.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="339.0" />
@@ -134,7 +134,7 @@
                                     <Label layoutX="149.0" layoutY="74.0" prefHeight="59.0" prefWidth="210.0" styleClass="custom-white-label" text="que nous vous proposons" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="236.0" style="-fx-background-color: yellow;" styleClass="card-unpadded" GridPane.columnIndex="1">
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="137.0" prefWidth="377.0" style="-fx-background-color: yellow;" styleClass="card-unpadded" GridPane.columnIndex="1">
                                  <children>
                                     <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
                                     <ImageView fitHeight="59.0" fitWidth="97.0" layoutX="33.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
@@ -173,9 +173,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <HBox layoutX="23.0" layoutY="33.0" prefHeight="112.0" prefWidth="963.0">
+                        <HBox layoutX="14.0" layoutY="1.0" prefHeight="165.0" prefWidth="963.0">
                            <children>
-                              <AnchorPane prefHeight="146.0" prefWidth="374.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
+                              <AnchorPane prefHeight="118.0" prefWidth="374.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
                                  <children>
                                     <Pane layoutX="-1.0" prefHeight="83.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
                                     <Label fx:id="imcRegime" layoutX="182.0" layoutY="50.0" prefHeight="45.0" prefWidth="141.0" styleClass="custom-white-title-label" text="0" />
@@ -184,36 +184,48 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="166.0" prefWidth="233.0" style="-fx-background-color: #DD4B39;" styleClass="card-unpadded">
                                  <children>
-                                    <Pane layoutX="-1.0" prefHeight="166.0" prefWidth="23.0" style="-fx-background-color: #C74433;" />
+                                    <Pane layoutX="-1.0" prefHeight="86.0" prefWidth="23.0" style="-fx-background-color: #C74433;" />
                                     <Label layoutX="43.0" layoutY="1.0" prefHeight="35.0" prefWidth="341.0" styleClass="custom-white-title-label" text="Votre poids ideal est" />
                                     <JFXProgressBar layoutX="154.0" layoutY="98.0" progress="0.52" />
-                                    <Label fx:id="imcIdealRegime" layoutX="194.0" layoutY="53.0" prefHeight="47.0" prefWidth="141.0" styleClass="custom-white-title-label" text="0" />
+                                    <Label fx:id="imcIdealRegime" layoutX="194.0" layoutY="53.0" prefHeight="35.0" prefWidth="141.0" styleClass="custom-white-title-label" text="0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="157.0" prefWidth="205.0" style="-fx-background-color: #F39C12;" styleClass="card">
                                  <children>
-                                    <VBox layoutX="14.0" layoutY="14.0" prefHeight="119.0" prefWidth="159.0">
+                                    <VBox layoutX="2.0" layoutY="2.0" prefHeight="131.0" prefWidth="225.0">
                                        <children>
                                           <Label prefHeight="31.0" prefWidth="153.0" styleClass="custom-white-title-label" text="conseil du jour" />
-                                          <TextArea editable="false" prefHeight="138.0" prefWidth="159.0" style="-fx-control-inner-background: #F39C12; -fx-background-color: #F39C12; -fx-text-inner-color: white;" text="manger 5 fruits&#10;et legumes par jour&#10;pour etre en bonne&#10;santé" />
+                                          <TextArea editable="false" prefHeight="92.0" prefWidth="169.0" style="-fx-control-inner-background: #F39C12; -fx-background-color: #F39C12; -fx-text-inner-color: white;" text="manger 5 fruits&#10;et legumes par jour&#10;pour etre en bonne&#10;santé" />
                                        </children>
                                     </VBox>
                                  </children>
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <JFXTabPane fx:id="tabRegime" layoutX="4.0" layoutY="214.0" prefHeight="329.0" prefWidth="980.0" style="-fx-tab-max-height: 25;">
+                        <JFXTabPane fx:id="tabRegime" layoutX="4.0" layoutY="182.0" prefHeight="361.0" prefWidth="980.0" style="-fx-tab-max-height: 25;">
                            <tabs>
                               <Tab fx:id="suivreRegime1" text="SuivreRegime1/2">
                                  <content>
                                     <AnchorPane prefHeight="346.0" prefWidth="980.0" styleClass="card-unpadded">
                                        <children>
-                                          <VBox layoutX="6.0" layoutY="32.0" prefHeight="284.0" prefWidth="451.0" spacing="10.0">
+                                          <VBox layoutX="6.0" layoutY="4.0" prefHeight="312.0" prefWidth="451.0" spacing="10.0">
                                              <children>
-                                                <JFXTextField fx:id="poidRegime" focusColor="#00add8" labelFloat="true" onKeyReleased="#validerPoids" prefHeight="14.0" prefWidth="415.0" promptText="Poids" unFocusColor="#868282" />
-                                                <JFXTextField fx:id="PoidsAPerdre" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="combien de kilo voulez vous perdre?" unFocusColor="#868282" />
-                                                <JFXComboBox fx:id="dureeRegime" layoutX="30.0" layoutY="120.0" prefHeight="30.0" prefWidth="405.0" promptText="En combien de temps voulez vous perdre vos KILOS?" />
-                                                <JFXComboBox fx:id="regimeEffectue" prefHeight="30.0" prefWidth="405.0" promptText="Avez vous deja suivie un regime recement? si oui la quelle " />
+                                                <JFXTextField fx:id="poidRegime" focusColor="#00add8" labelFloat="true" onKeyReleased="#validerPoids" prefHeight="14.0" prefWidth="415.0" promptText="Poids" unFocusColor="#868282">
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding></JFXTextField>
+                                                <JFXTextField fx:id="PoidsAPerdre" focusColor="#00add8" labelFloat="true" layoutX="10.0" layoutY="10.0" promptText="combien de kilo voulez vous perdre?" unFocusColor="#868282">
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding></JFXTextField>
+                                                <JFXComboBox fx:id="dureeRegime" layoutX="30.0" layoutY="120.0" prefHeight="30.0" prefWidth="405.0" promptText="En combien de temps voulez vous perdre vos KILOS?">
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding></JFXComboBox>
+                                                <JFXComboBox fx:id="regimeEffectue" prefHeight="30.0" prefWidth="405.0" promptText="Avez vous deja suivie un regime recement? si oui la quelle ">
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding></JFXComboBox>
                                                 <Label prefHeight="20.0" prefWidth="416.0" text="veullez cochez les produits dont vous etes allergique" />
                                                 <VBox fx:id="allergies" prefHeight="24.0" prefWidth="359.0">
                                                    <children>
@@ -235,6 +247,9 @@
                                                          </VBox.margin>
                                                       </HBox>
                                                    </children>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
                                                 </VBox>
                                              </children>
                                              <padding>

@@ -26,7 +26,7 @@ import javafx.scene.control.Skin;
 public class FillProgressIndicator extends ProgressCircleIndicator {
 
     public FillProgressIndicator() {
-        this.getStylesheets().add(ProgressCircleIndicator.class.getResource("/ressourcesIMC/fillprogress.css").toExternalForm());
+        this.getStylesheets().add(ProgressCircleIndicator.class.getResource("fillprogress.css").toExternalForm());
         this.getStyleClass().add("fillindicator");
     }
 

@@ -159,7 +159,7 @@ public class AjoutIMCViewController implements Initializable {
 
     public void startIMCAJOUT() throws Exception {
         stage = new Stage();
-        Parent root = FXMLLoader.load(AjoutIMCViewController.class.getResource("/bienetre/AjoutIMCView.fxml"));
+        Parent root = FXMLLoader.load(AjoutIMCViewController.class.getResource("AjoutIMCView.fxml"));
         Scene sc = new Scene(root);
         stage.setScene(sc);
         stage.show();

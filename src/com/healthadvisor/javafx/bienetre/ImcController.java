@@ -195,7 +195,7 @@ public class ImcController implements Initializable {
                 /*WebEngine engin = new WebEngine(getClass().getResource("/styles/videoYoutube.html").toExternalForm());*/               
                 WebView vew = new WebView();                
                 WebEngine engin = vew.getEngine();
-                engin.load(getClass().getResource("/styles/videoYoutube.html").toExternalForm());
+                engin.load(getClass().getResource("videoYoutube.html").toExternalForm());
                 this.pane.getChildren().add(vew);             
     } 
     public void imc()
@@ -458,7 +458,7 @@ public class ImcController implements Initializable {
         });
         maladiesL.addAll(this.listMaladies.getItems());
         System.out.println("index:"+regimes.indexOf(regime));
-        System.out.println(proposerRegime(allergiesElement, maladiesL, regimes));
+       // System.out.println(proposerRegime(allergiesElement, maladiesL, regimes));
         regime = regimes.get(regimes.indexOf(regime));
         for (Aliment aliment : regime.getAliments()) 
         {
@@ -503,7 +503,7 @@ public class ImcController implements Initializable {
          this.lesSports.setDisable(true);       
       } 
     }
-    public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
+   /* public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
     {
         //tout personne avec une maladies superieur a 2 ne sont pas traité uniquement le cas d'un diabetique est traité
         //tout les aliments dont la personne est allergique est filtré et sont enlevé de sa liste 
@@ -551,6 +551,6 @@ public class ImcController implements Initializable {
     
         return regime;
     }
-    
+    */
     
 }

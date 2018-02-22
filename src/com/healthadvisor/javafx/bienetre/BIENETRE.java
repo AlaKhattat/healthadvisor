@@ -28,13 +28,8 @@ public class BIENETRE extends Application {
     @Override
     public void start(Stage stage) throws Exception {
        	
-     Parent root  = FXMLLoader.load(getClass().getClassLoader().getResource("ImcView.fxml"));
-      /*  Parent root  = FXMLLoader.load(getClass().getResource("/bienetre/AjoutIMCView.fxml"));
-        Scene sc = new Scene(root);
-        stage.setScene(sc);
-        stage.show();*/
-        
-  /*      JFXDecorator decorator = new JFXDecorator(stage, root);
+     Parent root  = FXMLLoader.load(getClass().getResource("ImcView.fxml"));      
+      JFXDecorator decorator = new JFXDecorator(stage, root);
         decorator.setCustomMaximize(false);
         decorator.setBorder(Border.EMPTY);
         Scene scene = new Scene(decorator);
@@ -44,7 +39,7 @@ public class BIENETRE extends Application {
          
         stage.setScene(scene);
         stage.setIconified(false);
-        stage.show();*/
+        stage.show();
     }
    
 
@@ -52,8 +47,9 @@ public class BIENETRE extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+     
         launch(args);
+        System.out.println("TOTO");
     }
     
 }
