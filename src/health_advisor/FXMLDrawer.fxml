@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="162.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLDrawerController">
+   <children>
+      <ImageView fitHeight="173.0" fitWidth="162.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../../../../../Desktop/PI%20DEV/LOGOFinal.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="homeBtn" accessibleText="acceuil" prefHeight="46.0" prefWidth="162.0" styleClass="drawer-buttons" text="Acceuil" />
+      <JFXButton fx:id="doctorBtn" accessibleText="recherchemed" prefHeight="54.0" prefWidth="162.0" styleClass="drawer-buttons" text="Recherche Medecin" />
+      <JFXButton fx:id="appointmentBtn" accessibleText="sondage" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Sondage" />
+      <JFXButton fx:id="paymentBtn" accessibleText="evenement" prefHeight="53.0" prefWidth="162.0" styleClass="drawer-buttons" text="Evenement" />
+      <JFXButton fx:id="exitBtn" accessibleText="exitMenu" onAction="#exit" prefHeight="52.0" prefWidth="162.0" styleClass="drawer-buttons" text="Article" />
+      <JFXButton fx:id="exitBtn2" accessibleText="exitMenu" onAction="#exit" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Regime" />
+      <JFXButton fx:id="exitBtn21" accessibleText="exitMenu" onAction="#exit" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Geolocalisation" />
+      <JFXButton fx:id="exitBtn1" accessibleText="exitMenu" onAction="#exit" prefHeight="52.0" prefWidth="162.0" styleClass="drawer-buttons" text="Exit" />
+      <JFXButton prefHeight="227.0" prefWidth="152.0" styleClass="drawer-buttons" text="  " />
+   </children>
+</VBox>

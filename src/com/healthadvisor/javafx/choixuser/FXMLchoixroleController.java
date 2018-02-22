@@ -5,16 +5,25 @@
  */
 package com.healthadvisor.javafx.choixuser;
 
+import com.healthadvisor.javafx.routes.Routes;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -78,6 +87,26 @@ public class FXMLchoixroleController implements Initializable {
         ds.setBlurType(BlurType.THREE_PASS_BOX);
         medecin.setStroke(Color.BLACK);
         medecin.setEffect(ds);
+    }
+
+    @FXML
+    private void InscriPatient(MouseEvent event) throws IOException {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.InscriPatient)); 
+            Parent root=loader.load();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(root));
+            stage.show();
+           
+
+    }
+
+    @FXML
+    private void InscriMedecin(MouseEvent event) throws IOException {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.InscriMedecin)); 
+            Parent root=loader.load();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(root));
+            stage.show();
     }
     
 }
