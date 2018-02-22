@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -129,13 +130,7 @@ public class FXMLImcController implements Initializable {
     @FXML
     private Tab suivreRegime12;
     @FXML
-    private WebView videoYoutube;
-    @FXML
-    private Tab suivreRegime121;
-    @FXML
     private StackPane pane;
-    @FXML
-    private WebView videoYoutube1;
 
     public Patient getPatient() {
         return patient;
@@ -164,7 +159,7 @@ public class FXMLImcController implements Initializable {
     {
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
-                patient= new Patient("user1"," ", "fd");
+                patient= new Patient("user1","password1", "cin1");
                 GestionInfoSante g = new GestionInfoSante();
                 InfoSante info =g.afficherInfoSante(patient.getLogin()); 
                 if(info!=null)
@@ -505,7 +500,9 @@ public class FXMLImcController implements Initializable {
     }
     public  void validerRegime()
     {
+        System.out.println("jb:"+this.dureeRegime.getValue());
         Regime regime = new Regime();
+        GestionRegime gestion = new GestionRegime();
         if(this.dureeRegime.getValue().equals("le temps que sa prendra")==true)
         {
             regime.setDuree(-1);
@@ -514,13 +511,34 @@ public class FXMLImcController implements Initializable {
         {
             if(this.dureeRegime.getValue().equals("2 Semaine")==true)
             {
-                int duree = Integer.parseInt(this.dureeRegime.getValue());
-                regime.setDuree(duree);
+                try
+                {
+                    int duree = Integer.parseInt(this.dureeRegime.getValue().substring(0,1));
+                    regime.setDuree(duree);
+                }
+                catch(NumberFormatException ex)
+                {
+                    System.out.println("exection:"+ex.getMessage());
+                    System.out.println(this.dureeRegime.getValue().substring(0,1));
+                }        
+                
+                  
+                
             }
             else if(this.dureeRegime!=null)
             {
-                 int duree = Integer.parseInt(this.dureeRegime.getValue());
+                 try
+                {
+                     int duree = Integer.parseInt(this.dureeRegime.getValue().substring(0,1));
                 regime.setDuree(duree*4);
+                }
+                catch(NumberFormatException ex)
+                {
+                    System.out.println("exection:"+ex.getMessage());
+                    System.out.println(this.dureeRegime.getValue().substring(0,1));
+                }        
+             
+               
             }
         }
         regime.setId_regime(this.regimePropose.getValue());
@@ -535,6 +553,9 @@ public class FXMLImcController implements Initializable {
             listSport.add(sp);
          }
         regime.setSports(listSport);
+        Date date = new Date();
+        regime.setDate_debut(date);
+        gestion.suivreRegime(regime, patient);
        }
     }
     public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
@@ -574,6 +595,7 @@ public class FXMLImcController implements Initializable {
             {
                 regime.add(r);
             }
+            
                
        }
         
