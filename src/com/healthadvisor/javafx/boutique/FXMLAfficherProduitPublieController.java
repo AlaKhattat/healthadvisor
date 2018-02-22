@@ -1,6 +1,6 @@
 package com.healthadvisor.javafx.boutique;
 
-
+/*
 import com.healthadvisor.entities.Produit;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
@@ -405,3 +405,4 @@ result.ifPresent(usernamePassword -> {
     }
     
 }
+*/

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.healthadvisor.javafx.boutique;
+/*package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
@@ -357,3 +357,4 @@ public class FXMLAfficherProduitController implements Initializable {
     
     
 }
+*/

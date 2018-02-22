@@ -5,7 +5,7 @@
  */
 package com.healthadvisor.javafx.boutique;
 
-import com.healthadvisor.entities.Produit;
+/*import com.healthadvisor.entities.Produit;
 import static com.healthadvisor.javafx.boutique.FXMLAfficherProduitController.panier;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXTextArea;
@@ -280,3 +280,4 @@ public class FXMLAfficherPanierController implements Initializable {
     
     
 }
+*/
