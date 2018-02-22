@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane fx:id="pane" headerText="CALCUL IMC" prefHeight="545.0" prefWidth="737.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.FXMLAjoutIMCViewController">
+   <header>
+      <Label text="                                                                       CALCUL IMC" textAlignment="CENTER" />
+   </header>
+   <content>
+      <AnchorPane>
+         <children>
+            <JFXTextField fx:id="poid" focusColor="GREEN" labelFloat="true" layoutX="249.0" layoutY="128.0" onKeyReleased="#validerPoid" prefHeight="31.0" prefWidth="470.0" promptText="Saisissez votre poids en Kg" unFocusColor="BLACK">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="taille" focusColor="GREEN" labelFloat="true" layoutX="246.0" layoutY="198.0" onKeyReleased="#validerTaille" prefHeight="31.0" prefWidth="471.0" promptText="Votre taille en cm" unFocusColor="BLACK">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="sexe" layoutX="250.0" layoutY="262.0" prefHeight="39.0" prefWidth="464.0" promptText="SEXE" visibleRowCount="2" />
+            <JFXTextField fx:id="age" focusColor="GREEN" labelFloat="true" layoutX="246.0" layoutY="345.0" onKeyReleased="#validerAge" prefHeight="31.0" prefWidth="471.0" promptText="Saisissez votre age" unFocusColor="BLACK">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton fx:id="calculIMC" buttonType="RAISED" layoutX="244.0" layoutY="425.0" onMouseClicked="#calculerIMC" ripplerFill="#05ff05" style="-fx-background-color: green;" text="Calculer IMC">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXSpinner fx:id="spin" layoutX="345.0" layoutY="424.0" prefHeight="24.0" prefWidth="16.0" />
+         </children>
+      </AnchorPane>
+   </content>
+   <graphic>
+      <Label text="Label" />
+   </graphic>
+</DialogPane>

@@ -1,7 +1,7 @@
 
 package com.healthadvisor.javafx.boutique;
 
-
+/*
 import com.healthadvisor.entities.Produit;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXTextField;
@@ -231,3 +231,4 @@ public class FXMLProduitController implements Initializable {
     
     
 }
+*/

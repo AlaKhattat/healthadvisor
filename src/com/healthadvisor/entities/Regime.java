@@ -32,7 +32,10 @@ public class Regime
         this.id_regime = "";
         this.aliments = new ArrayList<>();
         this.sports = new ArrayList<>();
+        this.duree = 0;
     }
+
+   
     public Regime(String id_regime, List<Aliment> aliments,Type_Regime type ,Date date_debut, Date date_fin) 
     {
         this.id_regime = id_regime;
@@ -126,6 +129,13 @@ public class Regime
     {
         this.description = description;
     }
+     public int getDuree() {
+        return duree;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
     public boolean verifierFinRegimeDate()
     {
         if(date_fin.compareTo(date_debut)< 0)
@@ -188,7 +198,7 @@ public class Regime
     {
         return sports;
     }
-
+    
     public void setSports(List<Sport> sports) 
     {
         this.sports = sports;

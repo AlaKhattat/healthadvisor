@@ -22,7 +22,7 @@ public class MyDB
   static MyDB instance;
     private MyDB()
     {
-        this.url="jdbc:mysql://localhost/health_advisor";
+        this.url="jdbc:mysql://localhost/health advisor";
         this.user="root";
         this.pwd="";
         
