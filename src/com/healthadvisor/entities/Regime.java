@@ -212,6 +212,15 @@ public class Regime
      }
      return ch;
    }
+     public String totalDesSport()
+   {
+       String ch = "";
+       for(int i = 0; i < sports.size(); i++)
+       {
+         ch+=sports.get(i).getNom_sport()+" ";
+       }
+       return ch;
+   }
     public String splitDescription(String ch)
     {
         String total="";

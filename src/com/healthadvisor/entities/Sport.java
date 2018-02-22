@@ -89,6 +89,7 @@ public class Sport
      }
      return ch;
    }
+  
   public  static ArrayList<Type_Exercice> explodeSport(String liste_exercice)
   {
      ArrayList<Type_Exercice> exercices = new ArrayList<>();
