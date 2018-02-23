@@ -162,6 +162,7 @@ public class FXMLImcController implements Initializable {
                 this.box.getChildren().add(indicator);
                 patient=  new Patient(FXMLLoginController.pseudo,"", "");
                 GestionInfoSante g = new GestionInfoSante();
+                System.out.println("patient est la :"+patient);
                 InfoSante info =g.afficherInfoSante(patient.getLogin()); 
                 if(info!=null)
                 {
@@ -211,6 +212,10 @@ public class FXMLImcController implements Initializable {
     {
        
         FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
+        if(patient.getLogin()==null)
+        {
+            patient = new Patient(FXMLLoginController.pseudo,"","");
+        }
         FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
         
@@ -248,6 +253,10 @@ public class FXMLImcController implements Initializable {
     {
         Timer time2 = new Timer(true);
         GestionInfoSante ginfo = new GestionInfoSante();
+          if(patient.getLogin()==null)
+          {
+            patient = new Patient(FXMLLoginController.pseudo,"","");
+          }
          InfoSante info = ginfo.afficherInfoSante(patient.getLogin()); 
         time2.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -521,25 +530,20 @@ public class FXMLImcController implements Initializable {
                 {
                     System.out.println("exection:"+ex.getMessage());
                     System.out.println(this.dureeRegime.getValue().substring(0,1));
-                }        
-                
-                  
-                
+                }                                                       
             }
             else if(this.dureeRegime!=null)
             {
-                 try
+                try
                 {
                      int duree = Integer.parseInt(this.dureeRegime.getValue().substring(0,1));
-                regime.setDuree(duree*4);
+                     regime.setDuree(duree*4);
                 }
                 catch(NumberFormatException ex)
                 {
                     System.out.println("exection:"+ex.getMessage());
                     System.out.println(this.dureeRegime.getValue().substring(0,1));
-                }        
-             
-               
+                }                                
             }
         }
         regime.setId_regime(this.regimePropose.getValue());

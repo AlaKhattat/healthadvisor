@@ -372,7 +372,7 @@
                                  <content>
                                     <AnchorPane prefHeight="413.0" prefWidth="1057.0" styleClass="card-unpadded">
                                        <children>
-                                          <VBox layoutX="10.0" layoutY="18.0" prefHeight="16.0" prefWidth="1092.0">
+                                          <VBox layoutX="10.0" layoutY="28.0" prefHeight="30.0" prefWidth="1092.0">
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="1092.0">
                                                    <VBox.margin>
