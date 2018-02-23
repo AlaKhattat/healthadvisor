@@ -11,6 +11,7 @@ import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
 import com.healthadvisor.enumeration.Type_Aliment;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionInfoSante;
 import com.healthadvisor.service.impl.GestionRegime;
 import com.jfoenix.controls.JFXCheckBox;
@@ -159,7 +160,7 @@ public class FXMLImcController implements Initializable {
     {
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
-                patient= new Patient("user1","password1", "cin1");
+                patient=  new Patient(FXMLLoginController.pseudo,"", "");
                 GestionInfoSante g = new GestionInfoSante();
                 InfoSante info =g.afficherInfoSante(patient.getLogin()); 
                 if(info!=null)

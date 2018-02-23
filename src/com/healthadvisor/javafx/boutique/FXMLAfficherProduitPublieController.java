@@ -1,7 +1,8 @@
 package com.healthadvisor.javafx.boutique;
 
-/*
+
 import com.healthadvisor.entities.Produit;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -72,12 +73,12 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     GridPane g;
     ScrollPane s;
     private String url_image;
-    private static String id_user="50"; //la variable de session (de la table de khattout)
+   // private static String id_user="50"; //la variable de session (de la table de khattout)
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ServiceProduit sp=new ServiceProduit();
-        List<Produit> lst_P=sp.ListProduits_User(id_user);
+        List<Produit> lst_P=sp.ListProduits_User(FXMLLoginController.pseudo);
         Configurer_GridScroll(grid,scroll);
         for(int i=0;i<lst_P.size();i++)
             {
@@ -405,4 +406,3 @@ result.ifPresent(usernamePassword -> {
     }
     
 }
-*/

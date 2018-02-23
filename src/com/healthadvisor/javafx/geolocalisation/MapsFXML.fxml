@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="533.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.geolocalisation.MapsFXMLController">
+   <children>
+      <StackPane fx:id="stackPane" layoutX="142.0" layoutY="91.0" prefHeight="390.0" prefWidth="581.0" />
+      <TextField fx:id="seachPlacestxt" layoutX="142.0" layoutY="66.0" onKeyPressed="#SearchPlaceskeyPressed" prefHeight="25.0" prefWidth="277.0">
+         <contextMenu>
+            <ContextMenu fx:id="contextMenu">
+              <items>
+                <MenuItem fx:id="menuItem" mnemonicParsing="false" onMenuValidation="#menuvalidationAction" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+         </contextMenu></TextField>
+      <RadioButton fx:id="RdBtnPharmacie" layoutX="142.0" layoutY="39.0" mnemonicParsing="false" selected="true" text="Pharmacie">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleGrp" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="RdBtnHopital" layoutX="221.0" layoutY="39.0" mnemonicParsing="false" text="Hopital/Clinique" toggleGroup="$toggleGrp" />
+      <RadioButton fx:id="RdBtnDocteur" layoutX="332.0" layoutY="39.0" mnemonicParsing="false" text="Docteur" toggleGroup="$toggleGrp" />
+      <RadioButton fx:id="RdBtnPhysio" layoutX="404.0" layoutY="39.0" mnemonicParsing="false" text="Physiothérapeute" toggleGroup="$toggleGrp" />
+      <RadioButton fx:id="RdBtnGym" layoutX="526.0" layoutY="39.0" mnemonicParsing="false" text="Salle de sport" toggleGroup="$toggleGrp" />
+      <RadioButton fx:id="RdBtnSpa" layoutX="629.0" layoutY="39.0" mnemonicParsing="false" text="Spa" toggleGroup="$toggleGrp" />
+      <Button fx:id="btnClear" layoutX="723.0" layoutY="66.0" mnemonicParsing="false" onAction="#onBtnClearAction" text="Clear Map" />
+   </children>
+</AnchorPane>

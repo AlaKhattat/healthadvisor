@@ -1,7 +1,7 @@
 package com.healthadvisor.javafx.boutique;
 
 
-/*import com.healthadvisor.entities.Produit;
+import com.healthadvisor.entities.Produit;
 import com.healthadvisor.service.impl.ServiceProduit;
 import java.net.URL;
 import java.util.Date;
@@ -90,4 +90,4 @@ public class FXMLGererProduit_AdminController implements Initializable {
     }
     
 }
-*/
+

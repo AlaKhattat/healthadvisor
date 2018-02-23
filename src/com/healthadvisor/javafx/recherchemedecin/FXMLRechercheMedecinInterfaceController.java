@@ -5,15 +5,24 @@
  */
 package com.healthadvisor.javafx.recherchemedecin;
 
+import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
+import com.healthadvisor.javafx.routes.Routes;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -30,7 +39,8 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     private JFXTextField adresse2;
     @FXML
     private JFXTextField recherche;
-
+    
+    public static String spec;
     /**
      * Initializes the controller class.
      */
@@ -97,5 +107,25 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
         specialite.setItems(sl);
         new ComboBoxAutoComplete<String>(specialite);
     }    
+
+    @FXML
+    private void rdvSpecialite(MouseEvent event) {
+        spec=this.specialite.getValue();
+        try {
+         
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.AFFICHERMEDECIN)); 
+            Parent root=loader.load();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+    }
+    
+    
+    
     
 }

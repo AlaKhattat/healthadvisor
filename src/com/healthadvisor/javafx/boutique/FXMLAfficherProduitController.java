@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package com.healthadvisor.javafx.boutique;
+package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import static com.healthadvisor.javafx.login_fx.FXMLLoginController.panier;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.FileInputStream;
@@ -98,7 +99,7 @@ public class FXMLAfficherProduitController implements Initializable {
     private GridPane   grid=new GridPane();
     GridPane g;
     ScrollPane s;
-    public static ArrayList<ArrayList> panier=new ArrayList<>();
+   
     @FXML
     private Button btn_passer;
     @FXML
@@ -363,4 +364,3 @@ public class FXMLAfficherProduitController implements Initializable {
     
     
 }
-*/

@@ -7,6 +7,7 @@ package com.healthadvisor.javafx.bienetre;
 
 import com.healthadvisor.entities.InfoSante;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionInfoSante;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -96,6 +97,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
         IMC = 0;
         
         patient = new Patient("user1", "password", "to");
+        patient = new Patient(FXMLLoginController.pseudo,"password","to");
         remplirChamp(patient);
     }
 
@@ -181,7 +183,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
         InfoSante info = new InfoSante(tailleL, poidL, sexeL, loginL, ageL);
         GestionInfoSante ginfo = new GestionInfoSante();
         InfoSante info2 = ginfo.afficherInfoSante(loginL);
-                 if(info2!=null)
+                 if(info2.getPoids() >0)
                  {
                       ginfo.modifierInfoSante(info);   
                  }
