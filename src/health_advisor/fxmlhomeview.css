@@ -1,4 +1,22 @@
 .anchor {
-    -fx-background-image:url("11425.jpg");
+    -fx-background-image:url("1234.png");
 }
 
+/*Tool bar and its components*/
+.jfx-toolbar{
+    -fx-background-color: #5077ff;
+    -fx-min-height:40;
+}
+.toolbar-label{
+    -fx-background-color: transparent;
+    -fx-font-size: 20.0px;
+    -fx-padding: 5 0 5 0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold; 
+}
+
+.jfx-hamburger{
+    -fx-spacing: 4;
+    -fx-cursor: hand;
+    -fx-padding: 3px;
+}

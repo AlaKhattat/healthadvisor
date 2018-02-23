@@ -5,9 +5,11 @@
  */
 package com.healthadvisor.javafx.login_fx;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.routes.Routes;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
@@ -16,6 +18,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
@@ -88,8 +91,11 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private JFXTextField numtel;
     GestionPatient gp=new GestionPatient();
+    GestionMedecin gm=new GestionMedecin();
     public static String pseudo;
     public static String Identifiant;
+    public static boolean docteur=false;
+
                 public static ArrayList<ArrayList> panier;
 
     /**
@@ -120,9 +126,19 @@ public class FXMLLoginController implements Initializable {
         pseudo=usernamesigin;
         String password=this.passwordsiginin.getText();
         Patient p= gp.AfficherPatientLogin(pseudo);
+        Identifiant=p.getCin_user();
         if(p!=null){
+            Identifiant=p.getCin_user();
             if (p.getPassword().equalsIgnoreCase(password)) {
             panier=new ArrayList<>();
+            try{
+            Medecin m=gm.AfficherMedecinLogin(pseudo);
+            if(m.getLogin_med()!=null){
+               docteur=true;
+            }
+            }catch(NullPointerException e){
+                e.getMessage();
+            }
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.RechercheMedecin)); 
             Parent root=loader.load();
             Stage stage = new Stage(StageStyle.DECORATED);

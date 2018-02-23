@@ -45,6 +45,10 @@ public class FXMLDrawerController implements Initializable {
     private JFXButton article;
     @FXML
     private JFXButton evenement;
+    @FXML
+    private JFXButton gererutilisateur;
+    @FXML
+    private JFXButton suivierdv;
 
     /**
      * Initializes the controller class.
@@ -82,6 +86,14 @@ public class FXMLDrawerController implements Initializable {
 
     @FXML
     private void evenementAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void gererutilisateurAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void suivierdvAction(MouseEvent event) {
     }
     
 }

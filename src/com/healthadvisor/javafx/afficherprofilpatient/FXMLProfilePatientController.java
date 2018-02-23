@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.afficherprofilpatient;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
@@ -74,7 +75,7 @@ public class FXMLProfilePatientController implements Initializable {
         ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
         sexe.setItems(sl); 
         GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=gu.AfficherUtilisateurCin("11111111");
+        Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
         GestionPatient gp=new GestionPatient();
         Patient p=gp.AfficherPatientCin(u.getCin());
         
@@ -130,7 +131,7 @@ String str = sb.toString();
  int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur("11111111", nom, prenom, email, date, sexe, pays, ville,num);
+        Utilisateur u=new Utilisateur(FXMLLoginController.Identifiant, nom, prenom, email, date, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
         Patient p=new Patient(login, password, u.getCin());

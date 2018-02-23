@@ -4,27 +4,78 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="162.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLDrawerController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="162.0" styleClass="card-unpadded" stylesheets="@fxmldrawer.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLDrawerController">
    <children>
       <ImageView fitHeight="173.0" fitWidth="162.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../../../../../Desktop/PI%20DEV/LOGOFinal.png" />
+            <Image url="@LOFO.jpg" />
          </image>
       </ImageView>
-      <JFXButton fx:id="homeBtn" accessibleText="acceuil" prefHeight="46.0" prefWidth="162.0" styleClass="drawer-buttons" text="Acceuil" />
-      <JFXButton fx:id="doctorBtn" accessibleText="recherchemed" prefHeight="54.0" prefWidth="162.0" styleClass="drawer-buttons" text="Recherche Medecin" />
-      <JFXButton fx:id="appointmentBtn" accessibleText="sign" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="SignIn/up" />
-      <JFXButton fx:id="paymentBtn" accessibleText="evenement" prefHeight="53.0" prefWidth="162.0" styleClass="drawer-buttons" text="Evenement" />
-      <JFXButton accessibleText="boutique" prefHeight="52.0" prefWidth="162.0" styleClass="drawer-buttons" text="Boutique" />
-      <JFXButton fx:id="exitBtn2" accessibleText="symptome" onAction="#exit" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Analyse Symptomes" />
-      <JFXButton fx:id="geolocalisation" accessibleText="geolocalisation" onMouseClicked="#btnGeolocalAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Geolocalisation" />
-      <JFXButton fx:id="questionreponse" accessibleText="questionreponse" onMouseClicked="#questionreponseAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Question &amp; Reponse" />
-      <JFXButton fx:id="sondage" accessibleText="sondage" onMouseClicked="#sondageAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Sondage" />
-      <JFXButton fx:id="bienetre" accessibleText="bienetre" onMouseClicked="#bienetreAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Bien Etre" />
-      <JFXButton fx:id="article" accessibleText="article" onMouseClicked="#articleAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Article" />
-      <JFXButton fx:id="evenement" accessibleText="evenement" onMouseClicked="#evenementAction" prefHeight="55.0" prefWidth="162.0" styleClass="drawer-buttons" text="Evenement" />
-      <JFXButton fx:id="exitBtn1" accessibleText="exitMenu" onAction="#exit" prefHeight="52.0" prefWidth="162.0" styleClass="drawer-buttons" text="Exit" />
-      <JFXButton prefHeight="227.0" prefWidth="152.0" styleClass="drawer-buttons" text="  " />
+      <JFXButton fx:id="homeBtn" accessibleText="acceuil" prefHeight="61.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Acceuil">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="doctorBtn" accessibleText="recherchemed" prefHeight="61.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Recherche Medecin">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="appointmentBtn" accessibleText="sign" prefHeight="70.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="SignIn/up">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="paymentBtn" accessibleText="evenement" prefHeight="67.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Evenement">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton accessibleText="boutique" prefHeight="63.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Boutique">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="exitBtn2" accessibleText="symptome" onAction="#exit" prefHeight="71.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Analyse Symptomes">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="geolocalisation" accessibleText="geolocalisation" onMouseClicked="#btnGeolocalAction" prefHeight="74.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Geolocalisation">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="questionreponse" accessibleText="questionreponse" onMouseClicked="#questionreponseAction" prefHeight="67.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Question &amp; Reponse">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="sondage" accessibleText="sondage" onMouseClicked="#sondageAction" prefHeight="71.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Sondage">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="bienetre" accessibleText="bienetre" onMouseClicked="#bienetreAction" prefHeight="69.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Bien Etre">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="article" accessibleText="article" onMouseClicked="#articleAction" prefHeight="64.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Article">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="evenement" accessibleText="evenement" onMouseClicked="#evenementAction" prefHeight="74.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Evenement">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="gererutilisateur" accessibleText="gererutilisateur" onMouseClicked="#gererutilisateurAction" prefHeight="74.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Gerer Utilisateur">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="suivierdv" accessibleText="suivierdv" onMouseClicked="#suivierdvAction" prefHeight="74.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Suivie RDV Medecin">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="exitBtn1" accessibleText="exitMenu" onAction="#exit" prefHeight="52.0" prefWidth="162.0" styleClass="drawer-buttons" stylesheets="@fxmldrawer.css" text="Quitter">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></JFXButton>
    </children>
 </VBox>

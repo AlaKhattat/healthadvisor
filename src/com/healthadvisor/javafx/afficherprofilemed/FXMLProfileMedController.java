@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
@@ -140,7 +141,8 @@ public class FXMLProfileMedController implements Initializable {
         new ComboBoxAutoComplete<String>(specialite);
         
         GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=gu.AfficherUtilisateurCin("10002563");
+        Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
+        System.out.println("Utilisateur"+u);
         GestionPatient gp=new GestionPatient();
         Patient p=gp.AfficherPatientCin(u.getCin());
         GestionMedecin gm=new GestionMedecin();
@@ -212,7 +214,7 @@ public class FXMLProfileMedController implements Initializable {
          int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur("10002563", nom, prenom, email, date, sexe, pays, ville,num);
+        Utilisateur u=new Utilisateur(FXMLLoginController.Identifiant, nom, prenom, email, date, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
         Patient p=new Patient(login, password, u.getCin());

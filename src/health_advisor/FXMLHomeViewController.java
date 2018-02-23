@@ -5,7 +5,9 @@
  */
 package health_advisor;
 
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javafx.routes.Routes;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -22,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -39,15 +42,19 @@ public class FXMLHomeViewController implements Initializable {
     private AnchorPane holderPane;
     @FXML
     private JFXDrawer drawer;
-
+    @FXML
+    private JFXButton Signin;
+    @FXML
+    private JFXButton Signout;
+    @FXML
+    private JFXButton profile;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-         
-   HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
+     
+        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
             transition.setRate(transition.getRate() * -1);
@@ -72,10 +79,13 @@ public class FXMLHomeViewController implements Initializable {
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
+            StackPane GererUtil = FXMLLoader.load(getClass().getResource(Routes.GererUtilisateur));
+            AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
             ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+       
 
-            setNode(acceuil);
+            setNode(recherche);
             drawer.setSidePane(sidePane);
             ScrollPane ss=new ScrollPane();
             ss.setContent(sidePane);
@@ -127,7 +137,15 @@ public class FXMLHomeViewController implements Initializable {
                             case "article":
                                 drawer.close();                                
                                 setNode(Article);
-                                break;                                   
+                                break; 
+                            case "gererutilisateur":
+                                drawer.close();                                
+                                setNode(GererUtil);
+                                break;
+                            case "suivierdv":
+                                drawer.close();                                
+                                setNode(SuivieRDV);
+                                break;                                  
                         }
                     });
                 }
@@ -141,9 +159,34 @@ public class FXMLHomeViewController implements Initializable {
     }
 
     private void setNode(Node node) {
-        holderPane.getChildren().clear();
-        
+        holderPane.getChildren().clear();        
         holderPane.getChildren().add((Node) node);
     } 
+
+    @FXML
+    private void SigninAction(MouseEvent event) throws IOException {
+    AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+    setNode(login);
+    }
+
+    @FXML
+    private void SignoutAction(MouseEvent event) throws IOException {
+        FXMLLoginController.pseudo=null;
+        FXMLLoginController.Identifiant=null;
+        AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        setNode(login);
+    }
+
+    @FXML
+    private void profileAction(MouseEvent event) throws IOException {
+        if(FXMLLoginController.docteur==true){
+                AnchorPane ProfileMedecin = FXMLLoader.load(getClass().getResource(Routes.PROFILEMEDECIN));
+                setNode(ProfileMedecin);
+        }else{
+                 AnchorPane ProfilePatient = FXMLLoader.load(getClass().getResource(Routes.PROFILEPATIENT));
+                setNode(ProfilePatient);
+
+        }
+    }
     
 }
