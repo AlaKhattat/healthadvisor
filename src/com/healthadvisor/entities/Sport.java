@@ -7,6 +7,7 @@ package com.healthadvisor.entities;
 
 import com.healthadvisor.enumeration.Type_Exercice;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -100,5 +101,11 @@ public class Sport
      }
      return exercices;
   }
-   
+   public static ArrayList<String> explodePipeSport(String liste_exercie)
+   {
+       ArrayList<String>exercices = new ArrayList<>();
+       String[] list = liste_exercie.split("\\|");
+       exercices.addAll(Arrays.asList(list));
+       return exercices;
+   }
 }

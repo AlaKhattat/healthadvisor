@@ -5,11 +5,13 @@
  */
 package com.healthadvisor.javafx.bienetre;
 
+import com.healthadvisor.entities.Sport;
 import com.jfoenix.controls.JFXDecorator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -50,8 +52,9 @@ public class BIENETRE extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-     
+       
         launch(args);
+        
         System.out.println("TOTO");
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date dt = new Date();

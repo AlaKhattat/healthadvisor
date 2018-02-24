@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.bienetre;
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.InfoSante;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.ProgrammeRegime;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
 import com.healthadvisor.enumeration.Type_Aliment;
@@ -20,6 +21,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -108,8 +110,6 @@ public class FXMLImcController implements Initializable {
     @FXML
     private JFXTabPane tabRegime;
     @FXML
-    private Tab suivreRegime1;
-    @FXML
     private Tab suivreRegime11;
     @FXML
     private JFXRadioButton siSport;
@@ -129,7 +129,14 @@ public class FXMLImcController implements Initializable {
     @FXML
     private VBox lesSports;
     @FXML
-    private Tab suivreRegime12;
+    private Tab suivreRegime1;
+    @FXML
+    private JFXTextArea regimeDujour;
+    @FXML
+    private JFXComboBox<?> sportUser;
+    @FXML
+    private Tab suivreRegime121;
+ 
     @FXML
     private StackPane pane;
 
@@ -137,7 +144,11 @@ public class FXMLImcController implements Initializable {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+      @FXML
+    private Tab suivreRegime12;
+    @FXML
+    private Tab calorieCounter;
+ public void setPatient(Patient patient) {
         this.patient = patient;
     }
     
@@ -158,6 +169,7 @@ public class FXMLImcController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+               
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
                 patient=  new Patient(FXMLLoginController.pseudo,"", "");
@@ -177,6 +189,7 @@ public class FXMLImcController implements Initializable {
                              }
                       }, 3600);
                 }
+               
                 KiloValidator kilo = new KiloValidator();
                 kilo.setMessage("veullez  saisir un poid correct");
                 this.poidRegime.getValidators().add(kilo);                
@@ -450,6 +463,7 @@ public class FXMLImcController implements Initializable {
         regime.setId_regime(this.regimePropose.getValue());
         GestionRegime greg = new GestionRegime();
         regime = greg.rechercherRegime(regime);
+      
         this.infoRegime.setText(regime.splitDescription(regime.getDescription()));
         List<Regime> regimes = greg.afficherRegime();
        // proposerRegime(this.allergies.getChildren(), Maladies, regimes)
@@ -508,6 +522,7 @@ public class FXMLImcController implements Initializable {
          this.lesSports.setDisable(true);       
       } 
     }
+    @FXML
     public  void validerRegime()
     {
         System.out.println("jb:"+this.dureeRegime.getValue());
@@ -554,7 +569,14 @@ public class FXMLImcController implements Initializable {
          {
             JFXCheckBox sport =(JFXCheckBox) this.lesSports.getChildren().get(i);
             Sport sp = new Sport();
-            sp.setNom_sport(sport.getText());
+            if(i==0)
+            {
+                sp.setNom_sport(sport.getText());
+            }
+            else
+            {
+                 sp.setNom_sport("|"+sport.getText());
+            }
             listSport.add(sp);
          }
         regime.setSports(listSport);
@@ -602,11 +624,14 @@ public class FXMLImcController implements Initializable {
             }
             
                
-       }
-        
-    
+       }   
         return regime;
     }
-    
+    public void regimeDuJour()
+    {
+        GestionRegime greg = new GestionRegime();
+        List<Regime> regimes = greg.afficherRegime();
+        //regime = regimes.get(regimes.indexOf(regime));
+    }
     
 }

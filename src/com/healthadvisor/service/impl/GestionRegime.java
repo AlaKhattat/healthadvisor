@@ -241,5 +241,6 @@ public class GestionRegime implements IGestionRegime
           }
           return r; 
     }
+    
          
 }
