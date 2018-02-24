@@ -112,6 +112,21 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setOnMouseClicked((event) -> {
+            med=m;
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
