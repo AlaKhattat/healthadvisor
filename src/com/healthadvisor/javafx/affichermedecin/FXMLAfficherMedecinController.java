@@ -243,7 +243,7 @@ else
     @Override
     public void mapInitialized() {
   
-        System.out.println("Inisialisation MAP ...");
+        System.out.println("Initialisation MAP ...");
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
         
@@ -270,10 +270,8 @@ else
         map.addMarker( medecinMarker );
         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
         Utilisateur u=gu.AfficherUtilisateurCin(medecin.getCin_user());
-            System.out.println(u);
-        infoWindowOptions.content("<h2>"+u.getNom()+" "+u.getPrenom()+"</h2>"
-                                + "Current Location: "+medecin.getAdresse()+"<br>"
-                                 );
+         System.out.println(u);
+         infoWindowOptions.content("<div style='float:left;height:70px;width:70px'><img src='https://image.flaticon.com/icons/svg/607/607414.svg'></div><div style='float:right; padding: 10px;'><b> Dr"+u.getNom()+" "+u.getPrenom()+"</b><br/>"+medecin.getAdresse()+"<br/> "+medecin.getPays()+","+u.getVille()+"</div>" );  
 
         InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
         fredWilkeInfoWindow.open(map, medecinMarker);

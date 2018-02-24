@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import gmapsfx.GoogleMapView?>
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -8,6 +7,5 @@
     <children>
       <GoogleMapView fx:id="mapView" layoutX="7.0" layoutY="61.0" prefHeight="563.0" prefWidth="758.0" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <JFXButton fx:id="validerPosition" layoutX="195.0" layoutY="7.0" onMouseClicked="#validerPositionAction" prefHeight="36.0" prefWidth="115.0" text="Valider Position" />
     </children>
 </AnchorPane>
