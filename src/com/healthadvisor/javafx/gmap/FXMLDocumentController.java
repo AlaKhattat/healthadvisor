@@ -72,8 +72,8 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
 
     @Override
     public void mapInitialized() {
-      //modifier FXMLLoginController.Identifiant
-            Utilisateur u=gu.AfficherUtilisateurCin("2222224");
+      //modifier 
+            Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
            
 
         
@@ -99,11 +99,10 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
         
          InfoWindowOptions infoWindowOption = new InfoWindowOptions();
-         infoWindowOption.content("<img src=\"/com/healthadvisor/ressources/checked.png\">"
-                 + "<h2>Dr "+u.getNom()+" "+u.getPrenom()+"</h2>"
-                                );  
+         infoWindowOption.content("<div style='float:left;height:70px;width:70px'><img src='https://image.flaticon.com/icons/svg/607/607414.svg'></div><div style='float:right; padding: 10px;'><b> Dr"+u.getNom()+" "+u.getPrenom()+"</b></div>" );  
+  
 
-        InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
+            InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
             map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
             
             map.clearMarkers();
