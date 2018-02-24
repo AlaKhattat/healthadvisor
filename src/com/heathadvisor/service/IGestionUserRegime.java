@@ -5,7 +5,8 @@
  */
 package com.heathadvisor.service;
 
-import com.healthadvisor.entities.UserRegime;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.ProgrammeRegime;
 
 /**
  *
@@ -13,5 +14,7 @@ import com.healthadvisor.entities.UserRegime;
  */
 public interface IGestionUserRegime 
 {
-    public UserRegime rechercherUserRegime(int id_user);
+    public ProgrammeRegime rechercherUserRegime(Patient p);
+    public void  ajouterProgrammeRegime(Patient p,ProgrammeRegime programme);
+    public void modifierProgrammeRegime(Patient p,ProgrammeRegime programme);
 }

@@ -7,6 +7,8 @@ package com.healthadvisor.entities;
 
 import com.healthadvisor.enumeration.Type_Aliment;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +22,26 @@ import java.util.TreeMap;
 public class ProgrammeRegime 
 {
   private Regime regime;
-
-    public ProgrammeRegime(Regime regime) {
+  private String nomRegime;
+  private List<String> alimentJour;
+  private List<String> Sport;
+  private Date dateJour;
+  
+    public ProgrammeRegime(Regime regime) 
+    {
         this.regime = regime;
+        this.nomRegime = "";
+        this.alimentJour = new ArrayList<>();
+        this.dateJour = new Date();
     }
 
+    public ProgrammeRegime() 
+    {
+      regime = new Regime();
+      this.nomRegime = "";
+      this.alimentJour = new ArrayList<>();
+      this.dateJour = new Date();
+    }
     public Regime getRegime() {
         return regime;
     }
@@ -33,9 +50,59 @@ public class ProgrammeRegime
         this.regime = regime;
     }
 
-    public ProgrammeRegime() 
+    public String getNomRegime() {
+        return nomRegime;
+    }
+
+    public void setNomRegime(String nomRegime) {
+        this.nomRegime = nomRegime;
+    }
+
+    public List<String> getAlimentJour() {
+        return alimentJour;
+    }
+
+    public void setAlimentJour(List<String> alimentJour) {
+        this.alimentJour = alimentJour;
+    }
+
+    public Date getDateJour() {
+        return dateJour;
+    }
+
+    public void setDateJour(Date dateJour) {
+        this.dateJour = dateJour;
+    }
+
+    public List<String> getSport() {
+        return Sport;
+    }
+
+    public void setSport(List<String> Sport) {
+        this.Sport = Sport;
+    }
+    
+    @Override
+    public String toString() {
+        return "ProgrammeRegime{" + "regime=" + regime + ", nomRegime=" + nomRegime + ", alimentJour=" + alimentJour + ", dateJour=" + dateJour + '}';
+    }
+    
+    public static List<String>ExplodeNomAliment(String listaliment)
     {
-      regime = new Regime();
+        List<String>tab = new ArrayList<>();
+        if(listaliment!=null)
+        {
+          String[] list = listaliment.split("\\s");
+          tab.addAll(Arrays.asList(list));   
+        }
+        
+        return tab;
+    }
+    public String totalNomAliment()
+    {
+        String ch="";
+        ch = this.alimentJour.stream().map((i) -> i+" ").reduce(ch, String::concat);
+        return ch;
     }
     
   public Map<Type_Aliment,List<Aliment>> grouperParAliment(Regime regime)
@@ -67,7 +134,7 @@ public class ProgrammeRegime
        Map<Aliment,Integer> tab=new HashMap<>();  
        return tab;
    }
-   public Map<Integer,List<Aliment>> microNutrition(Regime re)
+   public Map<Integer,List<Aliment>> regimeDissocie(Regime re)
    {     
      Map<Integer,List<Aliment>> tab = new TreeMap<>();
      Map<Type_Aliment,List<Aliment>> list = grouperParAliment(re);

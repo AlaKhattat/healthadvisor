@@ -7,6 +7,7 @@ package com.healthadvisor.entities;
 
 import com.healthadvisor.enumeration.Type_Aliment;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -94,6 +95,15 @@ public class Aliment
          ch+=type_aliment.get(i).toString()+" ";
      }
      return ch;
+  }
+  public List<String> totalNomAliment(List<Aliment>aliments)
+  {
+      List<String> ch=new ArrayList<>();
+      for(Aliment a: aliments)
+      {
+          ch.add(a.nom_aliment);
+      }
+      return ch;
   }
   public  static ArrayList<Type_Aliment> explodeAliment(String listaliment)
   {

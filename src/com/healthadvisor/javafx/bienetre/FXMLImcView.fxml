@@ -9,7 +9,6 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -122,7 +121,7 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <AnchorPane prefHeight="105.0" prefWidth="307.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
+                              <AnchorPane onMouseClicked="#regimeDuJour" prefHeight="105.0" prefWidth="307.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
                                  <children>
                                     <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
                                     <ImageView fitHeight="63.0" fitWidth="97.0" layoutX="33.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
@@ -421,7 +420,7 @@
                                              </padding>
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="437.0" text="Programme du jour" />
-                                                <JFXTextArea fx:id="regimeDujour" prefHeight="217.0" prefWidth="443.0" />
+                                                <JFXListView fx:id="regimeDujour" />
                                              </children>
                                           </VBox>
                                           <VBox layoutX="605.0" layoutY="91.0" prefHeight="302.0" prefWidth="431.0" spacing="15.0">
@@ -429,7 +428,7 @@
                                                 <Insets left="20.0" top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
                                                 <StackPane fx:id="pane" prefHeight="223.0" prefWidth="434.0" />
                                              </children>
                                           </VBox>
