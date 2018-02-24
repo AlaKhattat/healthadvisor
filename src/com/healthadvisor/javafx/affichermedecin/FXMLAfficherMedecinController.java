@@ -91,9 +91,10 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
   
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
-if(FXMLRechercheMedecinInterfaceController.spec==null)
+if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
-else
+    }
+else{
     p.setContent(createPageSpécialite(specialite));
 
     anchor.getChildren().addAll(p,mapView);
@@ -103,9 +104,9 @@ else
     stage.setTitle("List Medecin");
     stage.show();
     }
+    }
     
-        
-    public void initializePageNOM(String nom){
+        public void initializePageNOM(String nomprenom){
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
         mapView.setLayoutX(618);
@@ -120,7 +121,8 @@ else
 if(FXMLRechercheMedecinInterfaceController.nom==null)
     p.setContent(createPage());
 else
-    p.setContent(createPageNom(nom));
+    p.setContent(createPageNom(nomprenom));
+
 
     anchor.getChildren().addAll(p,mapView);
     Stage stage = new Stage(StageStyle.DECORATED);
@@ -143,6 +145,22 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setUserData(m);
+        prdv.setOnMouseClicked((event) -> {
+            med=(Medecin)prdv.getUserData();
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
@@ -207,8 +225,9 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
-            med=m;
+            med=(Medecin)prdv.getUserData();
             
             try {
                 Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
@@ -236,6 +255,7 @@ else
         p.setPrefHeight(49);
         p.setLayoutX(0);
         p.setLayoutY(192);
+        p.getChildren().add(position);
         p.getChildren().add(prdv);
         p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
@@ -320,8 +340,8 @@ else
     }
     
       
-  public VBox createPageNom(String nomprenom) {
-    VBox box = new VBox();
+  public VBox createPageNom(String nomprenom) {    
+        VBox box = new VBox();
         GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSnomprenom(nomprenom)){
        
@@ -334,8 +354,9 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
-            med=m;
+            med=(Medecin)prdv.getUserData();
             
             try {
                 Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
@@ -363,6 +384,7 @@ else
         p.setPrefHeight(49);
         p.setLayoutX(0);
         p.setLayoutY(192);
+        p.getChildren().add(position);
         p.getChildren().add(prdv);
         p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
@@ -391,8 +413,8 @@ else
             anc.setPrefHeight(241);
             anc.getChildren().addAll(p,nom,specialite,adresse,c);
 
-      element.getChildren().add(anc);
-      box.getChildren().add(element);
+        element.getChildren().add(anc);
+        box.getChildren().add(element);
     }
   
     return box;
