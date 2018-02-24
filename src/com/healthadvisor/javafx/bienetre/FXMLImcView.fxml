@@ -9,6 +9,7 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -26,6 +27,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.bienetre.FXMLImcController">
    <children>
@@ -368,7 +370,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="suivreRegime12" text="Micronutrition">
+                              <Tab fx:id="suivreRegime12" text="Regime Dissocie">
                                  <content>
                                     <AnchorPane prefHeight="413.0" prefWidth="1102.0" styleClass="card-unpadded">
                                        <children>
@@ -379,7 +381,7 @@
                                                       <Insets bottom="20.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME MICRONUTRITION" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME DISSOCIE" />
                                              </children>
                                           </VBox>
                                           <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
@@ -425,11 +427,98 @@
                                           </VBox>
                                           <VBox layoutX="605.0" layoutY="91.0" prefHeight="302.0" prefWidth="431.0" spacing="15.0">
                                              <padding>
-                                                <Insets left="20.0" top="20.0" />
+                                                <Insets top="20.0" />
                                              </padding>
                                              <children>
                                                 <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane" prefHeight="223.0" prefWidth="434.0" />
+                                                <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="suivreRegime121" text="Regime Jeune">
+                                 <content>
+                                    <AnchorPane prefHeight="413.0" prefWidth="1102.0" styleClass="card-unpadded">
+                                       <children>
+                                          <VBox layoutX="10.0" layoutY="28.0" prefHeight="30.0" prefWidth="1092.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="1092.0">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME JEUN" />
+                                             </children>
+                                          </VBox>
+                                          <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
+                                             <children>
+                                                <VBox prefHeight="80.0" prefWidth="526.0">
+                                                   <children>
+                                                      <HBox prefHeight="41.0" prefWidth="574.0">
+                                                         <VBox.margin>
+                                                            <Insets right="10.0" />
+                                                         </VBox.margin>
+                                                      </HBox>
+                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0" />
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="2.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <JFXSpinner prefHeight="28.0" prefWidth="36.0">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" right="20.0" />
+                                                   </HBox.margin>
+                                                </JFXSpinner>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="474.0">
+                                                   <children>
+                                                      <HBox prefHeight="41.0" prefWidth="100.0" />
+                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0">
+                                                         <VBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </VBox.margin>
+                                                      </JFXProgressBar>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox layoutX="60.0" layoutY="102.0" prefHeight="266.0" prefWidth="439.0" spacing="10.0">
+                                             <padding>
+                                                <Insets top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="437.0" text="Programme du jour" />
+                                                <JFXTextArea editable="false" prefHeight="83.0" prefWidth="439.0" promptText="Principe" text="Ce regime vous permet de manger tout ce que vous voulez&#10;le principe consiste a jeuner pendant 16h sans manger la seule nourriture autorisé est de l'eau &#10;" />
+                                                <Text fx:id="heureRegimeJeune" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 50;" text="00h:00mn" textAlignment="CENTER" wrappingWidth="418.826171875">
+                                                   <VBox.margin>
+                                                      <Insets top="25.0" />
+                                                   </VBox.margin>
+                                                </Text>
+                                                <HBox prefHeight="23.0" prefWidth="439.0">
+                                                   <children>
+                                                      <JFXButton fx:id="cancelJeune" buttonType="RAISED" onMouseClicked="#annullerCompteur" text="annuler Jeune">
+                                                         <HBox.margin>
+                                                            <Insets left="170.0" />
+                                                         </HBox.margin>
+                                                      </JFXButton>
+                                                      <JFXButton fx:id="startJeune" buttonType="RAISED" onAction="#startCompteur" text="Commencer le jeune">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXButton>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="605.0" layoutY="91.0" prefHeight="302.0" prefWidth="431.0" spacing="15.0">
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                             <children>
+                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="pane1" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
                                        </children>

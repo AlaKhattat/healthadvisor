@@ -7,31 +7,28 @@ package com.healthadvisor.javafx.bienetre;
 
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.InfoSante;
+import com.healthadvisor.entities.Notification;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.ProgrammeRegime;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
+import com.healthadvisor.enumeration.StatutNotificationEnum;
 import com.healthadvisor.enumeration.Type_Aliment;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionInfoSante;
 import com.healthadvisor.service.impl.GestionRegime;
 import com.healthadvisor.service.impl.GestionUserRegime;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,22 +36,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.TreeMap;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -65,14 +52,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.web.WebEngine;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javax.swing.JComboBox;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -149,7 +132,18 @@ public class FXMLImcController implements Initializable {
     private StackPane pane;
     
     private WebView view;
-
+    @FXML
+    private Text heureRegimeJeune;
+    @FXML
+    private JFXButton cancelJeune;
+    @FXML
+    private JFXButton startJeune;
+    @FXML
+    private StackPane pane1;
+    @FXML
+    private JFXTextField rechercheManger;
+    private int heure;
+    private int minute;
     public Patient getPatient() {
         return patient;
     }
@@ -215,7 +209,9 @@ public class FXMLImcController implements Initializable {
                 this.regimeEffectue.getItems().addAll(typeregime);            
                 /*WebEngine engin = new WebEngine(getClass().getResource("/styles/videoYoutube.html").toExternalForm());*/               
                 this.view = new WebView();                
-                this.pane.getChildren().add(view);             
+                this.pane.getChildren().add(view);
+                heure = 0;
+                minute = 0;
     } 
     public void imc()
     {
@@ -636,6 +632,7 @@ public class FXMLImcController implements Initializable {
        }   
         return regime;
     }
+    @FXML
     public void regimeDuJour()
     {
         GestionRegime greg = new GestionRegime();
@@ -701,6 +698,7 @@ public class FXMLImcController implements Initializable {
            }
        }
     }
+    @FXML
     public void chargerVideo()
     {
         //Exercices Biceps |Exercices des Abdominaux
@@ -711,17 +709,106 @@ public class FXMLImcController implements Initializable {
         System.out.println(tabVideo);
         for(Map.Entry i : tabVideo.entrySet())
         {
-                String sansSpace = i.getKey().toString().trim();
+               String sansSpace = i.getKey().toString().trim();
                 if(sansSpace.equals(nomSport))
                 {
                     this.pane.getChildren().clear();
                     this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
                     this.pane.getChildren().add(view);  
-                }
-                
-        }
-            
-        
+                }           
+        }                
     }
-    
+  
+   public void startCompteur()
+   {
+       Timer timer = new Timer(true);
+      
+       timer.scheduleAtFixedRate(new TimerTask() {
+           @Override
+           public void run() 
+           {
+               Platform.runLater(()->{                                 
+                                     
+                                       String chheure="",chminute="";
+                                        if(heure < 10)
+                                        {
+                                                chheure="0"+Integer.toString(heure);
+                                        }
+                                        else
+                                        {
+                                                chheure=Integer.toString(heure);
+                                        }
+                                        if(minute < 10)
+                                        {
+                                           chminute="0"+Integer.toString(minute); 
+                                        }
+                                        else
+                                        {
+                                           chminute=Integer.toString(minute);
+                                        }
+                                        
+                                       if(heure+1 < 16)
+                                       {
+                                           
+                                          if(minute+1==60)
+                                          {
+                                            minute=0;
+                                            heure+=1;                                          
+                                            if(heure < 10)
+                                            {
+                                                chheure="0"+Integer.toString(heure);
+                                            }
+                                            else
+                                            {
+                                                chheure=Integer.toString(heure);
+                                            }
+                                            
+                                          }
+                                          else
+                                          {
+                                            minute+=1;
+                                            if(heure==0)
+                                            {
+                                                chheure="00";
+                                            }
+                                            if(minute < 10)
+                                            {
+                                               chminute="0"+Integer.toString(minute); 
+                                            }
+                                            else
+                                            {
+                                                chminute=Integer.toString(minute);
+                                            }
+                                          }
+                                           heureRegimeJeune.setText(chheure+"h"+":"+chminute+"mn"); 
+                  
+                                        }
+                                       else if(heure==17)//annuler compteur
+                                       {
+                                          heureRegimeJeune.setText("00h:00mn"); 
+                                          heure = 0;
+                                          minute = 0;
+                                          timer.cancel();
+                                          timer.purge();
+                                       }
+                                       else //terminer compteur
+                                       {
+                                          
+                                         minute=0;
+                                          heure=0;
+                                           Notifications.create().title("Jeune terminier").text("Votre heure de jeuner est terminier il est temps de "
+                                                   + "reprendre des forces").showConfirm();
+                                           heureRegimeJeune.setText("00h:00mn");
+                                          timer.cancel();
+                                          timer.purge();                                  
+                                       }
+               });
+              
+           }
+       }, 25, 50);
+   }
+   public void annullerCompteur()
+   {
+       heure = 17;
+   }
 }
