@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.bienetre;
 import com.healthadvisor.entities.Aliment;
 import com.healthadvisor.entities.InfoSante;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.ProgrammeRegime;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
 import com.healthadvisor.enumeration.Type_Aliment;
@@ -20,11 +21,13 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -107,8 +110,6 @@ public class FXMLImcController implements Initializable {
     @FXML
     private JFXTabPane tabRegime;
     @FXML
-    private Tab suivreRegime1;
-    @FXML
     private Tab suivreRegime11;
     @FXML
     private JFXRadioButton siSport;
@@ -128,21 +129,26 @@ public class FXMLImcController implements Initializable {
     @FXML
     private VBox lesSports;
     @FXML
-    private Tab suivreRegime12;
+    private Tab suivreRegime1;
     @FXML
-    private WebView videoYoutube;
+    private JFXTextArea regimeDujour;
+    @FXML
+    private JFXComboBox<?> sportUser;
     @FXML
     private Tab suivreRegime121;
+ 
     @FXML
     private StackPane pane;
-    @FXML
-    private WebView videoYoutube1;
 
     public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+      @FXML
+    private Tab suivreRegime12;
+    @FXML
+    private Tab calorieCounter;
+ public void setPatient(Patient patient) {
         this.patient = patient;
     }
     
@@ -163,11 +169,13 @@ public class FXMLImcController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+               
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
                 patient= new Patient(FXMLLoginController.pseudo,"", "");
                 System.out.println("patient:"+patient);
                 GestionInfoSante g = new GestionInfoSante();
+                System.out.println("patient est la :"+patient);
                 InfoSante info =g.afficherInfoSante(patient.getLogin()); 
                 if(info!=null)
                 {
@@ -182,6 +190,7 @@ public class FXMLImcController implements Initializable {
                              }
                       }, 3600);
                 }
+               
                 KiloValidator kilo = new KiloValidator();
                 kilo.setMessage("veullez  saisir un poid correct");
                 this.poidRegime.getValidators().add(kilo);                
@@ -217,6 +226,10 @@ public class FXMLImcController implements Initializable {
     {
        
         FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
+        if(patient.getLogin()==null)
+        {
+            patient = new Patient(FXMLLoginController.pseudo,"","");
+        }
         FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
         
@@ -254,6 +267,10 @@ public class FXMLImcController implements Initializable {
     {
         Timer time2 = new Timer(true);
         GestionInfoSante ginfo = new GestionInfoSante();
+          if(patient.getLogin()==null)
+          {
+            patient = new Patient(FXMLLoginController.pseudo,"","");
+          }
          InfoSante info = ginfo.afficherInfoSante(patient.getLogin()); 
         time2.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -447,6 +464,7 @@ public class FXMLImcController implements Initializable {
         regime.setId_regime(this.regimePropose.getValue());
         GestionRegime greg = new GestionRegime();
         regime = greg.rechercherRegime(regime);
+      
         this.infoRegime.setText(regime.splitDescription(regime.getDescription()));
         List<Regime> regimes = greg.afficherRegime();
        // proposerRegime(this.allergies.getChildren(), Maladies, regimes)
@@ -505,9 +523,12 @@ public class FXMLImcController implements Initializable {
          this.lesSports.setDisable(true);       
       } 
     }
+    @FXML
     public  void validerRegime()
     {
+        System.out.println("jb:"+this.dureeRegime.getValue());
         Regime regime = new Regime();
+        GestionRegime gestion = new GestionRegime();
         if(this.dureeRegime.getValue().equals("le temps que sa prendra")==true)
         {
             regime.setDuree(-1);
@@ -516,13 +537,29 @@ public class FXMLImcController implements Initializable {
         {
             if(this.dureeRegime.getValue().equals("2 Semaine")==true)
             {
-                int duree = Integer.parseInt(this.dureeRegime.getValue());
-                regime.setDuree(duree);
+                try
+                {
+                    int duree = Integer.parseInt(this.dureeRegime.getValue().substring(0,1));
+                    regime.setDuree(duree);
+                }
+                catch(NumberFormatException ex)
+                {
+                    System.out.println("exection:"+ex.getMessage());
+                    System.out.println(this.dureeRegime.getValue().substring(0,1));
+                }                                                       
             }
             else if(this.dureeRegime!=null)
             {
-                 int duree = Integer.parseInt(this.dureeRegime.getValue());
-                regime.setDuree(duree*4);
+                try
+                {
+                     int duree = Integer.parseInt(this.dureeRegime.getValue().substring(0,1));
+                     regime.setDuree(duree*4);
+                }
+                catch(NumberFormatException ex)
+                {
+                    System.out.println("exection:"+ex.getMessage());
+                    System.out.println(this.dureeRegime.getValue().substring(0,1));
+                }                                
             }
         }
         regime.setId_regime(this.regimePropose.getValue());
@@ -533,10 +570,20 @@ public class FXMLImcController implements Initializable {
          {
             JFXCheckBox sport =(JFXCheckBox) this.lesSports.getChildren().get(i);
             Sport sp = new Sport();
-            sp.setNom_sport(sport.getText());
+            if(i==0)
+            {
+                sp.setNom_sport(sport.getText());
+            }
+            else
+            {
+                 sp.setNom_sport("|"+sport.getText());
+            }
             listSport.add(sp);
          }
         regime.setSports(listSport);
+        Date date = new Date();
+        regime.setDate_debut(date);
+        gestion.suivreRegime(regime, patient);
        }
     }
     public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
@@ -576,12 +623,16 @@ public class FXMLImcController implements Initializable {
             {
                 regime.add(r);
             }
+            
                
-       }
-        
-    
+       }   
         return regime;
     }
-    
+    public void regimeDuJour()
+    {
+        GestionRegime greg = new GestionRegime();
+        List<Regime> regimes = greg.afficherRegime();
+        //regime = regimes.get(regimes.indexOf(regime));
+    }
     
 }

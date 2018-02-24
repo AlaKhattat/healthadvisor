@@ -97,6 +97,8 @@ public class FXMLAjoutIMCViewController implements Initializable {
         IMC = 0;
         
         patient = new Patient(FXMLLoginController.pseudo, " "," ");
+        patient = new Patient("user1", "password", "to");
+        patient = new Patient(FXMLLoginController.pseudo,"password","to");
         remplirChamp(patient);
     }
 
@@ -184,6 +186,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
         GestionInfoSante ginfo = new GestionInfoSante();
         InfoSante info2 = ginfo.afficherInfoSante(loginL);
                  if(info2.getTaille()>0)
+                 if(info2.getPoids() >0)
                  {
                       ginfo.modifierInfoSante(info);   
                  }
