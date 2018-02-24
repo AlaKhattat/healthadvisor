@@ -36,12 +36,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import netscape.javascript.JSObject;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -67,8 +72,8 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
 
     @Override
     public void mapInitialized() {
-      
-            Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
+      //modifier FXMLLoginController.Identifiant
+            Utilisateur u=gu.AfficherUtilisateurCin("2222224");
            
 
         
@@ -94,7 +99,8 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
         
          InfoWindowOptions infoWindowOption = new InfoWindowOptions();
-         infoWindowOption.content("<h2>Dr "+u.getNom()+" "+u.getPrenom()+"</h2>"
+         infoWindowOption.content("<img src=\"/com/healthadvisor/ressources/checked.png\">"
+                 + "<h2>Dr "+u.getNom()+" "+u.getPrenom()+"</h2>"
                                 );  
 
         InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
@@ -116,7 +122,15 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
             
        
         fredWilkeInfoWindo.open(map, myMark);
-        
+         Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
+       Notifications notifsucces=Notifications.create()
+               .graphic(new ImageView(imgsucces))
+                    .title("Ajout Position")
+                    .text("Votre Position a été recuperer avec sucés")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+       notifsucces.show();
         });
     }
  
