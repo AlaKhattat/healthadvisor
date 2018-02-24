@@ -86,11 +86,12 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
   
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
-if(FXMLRechercheMedecinInterfaceController.spec==null)
+if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
-else
+    }
+else{
     p.setContent(createPageSpécialite(specialite));
-
+    }
     anchor.getChildren().addAll(p,mapView);
     Stage stage = new Stage(StageStyle.DECORATED);
     Scene scene = new Scene(anchor);
@@ -112,8 +113,9 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
-            med=m;
+            med=(Medecin)prdv.getUserData();
             
             try {
                 Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
@@ -191,8 +193,9 @@ else
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
-            med=m;
+            med=(Medecin)prdv.getUserData();
             
             try {
                 Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
@@ -220,6 +223,7 @@ else
         p.setPrefHeight(49);
         p.setLayoutX(0);
         p.setLayoutY(192);
+        p.getChildren().add(position);
         p.getChildren().add(prdv);
         p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
