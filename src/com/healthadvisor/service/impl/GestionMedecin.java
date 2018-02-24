@@ -159,6 +159,44 @@ public class GestionMedecin implements IGestionMedecin{
         }
         return listmed;     }
 
+    @Override
+    public Medecin AficherMedecinNomPrenom(String nomprenom) {
+  Medecin med =null;
+        try {
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND concat(utilisateur.NOM,utilisateur.PRENOM)='"+nomprenom+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return med;     }
+
+    @Override
+    public List<Medecin> AfficherMedecinSnomprenom(String nomprenom) {
+        ArrayList<Medecin> listmed= new ArrayList<>();
+        try {
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND concat(utilisateur.NOM,utilisateur.PRENOM)='"+nomprenom+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                listmed.add(med);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listmed;     }
+
  
     
 }

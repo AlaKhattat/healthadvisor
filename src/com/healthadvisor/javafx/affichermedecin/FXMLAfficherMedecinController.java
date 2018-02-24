@@ -70,8 +70,13 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        if(FXMLRechercheMedecinInterfaceController.spec!=null)
         initializePage(FXMLRechercheMedecinInterfaceController.spec);
-      
+        else {
+        if(FXMLRechercheMedecinInterfaceController.nom!=null)
+        {initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
+        }
+        }
     }    
     
     public void initializePage(String specialite){
@@ -90,6 +95,32 @@ if(FXMLRechercheMedecinInterfaceController.spec==null)
     p.setContent(createPage());
 else
     p.setContent(createPageSpécialite(specialite));
+
+    anchor.getChildren().addAll(p,mapView);
+    Stage stage = new Stage(StageStyle.DECORATED);
+    Scene scene = new Scene(anchor);
+    stage.setScene(scene);
+    stage.setTitle("List Medecin");
+    stage.show();
+    }
+    
+        
+    public void initializePageNOM(String nom){
+        mapView.setPrefWidth(348);
+        mapView.setPrefHeight(397);
+        mapView.setLayoutX(618);
+        mapView.setLayoutY(66);
+        AnchorPane anchor = new AnchorPane();
+    anchor.setPrefWidth(1000);
+    anchor.setPrefHeight(600);
+    anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
+  
+    ScrollPane p=new ScrollPane();
+    p.setPrefSize(700, 600);
+if(FXMLRechercheMedecinInterfaceController.nom==null)
+    p.setContent(createPage());
+else
+    p.setContent(createPageNom(nom));
 
     anchor.getChildren().addAll(p,mapView);
     Stage stage = new Stage(StageStyle.DECORATED);
@@ -280,12 +311,92 @@ else
     
     //fonction prendre rdv
     public void AfficherPosition(JFXButton btn,Medecin m){
-        System.out.println("Afficher Position ... "+m);
-      btn.setOnAction((event) -> {
+          System.out.println("Afficher Position ... "+m);
+          btn.setOnAction((event) -> {
           System.out.println("Recuperation Position ..."); 
           medecin=m;
-mapInitialized();
+          mapInitialized();
       });
     }
+    
+      
+  public VBox createPageNom(String nomprenom) {
+    VBox box = new VBox();
+        GestionMedecin gm=new GestionMedecin();
+        for(Medecin m:gm.AfficherMedecinSnomprenom(nomprenom)){
+       
+        VBox element = new VBox();
+        element.setPadding(new Insets(10, 50, 50, 50));
+        element.setSpacing(10);
+        element.setFillWidth(true);
+        JFXButton prdv=new JFXButton("Prendre RDV");
+        prdv.setPrefWidth(142);
+        prdv.setPrefHeight(40);
+        prdv.setLayoutX(391);
+        prdv.setLayoutY(6);
+        prdv.setOnMouseClicked((event) -> {
+            med=m;
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
+        JFXButton position=new JFXButton("Afficher Cabinet");
+        position.setPrefWidth(156);
+        position.setPrefHeight(40);
+        position.setLayoutX(221);
+        position.setLayoutY(6);
+        AfficherPosition(position, m);
+        Rating r=new Rating();
+        r.setPartialRating(true);
+        r.setRating(3);
+        Pane p=new Pane();
+        p.setPrefWidth(547);
+        p.setPrefHeight(49);
+        p.setLayoutX(0);
+        p.setLayoutY(192);
+        p.getChildren().add(prdv);
+        p.getChildren().add(r);
+            Label nom=new Label("Dr "+m.getLogin_med());
+        nom.setPrefWidth(211);
+        nom.setPrefHeight(32);
+        nom.setMinWidth(nom.USE_COMPUTED_SIZE);
+        nom.setLayoutX(168);
+        nom.setLayoutY(32);
+            Label specialite=new Label(m.getSpecialite());
+        specialite.setPrefWidth(211);
+        specialite.setPrefHeight(32);
+        specialite.setLayoutX(168);
+        specialite.setLayoutY(71); 
+            Label adresse=new Label(m.getAdresse());
+        adresse.setPrefWidth(211);
+        adresse.setPrefHeight(32);
+        adresse.setLayoutX(168);
+        adresse.setLayoutY(111);
+        Circle c=new Circle();
+        c.setRadius(56);
+        c.setLayoutX(70);
+        c.setLayoutY(71);
+        c.setFill(Color.AQUAMARINE);
+            AnchorPane anc = new AnchorPane();
+            anc.setPrefWidth(410);
+            anc.setPrefHeight(241);
+            anc.getChildren().addAll(p,nom,specialite,adresse,c);
+
+      element.getChildren().add(anc);
+      box.getChildren().add(element);
+    }
+  
+    return box;
+  }
+
     
 }

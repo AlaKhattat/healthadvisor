@@ -5,9 +5,14 @@
  */
 package com.healthadvisor.javafx.recherchemedecin;
 
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
 import com.healthadvisor.javafx.routes.Routes;
+import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionUtilisateur;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -37,10 +42,15 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     private JFXTextField adresse;
     @FXML
     private JFXTextField adresse2;
-    @FXML
-    private JFXTextField recherche;
     
-    public static String spec;
+    public static String spec=null;
+    public static String nom=null;
+    @FXML
+    private JFXComboBox<String> rechercheNom;
+    GestionMedecin gm= new GestionMedecin();
+    GestionUtilisateur gu=new GestionUtilisateur();
+    @FXML
+    private JFXButton rdvNom;
     /**
      * Initializes the controller class.
      */
@@ -48,9 +58,8 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
             String[] specialitelist={
-"Anesthésiologie",
-"Biochimie médicale",
-"Cardiologie",
+"Allergologie",
+"Andrologie",
 "Chirurgie cardiaque",
 "Chirurgie colorectale",
 "Chirurgie générale",
@@ -60,52 +69,54 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
 "Chirurgie plastique",
 "Chirurgie thoracique",
 "Chirurgie vasculaire",
+"Anesthésiologie",
+"Angiologie",
+"Cardiologie",
+"Chirurgie",
+"Dentisterie",
 "Dermatologie",
-"Endocrinologie et métabolisme",
-"Gastro-entérologie",
-"Génétique médicale",
+"Endocrinologie",
+"Gastroentérologie",
 "Gériatrie",
-"Gérontopsychiatrie",
+"Gynécologie",
 "Hématologie",
-"Hématologie/oncologie pédiatrique",
-"Immunologie clinique et allergie",
-"Maladies infectieuses",
-"Médecine d'urgence",
-"Médecine d'urgence pédiatrique",
-"Médecine de l'adolescence",
-"Médecine de soins intensifs",
-"Médecine du travail",
+"Hépatologie",
+"Infectiologie",
+"Médecine générale",
 "Médecine interne",
-"Médecine interne générale",
-"Médecine maternelle et fœtale",
-"Médecine néonatale et périnatale",
-"Médecine nucléaire",
-"Médecine physique et réadaptation",
-"Microbiologie médicale",
+"Néonatologie",
 "Néphrologie",
-"Neurochirurgie",
 "Neurologie",
-"Neuropathologie",
-"Obstétrique et gynécologie",
-"Oncologie gynécologique",
-"Oncologie médicale",
+"Obstétrique",
+"Odontologie",
+"Oncologie",
 "Ophtalmologie",
-"Pathologie générale",
-"Pathologie hématologique",
-"Pathologie judiciaire",
+"Orthodontie",
+"Orthopédie",
+"Oto-rhino-laryngologie",
 "Pédiatrie",
-"Pédiatrie du développement",
 "Pneumologie",
 "Psychiatrie",
-"Psychiatrie légale",
-"Radio-oncologie",
-"Radiologie diagnostique",
+"Radiologie",
+"Radiothérapie",
 "Rhumatologie",
-"Santé publique et médecine préventive",
-"Urologie"};
+"Urologie"
+};
         ObservableList<String> sl=FXCollections.observableArrayList(specialitelist);
         specialite.setItems(sl);
         new ComboBoxAutoComplete<String>(specialite);
+        String[] NomMedecins=new String[gm.ListMedecin().size()];
+        System.out.println("Size List M"+gm.ListMedecin().size());
+        for(int i=0;i<gm.ListMedecin().size();i++){
+            System.out.println("Medecin "+i);
+            Utilisateur u=gu.AfficherUtilisateurCin(gm.ListMedecin().get(i).getCin_user());
+            NomMedecins[i]=u.getNom()+" "+u.getPrenom();
+            
+        }
+        ObservableList<String> sn=FXCollections.observableArrayList(NomMedecins);
+        rechercheNom.setItems(sn);
+        new ComboBoxAutoComplete<String>(rechercheNom);
+        
     }    
 
     @FXML
@@ -123,6 +134,22 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
         }
         
         
+    }
+
+    @FXML
+    private void rdvNomAction(MouseEvent event) {
+        System.out.println("Value"+this.rechercheNom.getValue());
+        nom=this.rechercheNom.getValue().replaceAll(" ", "");
+         try {
+         
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.AFFICHERMEDECIN)); 
+            Parent root=loader.load();
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     
