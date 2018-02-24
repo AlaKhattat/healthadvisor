@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package com.healthadvisor.javafx.gmap;
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionPatient;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import gmapsfx.GoogleMapView;
 import gmapsfx.MapComponentInitializedListener;
@@ -44,14 +51,16 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
     
     private GoogleMap map;
-
+    GestionPatient gp= new GestionPatient();
+    GestionMedecin gm= new GestionMedecin();
+    GestionUtilisateur gu= new GestionUtilisateur();
     @FXML
     private Label label;
     @FXML
     private GoogleMapView  mapView;
     @FXML
     private JFXButton validerPosition;
- @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInitializedListener(this);
     }    
@@ -59,7 +68,9 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     @Override
     public void mapInitialized() {
       
-        
+            Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
+           
+
         
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
@@ -83,9 +94,8 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
         
          InfoWindowOptions infoWindowOption = new InfoWindowOptions();
-         infoWindowOption.content("<h2>Dr Khattat Ala</h2>"
-                                + "Current Location: Safeway<br>"
-                                + "ETA: 45 minutes" );  
+         infoWindowOption.content("<h2>Dr "+u.getNom()+" "+u.getPrenom()+"</h2>"
+                                );  
 
         InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
             map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
@@ -93,9 +103,11 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
             map.clearMarkers();
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
+            //lblClick.setText(ll.toString());
+            //Recuperer longitude altitude
                 FXMLInscriMedecinController.LONG_P=ll.getLongitude();
                 FXMLInscriMedecinController.LAT_P=ll.getLatitude();
-            //lblClick.setText(ll.toString());
+                System.out.println("longitude"+FXMLInscriMedecinController.LONG_P);
             MarkerOptions  markerOpt = new MarkerOptions();
                 markerOpt.position(ll);
             
@@ -111,5 +123,6 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
 
     @FXML
     private void validerPositionAction(MouseEvent event) {
+        System.out.println("aaaaaa");
     }
 }
