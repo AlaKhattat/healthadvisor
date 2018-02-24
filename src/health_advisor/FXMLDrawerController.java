@@ -30,8 +30,6 @@ public class FXMLDrawerController implements Initializable {
     @FXML
     private JFXButton paymentBtn;
     @FXML
-    private JFXButton exitBtn2;
-    @FXML
     private JFXButton exitBtn1;
     @FXML
     private JFXButton geolocalisation;
@@ -49,6 +47,8 @@ public class FXMLDrawerController implements Initializable {
     private JFXButton gererutilisateur;
     @FXML
     private JFXButton suivierdv;
+    @FXML
+    private JFXButton analyse;
 
     /**
      * Initializes the controller class.

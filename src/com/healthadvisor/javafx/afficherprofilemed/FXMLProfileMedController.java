@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
+import com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
@@ -220,7 +221,7 @@ public class FXMLProfileMedController implements Initializable {
         Patient p=new Patient(login, password, u.getCin());
         gp.ModifierPatient(p);
         GestionMedecin gm=new GestionMedecin();
-        Medecin m=new Medecin(login, specialite, adresse, diplome, 0, login, password, u.getCin());
+        Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLInscriMedecinController.LAT_P,FXMLInscriMedecinController.LONG_P, login, password, u.getCin());
         gm.ModifierMedecin(m);
          Label l=new Label("Modification Avec Succés");
          JFXPopup pop=new JFXPopup(l);

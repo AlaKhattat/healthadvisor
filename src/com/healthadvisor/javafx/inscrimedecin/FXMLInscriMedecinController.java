@@ -16,14 +16,20 @@ import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -44,7 +50,10 @@ public class FXMLInscriMedecinController implements Initializable {
     private JFXTextField login;
     @FXML
     private JFXTextField password;
-
+public static Double LAT_P;
+public static Double LONG_P;
+    @FXML
+    private JFXButton position;
     /**
      * Initializes the controller class.
      */
@@ -124,13 +133,23 @@ public class FXMLInscriMedecinController implements Initializable {
          GestionPatient gp= new GestionPatient();
          Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
          gp.AjouterPatient(p);
-         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,login, password, p.getCin_user());
+         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,LAT_P,LONG_P,login, password, p.getCin_user());
          gm.AjouterMedecin(medecin);
          Label l=new Label("Ajout Avec Succés");
          JFXPopup pop=new JFXPopup(l);
          pop.show(valider,PopupVPosition.TOP, PopupHPosition.LEFT);
                  
          
+    }
+
+    @FXML
+    private void positionAction(MouseEvent event) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/gmap/FXMLDocumentController.fxml"));
+            Parent parent = loader.load();        
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Recuperer Ma Position");
+            stage.setScene(new Scene(parent));
+            stage.show();
     }
     
 }

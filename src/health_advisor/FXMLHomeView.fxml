@@ -19,7 +19,7 @@
    <children>
       <JFXToolbar maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="1200.0" styleClass="jfx-toolbar" stylesheets="@fxmlhomeview.css">
          <left>
-            <JFXHamburger fx:id="hamburger" styleClass="jfx-hamburger" stylesheets="@fxmlhomeview.css" BorderPane.alignment="CENTER" />
+            <JFXHamburger fx:id="hamburger" prefHeight="51.0" prefWidth="53.0" styleClass="jfx-hamburger" stylesheets="@fxmlhomeview.css" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <Label fx:id="txtCurrentWindow" prefHeight="40.0" prefWidth="199.0" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;" text="HEALTH_ADVISOR" BorderPane.alignment="CENTER" />

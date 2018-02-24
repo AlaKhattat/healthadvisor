@@ -166,6 +166,7 @@ public class FXMLImcController implements Initializable {
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
                 patient= new Patient(FXMLLoginController.pseudo,"", "");
+                System.out.println("patient:"+patient);
                 GestionInfoSante g = new GestionInfoSante();
                 InfoSante info =g.afficherInfoSante(patient.getLogin()); 
                 if(info!=null)

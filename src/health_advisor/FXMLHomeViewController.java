@@ -84,7 +84,6 @@ public class FXMLHomeViewController implements Initializable {
             ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
-
             setNode(recherche);
             drawer.setSidePane(sidePane);
             ScrollPane ss=new ScrollPane();

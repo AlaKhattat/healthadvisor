@@ -20,7 +20,7 @@ public class sendSMS {
 	public String sendSms(String msg,String numb) {
 		try {
 			// Construct data
-			String apiKey = "apikey=" + "MR3acFio6d0-kSSJgcrS6MNtUO45Gka83CHCRD6UzS";
+			String apiKey = "apikey=" + "MR3acFio6d0-kSSJgcrS6MNtUO45Gka83CHCRD6UzS	";
 			String message = "&message=" + msg;
 			String sender = "&sender=" + "HealthAdvisor";
 			String numbers = "&numbers=" + "+216" + numb;
