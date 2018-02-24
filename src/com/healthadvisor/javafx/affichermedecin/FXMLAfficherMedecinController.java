@@ -6,13 +6,34 @@
 package com.healthadvisor.javafx.affichermedecin;
 
 import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinInterfaceController;
 import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionPatient;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
+import gmapsfx.GoogleMapView;
+import gmapsfx.MapComponentInitializedListener;
+import gmapsfx.javascript.event.UIEventType;
+import gmapsfx.javascript.object.GoogleMap;
+import gmapsfx.javascript.object.InfoWindow;
+import gmapsfx.javascript.object.InfoWindowOptions;
+import gmapsfx.javascript.object.LatLong;
+import gmapsfx.javascript.object.MapOptions;
+import gmapsfx.javascript.object.MapTypeIdEnum;
+import gmapsfx.javascript.object.Marker;
+import gmapsfx.javascript.object.MarkerOptions;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -23,8 +44,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import netscape.javascript.JSObject;
 import org.controlsfx.control.Rating;
 
 /**
@@ -32,28 +55,44 @@ import org.controlsfx.control.Rating;
  *
  * @author khattout
  */
-public class FXMLAfficherMedecinController implements Initializable {
+public class FXMLAfficherMedecinController implements  Initializable, MapComponentInitializedListener {
   private Pagination pagination;
+  private Medecin medecin;
+  public static Medecin med;
     /**
      * Initializes the controller class.
      */
+    GestionUtilisateur gu= new GestionUtilisateur();
+    GestionPatient gp= new GestionPatient();
+    GestionMedecin gm= new GestionMedecin();
+      private GoogleMap map;
+      GoogleMapView mapView=new GoogleMapView();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initializePage(FXMLRechercheMedecinInterfaceController.spec);
+      
     }    
     
     public void initializePage(String specialite){
+        mapView.setPrefWidth(348);
+        mapView.setPrefHeight(397);
+        mapView.setLayoutX(618);
+        mapView.setLayoutY(66);
         AnchorPane anchor = new AnchorPane();
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
   
     ScrollPane p=new ScrollPane();
-    p.setPrefSize(550, 600);
-
+    p.setPrefSize(700, 600);
+if(FXMLRechercheMedecinInterfaceController.spec==null){
+    p.setContent(createPage());
+    }
+else{
     p.setContent(createPageSpécialite(specialite));
-    anchor.getChildren().add(p);
+    }
+    anchor.getChildren().addAll(p,mapView);
     Stage stage = new Stage(StageStyle.DECORATED);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
@@ -72,16 +111,39 @@ public class FXMLAfficherMedecinController implements Initializable {
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
-        prdv.setLayoutX(254);
-        prdv.setLayoutY(5);
+        prdv.setLayoutX(391);
+        prdv.setLayoutY(6);
+        prdv.setUserData(m);
+        prdv.setOnMouseClicked((event) -> {
+            med=(Medecin)prdv.getUserData();
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
+        JFXButton position=new JFXButton("Afficher Cabinet");
+        position.setPrefWidth(156);
+        position.setPrefHeight(40);
+        position.setLayoutX(221);
+        position.setLayoutY(6);
+        AfficherPosition(position, m);
         Rating r=new Rating();
         r.setPartialRating(true);
         r.setRating(3);
         Pane p=new Pane();
-        p.setPrefWidth(410);
+        p.setPrefWidth(547);
         p.setPrefHeight(49);
-        p.setLayoutX(-1);
+        p.setLayoutX(0);
         p.setLayoutY(192);
+        p.getChildren().add(position);
         p.getChildren().add(prdv);
         p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
@@ -129,16 +191,39 @@ public class FXMLAfficherMedecinController implements Initializable {
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
-        prdv.setLayoutX(254);
-        prdv.setLayoutY(5);
+        prdv.setLayoutX(391);
+        prdv.setLayoutY(6);
+        prdv.setUserData(m);
+        prdv.setOnMouseClicked((event) -> {
+            med=(Medecin)prdv.getUserData();
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
+        JFXButton position=new JFXButton("Afficher Cabinet");
+        position.setPrefWidth(156);
+        position.setPrefHeight(40);
+        position.setLayoutX(221);
+        position.setLayoutY(6);
+        AfficherPosition(position, m);
         Rating r=new Rating();
         r.setPartialRating(true);
         r.setRating(3);
         Pane p=new Pane();
-        p.setPrefWidth(410);
+        p.setPrefWidth(547);
         p.setPrefHeight(49);
-        p.setLayoutX(-1);
+        p.setLayoutX(0);
         p.setLayoutY(192);
+        p.getChildren().add(position);
         p.getChildren().add(prdv);
         p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
@@ -173,5 +258,53 @@ public class FXMLAfficherMedecinController implements Initializable {
   
     return box;
   }
+
+    @Override
+    public void mapInitialized() {
+  
+        System.out.println("Initialisation MAP ...");
+        //Set the initial properties of the map.
+        MapOptions mapOptions = new MapOptions();
+        
+        mapOptions.center(new LatLong(medecin.getLat_p(),medecin.getLong_p()))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .zoom(12);
+                   
+        map = mapView.createMap(mapOptions);
+                    //Add markers to the map
+            System.out.println("Affichage Position Medecin ....");
+            System.out.println(medecin);
+            System.out.println("long"+medecin.getLong_p());
+            LatLong medecinlocation = new LatLong(medecin.getLat_p(),medecin.getLong_p());
+        //Add markers to the map
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(medecinlocation);
+                Marker medecinMarker = new Marker(markerOptions1);
+        map.addMarker( medecinMarker );
+        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+        Utilisateur u=gu.AfficherUtilisateurCin(medecin.getCin_user());
+         System.out.println(u);
+         infoWindowOptions.content("<div style='float:left;height:70px;width:70px'><img src='https://image.flaticon.com/icons/svg/607/607414.svg'></div><div style='float:right; padding: 10px;'><b> Dr"+u.getNom()+" "+u.getPrenom()+"</b><br/>"+medecin.getAdresse()+"<br/> "+u.getPays()+","+u.getVille()+"</div>" );  
+
+        InfoWindow fredWilkeInfoWindow = new InfoWindow(infoWindowOptions);
+        fredWilkeInfoWindow.open(map, medecinMarker);
+        
+    }
+    
+    //fonction prendre rdv
+    public void AfficherPosition(JFXButton btn,Medecin m){
+        System.out.println("Afficher Position ... "+m);
+      btn.setOnAction((event) -> {
+          System.out.println("Recuperation Position ..."); 
+          medecin=m;
+mapInitialized();
+      });
+    }
     
 }

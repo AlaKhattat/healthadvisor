@@ -133,7 +133,9 @@ public static Double LONG_P;
          GestionPatient gp= new GestionPatient();
          Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
          gp.AjouterPatient(p);
+         System.out.println(LAT_P+""+LONG_P);
          Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,LAT_P,LONG_P,login, password, p.getCin_user());
+         System.out.println("latitude"+medecin.getLat_p());
          gm.AjouterMedecin(medecin);
          Label l=new Label("Ajout Avec Succés");
          JFXPopup pop=new JFXPopup(l);
@@ -144,7 +146,7 @@ public static Double LONG_P;
 
     @FXML
     private void positionAction(MouseEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/gmap/FXMLDocumentController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/gmap/FXMLDocument.fxml"));
             Parent parent = loader.load();        
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Recuperer Ma Position");

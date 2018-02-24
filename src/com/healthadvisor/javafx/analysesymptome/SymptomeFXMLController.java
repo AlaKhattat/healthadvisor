@@ -211,7 +211,7 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnEnvoyerAction(ActionEvent event) throws IOException{
-        String Symptomes="";
+        /*String Symptomes="";
         ObservableList<Node>ols=PaneBox.getChildren();
         for(Node x : ols){
             Symptome s=(Symptome)x.getUserData();
@@ -224,12 +224,12 @@ if(subbodypart.disableProperty().getValue()==true){
         GestionMaladie gm =new GestionMaladie();
         AccessToken token=new AccessToken();
         ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
-        ResultatAnalyse=l;
+        ResultatAnalyse=l;*/
         FXMLLoader loader=new FXMLLoader(getClass().getResource("ResultatAnalyseFXML.fxml"));
         Parent root=loader.load();
         Scene s = btnValider.getScene();
         s.setRoot(root);
-       
+        
        /* String Result="";
         for(Maladie x : l){
             Result=Result+"Maladie : "+x.getNom()+" Precision : "+x.getPrecision()+"%\n";
@@ -246,17 +246,17 @@ if(subbodypart.disableProperty().getValue()==true){
     
     public void initialize(URL url, ResourceBundle rb) {
         ResultatAnalyse=new ArrayList<>();
-        /*ArrayList<String> list=new ArrayList<>();
-        list.add("Hello");
-        list.add("hfdcjghbcns");
-        list.add("lsnvjshnvljsdkv");
-        list.add("lkhndvlhnbsdkjvbsjk");
-        Maladie m =new Maladie("Maladie jsihdlihlivh lqjfjliqjfqij ljhsdifjoqjsohqolvchoi olqholfholqhhohod",75,list);
+        ArrayList<String> list=new ArrayList<>();
+        list.add("Cardiologie");
+        list.add("Dentisterie");
+        list.add("Chirurgie");
+        list.add("Infectiologie");
+        Maladie m =new Maladie("Maladie xxyyzz",75,list);
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
-        ResultatAnalyse.add(m);*/
+        ResultatAnalyse.add(m);
         listsymptomes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         String[] sexelist={"Homme","Femme","Garçon","Fille"};
         ObservableList<String> ObservListsexe = FXCollections.observableArrayList(sexelist);

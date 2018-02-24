@@ -7,14 +7,21 @@ package com.healthadvisor.javafx.analysesymptome;
 
 
 import com.healthadvisor.entities.Maladie;
+import com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinInterfaceController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -41,7 +48,6 @@ public class ResultatAnalyseFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Hellllllllllllo");
         ArrayList<Maladie>l=SymptomeFXMLController.ResultatAnalyse;
             VBox v=new VBox();
             v.setPrefSize(625,130);
@@ -70,6 +76,17 @@ public class ResultatAnalyseFXMLController implements Initializable {
             listviewSpecialite.setPrefHeight(150);
             listviewSpecialite.setMaxHeight(150);
             listviewSpecialite.setMinHeight(150);
+            listviewSpecialite.setOnMouseClicked((event) -> {
+                try {
+                    FXMLRechercheMedecinInterfaceController.spec=listviewSpecialite.getSelectionModel().getSelectedItem();
+                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/affichermedecin/FXMLAfficherMedecin.fxml"));
+                    Parent root=loader.load();
+                    Scene s = scrollpane.getScene();
+                    s.setRoot(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(ResultatAnalyseFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
             h1.getChildren().add(listviewSpecialite);
             v.getChildren().add(h1);
          

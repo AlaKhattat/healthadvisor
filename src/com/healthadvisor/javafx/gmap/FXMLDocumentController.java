@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package com.healthadvisor.javafx.gmap;
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionPatient;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import gmapsfx.GoogleMapView;
 import gmapsfx.MapComponentInitializedListener;
@@ -29,12 +36,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import netscape.javascript.JSObject;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -44,22 +56,26 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
     
     private GoogleMap map;
-
+    GestionPatient gp= new GestionPatient();
+    GestionMedecin gm= new GestionMedecin();
+    GestionUtilisateur gu= new GestionUtilisateur();
     @FXML
     private Label label;
     @FXML
     private GoogleMapView  mapView;
     @FXML
     private JFXButton validerPosition;
- @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         mapView.addMapInitializedListener(this);
     }    
 
     @Override
     public void mapInitialized() {
-      
-        
+      //modifier 
+            Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
+           
+
         
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
@@ -83,19 +99,20 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
     
         
          InfoWindowOptions infoWindowOption = new InfoWindowOptions();
-         infoWindowOption.content("<h2>Dr Khattat Ala</h2>"
-                                + "Current Location: Safeway<br>"
-                                + "ETA: 45 minutes" );  
+         infoWindowOption.content("<div style='float:left;height:70px;width:70px'><img src='https://image.flaticon.com/icons/svg/607/607414.svg'></div><div style='float:right; padding: 10px;'><b> Dr"+u.getNom()+" "+u.getPrenom()+"</b></div>" );  
+  
 
-        InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
+            InfoWindow fredWilkeInfoWindo = new InfoWindow(infoWindowOption);
             map.addUIEventHandler(UIEventType.click, (JSObject obj) -> {
             
             map.clearMarkers();
             LatLong ll = new LatLong((JSObject) obj.getMember("latLng"));
             System.out.println("LatLong: lat: " + ll.getLatitude() + " lng: " + ll.getLongitude());
+            //lblClick.setText(ll.toString());
+            //Recuperer longitude altitude
                 FXMLInscriMedecinController.LONG_P=ll.getLongitude();
                 FXMLInscriMedecinController.LAT_P=ll.getLatitude();
-            //lblClick.setText(ll.toString());
+                System.out.println("longitude"+FXMLInscriMedecinController.LONG_P);
             MarkerOptions  markerOpt = new MarkerOptions();
                 markerOpt.position(ll);
             
@@ -104,12 +121,21 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
             
        
         fredWilkeInfoWindo.open(map, myMark);
-        
+         Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
+       Notifications notifsucces=Notifications.create()
+               .graphic(new ImageView(imgsucces))
+                    .title("Ajout Position")
+                    .text("Votre Position a été recuperer avec sucés")
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+       notifsucces.show();
         });
     }
  
 
     @FXML
     private void validerPositionAction(MouseEvent event) {
+        System.out.println("aaaaaa");
     }
 }

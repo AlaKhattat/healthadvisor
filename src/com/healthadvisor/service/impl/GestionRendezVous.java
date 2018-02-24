@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,8 +40,8 @@ public class GestionRendezVous implements IGestionRendezVous{
             String sql="Insert into rendez_vous (date_heure,user_id,med_id,statut) "+" values (?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             java.util.Date utilStartDate = rendezvous.getDate_heure();
-            java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-            preparedStmt.setDate(1,sqlStartDate);
+            Timestamp sqlStartDate = new Timestamp(utilStartDate.getTime());
+            preparedStmt.setTimestamp(1,sqlStartDate);
             preparedStmt.setString(2,rendezvous.getPatient_id());
             preparedStmt.setString(3,rendezvous.getMedecin_id());
             preparedStmt.setString(4,rendezvous.getStatut_rendezvous());
