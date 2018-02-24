@@ -23,12 +23,17 @@ import gmapsfx.javascript.object.MapOptions;
 import gmapsfx.javascript.object.MapTypeIdEnum;
 import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -53,6 +58,7 @@ import org.controlsfx.control.Rating;
 public class FXMLAfficherMedecinController implements  Initializable, MapComponentInitializedListener {
   private Pagination pagination;
   private Medecin medecin;
+  public static Medecin med;
     /**
      * Initializes the controller class.
      */
@@ -80,8 +86,10 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
   
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
-
+if(FXMLRechercheMedecinInterfaceController.spec==null)
     p.setContent(createPage());
+else
+    p.setContent(createPageSpécialite(specialite));
 
     anchor.getChildren().addAll(p,mapView);
     Stage stage = new Stage(StageStyle.DECORATED);
@@ -168,6 +176,21 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
         prdv.setPrefHeight(40);
         prdv.setLayoutX(391);
         prdv.setLayoutY(6);
+        prdv.setOnMouseClicked((event) -> {
+            med=m;
+            
+            try {
+                Parent root= FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/prendrerdv/PrendreRDVFXML.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+        });
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
