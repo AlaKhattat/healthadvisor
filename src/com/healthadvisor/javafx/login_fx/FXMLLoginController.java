@@ -190,6 +190,8 @@ public class FXMLLoginController implements Initializable {
  LocalDate localDate =date.getValue();
  Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
  Date date = Date.from(instant);
+ 
+ this.date.isPickOnBounds();
  String sexe=this.sexe.getValue();
  String pays=this.pays.getText();
  String ville=this.ville.getText();
@@ -326,5 +328,7 @@ public class FXMLLoginController implements Initializable {
       
     }
         }
+    
+ 
 }
     
