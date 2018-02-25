@@ -20,6 +20,8 @@ public class Rendez_Vous {
     private String statut_rendezvous;
     private String docteur;
     private String patient;
+    private Date date_validation;
+
 
     public String getDocteur() {
         return docteur;
@@ -37,13 +39,30 @@ public class Rendez_Vous {
         this.patient = patient;
     }
     
-public  Rendez_Vous(){}
+    public  Rendez_Vous(){}
+    
     public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id, String statut_rendezvous) {
         this.id = id;
         this.date_heure = date_heure;
         this.patient_id = patient_id;
         this.medecin_id = medecin_id;
         this.statut_rendezvous = statut_rendezvous;
+    }
+    public Rendez_Vous(int id, Date date_heure, String patient_id, String medecin_id, String statut_rendezvous, Date date_validation) {
+        this.id = id;
+        this.date_heure = date_heure;
+        this.patient_id = patient_id;
+        this.medecin_id = medecin_id;
+        this.statut_rendezvous = statut_rendezvous;
+        this.date_validation = date_validation;
+    }
+
+    public Date getDate_validation() {
+        return date_validation;
+    }
+
+    public void setDate_validation(Date date_validation) {
+        this.date_validation = date_validation;
     }
 
     

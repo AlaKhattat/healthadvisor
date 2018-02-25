@@ -79,7 +79,7 @@ public class GestionRendezVous implements IGestionRendezVous{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getDate("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"));
+                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getTimestamp("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"),rs.getTimestamp("Date_Valid"));
                 listrdv.add(rdv);
             }
             
