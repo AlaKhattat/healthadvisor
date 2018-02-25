@@ -20,31 +20,31 @@
                   <JFXButton fx:id="signup" defaultButton="true" layoutY="182.0" onAction="#SignUpAction" prefHeight="52.0" prefWidth="134.0" text="Sign Up" />
                   <AnchorPane fx:id="AnchorSignUp" layoutX="496.0" layoutY="2.0" style="-fx-background-color: #fff;">
                      <children>
-                        <JFXTextField fx:id="nom" labelFloat="true" layoutX="87.0" layoutY="62.0" prefHeight="41.0" prefWidth="119.0" promptText="Nom" />
-                        <JFXTextField fx:id="prenom" labelFloat="true" layoutX="87.0" layoutY="114.0" prefHeight="41.0" prefWidth="119.0" promptText="Prenom" />
-                        <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="174.0" prefHeight="41.0" prefWidth="119.0" promptText="Email" />
-                        <JFXTextField fx:id="pays" labelFloat="true" layoutX="87.0" layoutY="233.0" prefHeight="42.0" prefWidth="119.0" promptText="Pays" />
+                        <JFXTextField fx:id="nom" labelFloat="true" layoutX="87.0" layoutY="62.0" onKeyReleased="#nomControl" prefHeight="41.0" prefWidth="119.0" promptText="Nom" />
+                        <JFXTextField fx:id="prenom" labelFloat="true" layoutX="87.0" layoutY="114.0" onKeyReleased="#prenomControl" prefHeight="41.0" prefWidth="119.0" promptText="Prenom" />
+                        <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="174.0" onKeyReleased="#emailControl" prefHeight="41.0" prefWidth="119.0" promptText="Email" />
+                        <JFXTextField fx:id="pays" labelFloat="true" layoutX="87.0" layoutY="233.0" onKeyReleased="#paysControl" prefHeight="42.0" prefWidth="119.0" promptText="Pays" />
                         <FontAwesomeIconView fx:id="homesignup" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="180.0" layoutY="397.0" onMouseClicked="#homesignupAction" size="40" />
                         <Label fx:id="SignUp" layoutX="169.0" layoutY="14.0" text="Sign Up" textFill="#0b6183">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="cin" labelFloat="true" layoutX="234.0" layoutY="62.0" prefHeight="41.0" prefWidth="119.0" promptText="Cin" />
-                        <JFXTextField fx:id="ville" labelFloat="true" layoutX="234.0" layoutY="234.0" prefHeight="41.0" prefWidth="119.0" promptText="Ville" />
-                        <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="234.0" layoutY="190.0" prefHeight="25.0" prefWidth="119.0" promptText="Sexe" />
-                        <JFXDatePicker fx:id="date" editable="false" layoutX="234.0" layoutY="135.0" prefHeight="25.0" prefWidth="134.0" promptText="Date de naissance" />
-                        <JFXTextField fx:id="numtel" labelFloat="true" layoutX="87.0" layoutY="306.0" prefHeight="25.0" prefWidth="119.0" promptText="Téléphone" />
+                        <JFXTextField fx:id="cin" labelFloat="true" layoutX="234.0" layoutY="62.0" onKeyReleased="#cinControl" prefHeight="41.0" prefWidth="119.0" promptText="Cin" />
+                        <JFXTextField fx:id="ville" labelFloat="true" layoutX="234.0" layoutY="234.0" onKeyReleased="#villeControl" prefHeight="41.0" prefWidth="119.0" promptText="Ville" />
+                        <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="234.0" layoutY="190.0" onInputMethodTextChanged="#sexeControl" prefHeight="25.0" prefWidth="119.0" promptText="Sexe" />
+                        <JFXDatePicker fx:id="date" editable="false" layoutX="234.0" layoutY="135.0" onInputMethodTextChanged="#dateControl" prefHeight="25.0" prefWidth="134.0" promptText="Date de naissance" />
+                        <JFXTextField fx:id="numtel" labelFloat="true" layoutX="87.0" layoutY="306.0" onKeyReleased="#telControl" prefHeight="25.0" prefWidth="119.0" promptText="Téléphone" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="AnchorSignIn" layoutX="496.0" prefHeight="412.0" prefWidth="394.0" style="-fx-background-color: #fff; -fx-border-radius: 0.8em;">
                      <children>
-                        <JFXTextField fx:id="username" labelFloat="true" layoutX="90.0" layoutY="122.0" prefHeight="42.0" prefWidth="230.0" promptText="Pseudo" styleClass="input" stylesheets="@../../../../../../login_fx/src/login_fx/login.css">
+                        <JFXTextField fx:id="username" labelFloat="true" layoutX="90.0" layoutY="122.0" onKeyReleased="#pseudoControl" prefHeight="42.0" prefWidth="230.0" promptText="Pseudo" styleClass="input" stylesheets="@../../../../../../login_fx/src/login_fx/login.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXPasswordField fx:id="passwordsiginin" labelFloat="true" layoutX="93.0" layoutY="206.0" prefHeight="42.0" prefWidth="230.0" promptText="Password">
+                        <JFXPasswordField fx:id="passwordsiginin" labelFloat="true" layoutX="93.0" layoutY="206.0" onKeyReleased="#mdpControl" prefHeight="42.0" prefWidth="230.0" promptText="Password">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -34,11 +34,12 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="password" focusColor="WHITE" labelFloat="true" layoutX="306.0" layoutY="249.0" prefHeight="25.0" prefWidth="242.0" promptText="Mot de passe" styleClass="text" unFocusColor="WHITE">
+      <JFXTextField fx:id="password" focusColor="WHITE" labelFloat="true" layoutX="306.0" layoutY="249.0" onKeyReleased="#mdpControl" prefHeight="25.0" prefWidth="242.0" promptText="Mot de passe" styleClass="text" unFocusColor="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
       <JFXButton fx:id="valider" layoutX="459.0" layoutY="356.0" onMouseClicked="#validerPatient" prefHeight="25.0" prefWidth="89.0" text="Valider" textFill="WHITE" />
+      <Label fx:id="strenghtP" layoutX="306.0" layoutY="309.0" prefHeight="17.0" prefWidth="242.0" />
    </children>
 </AnchorPane>

@@ -39,7 +39,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="spécialite" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="230.0" prefHeight="25.0" prefWidth="253.0" promptText="Spécialité" styleClass="text" unFocusColor="#fffafa" />
+      <JFXComboBox fx:id="spécialite" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="230.0" onInputMethodTextChanged="#specialiteControl" prefHeight="25.0" prefWidth="253.0" promptText="Spécialité" styleClass="text" unFocusColor="#fffafa" />
       <Label layoutX="249.0" layoutY="33.0" prefHeight="28.0" prefWidth="323.0" text="Remplissez les champs suivant" textFill="WHITE">
          <font>
             <Font size="15.0" />
@@ -61,7 +61,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="password" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="154.0" prefHeight="25.0" prefWidth="253.0" promptText="Mot de passe" styleClass="text" unFocusColor="WHITE">
+      <JFXTextField fx:id="password" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="154.0" onKeyReleased="#mdpControl" prefHeight="25.0" prefWidth="253.0" promptText="Mot de passe" styleClass="text" unFocusColor="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -75,5 +75,6 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <Label fx:id="strenghtP" layoutX="319.0" layoutY="201.0" prefHeight="17.0" prefWidth="253.0" />
    </children>
 </AnchorPane>

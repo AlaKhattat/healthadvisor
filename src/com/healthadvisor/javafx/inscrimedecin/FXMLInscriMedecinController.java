@@ -24,12 +24,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -54,6 +61,8 @@ public static Double LAT_P;
 public static Double LONG_P;
     @FXML
     private JFXButton position;
+    @FXML
+    private Label strenghtP;
     /**
      * Initializes the controller class.
      */
@@ -112,6 +121,23 @@ public static Double LONG_P;
 
     @FXML
     private void validerInscri(MouseEvent event) {
+             Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Il faut remplir tous les champs")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+            Image img2=new Image("/com/healthadvisor/ressources/user.png");
+        Notifications notif2=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Inscription ")
+                    .text("Inscription Avec Succés \n Bienvenue")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+        try {
         String login=this.login.getText();
         String password =this.password.getText();
         String specialite=this.spécialite.getValue();
@@ -125,10 +151,10 @@ public static Double LONG_P;
          Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,LAT_P,LONG_P,login, password, p.getCin_user());
          System.out.println("latitude"+medecin.getLat_p());
          gm.AjouterMedecin(medecin);
-         Label l=new Label("Ajout Avec Succés");
-         JFXPopup pop=new JFXPopup(l);
-         pop.show(valider,PopupVPosition.TOP, PopupHPosition.LEFT);
-                 
+         notif2.show();
+           }catch(Exception e){
+            notif.show();
+        }        
          
     }
 
@@ -140,6 +166,54 @@ public static Double LONG_P;
             stage.setTitle("Recuperer Ma Position");
             stage.setScene(new Scene(parent));
             stage.show();
+    }
+
+    @FXML
+    private void specialiteControl(InputMethodEvent event) {
+    }
+
+    @FXML
+    private void mdpControl(KeyEvent event) {
+        String password;
+        password = this.password.getText();
+
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+
+        if (password.length() >= 8) {
+            for (int i = 0; i < password.length(); i++) {
+                char x = password.charAt(i);
+                if (Character.isLetter(x)) {
+
+                    hasLetter = true;
+                }
+
+                else if (Character.isDigit(x)) {
+
+                    hasDigit = true;
+                }
+
+                // no need to check further, break the loop
+                if(hasLetter && hasDigit){
+
+                    break;
+                }
+
+            }
+            if (hasLetter && hasDigit) {
+                strenghtP.setStyle("-fx-font-size: 15;\n" +
+" -fx-text-fill: #ADFF2F;");
+                strenghtP.setText("Fort");
+            } else {
+                strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #F39C12;");
+                strenghtP.setText("Faible");
+            }
+        } else {
+            strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #C70039;");
+                strenghtP.setText("il faut au moins 8 caractères");
+        }
     }
     
 }

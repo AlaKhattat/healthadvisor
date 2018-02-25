@@ -38,7 +38,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="29.0" layoutY="301.0" prefHeight="25.0" prefWidth="160.0" promptText="Email">
+      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="29.0" layoutY="301.0" onKeyReleased="#emailControl" prefHeight="25.0" prefWidth="160.0" promptText="Email">
          <font>
             <Font size="14.0" />
          </font>
@@ -53,8 +53,8 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="date" defaultColor="#132a5b" editable="false" layoutX="29.0" layoutY="368.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
-      <JFXComboBox fx:id="sexe" layoutX="29.0" layoutY="428.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
+      <JFXDatePicker fx:id="date" defaultColor="#132a5b" disable="true" editable="false" layoutX="29.0" layoutY="368.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
+      <JFXComboBox fx:id="sexe" disable="true" labelFloat="true" layoutX="29.0" layoutY="428.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
       <JFXTextField fx:id="adresse" editable="false" labelFloat="true" layoutX="310.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Adresse">
          <font>
             <Font size="14.0" />
@@ -65,14 +65,14 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="specialite" labelFloat="true" layoutX="310.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
+      <JFXComboBox fx:id="specialite" disable="true" labelFloat="true" layoutX="310.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
       <Rating disable="true" layoutX="210.0" layoutY="89.0" partialRating="true" />
       <JFXTextField fx:id="login" editable="false" labelFloat="true" layoutX="310.0" layoutY="460.0" prefHeight="25.0" prefWidth="160.0" promptText="Pseudo">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="310.0" layoutY="521.0" prefHeight="25.0" prefWidth="160.0" promptText="Mot de Passe">
+      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="310.0" layoutY="521.0" onKeyReleased="#mdpControl" prefHeight="25.0" prefWidth="160.0" promptText="Mot de Passe">
          <font>
             <Font size="14.0" />
          </font>
@@ -94,10 +94,11 @@
       </Label>
       <Separator layoutX="269.0" layoutY="433.0" prefHeight="6.0" prefWidth="270.0" />
       <Separator layoutX="269.0" layoutY="580.0" prefHeight="6.0" prefWidth="270.0" />
-      <JFXTextField fx:id="numtel" labelFloat="true" layoutX="29.0" layoutY="580.0" prefHeight="25.0" prefWidth="160.0" promptText="Téléphone">
+      <JFXTextField fx:id="numtel" editable="false" labelFloat="true" layoutX="29.0" layoutY="580.0" onKeyReleased="#telControl" prefHeight="25.0" prefWidth="160.0" promptText="Téléphone">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
+      <Label fx:id="strenghtP" layoutX="310.0" layoutY="559.0" prefHeight="17.0" prefWidth="160.0" />
    </children>
 </AnchorPane>

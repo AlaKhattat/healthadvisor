@@ -28,21 +28,31 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -121,7 +131,18 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private void homeAction(MouseEvent event) throws IOException {
         //Sign IN
-        
+        if(username.getText().isEmpty()||passwordsiginin.getText().isEmpty()){
+              Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Il faut remplir tous les champs")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();  
+        notif.show();
+            
+        }else {
         String usernamesigin=this.username.getText();
         pseudo=usernamesigin;
         String password=this.passwordsiginin.getText();
@@ -147,9 +168,20 @@ public class FXMLLoginController implements Initializable {
             }      
         }
     }
+    }
 
     @FXML
     private void homesignupAction(MouseEvent event) throws IOException {
+        Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Il faut remplir tous les champs")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();   
+         try{
+
  String cin=this.cin.getText();
  Identifiant=cin;
  String nom=this.nom.getText();
@@ -166,11 +198,17 @@ public class FXMLLoginController implements Initializable {
         GestionUtilisateur gu=new GestionUtilisateur();
         Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville,num);
         gu.AjouterUtilisateur(u);
-        FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.ChoixUser)); 
+         FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.ChoixUser)); 
             Parent root=loader.load();
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(root));
             stage.show();
+         }catch(Exception e){
+        notif.show();
+ 
+        }
+       
+  
 }
 
     @FXML
@@ -179,5 +217,114 @@ public class FXMLLoginController implements Initializable {
          AnchorSignIn.setOpacity(1.0);
          AnchorSignUp.setOpacity(0.0);
     }
-    
+
+    @FXML
+    private void nomControl(KeyEvent event) {
+        if(nom.getText().isEmpty()){
+            nom.setFocusColor(Color.RED);
+        }else {
+            nom.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void prenomControl(KeyEvent event) {
+          if(prenom.getText().isEmpty()){
+            prenom.setFocusColor(Color.RED);
+        }else {
+            prenom.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void emailControl(KeyEvent event) {
+        String masque = "^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(masque);
+        Matcher controler = pattern.matcher(email.getText());
+        if (controler.matches()){
+        //Ok : la saisie est bonne
+        email.setFocusColor(Color.BLUE);
+        }else{email.setFocusColor(Color.RED);
+        //La c'est pas bon
+        }
+    }
+
+    @FXML
+    private void paysControl(KeyEvent event) {
+            if(pays.getText().isEmpty()){
+            pays.setFocusColor(Color.RED);
+        }else {
+            pays.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void cinControl(KeyEvent event) {
+       String num=cin.getText();
+       if(num.length()<8 || num.length() >8 ){
+       cin.setFocusColor(Color.RED);
+       }else {
+       try{
+       cin.setFocusColor(Color.BLUE);
+       int numcin=Integer.parseInt(num);
+       }catch(NumberFormatException ex)  {
+       cin.setFocusColor(Color.RED);
+       }
+       }
+    }
+
+    @FXML
+    private void villeControl(KeyEvent event) {
+                if(ville.getText().isEmpty()){
+            ville.setFocusColor(Color.RED);
+        }else {
+            ville.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void sexeControl(InputMethodEvent event) {
+                if(sexe.getValue().isEmpty()){
+            sexe.setFocusColor(Color.RED);
+        }else {
+            sexe.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void dateControl(InputMethodEvent event) {
+        // a faire 
+    }
+
+    @FXML
+    private void telControl(KeyEvent event) {
+       String num=numtel.getText();
+       try{
+       numtel.setFocusColor(Color.BLUE);
+       int numtel=Integer.parseInt(num);
+       }catch(NumberFormatException ex)  {
+       numtel.setFocusColor(Color.RED);
+
+       }}
+
+    @FXML
+    private void pseudoControl(KeyEvent event) {
+                if(username.getText().isEmpty()){
+            username.setFocusColor(Color.RED);
+        }else {
+            username.setFocusColor(Color.BLUE);
+        }
+    }
+
+    @FXML
+    private void mdpControl(KeyEvent event) {
+                 if(passwordsiginin.getText().isEmpty()){
+            passwordsiginin.setFocusColor(Color.RED);
+                 }else {
+            passwordsiginin.setFocusColor(Color.BLUE);
+      
+    }
+        }
 }
+    

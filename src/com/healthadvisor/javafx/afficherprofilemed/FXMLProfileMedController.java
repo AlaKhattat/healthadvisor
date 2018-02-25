@@ -27,12 +27,21 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -128,6 +137,8 @@ public class FXMLProfileMedController implements Initializable {
 "Urologie"};
     @FXML
     private JFXTextField numtel;
+    @FXML
+    private Label strenghtP;
     /**
      * Initializes the controller class.
      */
@@ -177,26 +188,38 @@ public class FXMLProfileMedController implements Initializable {
 
     @FXML
     private void modifierMedecin(MouseEvent event) {
-        new ComboBoxAutoComplete<String>(specialite);
-        nom.setEditable(true);
-        prenom.setEditable(true);
         email.setEditable(true);
-        date.setEditable(true);
-        sexe.setEditable(true);
-        pays.setEditable(true);
-        ville.setEditable(true);
-        specialite.setEditable(true);
         adresse.setEditable(true);
-        diplome.setEditable(true);
         login.setEditable(true);
         password.setEditable(true);
+        numtel.setEditable(true);
+        ville.setEditable(true);
+        pays.setEditable(true);
         confirmer.setOpacity(1);
+
 
         
     }
 
     @FXML
     private void validerModifMedecin(MouseEvent event) {
+           Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Il faut remplir tous les champs")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle(); 
+              Image img2=new Image("/com/healthadvisor/ressources/checked.png");
+        Notifications notif2=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Modification Profile")
+                    .text("Profile Modifié avec succés")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle(); 
+        try{
  String nom=this.nom.getText();
  String prenom=this.prenom.getText();
  String email=this.email.getText();
@@ -223,25 +246,91 @@ public class FXMLProfileMedController implements Initializable {
         GestionMedecin gm=new GestionMedecin();
         Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLInscriMedecinController.LAT_P,FXMLInscriMedecinController.LONG_P, login, password, u.getCin());
         gm.ModifierMedecin(m);
-         Label l=new Label("Modification Avec Succés");
-         JFXPopup pop=new JFXPopup(l);
-         pop.show(confirmer,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
+
          
-         
-        this.nom.setEditable(true);
-        this.prenom.setEditable(true);
-        this.email.setEditable(true);
-        this.date.setEditable(true);
-        this.sexe.setEditable(true);
-        this.pays.setEditable(true);
-        this.ville.setEditable(true);
-        this.specialite.setEditable(true);
-        this.adresse.setEditable(true);
-        this.diplome.setEditable(true);
-        this.login.setEditable(true);
-        this.password.setEditable(true);
-        pop.hide();
+      
+        this.email.setEditable(false);
+        this.pays.setEditable(false);
+        this.ville.setEditable(false);
+        this.adresse.setEditable(false);
+        this.login.setEditable(false);
+        this.password.setEditable(false);
         confirmer.setOpacity(0);
+        notif2.show();
+        }catch(Exception e){
+        notif.show();
+ 
+        }
+    }
+
+    @FXML
+    private void mdpControl(KeyEvent event) {
+        String password;
+        password = this.password.getText();
+
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+
+        if (password.length() >= 8) {
+            for (int i = 0; i < password.length(); i++) {
+                char x = password.charAt(i);
+                if (Character.isLetter(x)) {
+
+                    hasLetter = true;
+                }
+
+                else if (Character.isDigit(x)) {
+
+                    hasDigit = true;
+                }
+
+                // no need to check further, break the loop
+                if(hasLetter && hasDigit){
+
+                    break;
+                }
+
+            }
+            if (hasLetter && hasDigit) {
+                strenghtP.setStyle("-fx-font-size: 15;\n" +
+" -fx-text-fill: #ADFF2F;");
+                strenghtP.setText("Fort");
+            } else {
+                strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #F39C12;");
+                strenghtP.setText("Faible");
+            }
+        } else {
+            strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #C70039;");
+                strenghtP.setText("il faut au moins 8 caractères");
+        }
+    }
+
+    @FXML
+    private void telControl(KeyEvent event) {
+          String num=numtel.getText();
+       try{
+       numtel.setFocusColor(Color.BLUE);
+       int numtel=Integer.parseInt(num);
+       }catch(NumberFormatException ex)  {
+       numtel.setFocusColor(Color.RED);
+
+       }
+    }
+
+    @FXML
+    private void emailControl(KeyEvent event) {
+          String masque = "^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(masque);
+        Matcher controler = pattern.matcher(email.getText());
+        if (controler.matches()){
+        //Ok : la saisie est bonne
+        email.setFocusColor(Color.BLUE);
+        }else{email.setFocusColor(Color.RED);
+        //La c'est pas bon
+        }
     }
     
 }

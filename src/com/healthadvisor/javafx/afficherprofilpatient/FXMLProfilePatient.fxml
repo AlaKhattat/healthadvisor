@@ -37,7 +37,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="44.0" layoutY="271.0" prefHeight="25.0" prefWidth="161.0" promptText="Email">
+      <JFXTextField fx:id="email" editable="false" labelFloat="true" layoutX="44.0" layoutY="271.0" onKeyReleased="#emailControl" prefHeight="25.0" prefWidth="161.0" promptText="Email">
          <font>
             <Font size="14.0" />
          </font>
@@ -57,13 +57,13 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="323.0" layoutY="476.0" prefHeight="25.0" prefWidth="161.0" promptText="Mot de passe">
+      <JFXTextField fx:id="password" editable="false" labelFloat="true" layoutX="323.0" layoutY="476.0" onKeyReleased="#mdpControl" prefHeight="25.0" prefWidth="161.0" promptText="Mot de passe">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="date" editable="false" layoutX="44.0" layoutY="332.0" prefHeight="25.0" prefWidth="161.0" promptText="Date de naissance" />
-      <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="44.0" layoutY="379.0" prefHeight="25.0" prefWidth="161.0" promptText="Sexe" />
+      <JFXDatePicker fx:id="date" disable="true" editable="false" layoutX="44.0" layoutY="332.0" prefHeight="25.0" prefWidth="161.0" promptText="Date de naissance" />
+      <JFXComboBox fx:id="sexe" disable="true" labelFloat="true" layoutX="44.0" layoutY="379.0" prefHeight="25.0" prefWidth="161.0" promptText="Sexe" />
       <Label layoutX="268.0" layoutY="338.0" prefHeight="40.0" prefWidth="248.0" text="Paramètres d'authentification" textFill="#8c0b0b">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -73,6 +73,7 @@
       <Separator layoutX="303.0" layoutY="538.0" prefHeight="9.0" prefWidth="239.0" />
       <JFXButton fx:id="modifier" layoutX="40.0" layoutY="636.0" onMouseClicked="#modifierPatient" prefHeight="25.0" prefWidth="84.0" text="Modifier" />
       <JFXButton fx:id="confirmer" layoutX="192.0" layoutY="636.0" onMouseClicked="#confirmerPatient" prefHeight="25.0" prefWidth="161.0" text="Confirmer Modification" />
-      <JFXTextField fx:id="numtel" labelFloat="true" layoutX="44.0" layoutY="535.0" prefHeight="25.0" prefWidth="161.0" promptText="Téléphone" />
+      <JFXTextField fx:id="numtel" labelFloat="true" layoutX="44.0" layoutY="535.0" onKeyReleased="#telControl" prefHeight="25.0" prefWidth="161.0" promptText="Téléphone" />
+      <Label fx:id="strenghtP" layoutX="323.0" layoutY="514.0" prefHeight="17.0" prefWidth="161.0" text="Label" />
    </children>
 </AnchorPane>
