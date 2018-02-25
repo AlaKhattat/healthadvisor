@@ -79,11 +79,11 @@ public class GestionRegime implements IGestionRegime
     }
     public void suivreRegime(Regime regime,Patient p)
     {
-        //ID_USER	ID_REGIME	ID_SPORT	DATE_DEBUT	DUREE
+        //ID_USER	ID_REGIME	ID_SPORT	DATE_DEBUT	DUREE 
        try
         { 
-            System.out.println("login:"+p.getLogin());
-          String query="insert into regime_user values (?,?,?,?,?)"; 
+          System.out.println("login:"+p.getLogin());
+          String query="insert into regime_user(id_user,id_regime,id_sport,date_debut,duree) values (?,?,?,?,?)"; 
           PreparedStatement statement = database.getConnexion().prepareStatement(query);//adding diet in diet table
           statement.setString(1, p.getLogin());
           statement.setString(2,regime.getId_regime());
