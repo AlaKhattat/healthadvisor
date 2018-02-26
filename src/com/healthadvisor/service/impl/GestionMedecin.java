@@ -124,7 +124,7 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.SPECIALITE='"+specialite+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.SPECIALITE like '%"+specialite+"%'" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
