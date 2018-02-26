@@ -55,6 +55,10 @@ public class ModifierRdvFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         GestionRendezVous grdv =new GestionRendezVous();
         for(Rendez_Vous rdv :grdv.ListRendez_Vous()){
+            if(rdv.getStatut_rendezvous().equals("ANNULE")){
+                System.out.println("annule");
+            }
+            else{
             HBox h =new HBox();
             h.minWidth(600);
             h.minHeight(100);
@@ -93,8 +97,8 @@ public class ModifierRdvFXMLController implements Initializable {
                         impo.show();
                     }
                     else{
-                        
-                            grdv.supprimerRendezVous(r.getId());
+                            r.setStatut_rendezvous(StatutRendezVousEnum.ANNULE.name());
+                            grdv.ModifierRendezVous(r);
                             try {
                             FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierRdvFXML.fxml"));
                             Parent root=loader.load();
@@ -133,7 +137,14 @@ public class ModifierRdvFXMLController implements Initializable {
                             Scene s=new Scene(root);
                             Stage stage=new Stage();
                             stage.setScene(s);
-                            stage.show();
+                            stage.showAndWait();
+                            try {
+                            FXMLLoader loader2=new FXMLLoader(getClass().getResource("ModifierRdvFXML.fxml"));
+                            Parent root2=loader2.load();
+                            annule.getScene().setRoot(root2);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ModifierRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         } catch (IOException ex) {
                             Logger.getLogger(ModifierRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -150,6 +161,7 @@ public class ModifierRdvFXMLController implements Initializable {
             Vcontainer.getChildren().add(h);
         }
     }    
+    }
     public static long DifférenceDates(Date date_mise){
         long diff=0;
         try {

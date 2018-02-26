@@ -128,5 +128,22 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
            System.out.println(e.getMessage());
        }      
     return false;}
+
+    @Override
+    public boolean ModifierRendezVousdate(Rendez_Vous rdv) {
+        try{
+           System.out.println("Modification RDV...");
+           Statement stm =database.getConnexion().createStatement();
+           Timestamp t=new Timestamp(rdv.getDate_heure().getTime());
+           String sql="UPDATE rendez_vous SET DATE_HEURE='"+t+"' WHERE id='"+rdv.getId()+"'";
+           stm.executeUpdate(sql);
+           System.out.println("Rendez_vous bien modifiÃ©");
+           return true;
+           
+        }catch(SQLException e){
+           System.err.println(e.getMessage());
+       }      
+            return false;
+    }
     
 }
