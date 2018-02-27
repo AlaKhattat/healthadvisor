@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.login_fx.FXMLLoginController">
+<AnchorPane fx:id="holderLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #00000000;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.login_fx.FXMLLoginController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="890.0" style="-fx-background-color: #00000000;">
          <children>
@@ -53,7 +53,7 @@
                         <JFXTextField fx:id="cin" labelFloat="true" layoutX="234.0" layoutY="62.0" onKeyReleased="#cinControl" prefHeight="41.0" prefWidth="119.0" promptText="Cin" />
                         <JFXTextField fx:id="ville" labelFloat="true" layoutX="234.0" layoutY="234.0" onKeyReleased="#villeControl" prefHeight="41.0" prefWidth="119.0" promptText="Ville" />
                         <JFXComboBox fx:id="sexe" labelFloat="true" layoutX="234.0" layoutY="190.0" onInputMethodTextChanged="#sexeControl" prefHeight="25.0" prefWidth="119.0" promptText="Sexe" />
-                        <JFXDatePicker fx:id="date" editable="false" layoutX="234.0" layoutY="135.0" onInputMethodTextChanged="#dateControl" prefHeight="25.0" prefWidth="134.0" promptText="Date de naissance" />
+                        <JFXDatePicker fx:id="date" editable="false" layoutX="234.0" layoutY="135.0" onAction="#dateControl" prefHeight="25.0" prefWidth="134.0" promptText="Date de naissance" />
                         <JFXTextField fx:id="numtel" labelFloat="true" layoutX="87.0" layoutY="306.0" onKeyReleased="#telControl" prefHeight="25.0" prefWidth="119.0" promptText="Téléphone" />
                      </children>
                   </AnchorPane>

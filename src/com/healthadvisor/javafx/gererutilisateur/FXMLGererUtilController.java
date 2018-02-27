@@ -132,6 +132,9 @@ public class FXMLGererUtilController implements Initializable {
             med.setLogin_med(m.getLogin_med());
             med.setSexe(u.getSexe());
             med.setSpecialite(m.getSpecialite());
+            med.setAdresse(m.getAdresse());
+            med.setStatut_compte(m.getStatut_compte());
+            med.setDiplome(m.getDiplome());
           return med;
       }).forEachOrdered((med) -> {
           listM.add(med);

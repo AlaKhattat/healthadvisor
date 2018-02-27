@@ -39,7 +39,7 @@ public class FXMLHomeViewController implements Initializable {
     @FXML
     private Label txtCurrentWindow;
     @FXML
-    private AnchorPane holderPane;
+    public  AnchorPane holderPane;
     @FXML
     private JFXDrawer drawer;
     @FXML
@@ -48,6 +48,8 @@ public class FXMLHomeViewController implements Initializable {
     private JFXButton Signout;
     @FXML
     private JFXButton profile;
+    @FXML
+    public static AnchorPane mainPane;
     /**
      * Initializes the controller class.
      */
@@ -67,20 +69,19 @@ public class FXMLHomeViewController implements Initializable {
             }
 
         });
-        try {
-            VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/FXMLDrawer.fxml"));
-            AnchorPane  acceuil= FXMLLoader.load(getClass().getResource(Routes.ChoixUser));
-            AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        
+if(FXMLLoginController.patient){
+     try {
+            System.out.println("Initialisation Patient ...");
+            VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/PatientDrawer.fxml"));
+            AnchorPane  acceuil= FXMLLoader.load(getClass().getResource(Routes.HOME));
             AnchorPane recherche = FXMLLoader.load(getClass().getResource(Routes.RechercheMedecin));
-            AnchorPane suivie = FXMLLoader.load(getClass().getResource(Routes.InscriPatient));
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
-            StackPane GererUtil = FXMLLoader.load(getClass().getResource(Routes.GererUtilisateur));
-            AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
             ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
@@ -101,10 +102,7 @@ public class FXMLHomeViewController implements Initializable {
                                 drawer.close();                               
                                 setNode(recherche);
                                 break;
-                            case "sign":
-                                drawer.close();
-                                setNode(login);
-                                break;
+                         
                             case "symptome":
                                 drawer.close();                                
                                 setNode(Symptome);
@@ -137,14 +135,8 @@ public class FXMLHomeViewController implements Initializable {
                                 drawer.close();                                
                                 setNode(Article);
                                 break; 
-                            case "gererutilisateur":
-                                drawer.close();                                
-                                setNode(GererUtil);
-                                break;
-                            case "suivierdv":
-                                drawer.close();                                
-                                setNode(SuivieRDV);
-                                break;                                  
+                            
+                                                            
                         }
                     });
                 }
@@ -154,7 +146,151 @@ public class FXMLHomeViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLHomeViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+}else {
+    if(FXMLLoginController.docteur){
+     try {
+            System.out.println("Initialisation Medecin ...");
+            VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/MedecinDrawer.fxml"));
+            AnchorPane  acceuil= FXMLLoader.load(getClass().getResource(Routes.HOME));
+            AnchorPane recherche = FXMLLoader.load(getClass().getResource(Routes.RechercheMedecin));
+            AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
+            AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
+            AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
+            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
+            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
+            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+            AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
 
+       
+            setNode(recherche);
+            drawer.setSidePane(sidePane);
+            ScrollPane ss=new ScrollPane();
+            ss.setContent(sidePane);
+            drawer.getChildren().add(ss);
+            for (Node node : sidePane.getChildren()) {
+                if (node.getAccessibleText() != null) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
+                        switch (node.getAccessibleText()) {
+                            case "acceuil":
+                                drawer.close();
+                                setNode(acceuil);
+                                break;
+                            case "recherchemed":
+                                drawer.close();                               
+                                setNode(recherche);
+                                break;
+                         
+                            case "symptome":
+                                drawer.close();                                
+                                setNode(Symptome);
+                                break;    
+                            case "geolocalisation":
+                                drawer.close();                                
+                                setNode(Geolocalisation);
+                                break;
+                            case "boutique":
+                                drawer.close();                                
+                                setNode(Boutique);
+                                break; 
+                            case "questionreponse":
+                                drawer.close();                                
+                                setNode(QuestionReponse);
+                                break;
+                            case "sondage":
+                                drawer.close();                                
+                                setNode(Sondage);
+                                break;  
+                            case "bienetre":
+                                drawer.close();                                
+                                setNode(BienEtre);
+                                break;
+                            case "evenement":
+                                drawer.close();                                
+                                setNode(Evenement);
+                                break;
+                            case "article":
+                                drawer.close();                                
+                                setNode(Article);
+                                break; 
+                            case "suivierdv":
+                                drawer.close();                                
+                                setNode(SuivieRDV);
+                                break; 
+                                                                           
+                        }
+                    });
+                }
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLHomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+    else {
+        try {
+            System.out.println("Initialisation Utilisateur ...");
+            VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/UtilisateurDrawer.fxml"));
+            AnchorPane acceuil= FXMLLoader.load(getClass().getResource(Routes.HOME));
+            AnchorPane recherche = FXMLLoader.load(getClass().getResource(Routes.RechercheMedecin));
+            AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
+            AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
+            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
+            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+       
+            setNode(acceuil);
+            drawer.setSidePane(sidePane);
+            ScrollPane ss=new ScrollPane();
+            ss.setContent(sidePane);
+            drawer.getChildren().add(ss);
+            for (Node node : sidePane.getChildren()) {
+                if (node.getAccessibleText() != null) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
+                        switch (node.getAccessibleText()) {
+                            case "acceuil":
+                                drawer.close();
+                                setNode(acceuil);
+                                break;
+                            case "recherchemed":
+                                drawer.close();                               
+                                setNode(recherche);
+                                break;
+                          
+                            case "symptome":
+                                drawer.close();                                
+                                setNode(Symptome);
+                                break;    
+                            case "geolocalisation":
+                                drawer.close();                                
+                                setNode(Geolocalisation);
+                                break; 
+                            case "questionreponse":
+                                drawer.close();                                
+                                setNode(QuestionReponse);
+                                break;
+                            case "evenement":
+                                drawer.close();                                
+                                setNode(Evenement);
+                                break;
+                            case "article":
+                                drawer.close();                                
+                                setNode(Article);
+                                break; 
+                                                          
+                        }
+                    });
+                }
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLHomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
     }
 
     private void setNode(Node node) {

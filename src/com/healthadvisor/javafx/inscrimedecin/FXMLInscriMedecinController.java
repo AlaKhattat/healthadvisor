@@ -7,6 +7,7 @@ package com.healthadvisor.javafx.inscrimedecin;
 
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
@@ -16,11 +17,17 @@ import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,9 +40,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -45,7 +55,6 @@ import org.controlsfx.control.Notifications;
  */
 public class FXMLInscriMedecinController implements Initializable {
 
-    @FXML
     private JFXTextField diplome;
     @FXML
     private JFXTextField adresse;
@@ -63,6 +72,13 @@ public static Double LONG_P;
     private JFXButton position;
     @FXML
     private Label strenghtP;
+    private String url_image;
+    @FXML
+    private ImageView imageview;
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private Label labelDiplome;
     /**
      * Initializes the controller class.
      */
@@ -121,7 +137,7 @@ public static Double LONG_P;
 
     @FXML
     private void validerInscri(MouseEvent event) {
-             Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+            Image img=new Image("/com/healthadvisor/ressources/cancel.png");
         Notifications notif=Notifications.create()
                .graphic(new ImageView(img))
                     .title("Champs Invalide")
@@ -148,7 +164,7 @@ public static Double LONG_P;
          Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
          gp.AjouterPatient(p);
          System.out.println(LAT_P+""+LONG_P);
-         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, diplome,0,LAT_P,LONG_P,login, password, p.getCin_user());
+         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, url_image,0,LAT_P,LONG_P,StatutMedecinEnum.NON_VALIDE.name(),login, password, p.getCin_user());
          System.out.println("latitude"+medecin.getLat_p());
          gm.AjouterMedecin(medecin);
          notif2.show();
@@ -214,6 +230,45 @@ public static Double LONG_P;
 " -fx-text-fill: #C70039;");
                 strenghtP.setText("il faut au moins 8 caractères");
         }
+    }
+
+  
+    @FXML
+    public void ParcourirImage(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(anchor.getScene().getWindow());
+        if (file != null) {
+            openFile(file);
+        }
+    }
+
+    private void openFile(File file) {
+        FileInputStream input;
+        try {
+            File dest = new File("C:\\wamp64\\www\\HealthAdvisorImages\\" + file.getName());
+            Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            url_image = dest.toPath().toString();
+            System.out.println("Image enregistrée avec succés");
+            input = new FileInputStream(url_image);
+            javafx.scene.image.Image img_produit = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            labelDiplome.setText("Votre Diplome : ");
+            imageview.setImage(img_produit);
+        } catch (IOException ex) {
+            System.err.println("Erreur d'enregistrement d'image");
+        }
+    }
+
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.setInitialDirectory(
+                new File("C:\\Users\\aaa\\Desktop\\")
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
     }
     
 }

@@ -7,6 +7,8 @@ package com.healthadvisor.service.impl;
 
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.entities.Utilisateur;
 import com.heathadvisor.service.IGestionMedecin;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +34,7 @@ public class GestionMedecin implements IGestionMedecin{
     public void AjouterMedecin(Medecin medecin) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into medecin (login,specialite,adresse,diplome,rating,lat_p,long_p) "+ " values (?,?,?,?,?,?,?)";
+            String sql="Insert into medecin (login,specialite,adresse,diplome,rating,lat_p,long_p,statut_compte) "+ " values (?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,medecin.getLogin());
             preparedStmt.setString(2,medecin.getSpecialite());
@@ -41,6 +43,7 @@ public class GestionMedecin implements IGestionMedecin{
             preparedStmt.setInt(5,medecin.getRating());
             preparedStmt.setDouble(6,medecin.getLat_p());
             preparedStmt.setDouble(7,medecin.getLong_p());
+            preparedStmt.setString(8,medecin.getStatut_compte());
 
               preparedStmt.executeUpdate();
 
@@ -89,7 +92,7 @@ public class GestionMedecin implements IGestionMedecin{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -108,7 +111,7 @@ public class GestionMedecin implements IGestionMedecin{
             String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
-                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
             }
             
             System.out.println("Recuperation avec succes");
@@ -128,7 +131,7 @@ public class GestionMedecin implements IGestionMedecin{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -148,7 +151,7 @@ public class GestionMedecin implements IGestionMedecin{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -167,7 +170,7 @@ public class GestionMedecin implements IGestionMedecin{
             String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND concat(utilisateur.NOM,utilisateur.PRENOM)='"+nomprenom+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
-                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
             }
             
             System.out.println("Recuperation avec succes");
@@ -186,7 +189,7 @@ public class GestionMedecin implements IGestionMedecin{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("statut_compte"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -196,6 +199,25 @@ public class GestionMedecin implements IGestionMedecin{
             Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listmed;     }
+
+    @Override
+    public boolean ModifierStatutMedecin(String cin, String statut) {     
+        GestionPatient gp=new GestionPatient();
+        Patient p=gp.AfficherPatientCin(cin);
+        Medecin med =AfficherMedecinLogin(p.getLogin());
+        try {
+            System.out.println("Modification RDV...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="UPDATE medecin SET statut_compte='"+statut+"' WHERE login='"+med.getLogin()+"'";
+            stm.executeUpdate(sql);
+            System.out.println("Rendez_vous bien modifiÃ©");
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+ }
+
 
  
     

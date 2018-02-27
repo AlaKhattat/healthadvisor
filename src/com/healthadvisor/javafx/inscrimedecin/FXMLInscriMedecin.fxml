@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="600.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="501.0" prefWidth="600.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController">
     <stylesheets>
         <URL value="@fxmlinscrimedecin.css" />
     </stylesheets>
@@ -29,11 +29,6 @@
             <DropShadow />
          </effect>
       </Label>
-      <JFXTextField fx:id="diplome" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="397.0" prefHeight="25.0" prefWidth="253.0" promptText="Diplome" styleClass="text" unFocusColor="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXTextField>
       <JFXTextField fx:id="adresse" focusColor="#5add5a" labelFloat="true" layoutX="319.0" layoutY="307.0" prefHeight="25.0" prefWidth="253.0" promptText="Adresse" styleClass="text" unFocusColor="WHITE">
          <font>
             <Font size="14.0" />
@@ -76,5 +71,16 @@
          </graphic>
       </JFXButton>
       <Label fx:id="strenghtP" layoutX="319.0" layoutY="201.0" prefHeight="17.0" prefWidth="253.0" />
+      <JFXButton layoutX="319.0" layoutY="411.0" onAction="#ParcourirImage" prefHeight="25.0" prefWidth="253.0" text="Importer Votre Diplome" textFill="#e1ff00">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="imageview" fitHeight="124.0" fitWidth="166.0" layoutX="71.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="labelDiplome" layoutX="71.0" layoutY="329.0" prefHeight="17.0" prefWidth="159.0" textFill="#00fc1d">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

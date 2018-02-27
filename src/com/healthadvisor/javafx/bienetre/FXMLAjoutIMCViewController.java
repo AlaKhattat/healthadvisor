@@ -204,8 +204,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
                    Platform.runLater(() -> {
                        FXMLAjoutIMCViewController.stage.close();
                 });
-                 
-               
+                  
             }
 
         }, 3000);

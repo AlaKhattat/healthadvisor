@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -73,7 +74,7 @@ public class FXMLSuivieRDVController implements Initializable {
         loadData();
     }    
    private void initCol() {
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date_heure"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date_rdv"));
         docteurCol.setCellValueFactory(new PropertyValueFactory<>("docteur"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
         statutCol.setCellValueFactory(new PropertyValueFactory<>("statut_rendezvous"));
@@ -84,11 +85,12 @@ public class FXMLSuivieRDVController implements Initializable {
         gr.ListRendez_Vous().stream().map((r) -> {
             String docteur=gr.RecupererMedecin(r.getMedecin_id());
             String patient=gr.RecupererPatient(r.getPatient_id());
-            Date date=r.getDate_heure();
+            SimpleDateFormat simpleDate=new SimpleDateFormat("dd MMM yyy à HH:mm");
+            String  date=simpleDate.format(r.getDate_heure());
             String statut =r.getStatut_rendezvous();
             Rendez_Vous rdv =new Rendez_Vous();
             rdv.setId(r.getId());
-            rdv.setDate_heure(date);
+            rdv.setDate_rdv("Le "+date);
             rdv.setMedecin_id(r.getMedecin_id());
             rdv.setPatient_id(r.getPatient_id());
             rdv.setDocteur(docteur);

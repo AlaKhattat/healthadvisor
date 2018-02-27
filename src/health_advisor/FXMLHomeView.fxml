@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLHomeViewController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="750.0" prefWidth="1200.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLHomeViewController">
     <stylesheets>
         <URL value="@fxmlhomeview.css" />
     </stylesheets>

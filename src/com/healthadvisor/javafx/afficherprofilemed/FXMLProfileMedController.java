@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.afficherprofilemed;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
 import com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
@@ -19,6 +20,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -32,14 +34,19 @@ import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -139,6 +146,12 @@ public class FXMLProfileMedController implements Initializable {
     private JFXTextField numtel;
     @FXML
     private Label strenghtP;
+    @FXML
+    private JFXButton modifPos;
+    @FXML
+    private Label statutCompteLabel;
+    @FXML
+    private ImageView statutImage;
     /**
      * Initializes the controller class.
      */
@@ -177,6 +190,15 @@ public class FXMLProfileMedController implements Initializable {
         this.login.setText(p.getLogin());
         this.password.setText(p.getPassword());
         this.diplome.setText(m.getDiplome());
+        this.statutCompteLabel.setText(m.getStatut_compte());
+        if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.NON_VALIDE.name())){
+            statutImage.setImage(new Image("/com/healthadvisor/javafx/afficherprofilemed/notverified.png"));
+        }else {
+                    if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
+                    statutImage.setImage(new Image("/com/healthadvisor/javafx/afficherprofilemed/checkmark.png"));
+
+                    }
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("");
         sb.append(u.getNum_tel());
@@ -195,6 +217,7 @@ public class FXMLProfileMedController implements Initializable {
         numtel.setEditable(true);
         ville.setEditable(true);
         pays.setEditable(true);
+        this.modifPos.setDisable(false);
         confirmer.setOpacity(1);
 
 
@@ -244,7 +267,7 @@ public class FXMLProfileMedController implements Initializable {
         Patient p=new Patient(login, password, u.getCin());
         gp.ModifierPatient(p);
         GestionMedecin gm=new GestionMedecin();
-        Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLInscriMedecinController.LAT_P,FXMLInscriMedecinController.LONG_P, login, password, u.getCin());
+        Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLInscriMedecinController.LAT_P,FXMLInscriMedecinController.LONG_P,this.statutCompteLabel.getText(), login, password, u.getCin());
         gm.ModifierMedecin(m);
 
          
@@ -255,6 +278,7 @@ public class FXMLProfileMedController implements Initializable {
         this.adresse.setEditable(false);
         this.login.setEditable(false);
         this.password.setEditable(false);
+        this.modifPos.setDisable(true);
         confirmer.setOpacity(0);
         notif2.show();
         }catch(Exception e){
@@ -331,6 +355,16 @@ public class FXMLProfileMedController implements Initializable {
         }else{email.setFocusColor(Color.RED);
         //La c'est pas bon
         }
+    }
+
+    @FXML
+    private void modifPositionAction(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/gmap/FXMLDocument.fxml"));
+            Parent parent = loader.load();        
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Recuperer Ma Position");
+            stage.setScene(new Scene(parent));
+            stage.show();
     }
     
 }

@@ -10,6 +10,7 @@ package com.healthadvisor.javafx.routes;
  * @author khattout
  */
 public class Routes {
+    public static String HOME ="/com/healthadvisor/javafx/home/Home.fxml";
     public static String LOGINVIEW="/com/healthadvisor/javafx/login_fx/FXMLLogin.fxml";
     public static String SuivieRDV_M="/com/healthadvisor/javafx/suivierendezvous/FXMLSuivieRDV.fxml";
     public static String InscriPatient="/com/healthadvisor/javafx/inscripatient/FXMLInscriPatient.fxml";

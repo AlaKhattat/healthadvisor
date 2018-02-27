@@ -57,7 +57,7 @@ public class FXMLEditStatutRDVController implements Initializable {
     private String patient_id;
     private String medecin_id;
     private Date dater;
-    String[] sexelist={StatutRendezVousEnum.ANNULE.name(),StatutRendezVousEnum.ENCOURS.name(),StatutRendezVousEnum.VALIDE.name()};
+    String[] statutrdv={StatutRendezVousEnum.ANNULE.name(),StatutRendezVousEnum.ENCOURS.name(),StatutRendezVousEnum.VALIDE.name()};
     GestionRendezVous gr=new GestionRendezVous();
     GestionUtilisateur gu=new GestionUtilisateur();
     GestionMedecin gm=new GestionMedecin();
@@ -75,7 +75,7 @@ public class FXMLEditStatutRDVController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
+        ObservableList<String> sl=FXCollections.observableArrayList(statutrdv);
         statut.setItems(sl); 
     }    
     

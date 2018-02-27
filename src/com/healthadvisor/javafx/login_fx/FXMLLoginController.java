@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -40,8 +41,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -51,6 +54,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -105,8 +109,11 @@ public class FXMLLoginController implements Initializable {
     public static String pseudo;
     public static String Identifiant;
     public static boolean docteur=false;
+    public static boolean patient=false;
 
                 public static ArrayList<ArrayList> panier;
+    @FXML
+    private AnchorPane holderLogin;
 
     /**
      * Initializes the controller class.
@@ -114,6 +121,23 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+                final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+     public DateCell call(final DatePicker datePicker) {
+         return new DateCell() {
+             @Override public void updateItem(LocalDate item, boolean empty) {
+                 super.updateItem(item, empty);
+
+                 if (Year.from(item).isAfter(Year.of(Year.now().getValue()-18))||Year.from(item).isBefore(Year.of(Year.now().getValue()-80))) {
+                     setTooltip(new Tooltip("Votre Age doit etre compris entre 18 et 80 ans"));
+                     setStyle("-fx-background-color: #ff4444;");
+                     setDisable(true);
+                 }
+                
+             }
+         };
+     }
+ };
+ date.setDayCellFactory(dayCellFactory);
        String[] sexelist={"Homme","Femme"};
         ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
         sexe.setItems(sl);
@@ -149,22 +173,27 @@ public class FXMLLoginController implements Initializable {
         Patient p= gp.AfficherPatientLogin(pseudo);
         Identifiant=p.getCin_user();
         if(p!=null){
+            patient=true;
             Identifiant=p.getCin_user();
             if (p.getPassword().equalsIgnoreCase(password)) {
             panier=new ArrayList<>();
             try{
             Medecin m=gm.AfficherMedecinLogin(pseudo);
             if(m.getLogin_med()!=null){
-               docteur=true;
+                patient=false;
+                docteur=true;
             }
             }catch(NullPointerException e){
                 e.getMessage();
             }
-            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.RechercheMedecin)); 
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
             Parent root=loader.load();
+            Scene s = holderLogin.getScene(); 
+            s.setRoot(root);
+            /*
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.show();*/
             }      
         }
     }
@@ -294,10 +323,7 @@ public class FXMLLoginController implements Initializable {
         }
     }
 
-    @FXML
-    private void dateControl(InputMethodEvent event) {
-        // a faire 
-    }
+ 
 
     @FXML
     private void telControl(KeyEvent event) {
@@ -324,11 +350,14 @@ public class FXMLLoginController implements Initializable {
                  if(passwordsiginin.getText().isEmpty()){
             passwordsiginin.setFocusColor(Color.RED);
                  }else {
-            passwordsiginin.setFocusColor(Color.BLUE);
-      
+            passwordsiginin.setFocusColor(Color.BLUE);    
     }
         }
-    
+
+    @FXML
+    private void dateControl(ActionEvent event) {
+   
  
 }
     
+}
