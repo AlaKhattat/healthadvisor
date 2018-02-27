@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="259.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.modifier_rdv.EditRdvFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="259.0" prefWidth="609.0" stylesheets="@../../../../../bootstrap3.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.modifier_rdv.EditRdvFXMLController">
    <children>
       <DatePicker fx:id="datePickerRDV" layoutX="131.0" layoutY="117.0" />
       <ComboBox fx:id="hourMinCombobox" layoutX="305.0" layoutY="117.0" prefHeight="25.0" prefWidth="114.0" />
