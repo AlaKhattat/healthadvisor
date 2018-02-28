@@ -14,6 +14,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -65,9 +66,7 @@ final Callback<DatePicker, DateCell> dayCellFactory =
                         public void updateItem(LocalDate item, boolean empty) {
                             super.updateItem(item, empty);
                            
-                            if (item.isBefore(
-                                    LocalDate.now())
-                                ) {
+                            if (item.isBefore(LocalDate.now()) || item.getDayOfWeek() == DayOfWeek.SUNDAY) {
                                     setDisable(true);
                                     setStyle("-fx-background-color: #ffc0cb;");
                             }   

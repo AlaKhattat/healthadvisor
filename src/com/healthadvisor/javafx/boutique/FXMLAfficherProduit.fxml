@@ -6,11 +6,13 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLAfficherProduitController">
    <children>
-      <AnchorPane fx:id="filtre" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="989.0">
+      <AnchorPane fx:id="filtre" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="1000.0">
          <children>
             <Label layoutX="651.0" layoutY="14.0" text="Type :" />
             <Label layoutX="10.0" layoutY="14.0" text="Promotion :" />
@@ -35,6 +37,18 @@
             <Button fx:id="btnInterface_Ajout" layoutX="869.0" layoutY="44.0" mnemonicParsing="false" onAction="#InterfaceAjouter" prefHeight="25.0" prefWidth="106.0" text="Ajouter Produit" />
             <Button fx:id="btnInterface_Publie" layoutX="869.0" layoutY="81.0" mnemonicParsing="false" onAction="#InterfacePublie" prefHeight="25.0" prefWidth="106.0" text="Publie" />
          </children></AnchorPane>
-      <AnchorPane fx:id="lst_produits" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="761.0" />
+      <AnchorPane fx:id="lst_produits" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="1000.0">
+         <children>
+            <Label fx:id="lbl_panier" layoutX="887.0" layoutY="143.0" prefHeight="69.0" prefWidth="90.0">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@panier.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="lblpanier_NB" layoutX="949.0" layoutY="135.0" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

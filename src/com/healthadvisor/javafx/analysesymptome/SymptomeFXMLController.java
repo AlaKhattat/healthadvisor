@@ -20,7 +20,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -145,7 +149,14 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnSuivantAction(ActionEvent event) {
-        if(!anne.getText().equals("") && sexe.getValue()!=null){
+        
+        
+        if(!anne.getText().equals("")&& sexe.getValue()!=null){
+                if(Integer.parseInt(anne.getText())>Calendar.getInstance().get(Calendar.YEAR) || Integer.parseInt(anne.getText())<1900){
+            Alert ageerror =new Alert(Alert.AlertType.ERROR, "Année de naissance incorrecte!!", ButtonType.OK);
+            ageerror.show();
+        }
+                else{
         if(anne.disableProperty().getValue()==true && sexe.disableProperty().getValue()==true){
         anne.setDisable(false);
         sexe.setDisable(false);
@@ -179,12 +190,12 @@ if(subbodypart.disableProperty().getValue()==true){
         btnValider.setText("Précédent");
         }
         }
+        }
         else{
             System.out.println("Erreur");
             Alert a =new Alert(Alert.AlertType.ERROR, "Remlir les champs Année de naissance et Sexe", ButtonType.OK);
             a.show();
         }
-        
     }
     @FXML
     void btnAjouterAction(ActionEvent event) {
@@ -245,6 +256,7 @@ if(subbodypart.disableProperty().getValue()==true){
     @Override
     
     public void initialize(URL url, ResourceBundle rb) {
+        btnValider.getStyleClass().add("button");
         ResultatAnalyse=new ArrayList<>();
         ArrayList<String> list=new ArrayList<>();
         list.add("Cardiologie");
@@ -269,6 +281,15 @@ if(subbodypart.disableProperty().getValue()==true){
             ObservList.add(e);
         }
         bodypart.setItems(ObservList);
+        anne.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                anne.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            if (anne.getText().length() > 4) {
+                String s = anne.getText().substring(0, 4);
+                anne.setText(s);
+            }
+        });
         
         
     }  

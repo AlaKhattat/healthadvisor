@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
-import static com.healthadvisor.javafx.login_fx.FXMLLoginController.panier;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.FileInputStream;
@@ -64,6 +58,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
 
 
@@ -99,7 +94,8 @@ public class FXMLAfficherProduitController implements Initializable {
     private GridPane   grid=new GridPane();
     GridPane g;
     ScrollPane s;
-   
+    public static List<ArrayList> panier=new ArrayList<>();
+    
     @FXML
     private Button btn_passer;
     @FXML
@@ -107,17 +103,37 @@ public class FXMLAfficherProduitController implements Initializable {
     @FXML
     private Button btnInterface_Publie;
     
+    //cette liste pour pouvoir manipulé les quantités des produits dans le panier
+    private List<Produit> lst_P ;
+    ServiceProduit service_P=new ServiceProduit();
+    @FXML
+    private Label lbl_panier;
+    @FXML
+    private Label lblpanier_NB;
+    
+    //********************************héthi lézém nzidha 3and 5atout
+    public static int nb_produits_panier=panier.size();
+   // public static float Prix_Final=0;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
+   
+   
+        
+        
     //remplir le combobox
     ch_type.getItems().addAll("Sante","Bien etre");
     
-    ServiceProduit sp=new ServiceProduit();
-    List<Produit> lst_P=sp.ConsulterListe_Produits();
+    //set the product number into image
+    lblpanier_NB.setText(""+nb_produits_panier);
+    
+    
+     lst_P=service_P.ConsulterListe_Produits();
+     //***************************************suppression des produits expirer
+     
     Configurer_GridScroll(grid,scroll);
     for(int i=0;i<lst_P.size();i++)
-    {
+    {   
         CreerProduit(grid, lst_P.get(i), 0, i, 1, i, 2, i, 3, i);
     }
     lst_produits.getChildren().addAll(scroll);
@@ -207,22 +223,26 @@ public class FXMLAfficherProduitController implements Initializable {
         Label esp4=new Label();
         esp4.setText("");
         
-        v2.getChildren().addAll(esp1,esp2,promotion,esp3,Ajt_Panier,esp4);
+        Button Signaler_Prod=new Button();
+        Signaler_Prod.setText("Signaler");
+        SignalerProduit(Signaler_Prod, p);
+        
+        v2.getChildren().addAll(esp1,esp2,promotion,esp3,Ajt_Panier,esp4,Signaler_Prod);
         grid.add(v2, columnV2, rowV2);
         
     }
 
     @FXML
     private void Recherche_Avancee(ActionEvent event) {
-            ServiceProduit sp=new ServiceProduit();
-            List<Produit> lst_prom=sp.ListeProduits_Promotion(Float.parseFloat(txt_promMIN.getText()),Float.parseFloat(txt_promMAX.getText()));
-            List<Produit> lst_prix=sp.ListProduits_Prix(Float.parseFloat(txt_prixMIN.getText()),Float.parseFloat(txt_prixMAX.getText()));
+            
+            List<Produit> lst_prom=service_P.ListeProduits_Promotion(Float.parseFloat(txt_promMIN.getText()),Float.parseFloat(txt_promMAX.getText()));
+            List<Produit> lst_prix=service_P.ListProduits_Prix(Float.parseFloat(txt_prixMIN.getText()),Float.parseFloat(txt_prixMAX.getText()));
             lst_prix.retainAll(lst_prom);
-            List<Produit> lst_date=sp.ListProduits_Date(java.sql.Date.valueOf(this.date_min.getValue()),java.sql.Date.valueOf(this.date_max.getValue()) );
+            List<Produit> lst_date=service_P.ListProduits_Date(java.sql.Date.valueOf(this.date_min.getValue()),java.sql.Date.valueOf(this.date_max.getValue()) );
             lst_date.retainAll(lst_prix);
-            List<Produit> lst_img=sp.ListProduits_Image(check_IMG.isSelected());
+            List<Produit> lst_img=service_P.ListProduits_Image(check_IMG.isSelected());
             lst_img.retainAll(lst_date);
-            List<Produit> lst_type=sp.ListProduits_Categorie(ch_type.getValue());
+            List<Produit> lst_type=service_P.ListProduits_Categorie(ch_type.getValue());
             lst_type.retainAll(lst_img);
             
             lst_produits.getChildren().removeAll(scroll);
@@ -270,12 +290,17 @@ public class FXMLAfficherProduitController implements Initializable {
                    if(MAJ_Nbr_Produits(p) != -1){
                        
                        panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString()));
+                       
                    }
                 else{
                    ArrayList<Object> nb_pdt=new ArrayList<>();
                    nb_pdt.add(0,p.getReference());
                    nb_pdt.add(1, 1);
                    panier.add(nb_pdt);
+                   nb_produits_panier=nb_produits_panier+1;
+                   lblpanier_NB.setText(""+nb_produits_panier);
+                       System.err.println(""+((p.getPrix_vente() * p.getPromotion())/100));
+                 //  Prix_Final=Prix_Final+(p.getPrix_vente())-((p.getPrix_vente() * p.getPromotion())/100);
                     }
                 }
                 else
@@ -292,14 +317,23 @@ public class FXMLAfficherProduitController implements Initializable {
                 Optional<Integer> result = dialog.showAndWait();
                 if (result.isPresent()){
                    if(MAJ_Nbr_Produits(p) != -1)
-                   {
-                           panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+ result.get());
+                   {   int qte=Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+result.get();
+                       if(qte>p.getQuantite()){
+                           panier.get(MAJ_Nbr_Produits(p)).set(1, p.getQuantite());
+                       }
+                else{
+                      panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+ result.get());
+                   }
                    }
                 else{
                    ArrayList<Object> nb_pdt=new ArrayList<>();
                    nb_pdt.add(0,p.getReference());
                    nb_pdt.add(1, result.get());
                    panier.add(nb_pdt);
+                   nb_produits_panier=nb_produits_panier+1;
+                   lblpanier_NB.setText(""+nb_produits_panier);
+                   //Prix_Final=Prix_Final+(p.getPrix_vente()*result.get())-((p.getPrix_vente()*result.get() * p.getPromotion())/100);
+                   
                                        }
             
                 // The Java 8 way to get the response value (with lambda expression).
@@ -335,6 +369,20 @@ public class FXMLAfficherProduitController implements Initializable {
         }
         return pos;
     }
+    
+    //Signaler un produit Indisérable
+    public void SignalerProduit(Button btn,Produit p){
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Produit pdt=service_P.ConsulterProduit(p.getReference());
+                pdt.setSignaler(1);
+                service_P.UpdateProduit(pdt);
+            }
+        }); 
+    }
+    
+    
 
     @FXML
     private void InterfaceAjouter(ActionEvent event) {

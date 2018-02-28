@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -26,6 +28,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -68,7 +71,10 @@ public class MapsFXMLController implements Initializable {
     private StackPane stackPane;
     @FXML
     private ToggleGroup toggleGrp;
-    public int Markercount;
+    private int Markercount;
+    private int nbrRequest;
+    private double lat;
+    private double lng;
     @FXML
     private Button btnClear;
     /***************************ON Action Methods*********************************************/
@@ -107,11 +113,12 @@ public class MapsFXMLController implements Initializable {
                                     System.out.println(ex);
                                 }
                             JSONObject obj2 = new JSONObject(ch2);
-                 Double lat=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat");
-                 Double lng=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+                 lat=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+                 lng=obj2.getJSONObject("result").getJSONObject("geometry").getJSONObject("location").getDouble("lng");
                                 webEngine.executeScript("map.setCenter({lat: "+lat+",lng:"+lng+"});\n" +
-                                                        "map.setZoom(14);  // Why 17? Because it looks good.");
+                                                        "map.setZoom(14);");
                                 Markercount=PlacesMaker(lat, lng, webEngine,toggleGrp.getSelectedToggle().getUserData().toString(),Markercount);
+                                nbrRequest=1;
                             } catch (MalformedURLException ex) {
                                 Logger.getLogger(MapsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -135,13 +142,17 @@ public class MapsFXMLController implements Initializable {
     @FXML
     private void onBtnClearAction(ActionEvent event) {
         webEngine.executeScript("deleteMarkers();");
+        seachPlacestxt.setText("");
         Markercount=0;
+        nbrRequest=0;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Markercount=0;
-        
+        nbrRequest=0;
+        lat=0;
+        lng=0;
         webView = new WebView();
         webEngine = webView.getEngine();
         URL urlGoogleMaps = getClass().getResource("Map.html");
@@ -153,6 +164,14 @@ public class MapsFXMLController implements Initializable {
         RdBtnGym.setUserData("gym");
         RdBtnPhysio.setUserData("physiotherapist");
         RdBtnSpa.setUserData("spa");
+        toggleGrp.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+           public void changed(ObservableValue<? extends Toggle> ov,
+                    Toggle old_toggle, Toggle new_toggle) {
+        if (nbrRequest>0) {
+        Markercount=PlacesMaker(lat, lng, webEngine,toggleGrp.getSelectedToggle().getUserData().toString(),Markercount);    
+        }
+      } 
+        });
 
     }
 

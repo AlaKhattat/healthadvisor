@@ -8,6 +8,7 @@ import java.util.Date;
 public class Commande {
 
   private int num_commande;
+  private String reference_commande;
   private Date date_commande;
   private String mode_payement;
   private String ID_client;
@@ -15,12 +16,23 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(int num_commande, Date date_commande, String mode_payement, String ID_client) {
+    public Commande(int num_commande, String reference_commande, Date date_commande, String mode_payement, String ID_client) {
         this.num_commande = num_commande;
+        this.reference_commande = reference_commande;
         this.date_commande = date_commande;
         this.mode_payement = mode_payement;
         this.ID_client = ID_client;
     }
+
+    public String getReference_commande() {
+        return reference_commande;
+    }
+
+    public void setReference_commande(String reference_commande) {
+        this.reference_commande = reference_commande;
+    }
+
+    
 
     public int getNum_commande() {
         return num_commande;
@@ -56,8 +68,10 @@ public class Commande {
 
     @Override
     public String toString() {
-        return "Commande{" + "num_commande=" + num_commande + ", date_commande=" + date_commande + ", mode_payement=" + mode_payement + ", ID_client=" + ID_client + '}';
+        return "Commande{" + "num_commande=" + num_commande + ", reference_commande=" + reference_commande + ", date_commande=" + date_commande + ", mode_payement=" + mode_payement + ", ID_client=" + ID_client + '}';
     }
+
+    
   
   
   

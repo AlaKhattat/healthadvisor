@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="pan_stats" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLStatistiques_AdminController">
+   <children>
+      <Button fx:id="btn_gerer" layoutX="866.0" layoutY="47.0" mnemonicParsing="false" onAction="#InterfaceGerer" prefHeight="25.0" prefWidth="100.0" text="Gerer" />
+      <AnchorPane fx:id="pan_pie" layoutX="6.0" layoutY="8.0" prefHeight="291.0" prefWidth="424.0" />
+      <AnchorPane fx:id="pan_bar" layoutX="430.0" layoutY="5.0" prefHeight="291.0" prefWidth="434.0" />
+      <AnchorPane fx:id="pan_area" layoutX="14.0" layoutY="292.0" prefHeight="291.0" prefWidth="964.0" />
+   </children>
+</AnchorPane>

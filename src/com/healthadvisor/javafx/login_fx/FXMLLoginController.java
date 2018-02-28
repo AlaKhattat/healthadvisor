@@ -117,6 +117,7 @@ public class FXMLLoginController implements Initializable {
                 public static ArrayList<ArrayList> panier;
     @FXML
     private AnchorPane holderLogin;
+           
 
     /**
      * Initializes the controller class.
@@ -140,10 +141,10 @@ public class FXMLLoginController implements Initializable {
          };
      }
  };
- date.setDayCellFactory(dayCellFactory);
+       date.setDayCellFactory(dayCellFactory);
        String[] sexelist={"Homme","Femme"};
-        ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
-        sexe.setItems(sl);
+       ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
+       sexe.setItems(sl);
     }    
 
 
@@ -179,7 +180,7 @@ public class FXMLLoginController implements Initializable {
             Identifiant=p.getCin_user();
             patient=true;
             if (p.getPassword().equalsIgnoreCase(password)) {
-            panier=new ArrayList<>();
+           
             try{
             Medecin m=gm.AfficherMedecinLogin(p.getLogin());
             if(m.getLogin_med()!=null){
