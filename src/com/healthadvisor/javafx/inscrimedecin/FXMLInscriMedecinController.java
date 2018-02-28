@@ -175,7 +175,7 @@ public static Double LONG_P;
          System.out.println("latitude"+medecin.getLat_p());
          gm.AjouterMedecin(medecin);
          notif2.show();
-      AnchorPane loginpane = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        AnchorPane loginpane = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
         FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,loginpane);
            }catch(Exception e){
             notif.show();

@@ -110,8 +110,8 @@ if(FXMLLoginController.patient){
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
-            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+           /* ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
        
             setNode(holderPane,recherche);
             drawer.setSidePane(sidePane);
@@ -154,7 +154,7 @@ if(FXMLLoginController.patient){
                             case "bienetre":
                                 drawer.close();                                
                                 setNode(holderPane,BienEtre);
-                                break;
+                                break;/*
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -163,7 +163,7 @@ if(FXMLLoginController.patient){
                                 drawer.close();                                
                                 setNode(holderPane,Article);
                                 break; 
-                            
+                            */
                                                             
                         }
                     });
@@ -191,8 +191,8 @@ if(FXMLLoginController.patient){
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
-            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+            /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
             AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
 
        
@@ -237,7 +237,7 @@ if(FXMLLoginController.patient){
                             case "bienetre":
                                 drawer.close();                                
                                 setNode(holderPane,BienEtre);
-                                break;
+                                break;/*
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -245,7 +245,7 @@ if(FXMLLoginController.patient){
                             case "article":
                                 drawer.close();                                
                                 setNode(holderPane,Article);
-                                break; 
+                                break; */
                             case "suivierdv":
                                 Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
                                 Medecin m=gm.AfficherMedecinLogin(p.getLogin());
@@ -279,8 +279,8 @@ if(FXMLLoginController.patient){
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
-            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
+/*            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
        
             setNode(holderPane,acceuil);
             drawer.setSidePane(sidePane);
@@ -311,7 +311,7 @@ if(FXMLLoginController.patient){
                             case "questionreponse":
                                 drawer.close();                                
                                 setNode(holderPane,QuestionReponse);
-                                break;
+                                break;/*
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -319,7 +319,7 @@ if(FXMLLoginController.patient){
                             case "article":
                                 drawer.close();                                
                                 setNode(holderPane,Article);
-                                break; 
+                                break; */
                                                           
                         }
                     });
@@ -341,7 +341,7 @@ if(FXMLLoginController.patient){
 
     @FXML
     private void SigninAction(MouseEvent event) throws IOException {
-        System.out.println("Se Connecter");
+    System.out.println("Se Connecter");
     AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
     setNode(holderPane,login);
     }
@@ -353,9 +353,9 @@ if(FXMLLoginController.patient){
         FXMLLoginController.Identifiant=null;
         FXMLLoginController.docteur=false;
         FXMLLoginController.patient=false;
-       FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
+        FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
             Parent root=loader.load();
-            Scene s = holderPane.getScene(); 
+            Scene s = holderPane1.getScene(); 
             s.setRoot(root);
             
             }

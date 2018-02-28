@@ -137,14 +137,9 @@ if(FXMLRechercheMedecinInterfaceController.nom==null)
     p.setContent(createPage());
 else
     p.setContent(createPageNom(nomprenom));
-
-
+  
     anchor.getChildren().addAll(p,mapView);
-    Stage stage = new Stage(StageStyle.DECORATED);
-    Scene scene = new Scene(anchor);
-    stage.setScene(scene);
-    stage.setTitle("List Medecin");
-    stage.show();
+    anchorPane.getChildren().add(anchor);
     }
   public VBox createPage() {
     VBox box = new VBox();
@@ -291,7 +286,8 @@ else
         adresse.setPrefHeight(32);
         adresse.setLayoutX(168);
         adresse.setLayoutY(111);
-         FileInputStream input;          
+         FileInputStream input;      
+            System.out.println("L'image : "+m.getPhoto_profile());
             input = new FileInputStream(m.getPhoto_profile());
             Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
         Circle c=new Circle();
