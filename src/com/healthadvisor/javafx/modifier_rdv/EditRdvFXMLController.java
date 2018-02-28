@@ -5,10 +5,15 @@
  */
 package com.healthadvisor.javafx.modifier_rdv;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Rendez_Vous;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
+import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionRendezVous;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -110,8 +115,15 @@ hourMinCombobox.getSelectionModel().select(stringheure);
         //MAJ BDD
         GestionRendezVous grdv=new GestionRendezVous();
         grdv.ModifierRendezVousdate(r);
+        SendEmail email=new SendEmail();
+        GestionMedecin gm=new GestionMedecin();
+        GestionUtilisateur gu=new GestionUtilisateur();
+        Medecin m=gm.AfficherMedecinLogin(r.getMedecin_id());
+        Utilisateur u=gu.AfficherUtilisateurCin(m.getCin_user());
+        
         Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
         stage.close();
+        email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
         Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
         a.show();
     }

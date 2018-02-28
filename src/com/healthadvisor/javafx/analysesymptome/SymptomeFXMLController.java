@@ -256,6 +256,7 @@ if(subbodypart.disableProperty().getValue()==true){
     @Override
     
     public void initialize(URL url, ResourceBundle rb) {
+        btnValider.getStyleClass().add("button");
         ResultatAnalyse=new ArrayList<>();
         ArrayList<String> list=new ArrayList<>();
         list.add("Cardiologie");

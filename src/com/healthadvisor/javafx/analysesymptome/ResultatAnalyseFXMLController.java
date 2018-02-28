@@ -86,6 +86,7 @@ public class ResultatAnalyseFXMLController implements Initializable {
             h1.setPrefSize(625,200);
             h1.setMaxHeight(200);
             h1.setMinHeight(200);
+            h1.setId("flatbee-card");
             Label NomMaladie=new Label(x.getNom());
             NomMaladie.setMaxWidth(150);
             NomMaladie.setMinWidth(150);
