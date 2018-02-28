@@ -91,7 +91,10 @@ String[] hhmm={
 "19:30"};
 ObservableList<String> sl=FXCollections.observableArrayList(hhmm);
 hourMinCombobox.setItems(sl);
-hourMinCombobox.getSelectionModel().select(ModifierRdvFXMLController.RDV.getDate_heure().getHours()+":"+ModifierRdvFXMLController.RDV.getDate_heure().getMinutes());
+
+DateFormat formatter = new SimpleDateFormat("HH:mm");
+String stringheure=formatter.format(ModifierRdvFXMLController.RDV.getDate_heure());
+hourMinCombobox.getSelectionModel().select(stringheure);
     }    
 
     @FXML
