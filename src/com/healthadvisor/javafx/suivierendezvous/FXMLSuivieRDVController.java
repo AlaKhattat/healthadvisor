@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.javafx.suivierendezvous;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.editstatutrdv.FXMLEditStatutRDVController;
@@ -41,6 +42,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.table.TableFilter;
 
 /**
  * FXML Controller class
@@ -72,6 +74,15 @@ public class FXMLSuivieRDVController implements Initializable {
         // TODO
         initCol();
         loadData();
+                 TableFilter<Rendez_Vous> tableFilterM = new TableFilter<>(tableView);
+        tableFilterM.setSearchStrategy((input,docteurCol) -> {
+        
+    try {
+        return docteurCol.contains(input);
+    } catch (Exception e) {
+        return false;
+    }
+});
     }    
    private void initCol() {
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date_rdv"));

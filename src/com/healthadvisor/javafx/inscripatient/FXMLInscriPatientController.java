@@ -12,6 +12,7 @@ import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -98,11 +99,8 @@ public class FXMLInscriPatientController implements Initializable {
         Patient p=new Patient(login, password,FXMLLoginController.Identifiant,url_image);
         gp.AjouterPatient(p);
          
-           FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.LOGINVIEW)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
+        AnchorPane loginpane = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,loginpane);
             notif2.show();
         }catch(Exception e){
             notif.show();

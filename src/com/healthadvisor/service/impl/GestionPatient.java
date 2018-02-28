@@ -143,6 +143,28 @@ System.out.println("Patient bien modifie");
         }
         return patient;     }
 
+    @Override
+    public List<Patient> AfficherQPatient() {
+      
+    ArrayList<Patient> listp= new ArrayList<>();
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="select patient.* FROM patient WHERE patient.LOGIN NOT IN (SELECT medecin.LOGIN FROM medecin WHERE patient.LOGIN=medecin.LOGIN)" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Patient patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"),rs.getString("photo_profile"));
+                listp.add(patient);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listp;    }
+
   
     
 }

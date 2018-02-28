@@ -15,6 +15,7 @@ import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +26,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -120,33 +123,26 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     }    
 
     @FXML
-    private void rdvSpecialite(MouseEvent event) {
+    private void rdvSpecialite(MouseEvent event) throws IOException {
+       nom=null;
         spec=this.specialite.getValue();
-        try {
-         
-            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.AFFICHERMEDECIN)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+
+        AnchorPane affichermed = FXMLLoader.load(getClass().getResource(Routes.AFFICHERMEDECIN));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,affichermed);
+        
         
         
     }
 
     @FXML
     private void rdvNomAction(MouseEvent event) {
+        spec=null;
         System.out.println("Value"+this.rechercheNom.getValue());
         nom=this.rechercheNom.getValue().replaceAll(" ", "");
          try {
-         
-            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.AFFICHERMEDECIN)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
+                   
+        AnchorPane affichermed = FXMLLoader.load(getClass().getResource(Routes.AFFICHERMEDECIN));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,affichermed);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

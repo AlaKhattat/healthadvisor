@@ -23,13 +23,17 @@ import gmapsfx.javascript.object.MapOptions;
 import gmapsfx.javascript.object.MapTypeIdEnum;
 import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -39,14 +43,17 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.imageio.ImageIO;
 import netscape.javascript.JSObject;
 import org.controlsfx.control.Rating;
 
@@ -59,6 +66,8 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
   private Pagination pagination;
   private Medecin medecin;
   public static Medecin med;
+      @FXML
+    private AnchorPane anchorPane;
     /**
      * Initializes the controller class.
      */
@@ -71,7 +80,11 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         if(FXMLRechercheMedecinInterfaceController.spec!=null)
-        initializePage(FXMLRechercheMedecinInterfaceController.spec);
+        try {
+            initializePage(FXMLRechercheMedecinInterfaceController.spec);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         else {
         if(FXMLRechercheMedecinInterfaceController.nom!=null)
         {initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
@@ -79,10 +92,10 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
         }
     }    
     
-    public void initializePage(String specialite){
+    public void initializePage(String specialite) throws IOException{
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
-        mapView.setLayoutX(618);
+        mapView.setLayoutX(633);
         mapView.setLayoutY(66);
         AnchorPane anchor = new AnchorPane();
     anchor.setPrefWidth(1000);
@@ -90,7 +103,7 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
   
     ScrollPane p=new ScrollPane();
-    p.setPrefSize(700, 600);
+    p.setPrefSize(620, 600);
 if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
     }
@@ -98,15 +111,17 @@ else{
     p.setContent(createPageSpécialite(specialite));
 
     anchor.getChildren().addAll(p,mapView);
-    Stage stage = new Stage(StageStyle.DECORATED);
+    anchorPane.getChildren().add(anchor);
+  /*  Stage stage = new Stage(StageStyle.DECORATED);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
     stage.setTitle("List Medecin");
-    stage.show();
+    stage.show();*/
     }
     }
     
         public void initializePageNOM(String nomprenom){
+        FXMLRechercheMedecinInterfaceController.spec=null;
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
         mapView.setLayoutX(618);
@@ -211,8 +226,10 @@ else
     return box;
   }
     
-  public VBox createPageSpécialite(String spec) {
-    VBox box = new VBox();
+  public VBox createPageSpécialite(String spec) throws FileNotFoundException, IOException {
+           FXMLRechercheMedecinInterfaceController.nom=null;
+
+      VBox box = new VBox();
         GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSpecialite(spec)){
        
@@ -274,11 +291,15 @@ else
         adresse.setPrefHeight(32);
         adresse.setLayoutX(168);
         adresse.setLayoutY(111);
+         FileInputStream input;          
+            input = new FileInputStream(m.getPhoto_profile());
+            Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
         Circle c=new Circle();
         c.setRadius(56);
         c.setLayoutX(70);
         c.setLayoutY(71);
         c.setFill(Color.AQUAMARINE);
+        c.setFill(new ImagePattern(img_profile));
             AnchorPane anc = new AnchorPane();
             anc.setPrefWidth(410);
             anc.setPrefHeight(241);

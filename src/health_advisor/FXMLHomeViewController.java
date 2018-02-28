@@ -50,8 +50,7 @@ public class FXMLHomeViewController implements Initializable {
     private JFXHamburger hamburger;
     @FXML
     private Label txtCurrentWindow;
-    @FXML
-    public  AnchorPane holderPane;
+    public  static AnchorPane holderPane;
     @FXML
     private JFXDrawer drawer;
     @FXML
@@ -72,12 +71,14 @@ public class FXMLHomeViewController implements Initializable {
                     .hideAfter(Duration.seconds(4))
                     .position(Pos.TOP_RIGHT)
                     .darkStyle();
+    @FXML
+    private AnchorPane holderPane1;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
+     holderPane=holderPane1;
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
         transition.setRate(-1);
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
@@ -112,7 +113,7 @@ if(FXMLLoginController.patient){
             ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
-            setNode(recherche);
+            setNode(holderPane,recherche);
             drawer.setSidePane(sidePane);
             ScrollPane ss=new ScrollPane();
             ss.setContent(sidePane);
@@ -123,44 +124,44 @@ if(FXMLLoginController.patient){
                         switch (node.getAccessibleText()) {
                             case "acceuil":
                                 drawer.close();
-                                setNode(acceuil);
+                                setNode(holderPane,acceuil);
                                 break;
                             case "recherchemed":
                                 drawer.close();                               
-                                setNode(recherche);
+                                setNode(holderPane,recherche);
                                 break;
                          
                             case "symptome":
                                 drawer.close();                                
-                                setNode(Symptome);
+                                setNode(holderPane,Symptome);
                                 break;    
                             case "geolocalisation":
                                 drawer.close();                                
-                                setNode(Geolocalisation);
+                                setNode(holderPane,Geolocalisation);
                                 break;
                             case "boutique":
                                 drawer.close();                                
-                                setNode(Boutique);
+                                setNode(holderPane,Boutique);
                                 break; 
                             case "questionreponse":
                                 drawer.close();                                
-                                setNode(QuestionReponse);
+                                setNode(holderPane,QuestionReponse);
                                 break;
                             case "sondage":
                                 drawer.close();                                
-                                setNode(Sondage);
+                                setNode(holderPane,Sondage);
                                 break;  
                             case "bienetre":
                                 drawer.close();                                
-                                setNode(BienEtre);
+                                setNode(holderPane,BienEtre);
                                 break;
                             case "evenement":
                                 drawer.close();                                
-                                setNode(Evenement);
+                                setNode(holderPane,Evenement);
                                 break;
                             case "article":
                                 drawer.close();                                
-                                setNode(Article);
+                                setNode(holderPane,Article);
                                 break; 
                             
                                                             
@@ -195,7 +196,7 @@ if(FXMLLoginController.patient){
             AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
 
        
-            setNode(recherche);
+            setNode(holderPane,recherche);
             drawer.setSidePane(sidePane);
             ScrollPane ss=new ScrollPane();
             ss.setContent(sidePane);
@@ -206,51 +207,51 @@ if(FXMLLoginController.patient){
                         switch (node.getAccessibleText()) {
                             case "acceuil":
                                 drawer.close();
-                                setNode(acceuil);
+                                setNode(holderPane,acceuil);
                                 break;
                             case "recherchemed":
                                 drawer.close();                               
-                                setNode(recherche);
+                                setNode(holderPane,recherche);
                                 break;
                          
                             case "symptome":
                                 drawer.close();                                
-                                setNode(Symptome);
+                                setNode(holderPane,Symptome);
                                 break;    
                             case "geolocalisation":
                                 drawer.close();                                
-                                setNode(Geolocalisation);
+                                setNode(holderPane,Geolocalisation);
                                 break;
                             case "boutique":
                                 drawer.close();                                
-                                setNode(Boutique);
+                                setNode(holderPane,Boutique);
                                 break; 
                             case "questionreponse":
                                 drawer.close();                                
-                                setNode(QuestionReponse);
+                                setNode(holderPane,QuestionReponse);
                                 break;
                             case "sondage":
                                 drawer.close();                                
-                                setNode(Sondage);
+                                setNode(holderPane,Sondage);
                                 break;  
                             case "bienetre":
                                 drawer.close();                                
-                                setNode(BienEtre);
+                                setNode(holderPane,BienEtre);
                                 break;
                             case "evenement":
                                 drawer.close();                                
-                                setNode(Evenement);
+                                setNode(holderPane,Evenement);
                                 break;
                             case "article":
                                 drawer.close();                                
-                                setNode(Article);
+                                setNode(holderPane,Article);
                                 break; 
                             case "suivierdv":
                                 Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
                                 Medecin m=gm.AfficherMedecinLogin(p.getLogin());
                                 if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
                                 drawer.close();                                
-                                setNode(SuivieRDV);
+                                setNode(holderPane,SuivieRDV);
                                 }else{
                                     notif.show();
                                 }
@@ -281,7 +282,7 @@ if(FXMLLoginController.patient){
             ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
-            setNode(acceuil);
+            setNode(holderPane,acceuil);
             drawer.setSidePane(sidePane);
             ScrollPane ss=new ScrollPane();
             ss.setContent(sidePane);
@@ -292,32 +293,32 @@ if(FXMLLoginController.patient){
                         switch (node.getAccessibleText()) {
                             case "acceuil":
                                 drawer.close();
-                                setNode(acceuil);
+                                setNode(holderPane,acceuil);
                                 break;
                             case "recherchemed":
                                 drawer.close();                               
-                                setNode(recherche);
+                                setNode(holderPane,recherche);
                                 break;
                           
                             case "symptome":
                                 drawer.close();                                
-                                setNode(Symptome);
+                                setNode(holderPane,Symptome);
                                 break;    
                             case "geolocalisation":
                                 drawer.close();                                
-                                setNode(Geolocalisation);
+                                setNode(holderPane,Geolocalisation);
                                 break; 
                             case "questionreponse":
                                 drawer.close();                                
-                                setNode(QuestionReponse);
+                                setNode(holderPane,QuestionReponse);
                                 break;
                             case "evenement":
                                 drawer.close();                                
-                                setNode(Evenement);
+                                setNode(holderPane,Evenement);
                                 break;
                             case "article":
                                 drawer.close();                                
-                                setNode(Article);
+                                setNode(holderPane,Article);
                                 break; 
                                                           
                         }
@@ -333,7 +334,7 @@ if(FXMLLoginController.patient){
 }
     }
 
-    private void setNode(Node node) {
+    public static void setNode(AnchorPane holderPane,Node node) {
         holderPane.getChildren().clear();        
         holderPane.getChildren().add((Node) node);
     } 
@@ -342,7 +343,7 @@ if(FXMLLoginController.patient){
     private void SigninAction(MouseEvent event) throws IOException {
         System.out.println("Se Connecter");
     AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
-    setNode(login);
+    setNode(holderPane,login);
     }
 
     @FXML
@@ -363,11 +364,11 @@ if(FXMLLoginController.patient){
     private void profileAction(MouseEvent event) throws IOException {
         if(FXMLLoginController.docteur){
                 AnchorPane ProfileMedecin = FXMLLoader.load(getClass().getResource(Routes.PROFILEMEDECIN));
-                setNode(ProfileMedecin);
+                setNode(holderPane,ProfileMedecin);
         }else{
             if(FXMLLoginController.patient){
                  AnchorPane ProfilePatient = FXMLLoader.load(getClass().getResource(Routes.PROFILEPATIENT));
-                setNode(ProfilePatient);
+                setNode(holderPane,ProfilePatient);
             }
         }
     }

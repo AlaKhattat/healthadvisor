@@ -239,11 +239,11 @@ public class FXMLLoginController implements Initializable {
         GestionUtilisateur gu=new GestionUtilisateur();
         Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville,num);
         gu.AjouterUtilisateur(u);
-        FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.ChoixUser)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
+   
+            
+            AnchorPane choixuser = FXMLLoader.load(getClass().getResource(Routes.ChoixUser));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,choixuser);
+      
          }catch(Exception e){
         notif.show();
  
