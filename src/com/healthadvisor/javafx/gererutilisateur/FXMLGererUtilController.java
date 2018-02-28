@@ -83,7 +83,6 @@ public class FXMLGererUtilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-  
         initColP();
         loadDataP();
         TableFilter<Patient> tableFilter = new TableFilter<>(tableViewP);

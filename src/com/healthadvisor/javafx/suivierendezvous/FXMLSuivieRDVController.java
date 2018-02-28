@@ -101,6 +101,7 @@ public class FXMLSuivieRDVController implements Initializable {
             String statut =r.getStatut_rendezvous();
             Rendez_Vous rdv =new Rendez_Vous();
             rdv.setId(r.getId());
+            rdv.setDate_heure(r.getDate_heure());
             rdv.setDate_rdv("Le "+date);
             rdv.setMedecin_id(r.getMedecin_id());
             rdv.setPatient_id(r.getPatient_id());
@@ -147,6 +148,7 @@ public class FXMLSuivieRDVController implements Initializable {
             Parent parent = loader.load();
 
             FXMLEditStatutRDVController controller = (FXMLEditStatutRDVController) loader.getController();
+            System.out.println("Rendez_vous "+selectedForEdit);
             controller.inflateUI(selectedForEdit);
 
             Stage stage = new Stage(StageStyle.DECORATED);

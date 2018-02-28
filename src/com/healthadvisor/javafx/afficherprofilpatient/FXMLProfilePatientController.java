@@ -150,7 +150,7 @@ public class FXMLProfilePatientController implements Initializable {
         login.setEditable(true);
         password.setEditable(true);
         confirmer.setOpacity(1);
-        this.ProfileB.setDefaultButton(false);
+        this.ProfileB.setDisable(false);
 
     }
 
@@ -202,7 +202,8 @@ public class FXMLProfilePatientController implements Initializable {
         this.Ville.setEditable(false);
         this.login.setEditable(false);
         this.password.setEditable(false);
-        this.ProfileB.setDefaultButton(true);
+        this.ProfileB.setDisable(true);
+
         notif2.show();
         confirmer.setOpacity(0);
           }catch(Exception e){

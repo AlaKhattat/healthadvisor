@@ -80,6 +80,7 @@ public class FXMLEditStatutRDVController implements Initializable {
     }    
     
      public void inflateUI(Rendez_Vous rdv) {
+         System.out.println("DAte :"+rdv.getDate_heure().toString());
        date.setText(rdv.getDate_heure().toString());
        dater=rdv.getDate_heure();
        docteur.setText(rdv.getDocteur());
