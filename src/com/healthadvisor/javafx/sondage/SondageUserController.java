@@ -45,7 +45,7 @@ public class SondageUserController implements Initializable {
     @FXML
     private Label label;
     public static Sondage sondageStatic;
-    public static Patient patient = new Patient("tarek", "pass", "1","");
+    public static Patient patient = new Patient("gara","gara","54789654","c:/ccc");
 
     /**
      * Initializes the controller class.

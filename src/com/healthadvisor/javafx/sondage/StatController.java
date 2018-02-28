@@ -5,9 +5,12 @@
  */
 package com.healthadvisor.javafx.sondage;
 
+import com.healthadvisor.entities.ReponsesPossibles;
+import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionStatistiques;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,15 +63,22 @@ public class StatController implements Initializable {
         GestionStatistiques gs = new GestionStatistiques();
         int nbrTotalReponses = gs.countReponsesSondage(SondageController.sondage.getId());
         //System.out.println(nbrTotalReponses);
+        GestionReponsesPossibles grp=new GestionReponsesPossibles();
+        ArrayList<Integer> lrp=new ArrayList<>();
+        for(ReponsesPossibles rp :grp.ListReponsesPossibles(SondageController.sondage.getId())){
+            lrp.add(rp.getId_reponse());
+            
+        }
+        
         
             
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                new PieChart.Data("★", gs.countStat(SondageController.sondage.getId(), 1)),
-                new PieChart.Data("★★", gs.countStat(SondageController.sondage.getId(), 2)),
-                new PieChart.Data("★★★", gs.countStat(SondageController.sondage.getId(), 3)),
-                new PieChart.Data("★★★★", gs.countStat(SondageController.sondage.getId(), 4)),
-                new PieChart.Data("★★★★★", gs.countStat(SondageController.sondage.getId(), 5)));
+                new PieChart.Data("★", gs.countStat(SondageController.sondage.getId(), lrp.get(0))),
+                new PieChart.Data("★★", gs.countStat(SondageController.sondage.getId(), lrp.get(1))),
+                new PieChart.Data("★★★", gs.countStat(SondageController.sondage.getId(), lrp.get(2))),
+                new PieChart.Data("★★★★", gs.countStat(SondageController.sondage.getId(), lrp.get(3))),
+                new PieChart.Data("★★★★★", gs.countStat(SondageController.sondage.getId(), lrp.get(4))));
         final PieChart chart = new PieChart(pieChartData);
         chart.setTitle("Sondage : "+SondageController.sondage.getNom()+"\n"+"Nombre réponses : "+nbrTotalReponses+" d'utilisateurs ont répondu à ce sondage.");
         
