@@ -96,9 +96,9 @@ public class FXMLAjoutIMCViewController implements Initializable {
         this.spin.setVisible(false);
         IMC = 0;
         
-        patient = new Patient(FXMLLoginController.pseudo, " "," ");
-        patient = new Patient("user1", "password", "to");
-        patient = new Patient(FXMLLoginController.pseudo,"password","to");
+        patient = new Patient(FXMLLoginController.pseudo, " "," ","");
+        patient = new Patient("user1", "password", "to","");
+        patient = new Patient(FXMLLoginController.pseudo,"password","to","");
         remplirChamp(patient);
     }
 

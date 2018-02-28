@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -73,12 +74,17 @@ public static Double LONG_P;
     @FXML
     private Label strenghtP;
     private String url_image;
+    private String url_image_profile;
     @FXML
     private ImageView imageview;
     @FXML
     private AnchorPane anchor;
     @FXML
     private Label labelDiplome;
+    @FXML
+    private ImageView imageProfile;
+        private Desktop desktop=Desktop.getDesktop();
+
     /**
      * Initializes the controller class.
      */
@@ -161,10 +167,10 @@ public static Double LONG_P;
         String diplome=this.diplome.getText();
          GestionMedecin gm=new GestionMedecin();
          GestionPatient gp= new GestionPatient();
-         Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
+         Patient p=new Patient(login, password,FXMLLoginController.Identifiant,url_image_profile);
          gp.AjouterPatient(p);
          System.out.println(LAT_P+""+LONG_P);
-         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, url_image,0,LAT_P,LONG_P,StatutMedecinEnum.NON_VALIDE.name(),login, password, p.getCin_user());
+         Medecin medecin=new Medecin(p.getLogin(), specialite, adresse, url_image,0,LAT_P,LONG_P,StatutMedecinEnum.NON_VALIDE.name(),login, password, p.getCin_user(),url_image_profile);
          System.out.println("latitude"+medecin.getLat_p());
          gm.AjouterMedecin(medecin);
          notif2.show();
@@ -245,15 +251,16 @@ public static Double LONG_P;
 
     private void openFile(File file) {
         FileInputStream input;
-        try {
+        try {            desktop.open(file);
+
             File dest = new File("C:\\wamp64\\www\\HealthAdvisorImages\\" + file.getName());
             Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
             url_image = dest.toPath().toString();
             System.out.println("Image enregistrée avec succés");
             input = new FileInputStream(url_image);
-            javafx.scene.image.Image img_produit = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            javafx.scene.image.Image img_diplome = SwingFXUtils.toFXImage(ImageIO.read(input), null);
             labelDiplome.setText("Votre Diplome : ");
-            imageview.setImage(img_produit);
+            imageview.setImage(img_diplome);
         } catch (IOException ex) {
             System.err.println("Erreur d'enregistrement d'image");
         }
@@ -270,5 +277,30 @@ public static Double LONG_P;
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
     }
+
+    @FXML
+    private void ParcourirImageProfile(ActionEvent event) {
+            final FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(anchor.getScene().getWindow());
+        if (file != null) {
+            openFileProfile(file);
+        }
+    }
+      private void openFileProfile(File file) {
+        FileInputStream input;
+        try {
+            File dest = new File("C:\\wamp64\\www\\HealthAdvisorImages\\" + file.getName());
+            Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            url_image_profile = dest.toPath().toString();
+            System.out.println("Image enregistrée avec succés");
+            input = new FileInputStream(url_image_profile);
+            javafx.scene.image.Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            imageProfile.setImage(img_profile);
+        } catch (IOException ex) {
+            System.err.println("Erreur d'enregistrement d'image");
+        }
+    }
+    }
     
-}
+

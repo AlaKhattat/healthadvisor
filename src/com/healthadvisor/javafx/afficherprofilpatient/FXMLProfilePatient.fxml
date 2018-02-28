@@ -7,20 +7,24 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilpatient.FXMLProfilePatientController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilpatient.FXMLProfilePatientController">
     <stylesheets>
         <URL value="@fxmlprofilepatient.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="122.0" fitWidth="127.0" layoutX="328.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView" fitHeight="122.0" fitWidth="127.0" layoutX="328.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@patienticon.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
       <Label layoutX="323.0" layoutY="170.0" text="Mon Profile">
          <font>
@@ -75,5 +79,10 @@
       <JFXButton fx:id="confirmer" layoutX="192.0" layoutY="636.0" onMouseClicked="#confirmerPatient" prefHeight="25.0" prefWidth="161.0" text="Confirmer Modification" />
       <JFXTextField fx:id="numtel" labelFloat="true" layoutX="44.0" layoutY="535.0" onKeyReleased="#telControl" prefHeight="25.0" prefWidth="161.0" promptText="Téléphone" />
       <Label fx:id="strenghtP" layoutX="323.0" layoutY="514.0" prefHeight="17.0" prefWidth="161.0" text="Label" />
+      <JFXButton fx:id="ProfileB" disable="true" layoutX="327.0" layoutY="220.0" onAction="#ParcourirImageP" prefHeight="25.0" prefWidth="165.0" text="Modifier Photo Profile" textFill="#0f12c3">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

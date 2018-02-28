@@ -49,8 +49,8 @@ public class Medecin extends Patient {
         this.lat_p = lat_p;
     }
 
-    public Medecin(String login_med, String specialite, String adresse, String diplome, int rating, Double long_p, Double lat_p,String statut_compte, String login, String password, String cin_user) {
-        super(login, password, cin_user);
+    public Medecin(String login_med, String specialite, String adresse, String diplome, int rating, Double long_p, Double lat_p, String statut_compte, String login, String password, String cin_user, String photo_profile) {
+        super(login, password, cin_user, photo_profile);
         this.login_med = login_med;
         this.specialite = specialite;
         this.adresse = adresse;
@@ -58,9 +58,10 @@ public class Medecin extends Patient {
         this.rating = rating;
         this.long_p = long_p;
         this.lat_p = lat_p;
-        this.statut_compte=statut_compte;
+        this.statut_compte = statut_compte;
     }
 
+  
 
 public Medecin(){}
     public String getLogin_med() {

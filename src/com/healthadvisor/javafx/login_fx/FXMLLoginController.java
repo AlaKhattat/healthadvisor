@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.login_fx;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.routes.Routes;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
@@ -110,6 +111,8 @@ public class FXMLLoginController implements Initializable {
     public static String Identifiant;
     public static boolean docteur=false;
     public static boolean patient=false;
+    public static Double LAT_P_Co;
+    public static Double LONG_P_Co;
 
                 public static ArrayList<ArrayList> panier;
     @FXML
@@ -171,21 +174,28 @@ public class FXMLLoginController implements Initializable {
         pseudo=usernamesigin;
         String password=this.passwordsiginin.getText();
         Patient p= gp.AfficherPatientLogin(pseudo);
-        Identifiant=p.getCin_user();
-        if(p!=null){
-            patient=true;
+       if(p!=null){
+
             Identifiant=p.getCin_user();
+            patient=true;
             if (p.getPassword().equalsIgnoreCase(password)) {
             panier=new ArrayList<>();
             try{
-            Medecin m=gm.AfficherMedecinLogin(pseudo);
+            Medecin m=gm.AfficherMedecinLogin(p.getLogin());
             if(m.getLogin_med()!=null){
+                System.out.println("Medecin ...");
+                LAT_P_Co=m.getLat_p();
+                LONG_P_Co=m.getLong_p();
+                System.out.println("LAtitude"+LAT_P_Co+"Longitude"+LONG_P_Co);
                 patient=false;
                 docteur=true;
+                
             }
             }catch(NullPointerException e){
                 e.getMessage();
             }
+          
+
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
             Parent root=loader.load();
             Scene s = holderLogin.getScene(); 
@@ -219,7 +229,7 @@ public class FXMLLoginController implements Initializable {
  LocalDate localDate =date.getValue();
  Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
  Date date = Date.from(instant);
- 
+ //Pick on bounds
  this.date.isPickOnBounds();
  String sexe=this.sexe.getValue();
  String pays=this.pays.getText();
@@ -229,7 +239,7 @@ public class FXMLLoginController implements Initializable {
         GestionUtilisateur gu=new GestionUtilisateur();
         Utilisateur u=new Utilisateur(cin, nom, prenom, email, date, sexe, pays, ville,num);
         gu.AjouterUtilisateur(u);
-         FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.ChoixUser)); 
+        FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.ChoixUser)); 
             Parent root=loader.load();
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(root));

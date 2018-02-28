@@ -33,11 +33,12 @@ public class GestionPatient implements IGestionPatient{
         try {
             System.out.println("Ajout...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into patient (login,password,cin_user) "+" values (?,?,?)";
+            String sql="Insert into patient (login,password,cin_user,photo_profile) "+" values (?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,patient.getLogin());
             preparedStmt.setString(2,patient.getPassword());
             preparedStmt.setString(3,patient.getCin_user());
+            preparedStmt.setString(4,patient.getPhoto_profile());
          
 
             preparedStmt.executeUpdate();
@@ -52,10 +53,14 @@ public class GestionPatient implements IGestionPatient{
     public void ModifierPatient(Patient patient) {
         try{
            System.out.println("Modification Patient...");
-           Statement stm =database.getConnexion().createStatement();
-           String sql="UPDATE patient SET login='"+patient.getLogin()+"', password='"+patient.getPassword()+"' WHERE cin_user='"+patient.getCin_user()+"'";
-            stm.executeUpdate(sql);
-           System.out.println("Patient bien modifiÃ©");
+           System.out.println("Recuperation url image"+patient.getPhoto_profile());
+PreparedStatement stm=database.getConnexion().prepareStatement("UPDATE patient SET login=?,password=?, photo_profile=? WHERE cin_user=?");
+stm.setString(1, patient.getLogin());
+stm.setString(2, patient.getPassword());
+stm.setString(3, patient.getPhoto_profile());
+stm.setString(4, patient.getCin_user());
+stm.executeUpdate();
+System.out.println("Patient bien modifie");
            
         }catch(SQLException e){
            System.out.println(e.getMessage());
@@ -87,7 +92,7 @@ public class GestionPatient implements IGestionPatient{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Patient patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                Patient patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"),rs.getString("photo_profile"));
                 listp.add(patient);
             }
             
@@ -108,7 +113,7 @@ public class GestionPatient implements IGestionPatient{
             String sql="select * from patient where login='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+                 patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"),rs.getString("photo_profile"));
             System.out.println("Le Patient :"+patient);
             System.out.println("Recuperation avec succes");   
             }
@@ -128,7 +133,7 @@ public class GestionPatient implements IGestionPatient{
             String sql="select * from patient where cin_user='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"),rs.getString("photo_profile"));
             System.out.println("Recuperation avec succes");   
             }
            

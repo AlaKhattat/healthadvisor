@@ -5,8 +5,13 @@
  */
 package health_advisor;
 
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javafx.routes.Routes;
+import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -19,13 +24,20 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -43,13 +55,23 @@ public class FXMLHomeViewController implements Initializable {
     @FXML
     private JFXDrawer drawer;
     @FXML
-    private JFXButton Signin;
+    private  JFXButton Signin;
     @FXML
-    private JFXButton Signout;
+    private  JFXButton Signout;
     @FXML
     private JFXButton profile;
     @FXML
     public static AnchorPane mainPane;
+    GestionPatient gp=new GestionPatient();
+    GestionMedecin gm=new GestionMedecin();
+        Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Accés Interdit ! ")
+                    .text("Attendez Jusque à la Validation De Votre Compte ")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
     /**
      * Initializes the controller class.
      */
@@ -71,6 +93,11 @@ public class FXMLHomeViewController implements Initializable {
         });
         
 if(FXMLLoginController.patient){
+            profile.setOpacity(1);
+
+        Signin.setOpacity(0);
+        Signout.setOpacity(1);
+        Signout.toFront();
      try {
             System.out.println("Initialisation Patient ...");
             VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/PatientDrawer.fxml"));
@@ -148,6 +175,10 @@ if(FXMLLoginController.patient){
         }
 }else {
     if(FXMLLoginController.docteur){
+        Signin.setOpacity(0);
+        Signout.setOpacity(1);
+        Signout.toFront();
+        profile.setOpacity(1);
      try {
             System.out.println("Initialisation Medecin ...");
             VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/MedecinDrawer.fxml"));
@@ -215,8 +246,14 @@ if(FXMLLoginController.patient){
                                 setNode(Article);
                                 break; 
                             case "suivierdv":
+                                Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+                                Medecin m=gm.AfficherMedecinLogin(p.getLogin());
+                                if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
                                 drawer.close();                                
                                 setNode(SuivieRDV);
+                                }else{
+                                    notif.show();
+                                }
                                 break; 
                                                                            
                         }
@@ -230,6 +267,9 @@ if(FXMLLoginController.patient){
         }
 }
     else {
+        Signin.setOpacity(1);
+        Signout.setOpacity(0);
+        Signin.toFront();
         try {
             System.out.println("Initialisation Utilisateur ...");
             VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/UtilisateurDrawer.fxml"));
@@ -300,27 +340,35 @@ if(FXMLLoginController.patient){
 
     @FXML
     private void SigninAction(MouseEvent event) throws IOException {
+        System.out.println("Se Connecter");
     AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
     setNode(login);
     }
 
     @FXML
     private void SignoutAction(MouseEvent event) throws IOException {
+       
         FXMLLoginController.pseudo=null;
         FXMLLoginController.Identifiant=null;
-        AnchorPane login = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
-        setNode(login);
-    }
+        FXMLLoginController.docteur=false;
+        FXMLLoginController.patient=false;
+       FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
+            Parent root=loader.load();
+            Scene s = holderPane.getScene(); 
+            s.setRoot(root);
+            
+            }
 
     @FXML
     private void profileAction(MouseEvent event) throws IOException {
-        if(FXMLLoginController.docteur==true){
+        if(FXMLLoginController.docteur){
                 AnchorPane ProfileMedecin = FXMLLoader.load(getClass().getResource(Routes.PROFILEMEDECIN));
                 setNode(ProfileMedecin);
         }else{
+            if(FXMLLoginController.patient){
                  AnchorPane ProfilePatient = FXMLLoader.load(getClass().getResource(Routes.PROFILEPATIENT));
                 setNode(ProfilePatient);
-
+            }
         }
     }
     

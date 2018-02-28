@@ -176,7 +176,7 @@ public class FXMLImcController implements Initializable {
                
                 FillProgressIndicator indicator = new FillProgressIndicator();
                 this.box.getChildren().add(indicator);
-                patient= new Patient(FXMLLoginController.pseudo,"", "");
+                patient= new Patient(FXMLLoginController.pseudo,"", "","");
                 System.out.println("patient:"+patient);
                 GestionInfoSante g = new GestionInfoSante();
                 System.out.println("patient est la :"+patient);
@@ -232,7 +232,7 @@ public class FXMLImcController implements Initializable {
         FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
         if(patient.getLogin()==null)
         {
-            patient = new Patient(FXMLLoginController.pseudo,"","");
+            patient = new Patient(FXMLLoginController.pseudo,"","","");
         }
         FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
@@ -273,7 +273,7 @@ public class FXMLImcController implements Initializable {
         GestionInfoSante ginfo = new GestionInfoSante();
           if(patient.getLogin()==null)
           {
-            patient = new Patient(FXMLLoginController.pseudo,"","");
+            patient = new Patient(FXMLLoginController.pseudo,"","","");
           }
          InfoSante info = ginfo.afficherInfoSante(patient.getLogin()); 
         time2.scheduleAtFixedRate(new TimerTask() {
