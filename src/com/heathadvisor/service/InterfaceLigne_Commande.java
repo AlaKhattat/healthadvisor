@@ -2,6 +2,8 @@
 package com.heathadvisor.service;
 
 import com.healthadvisor.entities.Ligne_Commande;
+import com.healthadvisor.entities.Produit;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,5 +15,7 @@ public interface InterfaceLigne_Commande {
     public Ligne_Commande ConsulterLigne_Commande(String id_produit,int id_commande);
     public List<Ligne_Commande> Liste_LigneCommandes_IDPRoduit(String id_produit);
     public List<Ligne_Commande> Liste_LigneCommandes_IDCommande(int id_commande);
+    public List<ArrayList> ListeProduits_PlusVendus();
+    public List<ArrayList> ChiffresAffaires();
     
 }

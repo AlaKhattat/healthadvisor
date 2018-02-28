@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.healthadvisor.service.impl;
 
 
@@ -35,7 +31,7 @@ public class ServiceProduit implements InterfaceProduit{
         try
         {
                 Statement stm =db.getConnexion().createStatement();
-                String sql="Insert into produit (REFERENCE,NOM,PRIX_VENTE,URL_IMAGE,DESCRIPTION,TYPE,DATE_MISE,PROMOTION,ID_USER,QUANTITE) "+" values (?,?,?,?,?,?,?,?,?,?)";
+                String sql="Insert into produit (REFERENCE,NOM,PRIX_VENTE,URL_IMAGE,DESCRIPTION,TYPE,DATE_MISE,PROMOTION,ID_USER,QUANTITE,SIGNALISATION_ETAT) "+" values (?,?,?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStmt = db.getConnexion().prepareStatement(sql);
                 preparedStmt.setString(1, p.getReference());
                 preparedStmt.setString(2, p.getNom());
@@ -47,6 +43,7 @@ public class ServiceProduit implements InterfaceProduit{
                 preparedStmt.setFloat(8, p.getPromotion());
                 preparedStmt.setString(9, p.getId_user());
                 preparedStmt.setInt(10, p.getQuantite());
+                preparedStmt.setInt(11, p.getSignaler());
                 preparedStmt.executeUpdate();
                 System.out.println("ajout produit effectuer avec succes");
         }
@@ -80,10 +77,12 @@ public class ServiceProduit implements InterfaceProduit{
 
     @Override
     public void UpdateProduit(Produit p) {
+        java.util.Date date_mise = p.getDate_mise();
+        java.sql.Date sqlDate_mise = new java.sql.Date(date_mise.getTime());
         try
         {
 
-                PreparedStatement preparedStmt =db.getConnexion().prepareStatement("UPDATE `produit` SET `NOM` = ?, `PRIX_VENTE` = ?,`URL_IMAGE` = ?,`DESCRIPTION` = ?,`TYPE` = ?,`PROMOTION`= ?,`QUANTITE`=? WHERE `REFERENCE` = ? ;");
+                PreparedStatement preparedStmt =db.getConnexion().prepareStatement("UPDATE `produit` SET `NOM` = ?, `PRIX_VENTE` = ?,`URL_IMAGE` = ?,`DESCRIPTION` = ?,`TYPE` = ?,`PROMOTION`= ?,`QUANTITE`=?,`SIGNALISATION_ETAT`=? ,`DATE_MISE`=? WHERE `REFERENCE` = ? ;");
                 preparedStmt.setString(1, p.getNom());
                 preparedStmt.setFloat(2, p.getPrix_vente());
                 preparedStmt.setString(3, p.getUrl_image());
@@ -91,7 +90,9 @@ public class ServiceProduit implements InterfaceProduit{
                 preparedStmt.setString(5, p.getType());
                 preparedStmt.setFloat(6, p.getPromotion());
                 preparedStmt.setInt(7, p.getQuantite());
-                preparedStmt.setString(8, p.getReference());
+                preparedStmt.setInt(8, p.getSignaler());
+                preparedStmt.setDate(9, sqlDate_mise);
+                preparedStmt.setString(10, p.getReference());
                 System.out.println(preparedStmt.toString());
         preparedStmt.executeUpdate();
             System.out.println("Update produit effectue avec succes");
@@ -113,8 +114,9 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           { 
               Produit pdt=new Produit();
-              pdt.setNom(s.getString(3));
+              pdt.setId_produit(s.getInt(1));
               pdt.setReference(s.getString(2));
+              pdt.setNom(s.getString(3));
               pdt.setPrix_vente(s.getFloat(4));
               pdt.setUrl_image(s.getString(5));
               pdt.setDescription(s.getString(6));
@@ -123,6 +125,7 @@ public class ServiceProduit implements InterfaceProduit{
               pdt.setPromotion(s.getFloat(9));
               pdt.setId_user(s.getString(10));
               pdt.setQuantite(s.getInt(11));
+              pdt.setSignaler(s.getInt(12));
               p=pdt;
           }
           System.out.println("patientiez en cours d'affichage");
@@ -146,7 +149,7 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           {
               Produit p=new Produit();
-             
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -157,6 +160,7 @@ public class ServiceProduit implements InterfaceProduit{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -180,6 +184,7 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -190,6 +195,7 @@ public class ServiceProduit implements InterfaceProduit{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -213,6 +219,7 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -223,6 +230,7 @@ public class ServiceProduit implements InterfaceProduit{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -246,6 +254,7 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -256,6 +265,7 @@ public class ServiceProduit implements InterfaceProduit{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -279,6 +289,7 @@ public class ServiceProduit implements InterfaceProduit{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -289,6 +300,7 @@ public class ServiceProduit implements InterfaceProduit{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -313,6 +325,7 @@ if(img){
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -323,6 +336,7 @@ if(img){
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -342,6 +356,7 @@ else{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -352,6 +367,7 @@ else{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -377,6 +393,7 @@ else{
           while(s.next())
           {
               Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
               p.setReference(s.getString(2));
               p.setNom(s.getString(3));
               p.setPrix_vente(s.getFloat(4));
@@ -387,6 +404,7 @@ else{
               p.setPromotion(s.getFloat(9));
               p.setId_user(s.getString(10));
               p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
               tabE.add(p);
           }
           System.out.println("patientiez en cours d'affichage");
@@ -396,6 +414,76 @@ else{
           System.out.println("probleme d'affichage ");
       }
       return tabE;
+    }
+
+    @Override
+    public List<Produit> ListProduits_Signaler(int signaler) {
+         List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where signalisation_etat = '"+signaler+"' ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE;
+    }
+
+    @Override
+    public Produit ConsulterProduit_Reference(String ref) {
+        List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where reference = '"+ref+"' ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE.get(0);
     }
     
     

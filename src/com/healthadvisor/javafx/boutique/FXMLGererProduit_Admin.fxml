@@ -5,11 +5,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="pan_gerer_produits" prefHeight="561.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLGererProduit_AdminController">
+<AnchorPane id="AnchorPane" fx:id="pan_gerer_produits" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLGererProduit_AdminController">
    <children>
-      <TableView fx:id="table_produits" layoutX="6.0" layoutY="88.0" prefHeight="226.0" prefWidth="746.0">
+      <TableView fx:id="table_produits" layoutX="6.0" layoutY="111.0" prefHeight="203.0" prefWidth="825.0">
         <columns>
           <TableColumn fx:id="Reference" prefWidth="75.0" text="Reference" />
           <TableColumn fx:id="Nom" prefWidth="75.0" text="Nom" />
@@ -21,17 +22,39 @@
             <TableColumn fx:id="Promotion" prefWidth="75.0" text="Promotion" />
             <TableColumn fx:id="ID_User" prefWidth="75.0" text="ID_User" />
             <TableColumn fx:id="Quantite" prefWidth="75.0" text="Quantite" />
-            <TableColumn fx:id="supprimer" prefWidth="75.0" />
+            <TableColumn fx:id="Signaler" prefWidth="75.0" text="Signaler" />
         </columns>
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#ModifierProduit_Admin" text="Modifier" />
-                  <MenuItem mnemonicParsing="false" onAction="#SupprimerProduit_Admin" text="Supprimer" />
+                  <MenuItem fx:id="btnMenu_Supprimer" mnemonicParsing="false" onAction="#SupprimerProduit_Admin" text="Supprimer" />
               </items>
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Button fx:id="btn_stats" layoutX="327.0" layoutY="391.0" mnemonicParsing="false" onAction="#Afficher_Stats" text="Afficher stats" />
+      <TextField fx:id="txtReference" layoutX="6.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtNom" layoutX="81.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtPrix" layoutX="156.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtUrl" layoutX="231.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtDescription" layoutX="305.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtType" layoutX="380.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtDate" layoutX="455.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtPromotion" layoutX="530.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtUser" layoutX="605.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtQuantite" layoutX="680.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="txtSignaler" layoutX="755.0" layoutY="86.0" prefHeight="25.0" prefWidth="75.0" />
+      <TableView fx:id="table_commande" layoutX="153.0" layoutY="368.0" prefHeight="200.0" prefWidth="402.0">
+        <columns>
+          <TableColumn fx:id="C_Ref" prefWidth="75.0" text="Reference" />
+          <TableColumn fx:id="C_Date" prefWidth="102.0" text="Date Payement" />
+            <TableColumn fx:id="C_Mode" prefWidth="102.0" text="Mode Payement" />
+            <TableColumn fx:id="C_User" prefWidth="102.0" text="ID_User" />
+        </columns>
+      </TableView>
+      <TextField layoutX="153.0" layoutY="343.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField layoutX="231.0" layoutY="344.0" prefHeight="26.0" prefWidth="102.0" />
+      <TextField layoutX="333.0" layoutY="345.0" prefHeight="26.0" prefWidth="102.0" />
+      <TextField layoutX="435.0" layoutY="346.0" prefHeight="26.0" prefWidth="102.0" />
+      <Button fx:id="btn_stat" layoutX="282.0" layoutY="22.0" mnemonicParsing="false" onAction="#InterfaceStatistiques" prefHeight="25.0" prefWidth="154.0" text="Statistiques" />
    </children>
 </AnchorPane>

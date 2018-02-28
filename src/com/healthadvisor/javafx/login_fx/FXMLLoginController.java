@@ -106,7 +106,7 @@ public class FXMLLoginController implements Initializable {
     public static String Identifiant;
     public static boolean docteur=false;
 
-                public static ArrayList<ArrayList> panier;
+           
 
     /**
      * Initializes the controller class.
@@ -151,7 +151,7 @@ public class FXMLLoginController implements Initializable {
         if(p!=null){
             Identifiant=p.getCin_user();
             if (p.getPassword().equalsIgnoreCase(password)) {
-            panier=new ArrayList<>();
+           
             try{
             Medecin m=gm.AfficherMedecinLogin(pseudo);
             if(m.getLogin_med()!=null){

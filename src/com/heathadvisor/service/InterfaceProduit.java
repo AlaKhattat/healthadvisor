@@ -24,5 +24,7 @@ public interface InterfaceProduit {
     public List<Produit> ListProduits_Categorie(String type);
     public List<Produit> ListProduits_Image(boolean img);
     public List<Produit> ListProduits_User(String id_user);
+    public List<Produit> ListProduits_Signaler(int signaler);
+    public Produit ConsulterProduit_Reference(String ref);
     
 }
