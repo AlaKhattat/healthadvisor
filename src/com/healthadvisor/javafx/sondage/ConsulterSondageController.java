@@ -6,14 +6,19 @@
 package com.healthadvisor.javafx.sondage;
 
 import com.healthadvisor.entities.ReponsesPossibles;
+import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.entities.UserReponse;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.javafx.questionreponse.ConsulterQuestionController;
 import com.healthadvisor.javafx.questionreponse.QuestionController;
+import com.healthadvisor.service.impl.GestionReponse;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
+import com.healthadvisor.service.impl.GestionStatistiques;
 import com.healthadvisor.service.impl.GestionUserReponse;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +33,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -52,14 +58,16 @@ public class ConsulterSondageController implements Initializable {
     private AnchorPane AnchorID;
     @FXML
     private Button btnEnvoyer;
-    ToggleGroup g =new ToggleGroup();
-
+    public ToggleGroup g =new ToggleGroup();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        
         
         VBox box = new VBox();
         box.setPadding(new Insets(10, 50, 50, 10));
@@ -68,16 +76,16 @@ public class ConsulterSondageController implements Initializable {
         box.setPrefHeight(131);
         box.setLayoutX(46);
         box.setLayoutY(114);
-        SondageText.setText(SondageController.sondage.getNom());
+        SondageText.setText(SondageUserController.sondageStatic.getNom());
         GestionReponsesPossibles grp = new GestionReponsesPossibles();
         
-        for(int i=0;i< grp.ListReponsesPossibles(SondageController.sondage.getId()).size();i++){
+        for(int i=0;i< grp.ListReponsesPossibles(SondageUserController.sondageStatic.getId()).size();i++){
             
             RadioButton r = new RadioButton();
-            r.setText(grp.ListReponsesPossibles(SondageController.sondage.getId()).get(i).getReponse());
+            r.setText(grp.ListReponsesPossibles(SondageUserController.sondageStatic.getId()).get(i).getReponse());
             r.setToggleGroup(g);
             r.setSelected(false);
-            r.setUserData(grp.ListReponsesPossibles(SondageController.sondage.getId()).get(i).getId_reponse());
+            r.setUserData(grp.ListReponsesPossibles(SondageUserController.sondageStatic.getId()).get(i).getId_reponse());
             
             /*r.setOnAction((event) -> {
                 System.out.println(r.getUserData());
@@ -97,13 +105,16 @@ public class ConsulterSondageController implements Initializable {
         }
         AnchorID.getChildren().add(box);
         
+        
+        
+        
     }    
 
     @FXML
     private void RetourBtnAction(ActionEvent event) throws IOException {
         
         SondageMain sm = new SondageMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("Sondage.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageUser.fxml"));
         Parent root=loader.load();
         Scene s = AnchorID.getScene();
         s.setRoot(root);
@@ -112,19 +123,69 @@ public class ConsulterSondageController implements Initializable {
     @FXML
     private void btnEnvoyerAction(ActionEvent event) {
         
-        UserReponse ur = new UserReponse(FXMLLoginController.pseudo, (Integer)g.getSelectedToggle().getUserData() );
-        GestionReponsesPossibles grp = new GestionReponsesPossibles();
+        boolean test;
+        String ch="";
+        
+        GestionStatistiques gs = new GestionStatistiques();
+        test = gs.testReponseDeUserSurSondage(SondageUserController.patient.getLogin(), SondageUserController.sondageStatic.getId());
         GestionUserReponse gur = new GestionUserReponse();
+        String x = gur.AfficherUserReponse(SondageUserController.patient.getLogin(), SondageUserController.sondageStatic.getId());
+        if (test==true){
+        
+            switch (x){
+                case "1": ch+="★";
+                break;
+                case "2": ch+="★★";
+                break;
+                case "3": ch+="★★★";
+                break;
+                case "4": ch+="★★★★";
+                break;
+                case "5": ch+="★★★★★";
+                break;
+            }
+            
+            Alert alerte = new Alert(Alert.AlertType.CONFIRMATION);
+            alerte.setTitle("Dialogue de confirmation");
+            alerte.setHeaderText("Attention !");
+            alerte.setContentText("Vous avez déjà répondu à ce sondage, voulez vous changer votre réponse ? \n votre réponse était : "+ch);
+        
+            Optional<ButtonType> result = alerte.showAndWait();
+            if (result.get() == ButtonType.OK)
+            {
+            
+            
+            
+            int id_ancienne_reponse =  gur.AfficherIdReponseUser(SondageUserController.sondageStatic.getId(),SondageUserController.patient.getLogin());
+            int id_nouvelle_reponse = (Integer)g.getSelectedToggle().getUserData();
+            gur.updateUserReponse(SondageUserController.patient.getLogin(),id_ancienne_reponse,id_nouvelle_reponse);
+            
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setTitle("Dialogue d'information");
+            a.setHeaderText("Succès !");
+            a.setContentText("Votre réponse à été bien mise à jour ...");
+            a.show();
+            
+            }else{
+            
+            }
+        }  
+        //FXMLLoginController.pseudo
+        else{
+        UserReponse ur = new UserReponse(SondageUserController.patient.getLogin(), (Integer)g.getSelectedToggle().getUserData() );
+        GestionReponsesPossibles grp = new GestionReponsesPossibles();
         gur.ajouterUserReponse(ur);
         
-        Alert alerte = new Alert(Alert.AlertType.INFORMATION);
-        alerte.setTitle("Dialogue d'information");
-        alerte.setHeaderText("Succès !");
-        alerte.setContentText("Votre réponse à été envoyée avec succès...");
-        alerte.show();
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setTitle("Dialogue d'information");
+        a.setHeaderText("Succès !");
+        a.setContentText("Votre réponse à été envoyée avec succès...");
+        a.show();
+                
         
         
         
-    }
+        }
     
+    }
 }

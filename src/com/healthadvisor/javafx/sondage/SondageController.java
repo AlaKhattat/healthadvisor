@@ -41,11 +41,11 @@ public class SondageController implements Initializable {
     private TableView<Sondage> tableID;
     @FXML
     private TableColumn<Sondage, String> columnID;
-    @FXML
-    private Button repondreBtnID;
     
     public static Sondage sondage;
-    //public static Patient patient = new Patient("ahmed", "pass", "1");
+    public static Patient patient = new Patient("tarek", "pass", "1","");
+    @FXML
+    private Button repondreBtnID;
 
     /**
      * Initializes the controller class.
@@ -62,7 +62,7 @@ public class SondageController implements Initializable {
         columnID.setCellValueFactory(new PropertyValueFactory<Sondage,String>("nom"));
         tableID.setItems(lists);
     }    
-
+    
     @FXML
     private void repondreBtnAction(ActionEvent event) throws IOException {
         //SondageMain sm = new SondageMain();
@@ -76,5 +76,6 @@ public class SondageController implements Initializable {
     private void tableViewEvent(MouseEvent event) {
         sondage = tableID.getSelectionModel().getSelectedItem();
     }
+
     
 }

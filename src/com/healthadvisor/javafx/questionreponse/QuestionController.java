@@ -51,8 +51,6 @@ public class QuestionController implements Initializable {
 
 
     @FXML
-    private Button btnID;
-    @FXML
     private AnchorPane paneID;
     @FXML
     private TableColumn<Question, String> utilisateurID;
@@ -60,11 +58,13 @@ public class QuestionController implements Initializable {
     private Button btnConsulter;
     
     public static Question question; 
-    //public static Patient patient = new Patient("ahmed", "pass", "1");
+    //public static Patient patient = new Patient("firassov", "pass", "2");
     @FXML
     private TextField searchBarID;
     @FXML
     private TableColumn<Question, Timestamp> dateID;
+    @FXML
+    private TableColumn<Question, String> specialite;
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,6 +78,7 @@ public class QuestionController implements Initializable {
                 utilisateurID.setCellValueFactory(new PropertyValueFactory<Question,String>("id_patient"));
                 questionID.setCellValueFactory(new PropertyValueFactory<Question,String>("question"));
                 dateID.setCellValueFactory(new PropertyValueFactory<Question,Timestamp>("date_publication"));
+                specialite.setCellValueFactory(new PropertyValueFactory<Question,String>("specialite"));
                 //Button btnConsulter = new Button("Consulter");
                 //consulterID.setCellValueFactory(new PropertyValueFactory<Question,Button>("btnConsulter"));
             }
@@ -85,6 +86,7 @@ public class QuestionController implements Initializable {
         
         
         //SearhBar filters
+        
         FilteredList<Question> filteredData = new FilteredList<>(listq, e -> true);
         searchBarID.setOnKeyReleased(e->{
             searchBarID.textProperty().addListener((observableValue, oldValue, newValue)->{
@@ -99,6 +101,9 @@ public class QuestionController implements Initializable {
                     else if(q.getId_patient().toLowerCase().contains(lowerCaseFilter)){
                         return true;
                     } 
+                    else if(q.getSpecialite().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } 
                     return false;
                 });
             });
@@ -107,9 +112,9 @@ public class QuestionController implements Initializable {
             tableID.setItems(sortedQuestion);
         });
         
+        
     }    
 
-    @FXML
     private void btnPoserQuestionAction(ActionEvent event) throws IOException {
         
         questionMain qm = new questionMain();
