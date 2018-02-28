@@ -6,17 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="470.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.QuestionController">
+<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="470.0" prefWidth="641.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.QuestionController">
    <children>
       <TableView fx:id="tableID" layoutY="38.0" onMouseClicked="#tableview" prefHeight="363.0" prefWidth="641.0">
         <columns>
             <TableColumn fx:id="utilisateurID" minWidth="0.0" prefWidth="117.0" text="Utilisateur" />
-          <TableColumn fx:id="questionID" minWidth="0.0" prefWidth="356.0" text="Question" />
-            <TableColumn fx:id="dateID" maxWidth="174.0" minWidth="-1.0" prefWidth="167.0" text="Date de publication" />
+          <TableColumn fx:id="questionID" minWidth="0.0" prefWidth="202.0" text="Question" />
+            <TableColumn fx:id="dateID" maxWidth="321.0" minWidth="-1.0" prefWidth="216.0" text="Date de publication" />
+            <TableColumn fx:id="specialite" maxWidth="168.0" minWidth="-1.0" prefWidth="105.0" text="Spécialité" />
         </columns>
       </TableView>
-      <Button fx:id="btnID" layoutX="255.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnPoserQuestionAction" prefHeight="25.0" prefWidth="131.0" text="Poser une question" />
-      <Button fx:id="btnConsulter" layoutX="255.0" layoutY="438.0" mnemonicParsing="false" onAction="#btnConsulterQuestion" prefHeight="25.0" prefWidth="131.0" text="Consulter question" />
+      <Button fx:id="btnConsulter" layoutX="255.0" layoutY="424.0" mnemonicParsing="false" onAction="#btnConsulterQuestion" prefHeight="25.0" prefWidth="131.0" text="Consulter question" />
       <TextField fx:id="searchBarID" layoutX="480.0" layoutY="7.0" promptText="Chercher une question ..." />
    </children>
 </AnchorPane>

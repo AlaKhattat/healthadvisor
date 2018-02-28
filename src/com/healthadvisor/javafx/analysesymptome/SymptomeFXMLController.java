@@ -16,6 +16,7 @@ import com.healthadvisor.service.impl.GestionMaladie;
 import com.healthadvisor.service.impl.GestionSubBodyPartSymptome;
 import com.healthadvisor.service.impl.GestionSubBodyParts;
 import com.jfoenix.controls.JFXSpinner;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.AbstractMap;
@@ -46,6 +47,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -236,10 +238,8 @@ if(subbodypart.disableProperty().getValue()==true){
         AccessToken token=new AccessToken();
         ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
         ResultatAnalyse=l;*/
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ResultatAnalyseFXML.fxml"));
-        Parent root=loader.load();
-        Scene s = btnValider.getScene();
-        s.setRoot(root);
+        AnchorPane a=FXMLLoader.load(getClass().getResource("ResultatAnalyseFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,a);
         
        /* String Result="";
         for(Maladie x : l){

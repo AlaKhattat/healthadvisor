@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public interface IGestionReponsesPossibles {
     
-    public void ajouterReponsesPossibles(ReponsesPossibles r);
+    public void ajouterReponsesPossibles(int id_reponse,String reponse, int id_sondage);
     public void supprimerReponsesPossibles(ReponsesPossibles r);
     public void updateReponsesPossibles(int id_reponse, String reponse);
     public void afficherReponsesPossibles(int id_sondage);

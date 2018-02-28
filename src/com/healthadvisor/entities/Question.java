@@ -21,13 +21,17 @@ public class Question {
    // private Patient patient;
     private String id_patient;
     private Timestamp date_publication;
+    private String specialite;
 
-    public Question(int id,String question, String id_patient, Timestamp date_publication) {
-        this.id=id;
+    public Question(int id, String question, String id_patient, Timestamp date_publication, String specialite) {
+        this.id = id;
         this.question = question;
         this.id_patient = id_patient;
         this.date_publication = date_publication;
+        this.specialite = specialite;
     }
+
+    
 
 
  
@@ -35,6 +39,17 @@ public class Question {
     public Question() {
     }
 
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    
+    
+    
     public Timestamp getDate_publication() {
         return date_publication;
     }

@@ -57,7 +57,6 @@ public class ConsulterQuestionController implements Initializable {
     private TableColumn<Reponse, String> medecinID;
     @FXML
     private TableColumn<Reponse, String> reponseID;
-    @FXML
     private Button modifierID;
     @FXML
     private Button supprimerID;
@@ -68,15 +67,11 @@ public class ConsulterQuestionController implements Initializable {
     @FXML
     private Button retourID;
     @FXML
-    private Button btnRepondre;
-    @FXML
     private TextField searchBarID;
     @FXML
     private Button btnSupprimerReponse;
     @FXML
     private TableColumn<Reponse, Timestamp> dateID;
-    @FXML
-    private Button modifierReponseBtn;
     
     public static Reponse reponse;
 
@@ -126,7 +121,6 @@ public class ConsulterQuestionController implements Initializable {
          
     }    
 
-    @FXML
     private void btnModifier(ActionEvent event) {
         if (modifierID.getText().equals("Valider"))
         {
@@ -175,7 +169,6 @@ public class ConsulterQuestionController implements Initializable {
         s.setRoot(root);
     }
 
-    @FXML
     private void btnRepondre(ActionEvent event) throws IOException {
         questionMain qm = new questionMain();
         FXMLLoader loader=new FXMLLoader(getClass().getResource("RepondreQuestion.fxml"));
@@ -206,7 +199,6 @@ public class ConsulterQuestionController implements Initializable {
         s.setRoot(root);
     }
 
-    @FXML
     private void modifierReponseBtn(ActionEvent event) throws IOException {
         questionMain qm = new questionMain();
         FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));

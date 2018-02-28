@@ -29,22 +29,7 @@ public class GestionReponsesPossibles implements IGestionReponsesPossibles{
     myDB=  MyDB.getInstance();
     }
     
-    @Override
-    public void ajouterReponsesPossibles(ReponsesPossibles r) {
-        try {
-            String query = "insert into reponses_possibles (ID_REPONSE,REPONSE,ID_SONDAGE) values (?,?,?)";
-            PreparedStatement prep= myDB.getConnexion().prepareStatement(query);
-            
-            prep.setInt(1,r.getId_reponse());
-            prep.setString(2 , r.getReponse());
-            prep.setInt(3, r.getId_sondage());
-            prep.executeUpdate();
-       
-            System.out.println("Réponse ajoutée au sondage.");
-        } catch (SQLException ex) {
-            System.out.println("Réponse non ajoutée au sondage !");
-         }
-    }
+   
 
     @Override
     public void supprimerReponsesPossibles(ReponsesPossibles r) {
@@ -116,6 +101,23 @@ public class GestionReponsesPossibles implements IGestionReponsesPossibles{
         return listrp;
         
         
+    }
+
+    @Override
+    public void ajouterReponsesPossibles(int id_reponse,String reponse, int id_sondage) {
+        try {
+            String query = "insert into reponses_possibles (ID_REPONSE,REPONSE,ID_SONDAGE) values (?,?,?)";
+            PreparedStatement prep= myDB.getConnexion().prepareStatement(query);
+            
+            prep.setInt(1,id_reponse);
+            prep.setString(2 , reponse);
+            prep.setInt(3, id_sondage);
+            prep.executeUpdate();
+       
+            System.out.println("Réponse ajoutée au sondage.");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+         }
     }
     
 }

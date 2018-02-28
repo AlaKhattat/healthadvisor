@@ -44,8 +44,8 @@ public class ModifierReponseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        ConsulterQuestionController cqc = new ConsulterQuestionController();
-        reponseText.setText(cqc.reponse.toString());
+        
+        reponseText.setText(ConsulterQuestionUserController.reponseStatic.getReponse());
         
     }    
 
@@ -60,12 +60,12 @@ public class ModifierReponseController implements Initializable {
         if (result.get() == ButtonType.OK)
         {
             GestionReponse gr = new GestionReponse();
-            gr.updateReponse(ConsulterQuestionController.reponse.getId(), reponseText.getText());
+            gr.updateReponse(ConsulterQuestionUserController.reponseStatic.getId(), reponseText.getText());
         }else{
             
         }
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestion.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
         Parent root=loader.load();
         Scene s = AnchorID.getScene();
         s.setRoot(root);
@@ -74,7 +74,7 @@ public class ModifierReponseController implements Initializable {
     @FXML
     private void btnRetour(ActionEvent event) throws IOException {
         questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestion.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
         Parent root=loader.load();
         Scene s = AnchorID.getScene();
         s.setRoot(root);
