@@ -1,29 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="731.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.ModifArticleFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.ModifArticleFXMLController">
    <children>
-      <Label layoutX="50.0" layoutY="82.0" text="Titre" />
-      <Label layoutX="44.0" layoutY="141.0" text="Description" />
-      <Label layoutX="45.0" layoutY="189.0" text="Contenu" />
-      <TextField fx:id="titreF" layoutX="226.0" layoutY="78.0" prefHeight="25.0" prefWidth="258.0" />
-      <TextField fx:id="contF" layoutX="226.0" layoutY="189.0" prefHeight="263.0" prefWidth="442.0" />
-      <Label layoutX="258.0" layoutY="14.0" text="Modifiez votre article !">
+      <ImageView fx:id="imageview" fitHeight="200.0" fitWidth="200.0" layoutX="741.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+      <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="36.0" layoutY="55.0" onMouseClicked="#redirectBack" size="40" />
+      <JFXTextField fx:id="titreF" focusColor="#19416f" labelFloat="true" layoutX="164.0" layoutY="147.0" onKeyReleased="#titreController" prefHeight="25.0" prefWidth="250.0" promptText="Titre" />
+      <JFXTextArea fx:id="contF" focusColor="#19416f" labelFloat="true" layoutX="162.0" layoutY="369.0" prefHeight="197.0" prefWidth="499.0" promptText="Contenu" />
+      <JFXButton fx:id="imgBut" layoutX="775.0" layoutY="345.0" onAction="#ParcourirImage" prefHeight="25.0" prefWidth="131.0" text="Insérer image" textFill="#19416f" />
+      <JFXButton fx:id="modifBut" layoutX="814.0" layoutY="541.0" onAction="#modifierFx" text="Valider" textFill="#19416f" />
+      <Label fx:id="avertCont" layoutX="163.0" layoutY="573.0" onKeyReleased="#contController" textFill="#f21010">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="avertTitre" layoutX="163.0" layoutY="178.0" textFill="#f21010">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tag1" focusColor="#19416f" labelFloat="true" layoutX="163.0" layoutY="313.0" onKeyReleased="#tagsController" prefHeight="25.0" prefWidth="159.0" promptText="Tag#1" />
+      <Label fx:id="avertTags" layoutX="162.0" layoutY="342.0" textFill="#f21010">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tag2" focusColor="#19416f" layoutX="347.0" layoutY="313.0" onKeyReleased="#tag2Controller" prefHeight="25.0" prefWidth="145.0" promptText="Tag#2" />
+      <JFXTextField fx:id="tag3" focusColor="#19416f" layoutX="515.0" layoutY="313.0" onKeyReleased="#tag3Controller" prefHeight="25.0" prefWidth="145.0" promptText="Tag#3" />
+      <JFXTextArea fx:id="descF" focusColor="#19416f" labelFloat="true" layoutX="164.0" layoutY="210.0" onKeyReleased="#descController" prefHeight="73.0" prefWidth="367.0" promptText="Description" />
+      <Label fx:id="avertDesc" layoutX="163.0" layoutY="292.0" textFill="#f21010">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="128.0" fitWidth="832.0" layoutX="84.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fond2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="118.0" layoutY="44.0" style="-fx-background-color: #dae3ee;" text="Modifiez votre article !" textFill="#19416f">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="modifBut" layoutX="615.0" layoutY="675.0" mnemonicParsing="false" onAction="#modifierFx" text="Valider" />
-      <Label layoutX="51.0" layoutY="503.0" text="Image" />
-      <Button fx:id="imgBut" layoutX="226.0" layoutY="499.0" mnemonicParsing="false" onAction="#ParcourirImage" text="Sélectionner une image" />
-      <ImageView fx:id="imgView" fitHeight="154.0" fitWidth="204.0" layoutX="464.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true" />
-      <ComboBox fx:id="descCombo" layoutX="226.0" layoutY="137.0" prefHeight="25.0" prefWidth="172.0" />
    </children>
 </AnchorPane>

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.NaviguerArticlesFXMLController">
+<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.MesArticlesFXMLController">
    <children>
       <ScrollPane layoutY="149.0" prefHeight="459.0" prefWidth="1000.0" style="-fx-background: #dae3ee;">
          <content>
@@ -29,7 +28,7 @@
             <Image url="@fond.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="254.0" layoutY="109.0" text="Consultez les articles écrits par nos médecins !" textFill="#19416f">
+      <Label layoutX="305.0" layoutY="109.0" text="Consultez et modifiez vos articles !" textFill="#19416f">
          <font>
             <Font size="24.0" />
          </font>

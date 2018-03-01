@@ -15,8 +15,12 @@ public class Evenement {
     private String type;
     private int nbrMax;
     private String image;
-
-    public Evenement(String nom, Date date, Time heure, String endroit, String type, int nbrMax, String image) {
+    private String valid;
+    private String logCreateur;
+    Date d2 = new Date(1970, 9, 9);
+    Patient p=new Patient(); //SESSION PATIENT
+    
+    public Evenement(String nom, Date date, Time heure, String endroit, String type, int nbrMax, String image, Patient p) {
         this.nom = nom;
         this.date=date;
         this.heure=heure;
@@ -24,6 +28,7 @@ public class Evenement {
         this.type = type;
         this.nbrMax = nbrMax;
         this.image=image;
+        this.logCreateur=p.getLogin();
     }
 
     public Evenement() {
@@ -92,9 +97,25 @@ public class Evenement {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
+    public String getLogCreateur() {
+        return logCreateur;
+    }
+
+    public void setLogCreateur(String logCreateur) {
+        this.logCreateur = logCreateur;
+    }
     
     public String toString(){
-        return "L'id est : "+id+"\nLe nom est : "+nom+"\nLa date est : "+date+"\nL'heure est : "+heure+"\nL'endroit est : "+endroit+"\nLe type est : "+type+"\nLe nombre max est : "+nbrMax;
+        return "L'id est : "+id+"\nLe nom est : "+nom+"\nLa date est : "+date+"\nL'heure est : "+heure+"\nL'endroit est : "+endroit+"\nLe type est : "+type+"\nLe nombre max est : "+nbrMax+"\nValidation de l'article : "+valid;
     }
     
     

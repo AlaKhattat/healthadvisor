@@ -1,7 +1,11 @@
 package com.healthadvisor.service.impl;
 
+import com.healthadvisor.javafx.article.AjoutArticleFXMLController;
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Evenement;
+import com.healthadvisor.entities.Evenement_Participants;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.evenement.AjoutEvenementFXMLController;
 import com.heathadvisor.service.IGestionEvenement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,14 +24,13 @@ public class GestionEvenement implements IGestionEvenement {
     public GestionEvenement() {
 
         db = MyDB.getInstance();
-
     }
-
-    @Override
+    
+    
     public void ajouterEvenement(Evenement e) {
 
         try {
-            PreparedStatement stm = db.getConnexion().prepareStatement("insert into evennement(nom, date, location, type, max_participants, url_image, heure) values(?,?,?,?,?,?,?)");
+            PreparedStatement stm = db.getConnexion().prepareStatement("insert into evennement(nom, date, location, type, max_participants, url_image, heure, validation, createur) values(?,?,?,?,?,?,?,?,?)");
             stm.setString(1, e.getNom());
             stm.setDate(2, e.getDate());
             stm.setString(3, e.getEndroit());
@@ -35,13 +38,15 @@ public class GestionEvenement implements IGestionEvenement {
             stm.setInt(5, e.getNbrMax());
             stm.setString(6, e.getImage());
             stm.setTime(7, e.getHeure());
+            stm.setString(8, "Non défini");
+            stm.setString(9, e.getLogCreateur());
             stm.executeUpdate();
             System.out.println("Ajout effectué ! ");
-            Alert al = new Alert(Alert.AlertType.INFORMATION);
+            /*Alert al = new Alert(Alert.AlertType.INFORMATION);
             al.setTitle("Ajout evenement");
             al.setHeaderText(null);
             al.setContentText("Ajout de l'evenement '" + e.getNom() + "' réussie !");
-            al.showAndWait();
+            al.showAndWait();*/
         } catch (SQLException err) {
             Alert al;
             al = new Alert(Alert.AlertType.ERROR);
@@ -52,11 +57,10 @@ public class GestionEvenement implements IGestionEvenement {
         }
     }
 
-    @Override
     public void supprimerEvenement(int id) {
 
         try {
-            PreparedStatement stm = db.getConnexion().prepareStatement("delete from evennement where id="+id);
+            PreparedStatement stm = db.getConnexion().prepareStatement("delete from evennement where id=" + id);
             stm.executeUpdate();
             System.out.println("Suppression effectue ! ");
             Alert al = new Alert(Alert.AlertType.INFORMATION);
@@ -75,7 +79,6 @@ public class GestionEvenement implements IGestionEvenement {
 
     }
 
-    @Override
     public void modifierEvenement(int id, String nom, Date date, Time heure, String endroit, String type, int max, String image) {
 
         try {
@@ -97,10 +100,10 @@ public class GestionEvenement implements IGestionEvenement {
             al.showAndWait();
         } catch (SQLException e) {
             Alert al;
-            al=new Alert(Alert.AlertType.ERROR);
+            al = new Alert(Alert.AlertType.ERROR);
             al.setTitle("Modification événement");
             al.setHeaderText(null);
-            al.setContentText("Echec de la modification de l'événement\n "+e.getSQLState()+ "\nMessage : " + e.getMessage());
+            al.setContentText("Echec de la modification de cet événement\n " + e.getSQLState() + "\nMessage : " + e.getMessage());
             al.showAndWait();
         }
 
@@ -123,14 +126,21 @@ public class GestionEvenement implements IGestionEvenement {
                 e.setNbrMax(res.getInt(6));
                 e.setImage(res.getString(7));
                 e.setHeure(res.getTime(8));
+                e.setValid(res.getString(9));
+                e.setLogCreateur(res.getString(10));
                 listE.add(e);
-
             }
             System.out.println("Affichage réussi ! ");
         } catch (SQLException err) {
             System.out.println("Erreur affichage : " + err.getSQLState());
         }
         return listE;
+    }
+    
+    public int dernierEvt(){
+        int taille=afficherEvenement().size()-1;
+        Evenement e=afficherEvenement().get(taille);
+        return e.getId();
     }
 
     public List<Evenement> rechercheEvenement(String s) {
@@ -142,6 +152,59 @@ public class GestionEvenement implements IGestionEvenement {
             }
         }
         return rech;
+    }
+
+    public Evenement rechercherID(int id) {
+        Evenement e = new Evenement();
+        for (Evenement i : afficherEvenement()) {
+            if (i.getId() == id) {
+                e = i;
+            }
+        }
+        return e;
+    }
+
+    public boolean isValid(int id) {
+        Evenement e = rechercherID(id);
+        for (Evenement i : afficherEvenement()) {
+            if (i.getId()== id) {
+                if(i.getValid().equals("Validé")){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void validationEvenement(int id, String statut) {
+        try {
+            PreparedStatement stm = db.getConnexion().prepareStatement("update evennement set validation=? where id=?");
+            stm.setString(1, statut);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+            if (statut.equals("Validé")) {
+                System.out.println("Evénement validé ! ");
+                Alert al = new Alert(Alert.AlertType.INFORMATION);
+                al.setTitle("Validation événement");
+                al.setHeaderText(null);
+                al.setContentText("Validation de l'événement réussie !");
+                al.showAndWait();
+            } else {
+                System.out.println("Evénement retiré ! ");
+                Alert al = new Alert(Alert.AlertType.INFORMATION);
+                al.setTitle("Validation événement");
+                al.setHeaderText(null);
+                al.setContentText("Retrait de l'événement réussi !");
+                al.showAndWait();
+            }
+        } catch (SQLException e) {
+            Alert al;
+            al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Validation événement");
+            al.setHeaderText(null);
+            al.setContentText("Echec de la mise à jour du statut de cet événement\n " + e.getSQLState() + "\nMessage : " + e.getMessage());
+            al.showAndWait();
+        }
     }
 
 }

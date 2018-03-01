@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.InterfacePrincipaleFXMLController">
+   <children>
+      <Hyperlink fx:id="list" layoutX="226.0" layoutY="106.0" onAction="#redirectList" text="Liste des articles" />
+      <Hyperlink fx:id="gestion" layoutX="226.0" layoutY="274.0" onAction="#redirectGestion" text="Gérer les articles" />
+      <Hyperlink fx:id="mesArticles" layoutX="238.0" layoutY="189.0" onAction="#redirectMyArt" text="Mes articles" />
+   </children>
+</AnchorPane>

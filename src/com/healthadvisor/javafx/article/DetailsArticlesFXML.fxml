@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.DetailsArticlesFXMLController">
+   <children>
+      <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" layoutX="532.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="confirm" fitHeight="130.0" fitWidth="141.0" layoutX="323.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@validation.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="titreL" layoutX="49.0" layoutY="264.0" text="Label" />
+      <Label fx:id="contL" layoutX="49.0" layoutY="359.0" prefHeight="190.0" prefWidth="455.0" />
+      <Label fx:id="tagsL" layoutX="173.0" layoutY="264.0" text="Label" />
+      <Label fx:id="descL" layoutX="49.0" layoutY="290.0" prefHeight="48.0" prefWidth="455.0" text="Label" />
+      <JFXButton fx:id="back" layoutX="403.0" layoutY="556.0" onAction="#redirectBack" text="Retour" />
+      <JFXButton fx:id="modif" layoutX="297.0" layoutY="556.0" onAction="#redirectModif" text="Modifier" />
+      <Label layoutX="335.0" layoutY="152.0" text="Succés !">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

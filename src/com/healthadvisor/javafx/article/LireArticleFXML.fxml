@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.LireArticleFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.LireArticleFXMLController">
    <children>
-      <Label fx:id="cont" layoutX="17.0" layoutY="261.0" prefHeight="270.0" prefWidth="731.0" text="Label" />
-      <Label fx:id="titre" layoutX="92.0" layoutY="14.0" prefHeight="59.0" prefWidth="657.0" text="Label" />
-      <Label fx:id="desc" layoutX="345.0" layoutY="81.0" prefHeight="76.0" prefWidth="393.0" text="Label" />
-      <ImageView fx:id="imgView" fitHeight="180.0" fitWidth="223.0" layoutX="8.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="idmed" layoutX="345.0" layoutY="167.0" prefHeight="18.0" prefWidth="104.0" text="Label" />
-      <Button fx:id="back" layoutX="8.0" layoutY="19.0" mnemonicParsing="false" onAction="#retour" text="Précédent" />
+      <Label fx:id="cont" layoutX="56.0" layoutY="266.0" prefHeight="270.0" prefWidth="642.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="titre" alignment="CENTER" layoutX="124.0" layoutY="23.0" prefHeight="59.0" prefWidth="765.0" text="Les regimes" textFill="#19416f">
+         <font>
+            <Font size="40.0" />
+         </font></Label>
+      <Label fx:id="desc" layoutX="53.0" layoutY="171.0" prefHeight="76.0" prefWidth="393.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <ImageView fx:id="imgView" fitHeight="200.0" fitWidth="200.0" layoutX="756.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="idmed" layoutX="503.0" layoutY="96.0" prefHeight="18.0" prefWidth="104.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="37.0" layoutY="65.0" onMouseClicked="#redirectBack" size="40" />
+      <Rating fx:id="rating" layoutX="426.0" layoutY="543.0" onMouseClicked="#calculRating" rating="0.0" />
+      <Label fx:id="tagsL" layoutX="56.0" layoutY="138.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <JFXComboBox fx:id="validCombo" focusColor="#19416f" layoutX="839.0" layoutY="368.0" prefHeight="25.0" prefWidth="104.0" />
+      <JFXButton fx:id="validBut" layoutX="853.0" layoutY="423.0" onAction="#validArticle" prefHeight="25.0" prefWidth="80.0" text="Confirmer" textFill="#19416f" />
+      <JFXButton fx:id="modif" layoutX="853.0" layoutY="475.0" onAction="#redirectModif" prefWidth="80.0" text="Modifier" textFill="#19416f" />
+      <JFXButton fx:id="pdfBut" layoutX="853.0" layoutY="519.0" onAction="#savePdf" prefWidth="80.0" text="Télécharger" textFill="#19416f" />
    </children>
 </AnchorPane>

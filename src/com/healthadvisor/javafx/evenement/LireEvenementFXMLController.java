@@ -3,9 +3,11 @@ package com.healthadvisor.javafx.evenement;
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Evenement_Participants;
 import com.healthadvisor.entities.Patient;
-import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.service.impl.GestionEvenement;
 import com.healthadvisor.service.impl.GestionEvenementParticipants;
-import com.healthadvisor.service.impl.GestionPatient;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,12 +29,17 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
 
 public class LireEvenementFXMLController implements Initializable {
@@ -60,8 +67,33 @@ public class LireEvenementFXMLController implements Initializable {
     @FXML
     private ListView<String> listParticip;
     private Evenement evt;
-    GestionPatient gp= new GestionPatient();
+
+    Date d2 = new Date(1970, 9, 9);
+    Patient p=new Patient(); //SESSION PATIENT
+    
     GestionEvenementParticipants gep = new GestionEvenementParticipants();
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private Label avert;
+    @FXML
+    private FontAwesomeIconView warning;
+    @FXML
+    private FontAwesomeIconView fleche;
+    @FXML
+    private JFXComboBox validCombo;
+    @FXML
+    private JFXButton validBut;
+
+    GestionEvenement ge = new GestionEvenement();
+    @FXML
+    private Label createurLab;
+    @FXML
+    private JFXButton modif;
+
+    private String retour;
+    @FXML
+    private FontAwesomeIconView back;
 
     public Evenement getEvt() {
         return evt;
@@ -71,19 +103,62 @@ public class LireEvenementFXMLController implements Initializable {
         this.evt = evt;
     }
 
-    public void ecrireMessage(Evenement e) {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        validCombo.getItems().addAll("Valider", "Retirer");
+    }
+
+    public void dispoEvent(Evenement e, Patient p) {
+        List<Evenement_Participants> lep = gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).collect(Collectors.toList());
+        List<String> listP = new ArrayList<>();
+        int nbr = (int) gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).count();
+        for (Evenement_Participants ep : lep) {
+            listP.add(ep.getpLog());
+        }
+        System.out.println(listP);
+        if (nbr < e.getNbrMax()) {
+            participeBut.setVisible(true);
+            disp.setVisible(false);
+            setWarning(e);
+        } else {
+            participeBut.setVisible(false);
+            disp.setVisible(true);
+        }
+        if (listP.contains(p.getLogin())) {
+            participeBut.setText("Je ne participe plus !");
+            avert.setVisible(false);
+            warning.setVisible(false);
+            fleche.setVisible(false);
+        } else {
+            setWarning(e);
+        }
+    }
+
+    public void ecrireMessage(Evenement e, Patient p) {
         int nbr = (int) gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).count();
         List<Evenement_Participants> lep = gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).collect(Collectors.toList());
         List<String> listP = new ArrayList<>();
+        List<String> autres = new ArrayList<>();
         Random rd = new Random();
         for (Evenement_Participants ep : lep) {
             listP.add(ep.getpLog());
         }
+        for (String s : listP) {
+            if (s.equals(p.getLogin()) == false) {
+                autres.add(s);
+            }
+        }
         if (nbr == 0) {
             message.setText("Soyez le premier à participer !");
-        } else if (nbr == 1) {
-
+        } else if (nbr == 1 && listP.get(0).equals(p.getLogin()) == false) {
             message.setText(lep.get(0).getpLog() + " y participe !");
+        } else if (nbr == 1 && listP.get(0).equals(p.getLogin())) {
+            message.setText("Vous étes le seul à y participer pour l'instant.");
+        } else if (nbr == 2 && listP.contains(p.getLogin())) {
+            message.setText("Vous et " + autres.get(0) + " participez à cet événement !");
+        } else if (nbr > 2 && listP.contains(p.getLogin())) {
+            int index = rd.nextInt(autres.size());
+            message.setText("Vous, " + lep.get(index).getpLog() + " et " + (listP.size() - 2) + " autre(s) personne(s) \nallez participer à cet événement !");
         } else {
             int index = rd.nextInt(listP.size());
             message.setText(lep.get(index).getpLog() + " et " + (listP.size() - 1) + " autre(s) personne(s) \ny seront !");
@@ -92,37 +167,21 @@ public class LireEvenementFXMLController implements Initializable {
         listParticip.setItems(participData);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
-    public void dispoEvent(Evenement e) {
-        int nbr = (int) gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).count();
-        if (nbr < e.getNbrMax()) {
-            participeBut.setVisible(true);
-            disp.setVisible(false);
-        } else {
-            participeBut.setVisible(false);
-            disp.setVisible(true);
-        }
-
-    }
-
     @FXML
     private void ajoutParticip(ActionEvent event) {
-        Date d2 = new Date(1970, 9, 9);
-        
-        //Patient p =gp.AfficherPatientLogin(FXMLLoginController.pseudo);
-        Patient p=gp.AfficherPatientLogin("kiki");
-        Evenement_Participants ep =new Evenement_Participants(evt, p);
+        Evenement_Participants ep = new Evenement_Participants(evt, p);
         if (participeBut.getText().equals("Je participe !")) {
             gep.ajouterEvenementParticipants(ep);
             participeBut.setText("Je ne participe plus");
+            warning.setVisible(false);
+            avert.setVisible(false);
+            fleche.setVisible(false);
         } else {
             gep.supprimerEvenementParticipants(ep);
             participeBut.setText("Je participe !");
+            setWarning(evt);
         }
+        ecrireMessage(evt, p);
     }
 
     public Label getNomLab() {
@@ -193,7 +252,103 @@ public class LireEvenementFXMLController implements Initializable {
         } catch (IOException io) {
             Logger.getLogger(LireEvenementFXMLController.class.getName()).log(Level.SEVERE, null, io);
         }
+    }
 
+    public void setCreateurLab(String createurLab) {
+        this.createurLab.setText(createurLab);
+    }
+
+    public void setWarning(Evenement e) {
+
+        int nbr = (int) gep.afficherEvenementParticipants().stream().filter(ep -> ep.getIdEvent() == e.getId()).count();
+        int restant = e.getNbrMax() - nbr;
+        if (restant <= 10 && restant > 0) {
+            warning.setVisible(true);
+            fleche.setVisible(true);
+            avert.setVisible(true);
+            avert.setText("Plus que " + restant + " places à prendre ! Dépéchez-vous, c'est pas la !");
+        } else {
+            avert.setVisible(false);
+            warning.setVisible(false);
+            fleche.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void validEvt(ActionEvent event) {
+        String statut = validCombo.getSelectionModel().getSelectedItem().toString();
+        if (statut == "Valider") {
+            Boolean b = ge.isValid(evt.getId());
+            if (b.equals(false)) {
+                ge.validationEvenement(evt.getId(), "Validé");
+            } else {
+                System.out.println("déja validé !");
+            }
+        } else if (statut == "Retirer") {
+            Boolean b = ge.isValid(evt.getId());
+            if (b.equals(true)) {
+                ge.validationEvenement(evt.getId(), "Retiré");
+            } else {
+                System.out.println("déja retiré !");
+            }
+        }
+    }
+
+    @FXML
+    private void redirectModif(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifEvenementFXML.fxml"));
+        try {
+            GestionEvenement ge = new GestionEvenement();
+            //Evenement e = ge.rechercherID(id);
+            Parent root;
+            root = loader.load();
+            ModifEvenementFXMLController cnt = loader.getController();
+            cnt.setId(evt.getId());
+            cnt.setDateF(evt.getDate());
+            cnt.setImgView(evt.getImage());
+            cnt.setEndroitF(evt.getEndroit());
+            cnt.setMaxF(evt.getNbrMax());
+            cnt.setNomF(evt.getNom());
+            cnt.setTimeF(evt.getHeure());
+            cnt.setTypeCombo(evt.getType());
+            cnt.setRetour(retour);
+            //cnt.affichage = true;
+            Scene scene = anchor.getScene();
+            scene.setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(ModifEvenementFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setRetour(String retour) {
+        this.retour = retour;
+    }
+
+    @FXML
+    private void redirectBack(MouseEvent event) {
+        if (retour.equals("navig")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerEvenementsFXML.fxml"));
+            try {
+                Parent root;
+                root = loader.load();
+                NaviguerEvenementsFXMLController nav = loader.getController();
+                Scene scene = anchor.getScene();
+                scene.setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(NaviguerEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (retour.equals("mes")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesEvenementsFXML.fxml"));
+            try {
+                Parent root;
+                root = loader.load();
+                MesEvenementsFXMLController mes = loader.getController();
+                Scene scene = anchor.getScene();
+                scene.setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(MesEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

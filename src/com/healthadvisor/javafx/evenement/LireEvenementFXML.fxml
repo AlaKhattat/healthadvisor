@@ -1,24 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.LireEvenementFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.LireEvenementFXMLController">
    <children>
-      <Label fx:id="nomLab" layoutX="244.0" layoutY="14.0" prefHeight="38.0" prefWidth="493.0" text="Label" />
-      <ImageView fx:id="img" fitHeight="177.0" fitWidth="219.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="typeLab" layoutX="244.0" layoutY="79.0" prefHeight="24.0" prefWidth="227.0" text="Label" />
-      <Label fx:id="dateLab" layoutX="244.0" layoutY="122.0" prefHeight="17.0" prefWidth="89.0" text="Label" />
-      <Label fx:id="heureLab" layoutX="344.0" layoutY="122.0" prefHeight="17.0" prefWidth="126.0" text="Label" />
-      <Label fx:id="endroitLab" layoutX="493.0" layoutY="122.0" prefHeight="17.0" prefWidth="195.0" text="Label" />
-      <Button fx:id="participeBut" layoutX="633.0" layoutY="478.0" mnemonicParsing="false" onAction="#ajoutParticip" text="Je participe !" />
-      <Label fx:id="maxLab" layoutX="14.0" layoutY="198.0" prefHeight="17.0" prefWidth="89.0" text="Label" />
-      <Label fx:id="disp" layoutX="602.0" layoutY="482.0" text="Plus de places disponibles !" />
-      <Label fx:id="message" layoutX="14.0" layoutY="223.0" text="Label" />
+      <Label fx:id="nomLab" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="18.0" prefHeight="38.0" prefWidth="493.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+      <ImageView fx:id="img" fitHeight="200.0" fitWidth="200.0" layoutX="733.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="typeLab" layoutX="326.0" layoutY="169.0" prefHeight="24.0" prefWidth="134.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="dateLab" layoutX="326.0" layoutY="214.0" prefHeight="17.0" prefWidth="89.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="heureLab" layoutX="426.0" layoutY="214.0" prefHeight="17.0" prefWidth="126.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="endroitLab" layoutX="514.0" layoutY="170.0" prefHeight="21.0" prefWidth="187.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="maxLab" layoutX="14.0" layoutY="198.0" prefHeight="17.0" prefWidth="89.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="disp" layoutX="768.0" layoutY="508.0" text="Plus de places disponibles !" textFill="#f21010" />
+      <Label fx:id="message" layoutX="14.0" layoutY="223.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
       <ListView fx:id="listParticip" layoutX="14.0" layoutY="279.0" prefHeight="254.0" prefWidth="164.0" />
-      <Label layoutX="14.0" layoutY="258.0" text="Participants :" />
+      <Label layoutX="14.0" layoutY="258.0" text="Participants :" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="avert" layoutX="408.0" layoutY="512.0" text="Label" textFill="#f21010" />
+      <FontAwesomeIconView fx:id="warning" fill="#f21010" glyphName="EXCLAMATION_TRIANGLE" layoutX="378.0" layoutY="528.0" size="25" wrappingWidth="41.0" />
+      <FontAwesomeIconView fx:id="fleche" fill="#f21010" glyphName="ARROW_RIGHT" layoutX="709.0" layoutY="526.0" size="25" wrappingWidth="21.428571701049805" />
+      <JFXComboBox fx:id="validCombo" focusColor="#19416f" layoutX="787.0" layoutY="364.0" prefHeight="25.0" prefWidth="126.0" />
+      <JFXButton fx:id="validBut" layoutX="816.0" layoutY="406.0" onAction="#validEvt" text="Confirmer" textFill="#19416f" />
+      <Label fx:id="createurLab" layoutX="14.0" layoutY="175.0" text="Label" textFill="#19416f">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <JFXButton fx:id="modif" layoutX="824.0" layoutY="437.0" onAction="#redirectModif" text="Modifier" textFill="#19416f" />
+      <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="42.0" layoutY="59.0" onMouseClicked="#redirectBack" size="40" />
+      <JFXButton fx:id="participeBut" layoutX="801.0" layoutY="505.0" onAction="#ajoutParticip" text="Je participe !" textFill="#19416f" />
    </children>
 </AnchorPane>

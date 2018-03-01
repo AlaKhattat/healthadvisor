@@ -1,6 +1,7 @@
 package com.healthadvisor.javafx.evenement;
 
 import com.healthadvisor.entities.Evenement;
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.service.impl.GestionEvenement;
 import com.sun.prism.impl.Disposer.Record;
 import java.sql.Date;
@@ -36,8 +37,11 @@ public class AffichButton extends TableCell<Record, Boolean> {
                 String type = currentEvt.getType();
                 int nbrMax = currentEvt.getNbrMax();
                 String url=currentEvt.getImage();
+                String createur=currentEvt.getLogCreateur();
                 LireEvenementFXMLController le=new LireEvenementFXMLController();
-                main.startAffich(st, nom, date, heure, endroit, type, nbrMax, url, currentEvt);
+                Date d2 = new Date(1970, 9, 9);
+                Patient p=new Patient(); //SESSION PATIENT
+                main.startAffich(st, nom, date, heure, endroit, type, nbrMax, url, currentEvt, createur, p);
             }
         });
     }

@@ -9,11 +9,15 @@ public class Article {
     private String contenu;
     private String idMed;
     private String image;
+    private double note;
+    private String tags;
+    private String valid;
 
-    public Article(String nom, String description, String contenu, Medecin medecin, String image) {
+    public Article(String nom, String description, String tags, String contenu, Medecin medecin, String image) {
     
         this.nom=nom;
         this.description=description;
+        this.tags=tags;
         this.contenu=contenu;
         this.idMed=medecin.getLogin();
         this.image=image;
@@ -21,8 +25,6 @@ public class Article {
 
     public Article() {
     }
-    
-    
     
     public int getReference() {
         return reference;
@@ -71,9 +73,33 @@ public class Article {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public double getNote() {
+        return note;
+    }
+
+    public void setNote(double note) {
+        this.note = note;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getValid() {
+        return valid;
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
     
     public String toString(){
-        return "La reference est : "+reference+"\nLe nom est : "+nom+"\nLa description est : "+description+"\nLe contenu est : "+contenu+"\nL'id du medecin est : "+idMed+"\n";
+        return "La reference est : "+reference+"\nLe nom est : "+nom+"\nLa description est : "+description+"\nLes tags sont : "+tags+"\nLe contenu est : "+contenu+"\nL'id du medecin est : "+idMed+"\nLa moyenne des notes est"+note+"\nValidation de l'article"+valid;
     }
     
     

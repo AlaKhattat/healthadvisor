@@ -1,7 +1,6 @@
 
 package com.healthadvisor.service.impl;
 
-
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Evenement_Participants;
 import com.heathadvisor.service.IGestionEvenementParticipants;
@@ -24,7 +23,6 @@ public class GestionEvenementParticipants implements IGestionEvenementParticipan
         
     }
     
-    @Override
     public void ajouterEvenementParticipants(Evenement_Participants p){
          
         try {
@@ -38,12 +36,11 @@ public class GestionEvenementParticipants implements IGestionEvenementParticipan
         }
     }
     
-    @Override
     public void supprimerEvenementParticipants(Evenement_Participants p) {
         
         try
         {
-         PreparedStatement stm = db.getConnexion().prepareStatement("delete from evennement_participants where id_event= ? or id_user=?"); 
+         PreparedStatement stm = db.getConnexion().prepareStatement("delete from evennement_participants where id_event= ? and id_user=?"); 
          stm.setInt(1,p.getIdEvent());
          stm.setString(2, p.getpLog());
          stm.executeUpdate();
@@ -56,7 +53,6 @@ public class GestionEvenementParticipants implements IGestionEvenementParticipan
         
     }
     
-    @Override
     public List<Evenement_Participants> afficherEvenementParticipants()
     {
         List<Evenement_Participants> listEP = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.healthadvisor.javafx.article;
 
 import com.healthadvisor.entities.Article;
 import com.healthadvisor.service.impl.GestionArticle;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,15 +16,17 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -36,28 +39,25 @@ public class NaviguerArticlesFXMLController implements Initializable {
 
     GestionArticle ga = new GestionArticle();
     @FXML
-    private Button back;
+    private FontAwesomeIconView back;
+    @FXML
+    private FontAwesomeIconView ajout;
+    @FXML
+    private VBox vb;
+    @FXML
+    private AnchorPane anchor;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        VBox grosvbox = new VBox();
-        grosvbox.setPrefWidth(550);
-        grosvbox.setPrefHeight(484);
-        grosvbox.setMinWidth(USE_COMPUTED_SIZE);
-        grosvbox.setMinHeight(USE_COMPUTED_SIZE);
-        grosvbox.setMaxWidth(USE_COMPUTED_SIZE);
-        grosvbox.setMaxHeight(USE_COMPUTED_SIZE);
-        grosvbox.setLayoutX(35);
-        grosvbox.setLayoutY(17);
-        grosvbox.setPadding(new Insets(15, 450, 15, 450));
-        grosvbox.setSpacing(35);
-        grosvbox.setAlignment(Pos.CENTER);
         List<Article> liste = new ArrayList<>();
-        liste = ga.afficherArticle();
+        for (Article a : ga.afficherArticle()) {
+            if (ga.isValid(a.getReference())) {
+                liste.add(a);
+            }
+        }
         for (int i = 0; i < liste.size(); i++) {
             Hyperlink titre = new Hyperlink();
-            ListeArticleFXMain main = new ListeArticleFXMain();
             Article a = liste.get(i);
             titre.setText(a.getNom());
             titre.setOnAction(new EventHandler<ActionEvent>() {
@@ -70,7 +70,30 @@ public class NaviguerArticlesFXMLController implements Initializable {
                     String cont = a.getContenu();
                     String idmed = a.getIdMed();
                     String img = a.getImage();
-                    main.startAffich(st, titre, desc, cont, idmed, img);
+                    String tag = a.getTags();
+                    double note = a.getNote();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("LireArticleFXML.fxml"));
+                        Parent root;
+                        root = loader.load();
+                        LireArticleFXMLController cnt = loader.getController();
+                        DetailsArticlesFXMLController details=new DetailsArticlesFXMLController();
+                        AjoutArticleFXMLController ajout=new AjoutArticleFXMLController();
+                        cnt.setId(ref);
+                        cnt.setCont(cont);
+                        cnt.setImg(a.getImage());
+                        cnt.setDesc(desc);
+                        cnt.setIdmed(idmed);
+                        cnt.setTagsL(tag);
+                        cnt.setTitre(titre);
+                        cnt.setRating(note);
+                        cnt.setRetour("navig");
+                        details.setRetour("navig");             
+                        Scene scene = anchor.getScene();
+                        scene.setRoot(root);
+                    } catch (IOException ex) {
+                        Logger.getLogger(NaviguerArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             ImageView img = new ImageView();
@@ -84,18 +107,42 @@ public class NaviguerArticlesFXMLController implements Initializable {
             } catch (IOException io) {
                 Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, io);
             }
-            img.setFitHeight(400);
-            img.setFitWidth(450);
+            img.setFitHeight(300);
+            img.setFitWidth(350);
             titre.setFont(Font.font("verdana", 25));
             VBox vbox = new VBox();
             vbox.getChildren().setAll(titre, img);
-            grosvbox.getChildren().add(vbox);
+            vb.getChildren().add(vbox);
         }
-        scroll.setContent(grosvbox);
     }
 
     @FXML
-    private void retour(ActionEvent event) {
+    private void redirectBack(MouseEvent event) {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
+        try {
+            Parent root;
+            root = loader.load();
+            InterfacePrincipaleFXMLController interf = loader.getController();
+            Scene scene = anchor.getScene();
+            scene.setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void ajoutArt(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutArticleFXML.fxml"));
+        try {
+            Parent root;
+            root = loader.load();
+            AjoutArticleFXMLController ajoutA = loader.getController();
+            ajoutA.setRetour("navig");
+            Scene scene = anchor.getScene();
+            scene.setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

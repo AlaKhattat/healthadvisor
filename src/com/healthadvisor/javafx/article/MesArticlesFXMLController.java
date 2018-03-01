@@ -1,16 +1,15 @@
-package com.healthadvisor.javafx.evenement;
+package com.healthadvisor.javafx.article;
 
-import com.healthadvisor.entities.Evenement;
-import com.healthadvisor.entities.Patient;
-import com.healthadvisor.service.impl.GestionEvenement;
+import com.healthadvisor.entities.Article;
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.service.impl.GestionArticle;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,8 +20,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,85 +27,73 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-public class NaviguerEvenementsFXMLController implements Initializable {
+public class MesArticlesFXMLController implements Initializable {
 
-    @FXML
     private ScrollPane scroll;
-
-    @FXML
-    private FontAwesomeIconView back;
-
-    Date d2 = new Date(1970, 9, 9);
-    Patient p=new Patient(); //SESSION PATIENT
-    
-    GestionEvenement ge = new GestionEvenement();
     @FXML
     private AnchorPane anchor;
     @FXML
     private VBox vb;
+
+    GestionArticle ga = new GestionArticle();
+    Date d3 = new Date(1970, 17, 4, 9, 5, 3);
+    Medecin m=new Medecin(); //SESSION MEDECIN
+    @FXML
+    private FontAwesomeIconView back;
     @FXML
     private FontAwesomeIconView ajout;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        List<Evenement> liste = new ArrayList<>();
-        for (Evenement i : ge.afficherEvenement()) {
-            if (ge.isValid(i.getId())) {
-                liste.add(i);
+        List<Article> liste = new ArrayList<>();
+        for (Article a : ga.afficherArticle()) {
+            if (a.getIdMed().equals(m.getLogin())) {
+                liste.add(a);
             }
         }
         for (int i = 0; i < liste.size(); i++) {
             Hyperlink titre = new Hyperlink();
-            ListeEvenementFXMain main = new ListeEvenementFXMain();
-            Evenement e = liste.get(i);
-            titre.setText(e.getNom());
+            Article a = liste.get(i);
+            titre.setText(a.getNom());
             titre.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    int ref = a.getReference();
                     Stage st = new Stage();
-                    int i = e.getId();
-                    String nom = e.getNom();
-                    Date date = e.getDate();
-                    Time heure = e.getHeure();
-                    String endroit = e.getEndroit();
-                    String type = e.getType();
-                    int nbrMax = e.getNbrMax();
-                    String url = e.getImage();
-                    String createur = e.getLogCreateur();
+                    String titre = a.getNom();
+                    String desc = a.getDescription();
+                    String cont = a.getContenu();
+                    String idmed = a.getIdMed();
+                    String img = a.getImage();
+                    String tag = a.getTags();
+                    double note = a.getNote();
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("LireEvenementFXML.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("LireArticleFXML.fxml"));
                         Parent root;
                         root = loader.load();
-                        LireEvenementFXMLController cnt = loader.getController();
-                        DetailsEvenementsFXMLController details = new DetailsEvenementsFXMLController();
-                        cnt.setDateLab(date);
-                        cnt.setEndroitLab(endroit);
-                        cnt.setHeureLab(heure);
-                        cnt.setTypeLab(type);
-                        cnt.setNomLab(nom);
-                        cnt.setImg(url);
-                        cnt.setMaxLab(nbrMax);
-                        cnt.setCreateurLab(createur);
-                        cnt.setRetour("navig");
-                        details.setRetour("navig");
-                        cnt.setWarning(e);
-                        cnt.setEvt(e);
-                        cnt.ecrireMessage(e, p);
-                        cnt.dispoEvent(e, p);
+                        LireArticleFXMLController cnt = loader.getController();
+                        DetailsArticlesFXMLController details = new DetailsArticlesFXMLController();
+                        cnt.setId(ref);
+                        cnt.setCont(cont);
+                        cnt.setImg(a.getImage());
+                        cnt.setDesc(desc);
+                        cnt.setIdmed(idmed);
+                        cnt.setTagsL(tag);
+                        cnt.setTitre(titre);
+                        cnt.setRating(note);
+                        cnt.setRetour("mes");
+                        details.setRetour("mes");
                         Scene scene = anchor.getScene();
                         scene.setRoot(root);
                     } catch (IOException ex) {
-                        Logger.getLogger(NaviguerEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(NaviguerArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -119,18 +104,18 @@ public class NaviguerEvenementsFXMLController implements Initializable {
                 Image img_evt = SwingFXUtils.toFXImage(ImageIO.read(input), null);
                 img.setImage(img_evt);
             } catch (FileNotFoundException ex) {
+                Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException io) {
+                Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, io);
             }
-            img.setFitHeight(300);
-            img.setFitWidth(350);
+            img.setFitHeight(400);
+            img.setFitWidth(450);
             titre.setFont(Font.font("verdana", 25));
             VBox vbox = new VBox();
             vbox.getChildren().setAll(titre, img);
             vb.getChildren().add(vbox);
         }
     }
-
-
 
     @FXML
     private void redirectBack(MouseEvent event) {
@@ -146,18 +131,18 @@ public class NaviguerEvenementsFXMLController implements Initializable {
         }
     }
 
-        @FXML
-    private void ajoutEvt(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutEvenementFXML.fxml"));
+    @FXML
+    private void ajoutArt(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutArticleFXML.fxml"));
         try {
             Parent root;
             root = loader.load();
-            AjoutEvenementFXMLController ajoutE = loader.getController();
-            ajoutE.setRetour("navig");
+            AjoutArticleFXMLController ajoutA = loader.getController();
+            ajoutA.setRetour("mes");
             Scene scene = anchor.getScene();
             scene.setRoot(root);
         } catch (IOException ex) {
-            Logger.getLogger(AjoutEvenementFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,5 +1,5 @@
 
-package com.healthadvisor.javafx.article;
+package com.healthadvisor.javafx.evenement;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -13,11 +13,11 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class NaviguerArticlesFXMain extends Application {
+public class NaviguerEvenementsFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("NaviguerArticlesFXML.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("NaviguerEvenementsFXML.fxml"));
         try {
             Parent root=loader.load();
             Scene sc=new Scene(root);
@@ -28,6 +28,7 @@ public class NaviguerArticlesFXMain extends Application {
         }
     }
 
+    
     public static void main(String[] args) {
         launch(args);
     }

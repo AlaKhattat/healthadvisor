@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.NaviguerEvenementsFXMLController">
+<AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.MesEvenementsFXMLController">
    <children>
-      <ScrollPane layoutX="1.0" layoutY="139.0" prefHeight="460.0" prefWidth="1000.0" style="-fx-background: #dae3ee;">
+      <ScrollPane layoutX="1.0" layoutY="147.0" prefHeight="452.0" prefWidth="1000.0" style="-fx-background: #dae3ee;">
          <content>
             <VBox fx:id="vb" alignment="CENTER" prefWidth="993.0">
                <padding>
@@ -23,7 +22,7 @@
          </content>
       </ScrollPane>
       <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="24.0" layoutY="55.0" onMouseClicked="#redirectBack" size="40" />
-      <Label layoutX="119.0" layoutY="103.0" text="Marathons, conférences, sensibilisations... Participez à nos événements !" textFill="#19416f">
+      <Label layoutX="292.0" layoutY="103.0" text="Consultez et modifiez vos événements !" textFill="#19416f">
          <font>
             <Font size="24.0" />
          </font>

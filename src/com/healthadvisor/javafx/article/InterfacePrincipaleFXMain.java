@@ -1,23 +1,18 @@
 
-package com.healthadvisor.javafx.evenement;
+package com.healthadvisor.javafx.article;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
-public class NewFXMain extends Application {
+public class InterfacePrincipaleFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("NaviguerEvenementsFXML.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
         try {
             Parent root=loader.load();
             Scene sc=new Scene(root);
@@ -28,7 +23,6 @@ public class NewFXMain extends Application {
         }
     }
 
-    
     public static void main(String[] args) {
         launch(args);
     }

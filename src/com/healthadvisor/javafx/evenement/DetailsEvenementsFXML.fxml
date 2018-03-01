@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.DetailsEvenementsFXMLController">
+   <children>
+      <Label layoutX="345.0" layoutY="134.0" prefHeight="67.0" prefWidth="87.0" text="Succés !" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="nomLab" layoutX="37.0" layoutY="246.0" text="Label" />
+      <Label fx:id="dateLab" layoutX="37.0" layoutY="289.0" text="Label" />
+      <Label fx:id="heureLab" layoutX="37.0" layoutY="324.0" text="Label" />
+      <Label fx:id="endroitLab" layoutX="37.0" layoutY="364.0" text="Label" />
+      <Label fx:id="typeLab" layoutX="313.0" layoutY="246.0" text="Label" />
+      <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" layoutX="522.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="maxLab" layoutX="313.0" layoutY="355.0" text="Label" />
+      <ImageView fx:id="confirm" fitHeight="130.0" fitWidth="141.0" layoutX="323.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@validation.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="modif" layoutX="270.0" layoutY="500.0" onAction="#redirectModif" text="Modifier" />
+      <JFXButton fx:id="back" layoutX="454.0" layoutY="500.0" onAction="#redirectBack" text="Retour" />
+   </children>
+</AnchorPane>

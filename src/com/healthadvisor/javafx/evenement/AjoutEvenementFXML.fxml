@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchor" fx:id="anchor" prefHeight="686.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.AjoutEvenementFXMLController">
+<AnchorPane id="anchor" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.AjoutEvenementFXMLController">
    <children>
-      <Label layoutX="44.0" layoutY="82.0" text="Nom" />
-      <Label layoutX="44.0" layoutY="141.0" text="Date" />
-      <Label layoutX="45.0" layoutY="189.0" text="Heure" />
-      <TextField fx:id="nomF" layoutX="226.0" layoutY="78.0" prefHeight="25.0" prefWidth="258.0" />
-      <Label layoutX="258.0" layoutY="14.0" text="Ajoutez un événement">
+      <JFXTimePicker fx:id="timeF" defaultColor="#19416f" layoutX="67.0" layoutY="369.0" prefHeight="30.0" prefWidth="220.0" promptText="Heure" />
+      <ImageView fx:id="imgView" fitHeight="200.0" fitWidth="200.0" layoutX="778.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXTextField fx:id="nomF" focusColor="#19416f" labelFloat="true" layoutX="67.0" layoutY="201.0" onKeyReleased="#nomController" prefHeight="30.0" prefWidth="220.0" promptText="Nom" />
+      <JFXTextField fx:id="endroitF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="206.0" onKeyReleased="#endroitController" prefHeight="30.0" prefWidth="220.0" promptText="Endroit" />
+      <JFXComboBox fx:id="typeCombo" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="285.0" prefHeight="30.0" prefWidth="220.0" promptText="Type" />
+      <JFXTextField fx:id="maxF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="374.0" onKeyReleased="#numController" prefHeight="30.0" prefWidth="220.0" promptText="Nombre de participants" />
+      <JFXButton fx:id="ajoutEvtBut" layoutX="850.0" layoutY="500.0" onAction="#ajoutFx" text="Valider" textAlignment="CENTER" textFill="#19416f" />
+      <JFXButton fx:id="imgBut" layoutX="831.0" layoutY="375.0" onAction="#ParcourirImage" text="Insérer image" textFill="#19416f" />
+      <Label fx:id="avertNom" layoutX="67.0" layoutY="238.0" textFill="#f21010" />
+      <Label fx:id="avertMax" layoutX="486.0" layoutY="414.0" textFill="#f21010" />
+      <JFXDatePicker fx:id="dateF" defaultColor="#19416f" layoutX="67.0" layoutY="284.0" prefHeight="30.0" prefWidth="220.0" promptText="Date" />
+      <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="24.0" layoutY="54.0" onMouseClicked="#redirectBack" size="40" />
+      <ImageView fitHeight="128.0" fitWidth="832.0" layoutX="77.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fond2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="384.0" layoutY="22.0" style="-fx-background-color: #dae3ee;" text="Créer un événement !" textFill="#19416f">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="ajoutEvtBut" layoutX="607.0" layoutY="626.0" mnemonicParsing="false" onAction="#ajoutFx" prefHeight="32.0" prefWidth="58.0" text="Valider" />
-      <Button fx:id="imgBut" layoutX="226.0" layoutY="438.0" mnemonicParsing="false" onAction="#ParcourirImage" prefHeight="32.0" prefWidth="107.0" text="Insérer image" />
-      <Label layoutX="53.0" layoutY="445.0" text="Image" />
-      <DatePicker fx:id="dateF" layoutX="226.0" layoutY="137.0" prefHeight="25.0" />
-      <JFXTimePicker fx:id="timeF" layoutX="228.0" layoutY="185.0" />
-      <TextField fx:id="endroitF" layoutX="226.0" layoutY="251.0" prefHeight="25.0" prefWidth="258.0" />
-      <Label layoutX="45.0" layoutY="255.0" text="Endroit" />
-      <Label layoutX="45.0" layoutY="313.0" text="Type" />
-      <ComboBox fx:id="typeCombo" layoutX="228.0" layoutY="309.0" prefWidth="150.0" />
-      <Label layoutX="44.0" layoutY="362.0" prefHeight="35.0" prefWidth="128.0" text="Max participants" />
-      <TextField fx:id="maxF" layoutX="226.0" layoutY="366.0" prefHeight="26.0" prefWidth="150.0" />
-      <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" layoutX="549.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="back" layoutX="19.0" layoutY="19.0" mnemonicParsing="false" onAction="#retour" text="Précédent" />
+      <Label fx:id="avertEndroit" layoutX="485.0" layoutY="247.0" textFill="#f21010" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@ public interface IGestionArticle {
     
     public void ajouterArticle(Article a);
     public void supprimerArticle(int ref);
-    public void modifierArticle(int ref, String nom, String desc, String cont, String image);
+    public void modifierArticle(int ref, String nom, String desc, String tags, String cont, String image);
     public List<Article> afficherArticle();
     
 }

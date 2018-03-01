@@ -1,8 +1,10 @@
+
 package com.healthadvisor.javafx.evenement;
 
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.service.impl.GestionEvenement;
+import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,49 +23,43 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-public class NaviguerEvenementsFXMLController implements Initializable {
 
-    @FXML
+public class MesEvenementsFXMLController implements Initializable {
+
     private ScrollPane scroll;
-
-    @FXML
-    private FontAwesomeIconView back;
-
-    Date d2 = new Date(1970, 9, 9);
-    Patient p=new Patient(); //SESSION PATIENT
-    
-    GestionEvenement ge = new GestionEvenement();
     @FXML
     private AnchorPane anchor;
     @FXML
     private VBox vb;
     @FXML
+    private FontAwesomeIconView back;
+    
+    Date d2 = new Date(1970, 9, 9);
+    Patient p=new Patient(); //SESSION PATIENT
+    
+    GestionEvenement ge = new GestionEvenement();
+    @FXML
     private FontAwesomeIconView ajout;
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         List<Evenement> liste = new ArrayList<>();
         for (Evenement i : ge.afficherEvenement()) {
-            if (ge.isValid(i.getId())) {
+            if (i.getLogCreateur().equals(p.getLogin())) {
                 liste.add(i);
             }
         }
@@ -84,13 +80,13 @@ public class NaviguerEvenementsFXMLController implements Initializable {
                     String type = e.getType();
                     int nbrMax = e.getNbrMax();
                     String url = e.getImage();
-                    String createur = e.getLogCreateur();
+                    String createur=e.getLogCreateur();
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("LireEvenementFXML.fxml"));
                         Parent root;
                         root = loader.load();
                         LireEvenementFXMLController cnt = loader.getController();
-                        DetailsEvenementsFXMLController details = new DetailsEvenementsFXMLController();
+                        DetailsEvenementsFXMLController details=new DetailsEvenementsFXMLController();
                         cnt.setDateLab(date);
                         cnt.setEndroitLab(endroit);
                         cnt.setHeureLab(heure);
@@ -99,8 +95,8 @@ public class NaviguerEvenementsFXMLController implements Initializable {
                         cnt.setImg(url);
                         cnt.setMaxLab(nbrMax);
                         cnt.setCreateurLab(createur);
-                        cnt.setRetour("navig");
-                        details.setRetour("navig");
+                        cnt.setRetour("mes");
+                        details.setRetour("mes");
                         cnt.setWarning(e);
                         cnt.setEvt(e);
                         cnt.ecrireMessage(e, p);
@@ -121,16 +117,14 @@ public class NaviguerEvenementsFXMLController implements Initializable {
             } catch (FileNotFoundException ex) {
             } catch (IOException io) {
             }
-            img.setFitHeight(300);
-            img.setFitWidth(350);
+            img.setFitHeight(200);
+            img.setFitWidth(250);
             titre.setFont(Font.font("verdana", 25));
             VBox vbox = new VBox();
             vbox.getChildren().setAll(titre, img);
             vb.getChildren().add(vbox);
         }
     }
-
-
 
     @FXML
     private void redirectBack(MouseEvent event) {
@@ -146,19 +140,21 @@ public class NaviguerEvenementsFXMLController implements Initializable {
         }
     }
 
-        @FXML
+    @FXML
     private void ajoutEvt(MouseEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutEvenementFXML.fxml"));
         try {
             Parent root;
             root = loader.load();
             AjoutEvenementFXMLController ajoutE = loader.getController();
-            ajoutE.setRetour("navig");
+            ajoutE.setRetour("mes");
             Scene scene = anchor.getScene();
             scene.setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(AjoutEvenementFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
+    
 }
