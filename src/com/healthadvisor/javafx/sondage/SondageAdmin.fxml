@@ -6,15 +6,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.SondageAdminController">
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.SondageAdminController">
    <children>
       <TableView fx:id="tableID" layoutX="-1.0" layoutY="50.0" onMouseClicked="#tableViewEvent" prefHeight="350.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="columnID" prefWidth="599.0" text="Sondages" />
         </columns>
       </TableView>
-      <Button fx:id="statBtn" layoutX="235.0" layoutY="414.0" mnemonicParsing="false" onAction="#statBtnAction" prefHeight="25.0" prefWidth="129.0" text="Voir statistiques" />
-      <Button fx:id="ajouterBtn" layoutX="236.0" layoutY="445.0" mnemonicParsing="false" onAction="#AjouterBtnAction" prefHeight="25.0" prefWidth="129.0" text="Ajouter un sondage" />
+      <Button fx:id="statBtn" layoutX="443.0" layoutY="14.0" mnemonicParsing="false" onAction="#statBtnAction" prefHeight="27.0" prefWidth="143.0" text="Voir statistiques" />
+      <Button fx:id="ajouterBtn" layoutX="229.0" layoutY="412.0" mnemonicParsing="false" onAction="#AjouterBtnAction" prefHeight="27.0" prefWidth="143.0" text="Ajouter un sondage" />
       <TextField fx:id="searchBarID" layoutX="14.0" layoutY="14.0" promptText="Chercher un sondage ..." />
+      <Button fx:id="btnSupprimer" layoutX="229.0" layoutY="444.0" mnemonicParsing="false" onAction="#btnSupprimerAction" prefHeight="27.0" prefWidth="143.0" text="Supprimer sondage" />
    </children>
 </AnchorPane>

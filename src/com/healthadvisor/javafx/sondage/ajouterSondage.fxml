@@ -5,11 +5,10 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.AjouterSondageController">
+<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.AjouterSondageController">
    <children>
       <Label fx:id="labelID" layoutX="45.0" layoutY="54.0" text="Donnez une description au sondage d'avis que vous voulez créer" />
       <TextArea fx:id="textAreaID" layoutX="45.0" layoutY="94.0" prefHeight="62.0" prefWidth="501.0" />
-      <Button fx:id="btnPublier" layoutX="244.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnPublierAction" text="Publier sondage" />
-      <Button fx:id="retourBtn" layoutX="244.0" layoutY="245.0" mnemonicParsing="false" onAction="#retourBtnAction" prefHeight="25.0" prefWidth="102.0" text="Retour" />
+      <Button fx:id="btnPublier" layoutX="237.0" layoutY="210.0" mnemonicParsing="false" onAction="#btnPublierAction" text="Publier sondage" />
    </children>
 </AnchorPane>
