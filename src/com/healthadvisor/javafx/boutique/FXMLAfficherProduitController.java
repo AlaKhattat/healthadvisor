@@ -2,12 +2,14 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -153,12 +155,11 @@ public class FXMLAfficherProduitController implements Initializable {
     GridPane g;
     ScrollPane s;
     private boolean prom_minC=true,prom_maxC=true,date_minC=true,date_maxC=true,prix_minC=true,prix_maxC=true;
-    public static List<ArrayList> panier=new ArrayList<>();
     //cette liste pour pouvoir manipulé les quantités des produits dans le panier
     private List<Produit> lst_P ;
     ServiceProduit service_P=new ServiceProduit();
     //********************************héthi lézém nzidha 3and 5atout
-    public static int nb_produits_panier=panier.size();
+  
    // public static float Prix_Final=0;
     @FXML
     private BorderPane pan_notif;
@@ -176,7 +177,7 @@ public class FXMLAfficherProduitController implements Initializable {
     ch_type.getItems().addAll("Sante","Bien etre");
     
     //set the product number into image
-    lblpanier_NB.setText(""+nb_produits_panier);
+    lblpanier_NB.setText(""+FXMLLoginController.nb_produits_panier);
     
     
      lst_P=service_P.ConsulterListe_Produits();
@@ -426,16 +427,16 @@ public class FXMLAfficherProduitController implements Initializable {
                     
                    if(MAJ_Nbr_Produits(p) != -1){
                        
-                       panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString()));
+                       FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).get(1).toString()));
                        
                    }
                 else{
                    ArrayList<Object> nb_pdt=new ArrayList<>();
                    nb_pdt.add(0,p.getReference());
                    nb_pdt.add(1, 1);
-                   panier.add(nb_pdt);
-                   nb_produits_panier=nb_produits_panier+1;
-                   lblpanier_NB.setText(""+nb_produits_panier);
+                       FXMLLoginController.panier.add(nb_pdt);
+                       FXMLLoginController.nb_produits_panier=FXMLLoginController.nb_produits_panier+1;
+                   lblpanier_NB.setText(""+FXMLLoginController.nb_produits_panier);
                     }
                 }
                 else
@@ -452,21 +453,21 @@ public class FXMLAfficherProduitController implements Initializable {
                 Optional<Integer> result = dialog.showAndWait();
                 if (result.isPresent()){
                    if(MAJ_Nbr_Produits(p) != -1)
-                   {   int qte=Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+result.get();
+                   {   int qte=Integer.parseInt(FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+result.get();
                        if(qte>p.getQuantite()){
-                           panier.get(MAJ_Nbr_Produits(p)).set(1, p.getQuantite());
+                           FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).set(1, p.getQuantite());
                        }
                 else{
-                      panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+ result.get());
+                           FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).set(1, Integer.parseInt(FXMLLoginController.panier.get(MAJ_Nbr_Produits(p)).get(1).toString())+ result.get());
                    }
                    }
                 else{
                    ArrayList<Object> nb_pdt=new ArrayList<>();
                    nb_pdt.add(0,p.getReference());
                    nb_pdt.add(1, result.get());
-                   panier.add(nb_pdt);
-                   nb_produits_panier=nb_produits_panier+1;
-                   lblpanier_NB.setText(""+nb_produits_panier);
+                       FXMLLoginController.panier.add(nb_pdt);
+                       FXMLLoginController.nb_produits_panier=FXMLLoginController.nb_produits_panier+1;
+                   lblpanier_NB.setText(""+FXMLLoginController.nb_produits_panier);
                    //Prix_Final=Prix_Final+(p.getPrix_vente()*result.get())-((p.getPrix_vente()*result.get() * p.getPromotion())/100);
                    
                                        }
@@ -495,9 +496,9 @@ public class FXMLAfficherProduitController implements Initializable {
      //fonction pour ne pas ajouter le meme produit dans le panier s'il existe et incrémenter le nombre 
     public int MAJ_Nbr_Produits(Produit p){
         int  pos=-1;
-        for(int i=0;i<panier.size();i++){
+        for(int i=0;i<FXMLLoginController.panier.size();i++){
            
-                if(panier.get(i).get(0).toString().equalsIgnoreCase(p.getReference())){
+                if(FXMLLoginController.panier.get(i).get(0).toString().equalsIgnoreCase(p.getReference())){
                     pos=i;
                 }
             
@@ -522,10 +523,8 @@ public class FXMLAfficherProduitController implements Initializable {
     @FXML
     private void InterfaceAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan.getScene(); 
-            s.setRoot(root);
+           AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -534,10 +533,8 @@ public class FXMLAfficherProduitController implements Initializable {
     @FXML
     private void InterfacePublie(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduitPublie.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan.getScene(); 
-            s.setRoot(root);
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduitPublie.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }

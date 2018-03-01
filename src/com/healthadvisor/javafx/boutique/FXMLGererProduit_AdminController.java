@@ -6,6 +6,7 @@ import com.healthadvisor.entities.Produit;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.service.impl.ServiceCommande;
 import com.healthadvisor.service.impl.ServiceProduit;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -449,10 +450,8 @@ public class FXMLGererProduit_AdminController implements Initializable {
     @FXML
     private void InterfaceStatistiques(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLStatistiques_Admin.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_gerer_produits.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLStatistiques_Admin.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }

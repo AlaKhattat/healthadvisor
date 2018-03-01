@@ -34,6 +34,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -132,12 +133,12 @@ public class FXMLLoginController implements Initializable {
     public boolean cinC=false;
     public boolean num_telC=false;
     
-                public static ArrayList<ArrayList> panier;
     @FXML
     private AnchorPane holderLogin;
     @FXML
     private JFXSpinner spinnerSignin;
-           
+    public static List<ArrayList> panier;
+    public static int nb_produits_panier;  
 
     /**
      * Initializes the controller class.
@@ -221,6 +222,7 @@ public class FXMLLoginController implements Initializable {
         System.out.println("Recuperer Utilisateur "+p);
            
             if (p!=null) {
+                
             Identifiant=p.getCin_user();
             patient=true;
             try{
@@ -237,8 +239,8 @@ public class FXMLLoginController implements Initializable {
             }catch(NullPointerException e){
                 e.getMessage();
             }
-          
-
+          panier=new ArrayList<>();
+         nb_produits_panier= panier.size();
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
             Parent root;
             try {

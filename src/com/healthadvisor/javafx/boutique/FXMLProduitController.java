@@ -2,11 +2,13 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
 import java.awt.Desktop;
 import java.awt.Menu;
 import static java.awt.SystemColor.desktop;
@@ -133,7 +135,7 @@ public class FXMLProduitController implements Initializable {
     private Desktop desktop = Desktop.getDesktop();
     ServiceProduit servP=new ServiceProduit();
     private Path url_destination,url_source;
-    public static String login_user="login";
+    //public static String login_user="login";
  
     
    
@@ -179,7 +181,7 @@ public class FXMLProduitController implements Initializable {
              } 
               
                
-             String ID_patient=login_user;//*************héthi lézém nsobha mél variable li bch n7otha awél ma tét7al lapp
+             String ID_patient=FXMLLoginController.pseudo;//*************héthi lézém nsobha mél variable li bch n7otha awél ma tét7al lapp
              String description=desc.getText();
              float promotion=Float.parseFloat(txt_promotion.getText());
              int quantite= Integer.parseInt(txt_quantite.getText());
@@ -233,7 +235,7 @@ public class FXMLProduitController implements Initializable {
    private static void configureFileChooser(final FileChooser fileChooser){                           
         fileChooser.setTitle("View Pictures");
         fileChooser.setInitialDirectory(
-            new File("C:\\Users\\HABOUB\\Desktop\\")
+            new File("C:\\Users\\aaa\\Desktop\\")
         ); 
         fileChooser.getExtensionFilters().addAll(
                // new FileChooser.ExtensionFilter("All Images", "*.*"),
@@ -247,10 +249,8 @@ public class FXMLProduitController implements Initializable {
     @FXML
     private void InterfaceFiltre(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_ajoutP.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,10 +259,8 @@ public class FXMLProduitController implements Initializable {
     @FXML
     private void InterfacePanier(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherPanier.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_ajoutP.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherPanier.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -271,10 +269,8 @@ public class FXMLProduitController implements Initializable {
     @FXML
     private void InterfacePublie(ActionEvent event) {
          try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduitPublie.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_ajoutP.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduitPublie.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }

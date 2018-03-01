@@ -2,7 +2,6 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
-import static com.healthadvisor.javafx.boutique.FXMLAfficherProduitController.panier;
 import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
@@ -10,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
 import java.awt.Desktop;
 import static java.awt.SystemColor.desktop;
 import java.io.File;
@@ -92,7 +92,7 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
-        List<Produit> lst_P=servP.ListProduits_User(FXMLProduitController.login_user); //**** je dois la changer avec la variable de login
+        List<Produit> lst_P=servP.ListProduits_User(FXMLLoginController.pseudo); //**** je dois la changer avec la variable de login
         ///*************************pour afficher notif d'un prod un jour avant l'expiration du produit
         NotificationEmail_Expiration(lst_P);
         //**********************Pour supprimer un produit déja expiré
@@ -405,7 +405,7 @@ result.ifPresent(usernamePassword -> {
    private static void configureFileChooser(final FileChooser fileChooser){                           
         fileChooser.setTitle("View Pictures");
         fileChooser.setInitialDirectory(
-            new File("C:\\Users\\HABOUB\\Desktop\\")
+            new File("C:\\Users\\aaa\\Desktop\\")
         ); 
         fileChooser.getExtensionFilters().addAll(
                // new FileChooser.ExtensionFilter("All Images", "*.*"),
@@ -419,10 +419,8 @@ result.ifPresent(usernamePassword -> {
     @FXML
     private void InterfaceAjout(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_publie.getScene(); 
-            s.setRoot(root);
+           AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -431,10 +429,8 @@ result.ifPresent(usernamePassword -> {
     @FXML
     private void InterfaceFiltre(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_publie.getScene(); 
-            s.setRoot(root);
+             AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -443,10 +439,8 @@ result.ifPresent(usernamePassword -> {
     @FXML
     private void InterfacePanier(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherPanier.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_publie.getScene(); 
-            s.setRoot(root);
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherPanier.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
