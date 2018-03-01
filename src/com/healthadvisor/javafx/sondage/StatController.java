@@ -80,7 +80,9 @@ public class StatController implements Initializable {
                 new PieChart.Data("★★★★", gs.countStat(SondageController.sondage.getId(), lrp.get(3))),
                 new PieChart.Data("★★★★★", gs.countStat(SondageController.sondage.getId(), lrp.get(4))));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Sondage : "+SondageController.sondage.getNom()+"\n"+"Nombre réponses : "+nbrTotalReponses+" d'utilisateurs ont répondu à ce sondage.");
+        chart.setTitle(SondageController.sondage.getNom()+"\n"+"Nombre total des réponses : "+nbrTotalReponses);
+        
+        
         
         /**/
         Label caption = new Label("");
@@ -108,7 +110,8 @@ public class StatController implements Initializable {
         
         
         
-        
+        chart.setPrefWidth(600);
+        chart.setPrefHeight(484);
         paneID.getChildren().add(chart);
         paneID.getChildren().add(caption);
         

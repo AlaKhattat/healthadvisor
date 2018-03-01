@@ -48,6 +48,8 @@ public class SondageAdminController implements Initializable {
     private Button ajouterBtn;
     @FXML
     private TextField searchBarID;
+    @FXML
+    private Button btnSupprimer;
 
     /**
      * Initializes the controller class.
@@ -108,6 +110,18 @@ public class SondageAdminController implements Initializable {
         Parent root=loader.load();
         Scene s = tableID.getScene();
         s.setRoot(root);
+    }
+
+    @FXML
+    private void btnSupprimerAction(ActionEvent event) throws IOException {
+        GestionSondage gs = new GestionSondage();
+        gs.supprimerSondage(tableID.getSelectionModel().getSelectedItem());
+        
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageAdmin.fxml"));
+        Parent root=loader.load();
+        Scene s = tableID.getScene();
+        s.setRoot(root);
+        
     }
     
 }

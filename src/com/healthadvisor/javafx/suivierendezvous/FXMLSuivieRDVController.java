@@ -12,11 +12,13 @@ import com.healthadvisor.javafx.editstatutrdv.FXMLEditStatutRDVController;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -33,6 +35,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,6 +69,18 @@ public class FXMLSuivieRDVController implements Initializable {
     private TableColumn<Rendez_Vous, String> statutCol;
     @FXML
     private AnchorPane root;
+    @FXML
+    private Label nombreRdvTotal;
+    @FXML
+    private Label nombreRdvEncours;
+    @FXML
+    private JFXProgressBar progressBar;
+    @FXML
+    private Label JourAuj;
+    @FXML
+    private Label dateAujd;
+    @FXML
+    private AnchorPane progressRDV;
 
     /**
      * Initializes the controller class.
@@ -73,6 +88,11 @@ public class FXMLSuivieRDVController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        nombreRdvTotal.setText(Integer.toString(gr.ListRendez_Vous_Medecin(FXMLLoginController.pseudo).size()));
+        nombreRdvEncours.setText(Integer.toString(gr.Rendez_Vous_Encours(FXMLLoginController.pseudo))+" sur "+nombreRdvTotal.getText());
+        JourAuj.setText(LocalDate.now().getDayOfWeek().toString());
+        dateAujd.setText(LocalDate.now().toString());
+        progressBar.setProgress(gr.Rendez_Vous_Encours(FXMLLoginController.pseudo)/gr.ListRendez_Vous_Medecin(FXMLLoginController.pseudo).size());
         initCol();
         loadData();
                  TableFilter<Rendez_Vous> tableFilterM = new TableFilter<>(tableView);
@@ -94,6 +114,7 @@ public class FXMLSuivieRDVController implements Initializable {
 
     private void loadData() {
         list.clear();
+      
         gr.ListRendez_Vous_Medecin(FXMLLoginController.pseudo).stream().map((r) -> {
             String docteur=gr.RecupererMedecin(r.getMedecin_id());
             String patient=gr.RecupererPatient(r.getPatient_id());
@@ -200,5 +221,5 @@ public class FXMLSuivieRDVController implements Initializable {
     private void refresh(ActionEvent event) {
                 loadData();         
     }
-    
+  
 }

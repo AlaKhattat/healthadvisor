@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -38,8 +39,6 @@ public class AjouterSondageController implements Initializable {
     private TextArea textAreaID;
     @FXML
     private Button btnPublier;
-    @FXML
-    private Button retourBtn;
     /**
      * Initializes the controller class.
      */
@@ -49,32 +48,43 @@ public class AjouterSondageController implements Initializable {
     }    
 
     @FXML
-    private void btnPublierAction(ActionEvent event) {
-        
-        GestionSondage gs = new GestionSondage();
-        Sondage s = new Sondage(0, textAreaID.getText());
-        gs.ajouterSondage(s);
-        
-        int x = gs.afficherIdSondage(textAreaID.getText());
-        
-        GestionReponsesPossibles grp = new GestionReponsesPossibles();
-        
-        grp.ajouterReponsesPossibles(0,"1", x);
-        grp.ajouterReponsesPossibles(0,"2", x);
-        grp.ajouterReponsesPossibles(0,"3", x);
-        grp.ajouterReponsesPossibles(0,"4", x);
-        grp.ajouterReponsesPossibles(0,"5", x);
+    private void btnPublierAction(ActionEvent event) throws IOException {
         
         
+        if(textAreaID.getText().length()<30){
+            Alert alerte = new Alert(Alert.AlertType.WARNING);
+            alerte.setTitle("Dialogue d'erreur");
+            alerte.setHeaderText("Attention !");
+            alerte.setContentText("Votre sondage doit avoir au mois 30 caractères...");
+            alerte.show();
+        }
         
+        else{
+        
+            GestionSondage gs = new GestionSondage();
+            Sondage s = new Sondage(0, textAreaID.getText());
+            gs.ajouterSondage(s);
+
+            //int x = gs.afficherIdSondage(textAreaID.getText());
+            
+            int x = gs.afficherIdSondage(s.getNom());
+
+            GestionReponsesPossibles grp = new GestionReponsesPossibles();
+
+            grp.ajouterReponsesPossibles(0,"1", x);
+            grp.ajouterReponsesPossibles(0,"2", x);
+            grp.ajouterReponsesPossibles(0,"3", x);
+            grp.ajouterReponsesPossibles(0,"4", x);
+            grp.ajouterReponsesPossibles(0,"5", x);
+
+
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageAdmin.fxml"));
+            Parent root=loader.load();
+            Scene sc = paneID.getScene();
+            sc.setRoot(root);
+        }
     }
 
-    @FXML
-    private void retourBtnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageAdmin.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
-    }
+    
     
 }

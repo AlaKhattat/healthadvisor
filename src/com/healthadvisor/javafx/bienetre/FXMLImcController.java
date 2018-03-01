@@ -12,6 +12,7 @@ import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.ProgrammeRegime;
 import com.healthadvisor.entities.Regime;
 import com.healthadvisor.entities.Sport;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.enumeration.StatutNotificationEnum;
 import com.healthadvisor.enumeration.Type_Aliment;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
@@ -312,9 +313,11 @@ public class FXMLImcController implements Initializable {
     {
        
         FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
-        if(patient.getLogin()==null)
+        System.out.println("PATIENT"+patient.getLogin());
+        if(patient.getLogin().equals(" "))
         {
             patient = new Patient(FXMLLoginController.pseudo,"","","");
+            System.out.println(" patient:"+patient.getLogin());
         }
         FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
@@ -558,21 +561,16 @@ public class FXMLImcController implements Initializable {
             JFXCheckBox check =(JFXCheckBox) this.allergies.getChildren().get(i);
             if(check.isSelected())
             {
-                System.out.println("selection ");
+                System.out.println("gfg"+check.getText());
+                aller.add(check.getText());
             }
-            aller.add(check.getText());
+           
         }
        
        
-        this.allergies.getChildren().forEach((Node ch) -> {
-   
-             JFXCheckBox check = (JFXCheckBox)ch;
-            
-             allergiesElement.add(check.getText());
-               
-           
-        });
+        
         allergiesElement.addAll(this.listeAllergieSup.getItems());
+        
         maladiesL.addAll(this.listMaladies.getItems());
         System.out.println("index:"+regimes.indexOf(regime));
         aller.addAll(allergiesElement);         
@@ -682,6 +680,8 @@ public class FXMLImcController implements Initializable {
         Date date = new Date();
         regime.setDate_debut(date);
         gestion.suivreRegime(regime, patient);
+        Notifications.create().title("BIENVENUE DANS LE PROGRAMME REGIME").show();
+        regimeDuJour();
        }
     }
     public List<Regime> proposerRegime(List<String>AllergiesAliments,List<String>Maladies,List<Regime>regimes)
@@ -689,17 +689,25 @@ public class FXMLImcController implements Initializable {
         //toutes personne avec une maladies superieur a 2 ne sont pas traité uniquement le cas d'un diabetique est traité
         //tout les aliments dont la personne est allergique est filtré et sont enlevé de sa liste
         ProgrammeRegime prog = new ProgrammeRegime();
-        List<Regime> tabRegime = new ArrayList<Regime>();
+        List<Regime> tabRegime = new ArrayList<>();
+        List<String> ltypeAliment = new ArrayList<>();
+        for(Type_Aliment type: Type_Aliment.values())
+        {
+            ltypeAliment.add(type.toString());
+        }
         for(int i = 0; i < regimes.size(); i++)
         {
            Regime r = regimes.get(i);
             Map<Type_Aliment,List<Aliment>>aliments = prog.grouperParAliment(regimes.get(i));
             for(String allergie: AllergiesAliments)
             {
+               if(ltypeAliment.contains(allergie))
+               {
                 if(aliments.containsKey(Type_Aliment.valueOf(allergie)))
                 {
                     aliments.remove(Type_Aliment.valueOf(allergie));
                 }
+               }
             }
            List<Aliment>aliment = new ArrayList<>();
            for(List<Aliment> j:aliments.values())
@@ -789,6 +797,25 @@ public class FXMLImcController implements Initializable {
            }
         }
        }
+    }
+    
+    public void nePlusSuivreRegime()
+    {
+       
+       GestionUserRegime guser = new GestionUserRegime();
+       ProgrammeRegime prog = guser.rechercherUserRegime(patient);
+     
+       if(prog!=null)
+       {
+           guser.supprimerProgrammeRegime(patient, prog);
+          bienetre.getSelectionModel().select(0);
+          this.listeAllergieSup.getItems().clear();
+          this.listMaladies.getItems().clear();
+          this.dureeRegime.setValue("");
+          this.regimeEffectue.setValue("");
+          this.bienetre.getSelectionModel().select(0);
+       }
+     
     }
     @FXML
     public void chargerVideo()

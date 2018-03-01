@@ -231,7 +231,7 @@
                                                    <padding>
                                                       <Insets top="10.0" />
                                                    </padding></JFXComboBox>
-                                                <Label prefHeight="20.0" prefWidth="416.0" text="veullez cochez les produits dont vous etes allergique" />
+                                                <Label prefHeight="20.0" prefWidth="416.0" text="veuillez cochez les produits dont vous etes allergique" />
                                                 <Pane fx:id="allergies">
                                                    <children>
                                                       <JFXCheckBox fx:id="box_Allergi" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="137.0" text="laitier" />
@@ -343,7 +343,7 @@
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="77.0" prefWidth="511.0" spacing="20.0">
                                                    <children>
                                                       <JFXButton fx:id="precRegime2" layoutX="233.0" layoutY="10.0" onMouseClicked="#precRegime2" styleClass="cancel-button" text="Precedent" />
-                                                      <JFXButton layoutX="72.0" layoutY="10.0" onMouseClicked="#validerRegime" prefHeight="37.0" prefWidth="100.0" styleClass="blue-btn" text="valider" />
+                                                      <JFXButton fx:id="validerR2" layoutX="72.0" layoutY="10.0" onMouseClicked="#validerRegime" prefHeight="37.0" prefWidth="100.0" styleClass="blue-btn" text="valider" />
                                                    </children>
                                                    <padding>
                                                       <Insets right="20.0" />
@@ -490,9 +490,9 @@
                                              <children>
                                                 <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
                                                 <StackPane fx:id="pane11" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXButton onMouseClicked="#nePlusSuivreRegime" prefHeight="37.0" prefWidth="219.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                              </children>
                                           </VBox>
-                                          <JFXButton layoutX="832.0" layoutY="432.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -580,7 +580,7 @@
                                                 <StackPane fx:id="pane1" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
-                                          <JFXButton layoutX="836.0" layoutY="415.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
+                                          <JFXButton layoutX="832.0" layoutY="375.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -649,7 +649,7 @@
                                                 <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
-                                          <JFXButton layoutX="852.0" layoutY="420.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
+                                          <JFXButton layoutX="737.0" layoutY="382.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -718,6 +718,7 @@
                                                 <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
+                                          <JFXButton layoutX="619.0" layoutY="397.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                        </children>
                                     </AnchorPane>
                                  </content>

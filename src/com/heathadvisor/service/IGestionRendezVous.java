@@ -23,5 +23,6 @@ public interface IGestionRendezVous {
     public String RecupererPatient(String id_patient);
     public boolean ModifierRendezVous(Rendez_Vous rdv);
     public boolean ModifierRendezVousdate(Rendez_Vous rdv);
+    public int Rendez_Vous_Encours(String id_medecin);
     
 }
