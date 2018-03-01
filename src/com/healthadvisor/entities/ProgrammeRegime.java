@@ -26,7 +26,12 @@ public class ProgrammeRegime
   private List<String> alimentJour;
   private List<String> Sport;
   private Date dateJour;
-  
+  private List<String>ptitDejGras;
+  private List<String>dejDense;
+  private List<String>gouterSucree;
+  private List<String>dinerLeger;
+  private List<String>proteines;
+  private List<String>calories;
     public ProgrammeRegime(Regime regime) 
     {
         this.regime = regime;
@@ -41,6 +46,40 @@ public class ProgrammeRegime
       this.nomRegime = "";
       this.alimentJour = new ArrayList<>();
       this.dateJour = new Date();
+     ptitDejGras = Arrays.asList(Type_Aliment.matiereGrasse.toString(),
+                                 Type_Aliment.cacao.toString(),
+                                 Type_Aliment.pains.toString(),
+                                 Type_Aliment.thes.toString());
+     dejDense = Arrays.asList(Type_Aliment.oeufs.toString(),
+                              Type_Aliment.poissons.toString(),
+                              Type_Aliment.viandes.toString(),
+                              Type_Aliment.pates.toString(),
+                              Type_Aliment.riz.toString(),
+                              Type_Aliment.pains.toString(),
+                              Type_Aliment.laitier.toString());
+     gouterSucree = Arrays.asList(Type_Aliment.fruits.toString(),
+                                  Type_Aliment.noix.toString(),
+                                  Type_Aliment.jus.toString());
+     dinerLeger = Arrays.asList(Type_Aliment.fruitsMer.toString(),
+                                Type_Aliment.volailles.toString(),
+                                Type_Aliment.legumes.toString(),
+                                Type_Aliment.haricot_sec.toString());
+     proteines = Arrays.asList(Type_Aliment.cereales.toString(),
+                               Type_Aliment.laitier.toString(),
+                               Type_Aliment.oeufs.toString(),
+                               Type_Aliment.poissons.toString(),
+                               Type_Aliment.viandes.toString(),
+                               Type_Aliment.volailles.toString(),
+                               Type_Aliment.riz.toString()
+                              );
+     calories = Arrays.asList(Type_Aliment.fruits.toString(),
+                              Type_Aliment.cereales.toString(),
+                              Type_Aliment.jus.toString(),
+                              Type_Aliment.matiereGrasse.toString(),
+                              Type_Aliment.legumes.toString(),
+                              Type_Aliment.oeufs.toString(),
+                              Type_Aliment.poissons.toString()
+                              );
     }
     public Regime getRegime() {
         return regime;
@@ -146,4 +185,70 @@ public class ProgrammeRegime
      }   
      return tab;
    }
+   public Map<String,List<Aliment>>regimeMicronutrition(Regime re)
+   {
+     
+     Map<String,List<Aliment>> tab = new TreeMap<>();
+     Map<Type_Aliment,List<Aliment>> list = grouperParAliment(re);
+     for(Map.Entry<Type_Aliment,List<Aliment>>i:list.entrySet())
+     {
+         if(ptitDejGras.contains(i.getKey().toString()))
+         {
+           
+                 tab.put("petit dejeuner",i.getValue());
+             
+           
+         }
+         else if(dejDense.contains(i.getKey().toString()))
+         {
+             
+                 tab.put("dejeuner",i.getValue());
+             
+         }
+         else if(gouterSucree.contains(i.getKey().toString()))
+         {
+             
+              
+                 tab.put("gouter",i.getValue());
+             
+             
+         }
+         else if(dinerLeger.contains(i.getKey().toString()))
+         {
+            
+                 tab.put("diner",i.getValue());
+             
+         }
+     }
+      return tab;
+   }
+   public Map<String,List<Aliment>>regimeHyperProteine(Regime re)
+   {
+     
+     Map<String,List<Aliment>> tab = new TreeMap<>();
+     Map<Type_Aliment,List<Aliment>> list = grouperParAliment(re);
+     for(Map.Entry<Type_Aliment,List<Aliment>>i:list.entrySet())
+     {
+         if(proteines.contains(i.getKey().toString()))
+         {
+                 tab.put("proteine",i.getValue());  
+         }      
+     }
+      return tab;
+   }
+   public Map<String,List<Aliment>>regimeHypoCalorique(Regime re)
+   {
+     
+     Map<String,List<Aliment>> tab = new TreeMap<>();
+     Map<Type_Aliment,List<Aliment>> list = grouperParAliment(re);
+     for(Map.Entry<Type_Aliment,List<Aliment>>i:list.entrySet())
+     {
+         if(calories.contains(i.getKey().toString()))
+         {
+                 tab.put("calorie",i.getValue());  
+         }      
+     }
+      return tab;
+   }
+   
 }

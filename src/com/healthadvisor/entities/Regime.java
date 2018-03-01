@@ -9,7 +9,9 @@ import com.healthadvisor.enumeration.Type_Regime;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 
 /**
@@ -26,7 +28,7 @@ public class Regime
   private Date date_fin;
   private String description;
   private int duree;
-
+  
     public Regime() 
     {
         this.id_regime = "";
@@ -246,6 +248,23 @@ public class Regime
      }
       return total;
     }
+    public double recuperCalorie(String ch)
+    {
+       
+        String [] tab = ch.split("calorie:");
+        String nom = tab[0];
+        Double valeur = 0d;
+        System.out.println("tab:"+tab);
+        try
+        {
+            valeur = Double.parseDouble(tab[1]);
+        }
+        catch(NumberFormatException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+       
+        return valeur;
+    }
    
-  
 }
