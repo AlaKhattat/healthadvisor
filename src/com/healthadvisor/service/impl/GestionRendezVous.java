@@ -147,6 +147,27 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
     }
 
     @Override
+    public List<Rendez_Vous> ListRendez_Vous(String patientId) {
+ArrayList<Rendez_Vous> listrdv= new ArrayList<>();
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="select * from rendez_vous where USER_ID='"+patientId+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getTimestamp("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"),rs.getTimestamp("Date_Valid"));
+                listrdv.add(rdv);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listrdv;    }
+    
+  @Override
     public List<Rendez_Vous> ListRendez_Vous_Medecin(String id_medecin) {
 
     ArrayList<Rendez_Vous> listrdv= new ArrayList<>();

@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.analysesymptome;
 
 import com.healthadvisor.entities.Maladie;
 import com.healthadvisor.javafx.recherchemedecin.FXMLRechercheMedecinInterfaceController;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class ResultatAnalyseFXMLController implements Initializable {
             NomMaladie.setWrapText(true);
             h1.getChildren().add(NomMaladie);
             ProgressBar precision=new ProgressBar(x.getPrecision()/100);
-            Label lprecision =new Label(x.getPrecision()+"%");
+            Label lprecision =new Label(Math.round(x.getPrecision())+"%");
             HBox hprecision =new HBox();
             hprecision.setMaxWidth(150);
             hprecision.setMinWidth(150);
@@ -109,10 +110,9 @@ public class ResultatAnalyseFXMLController implements Initializable {
             listviewSpecialite.setOnMouseClicked((event) -> {
                 try {
                     FXMLRechercheMedecinInterfaceController.spec=listviewSpecialite.getSelectionModel().getSelectedItem();
-                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/affichermedecin/FXMLAfficherMedecin.fxml"));
-                    Parent root=loader.load();
-                    Scene s = scrollpane.getScene();
-                    s.setRoot(root);
+                    //FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/affichermedecin/FXMLafficherdetailsmedecin.fxml"));
+                    AnchorPane a=FXMLLoader.load(getClass().getResource("/com/healthadvisor/javafx/affichermedecin/FXMLafficherdetailsmedecin.fxml"));
+                    FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,a);
                 } catch (IOException ex) {
                     Logger.getLogger(ResultatAnalyseFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                 }

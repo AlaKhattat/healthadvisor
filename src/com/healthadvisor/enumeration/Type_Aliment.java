@@ -19,14 +19,16 @@ public enum Type_Aliment
     volailles,
     poissons,
     haricot_sec,
-    ouefs,
+    oeufs,
     noix,
     pains,
     cacao,
     cereales,
     riz,
     pates,
-    thes
+    thes,
+    jus,
+    fruitsMer
     
     
 }
