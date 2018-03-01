@@ -187,18 +187,18 @@ public class FXMLAfficherProduitPublieController implements Initializable {
         
         HBox h1=new HBox();
         
-        Button Modif_Produit=new Button();
+        JFXButton Modif_Produit=new JFXButton();
         Modif_Produit.setText("Modifier Produit");
         Modifier_Produit(Modif_Produit,p,url_image);
        
         
-        Button btnMAJ_date=new Button();
+        JFXButton btnMAJ_date=new JFXButton();
         btnMAJ_date.setText("MAJ Date");
         RenouvellerDate_Publication(btnMAJ_date,p,date_expiration);
         
         h1.getChildren().addAll(Modif_Produit,btnMAJ_date);
         
-        Button Supp_Produit=new Button();
+        JFXButton Supp_Produit=new JFXButton();
         Supp_Produit.setText("Supprimer Produit");
         Supprimer_Produit(Supp_Produit, p);
        
@@ -216,6 +216,12 @@ public class FXMLAfficherProduitPublieController implements Initializable {
            //configuration grid
            grid.setHgap(10); 
            grid.setVgap(10);
+           grid.setStyle("-fx-padding: 10;" + 
+                      "-fx-border-style: solid inside;" + 
+                      "-fx-border-width: 2;" +
+                      "-fx-border-insets: 5;" + 
+                      "-fx-border-radius: 5;" + 
+                      "-fx-border-color: blue;");
            grid.setMaxHeight(pan_publie.getHeight());
            grid.setMaxWidth(pan_publie.getPrefWidth());   
            grid.setPrefWidth(scroll.getPrefWidth());
@@ -230,7 +236,7 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     }
     
     //fonction pour supprimer un produits de la liste des produits publiés
-    public void Supprimer_Produit(Button btn,Produit p){
+    public void Supprimer_Produit(JFXButton btn,Produit p){
         ServiceProduit sp=new ServiceProduit();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -252,7 +258,7 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     }
     
     //pour modifier l'un des produits publiés
-    public void Modifier_Produit(Button btn,Produit p,String url){
+    public void Modifier_Produit(JFXButton btn,Produit p,String url){
         ServiceProduit sp=new ServiceProduit();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -282,7 +288,7 @@ public class FXMLAfficherProduitPublieController implements Initializable {
             
             Label lbl_image=new Label();
             lbl_image.setText("Image");
-            Button btn_image=new Button();
+            JFXButton btn_image=new JFXButton();
             btn_image.setText("Parcourir...");
             ParcourirImage(btn_image);
             Label lbl_url=new Label();
@@ -364,7 +370,7 @@ result.ifPresent(usernamePassword -> {
     }     
     
     //la fonction mére du filechooser
-     private void ParcourirImage(Button btn) {
+     private void ParcourirImage(JFXButton btn) {
          btn.setOnAction(new EventHandler<ActionEvent>() {
              @Override
              public void handle(ActionEvent event) {
@@ -561,7 +567,7 @@ result.ifPresent(usernamePassword -> {
     }
     
     //renouveller la date de publication du produit de 30jours
-    public void RenouvellerDate_Publication(Button btn,Produit p,Label lblNB_jours)
+    public void RenouvellerDate_Publication(JFXButton btn,Produit p,Label lblNB_jours)
     {   
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override

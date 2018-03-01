@@ -14,6 +14,9 @@ import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.healthadvisor.service.impl.GestionUtilisateur;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -47,9 +50,9 @@ public class EditRdvFXMLController implements Initializable {
     @FXML
     private DatePicker datePickerRDV;
     @FXML
-    private ComboBox<String> hourMinCombobox;
+    private JFXComboBox<String> hourMinCombobox;
     @FXML
-    private Button btnValiderRdv;
+    private JFXButton btnValiderRdv;
     public static boolean editDone=false;
 
     /**
