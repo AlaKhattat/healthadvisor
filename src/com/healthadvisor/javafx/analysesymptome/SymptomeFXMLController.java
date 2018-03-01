@@ -15,7 +15,11 @@ import com.healthadvisor.service.impl.GestionBodyParts;
 import com.healthadvisor.service.impl.GestionMaladie;
 import com.healthadvisor.service.impl.GestionSubBodyPartSymptome;
 import com.healthadvisor.service.impl.GestionSubBodyParts;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.JFXTextField;
 import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +28,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,6 +42,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -61,22 +71,24 @@ import javafx.stage.Stage;
 public class SymptomeFXMLController implements Initializable {
 
     @FXML
-    private TextField anne;
+    private JFXSpinner spinner;
+    @FXML
+    private JFXTextField anne;
 
     @FXML
-    private ComboBox<String> sexe;
+    private JFXComboBox<String> sexe;
 
     @FXML
-    private ComboBox<BodyParts> bodypart;
+    private JFXComboBox<BodyParts> bodypart;
     
     @FXML
-    private ComboBox<SubBodyParts> subbodypart;
+    private JFXComboBox<SubBodyParts> subbodypart;
     
     @FXML
-    private ListView<Symptome> listsymptomes;
+    private JFXListView<Symptome> listsymptomes;
     
     @FXML
-    private Button btnValider;
+    private JFXButton btnValider;
     
     @FXML
     private Label lb1;
@@ -96,7 +108,7 @@ public class SymptomeFXMLController implements Initializable {
     private Label lb6;
     
     @FXML
-    private Button btnAjouter;
+    private JFXButton btnAjouter;
      
     @FXML
     private FlowPane PaneBox;
@@ -207,6 +219,7 @@ if(subbodypart.disableProperty().getValue()==true){
     @FXML
     void btnAjouterAction(ActionEvent event) {
         btnEnvoyer.setOpacity(1);
+        btnEnvoyer.setDisable(false);
         ObservableList ol=listsymptomes.getSelectionModel().getSelectedItems();
         for(Object x : ol){
             nbtag++;
@@ -221,6 +234,7 @@ if(subbodypart.disableProperty().getValue()==true){
                     PaneBox.getChildren().remove(t);
                     if(nbtag==0){
                         btnEnvoyer.setOpacity(0);
+                        btnEnvoyer.setDisable(true);
                     }
                 }
                 
@@ -235,22 +249,42 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnEnvoyerAction(ActionEvent event) throws IOException{
-        String Symptomes="";
-        ObservableList<Node>ols=PaneBox.getChildren();
-        for(Node x : ols){
-            Symptome s=(Symptome)x.getUserData();
-           Symptomes=Symptomes+"\""+s.getId()+"\",";
-        }
-         StringBuilder sb = new StringBuilder(Symptomes);
-         sb.delete(Symptomes.length()-1,Symptomes.length());
-         Symptomes=sb.toString();
-        System.out.println(Symptomes);
-        GestionMaladie gm =new GestionMaladie();
-        AccessToken token=new AccessToken();
-        ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
-        ResultatAnalyse=l;
-        ScrollPane a=FXMLLoader.load(getClass().getResource("ResultatAnalyseFXML.fxml"));
-        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,a);
+        
+        
+        spinner.setOpacity(1);
+        btnEnvoyer.setOpacity(0);
+        Timer t=new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    try {
+                        String Symptomes="";
+                        ObservableList<Node>ols=PaneBox.getChildren();
+                        for(Node x : ols){
+                            Symptome s=(Symptome)x.getUserData();
+                            Symptomes=Symptomes+"\""+s.getId()+"\",";
+                        }
+                        StringBuilder sb = new StringBuilder(Symptomes);
+                        sb.delete(Symptomes.length()-1,Symptomes.length());
+                        Symptomes=sb.toString();
+                        System.out.println(Symptomes);
+                        GestionMaladie gm =new GestionMaladie();
+                        AccessToken token=new AccessToken();
+                        ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
+                        ResultatAnalyse=l;
+                        spinner.setOpacity(0);
+                        btnEnvoyer.setOpacity(1);
+                        ScrollPane a=FXMLLoader.load(getClass().getResource("ResultatAnalyseFXML.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,a);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SymptomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            }
+        },500);
+        
+        
         
        /* String Result="";
         for(Maladie x : l){
@@ -281,6 +315,8 @@ if(subbodypart.disableProperty().getValue()==true){
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);*/
         listsymptomes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        PaneBox.setVgap(4);
+        PaneBox.setHgap(4);
         String[] sexelist={"Homme","Femme","Garçon","Fille"};
         ObservableList<String> ObservListsexe = FXCollections.observableArrayList(sexelist);
         sexe.setItems(ObservListsexe);

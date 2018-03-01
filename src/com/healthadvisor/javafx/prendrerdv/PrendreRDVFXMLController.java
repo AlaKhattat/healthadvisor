@@ -10,6 +10,8 @@ import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import static com.healthadvisor.javafx.article.ListeArticleFXMain.stage;
 import com.healthadvisor.service.impl.GestionRendezVous;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -49,9 +51,9 @@ public class PrendreRDVFXMLController implements Initializable {
     @FXML
     private DatePicker datePickerRDV;
     @FXML
-    private ComboBox<String> hourMinCombobox;
+    private JFXComboBox<String> hourMinCombobox;
     @FXML
-    private Button btnValiderRdv;
+    private JFXButton btnValiderRdv;
 
     /**
      * Initializes the controller class.
