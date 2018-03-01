@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import static com.healthadvisor.javafx.article.ListeArticleFXMain.stage;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -122,7 +123,7 @@ hourMinCombobox.setItems(sl);
         //Preparation Objet RDV
         Rendez_Vous rdv=new Rendez_Vous();
         rdv.setMedecin_id(FXMLAfficherMedecinController.med.getLogin_med());
-        rdv.setPatient_id("firas");
+        rdv.setPatient_id(FXMLLoginController.pseudo);
         rdv.setStatut_rendezvous(StatutRendezVousEnum.ENCOURS.name());
         //Manipulation de date
             String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();

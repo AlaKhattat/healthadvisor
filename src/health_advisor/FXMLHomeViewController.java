@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,6 +77,8 @@ public class FXMLHomeViewController implements Initializable {
                     .darkStyle();
     @FXML
     private AnchorPane holderPane1;
+    @FXML
+    private JFXButton rendez_vousP;
     /**
      * Initializes the controller class.
      */
@@ -170,7 +173,7 @@ if(FXMLLoginController.admin){
 }else{
 if(FXMLLoginController.patient){
             profile.setOpacity(1);
-
+rendez_vousP.setOpacity(1);
         Signin.setOpacity(0);
         Signout.setOpacity(1);
         Signout.toFront();
@@ -455,6 +458,13 @@ if(FXMLLoginController.patient){
                 stage.show();
             }
         }
+    }
+
+    @FXML
+    private void rendezVousAction(ActionEvent event) throws IOException {
+        System.out.println("Recuperation Modif");
+    AnchorPane modifrdv = FXMLLoader.load(getClass().getResource(Routes.MODIFRDV));
+    setNode(holderPane,modifrdv);
     }
     
 }

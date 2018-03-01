@@ -63,6 +63,18 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="rendez_vousP" layoutY="1.0" onAction="#rendezVousAction" opacity="0.0" prefHeight="59.0" prefWidth="205.0" text="Consulter Rendez_Vous">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@rdvcalendar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </right>

@@ -148,9 +148,9 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
 
     @Override
     public List<Rendez_Vous> ListRendez_Vous(String patientId) {
-ArrayList<Rendez_Vous> listrdv= new ArrayList<>();
+        ArrayList<Rendez_Vous> listrdv= new ArrayList<>();
         try {
-            System.out.println("Recupération...");
+            System.out.println("Recupération Patient...");
             Statement stm =database.getConnexion().createStatement();
             String sql="select * from rendez_vous where USER_ID='"+patientId+"'" ;
             ResultSet rs = stm.executeQuery(sql);
