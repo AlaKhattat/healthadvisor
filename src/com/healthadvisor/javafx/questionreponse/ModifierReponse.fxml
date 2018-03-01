@@ -4,10 +4,10 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.ModifierReponseController">
+<AnchorPane id="AnchorPane" fx:id="AnchorID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.ModifierReponseController">
    <children>
       <TextArea fx:id="reponseText" layoutX="14.0" layoutY="48.0" prefHeight="79.0" prefWidth="568.0" />
-      <Button fx:id="modifierReponseBtn" layoutX="239.0" layoutY="188.0" mnemonicParsing="false" onAction="#modifierReponseBtn" prefHeight="25.0" prefWidth="118.0" text="Modifier réponse" />
-      <Button fx:id="retourID" layoutX="239.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="25.0" prefWidth="118.0" text="Retour" />
+      <Button fx:id="modifierReponseBtn" layoutX="228.0" layoutY="187.0" mnemonicParsing="false" onAction="#modifierReponseBtn" prefHeight="27.0" prefWidth="141.0" text="Modifier réponse" />
+      <Button fx:id="retourID" layoutX="228.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="27.0" prefWidth="141.0" text="Retour" />
    </children>
 </AnchorPane>

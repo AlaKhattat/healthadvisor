@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="625.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.AjouterQuestionController">
+<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="625.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.AjouterQuestionController">
    <children>
       <TextArea fx:id="questionID" layoutX="13.0" layoutY="113.0" prefHeight="200.0" prefWidth="600.0" />
       <Label fx:id="labelID" layoutX="14.0" layoutY="79.0" text="Tapez votre question ..." />
       <Button fx:id="btnID" layoutX="245.0" layoutY="334.0" mnemonicParsing="false" onAction="#partagerQuestion" text="Partager question" />
-      <Button fx:id="btnRetour" layoutX="245.0" layoutY="363.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="25.0" prefWidth="110.0" text="Retour" />
+      <Button fx:id="btnRetour" layoutX="245.0" layoutY="363.0" mnemonicParsing="false" onAction="#btnRetour" prefHeight="27.0" prefWidth="128.0" text="Retour" />
       <ComboBox fx:id="comboBoxID" layoutX="205.0" layoutY="29.0" prefWidth="150.0" />
       <Label fx:id="labelCombo" layoutX="14.0" layoutY="33.0" text="Choisissez une spécialité " />
    </children>
