@@ -1,4 +1,3 @@
-
 package com.healthadvisor.javafx.boutique;
 
 import java.io.IOException;
