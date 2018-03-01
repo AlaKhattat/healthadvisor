@@ -149,7 +149,7 @@ public class AjouterQuestionController implements Initializable {
         }
         else{
         GestionQuestion gq = new GestionQuestion();
-        Question q = new Question(0,questionID.getText(),QuestionUserController.patient.getLogin(),new java.sql.Timestamp(new java.util.Date().getTime()),comboBoxID.getValue());
+        Question q = new Question(0,questionID.getText(),FXMLLoginController.pseudo,new java.sql.Timestamp(new java.util.Date().getTime()),comboBoxID.getValue());
         gq.ajouterQuestion(q);
         
         Alert alerte = new Alert(AlertType.INFORMATION);

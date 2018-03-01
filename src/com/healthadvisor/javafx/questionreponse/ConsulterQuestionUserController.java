@@ -5,10 +5,14 @@
  */
 package com.healthadvisor.javafx.questionreponse;
 
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionReponse;
@@ -102,8 +106,7 @@ public class ConsulterQuestionUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        System.err.println(QuestionUserController.patient.getLogin());
-        System.err.println(QuestionUserController.questionStatic.getId_patient());
+   
         
         shareID.setUserData(QuestionUserController.questionStatic);
         btnModifier.setUserData(0);
@@ -117,20 +120,23 @@ public class ConsulterQuestionUserController implements Initializable {
             errModif.setStyle("-fx-text-fill: #D92A27");
             
         }
-        
-        
-        if(!QuestionUserController.m.getSpecialite().equals(QuestionUserController.questionStatic.getSpecialite())){
+        GestionMedecin gm=new GestionMedecin();
+        GestionPatient gp= new GestionPatient();
+        if(FXMLLoginController.docteur){
+        Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+        Medecin m=gm.AfficherMedecinLogin(p.getLogin());
+        if(!m.getSpecialite().equals(QuestionUserController.questionStatic.getSpecialite())){
             shareID.setOpacity(0);
         }
         
-        if(!QuestionUserController.patient.getLogin().equals(QuestionUserController.questionStatic.getId_patient())){
+        if(!FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
             btnModifier.setOpacity(0);
         }
         
-        if(!QuestionUserController.patient.getLogin().equals(QuestionUserController.questionStatic.getId_patient())){
+        if(!FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
             btnSupprimer.setOpacity(0);
         }
-        
+        }
         
         
         
@@ -288,8 +294,7 @@ public class ConsulterQuestionUserController implements Initializable {
         }else{
             
         }
-        
-        ScrollPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+        AnchorPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
         FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
         
        
@@ -299,7 +304,7 @@ public class ConsulterQuestionUserController implements Initializable {
     @FXML
     private void shareIDAction(ActionEvent event) throws IOException {
         
-        ScrollPane a = FXMLLoader.load(getClass().getResource("RepondreQuestion.fxml"));
+        AnchorPane a = FXMLLoader.load(getClass().getResource("RepondreQuestion.fxml"));
         FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
         
         
