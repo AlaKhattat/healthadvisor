@@ -30,7 +30,7 @@ public class questionMain extends Application {
 
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+            root = FXMLLoader.load(getClass().getResource("question.fxml"));
             Scene scene = new Scene(root);
         
             primaryStage.setTitle("Questions & Réponses");
