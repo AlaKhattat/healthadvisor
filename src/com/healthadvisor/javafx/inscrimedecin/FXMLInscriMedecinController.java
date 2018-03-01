@@ -155,7 +155,7 @@ public static Double LONG_P;
                     .darkStyle();
             Image img2=new Image("/com/healthadvisor/ressources/user.png");
         Notifications notif2=Notifications.create()
-               .graphic(new ImageView(img))
+               .graphic(new ImageView(img2))
                     .title("Inscription ")
                     .text("Inscription Avec Succés \n Bienvenue")
                     .hideAfter(Duration.seconds(4))
@@ -189,6 +189,7 @@ public static Double LONG_P;
             Parent parent = loader.load();        
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Recuperer Ma Position");
+            stage.getIcons().add(new Image("/com/healthadvisor/javafx/inscrimedecin/location.png"));
             stage.setScene(new Scene(parent));
             stage.show();
     }

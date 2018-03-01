@@ -16,8 +16,14 @@
          <children>
             <AnchorPane layoutY="45.0" style="-fx-background-color: #fff; -fx-border-radius: 5em;">
                <children>
-                  <JFXButton fx:id="signin" layoutY="113.0" onMouseClicked="#SigniInAction" prefHeight="52.0" prefWidth="134.0" text="Sign In" />
-                  <JFXButton fx:id="signup" defaultButton="true" layoutY="182.0" onAction="#SignUpAction" prefHeight="52.0" prefWidth="134.0" text="Sign Up" />
+                  <JFXButton fx:id="signin" layoutY="113.0" onMouseClicked="#SigniInAction" prefHeight="52.0" prefWidth="134.0" text="Se Connecter">
+                     <font>
+                        <Font size="13.0" />
+                     </font></JFXButton>
+                  <JFXButton fx:id="signup" defaultButton="true" layoutY="182.0" onAction="#SignUpAction" prefHeight="52.0" prefWidth="134.0" text="S'Enregistrer">
+                     <font>
+                        <Font size="13.0" />
+                     </font></JFXButton>
                   <AnchorPane fx:id="AnchorSignIn" layoutX="496.0" prefHeight="412.0" prefWidth="394.0" style="-fx-background-color: #fff; -fx-border-radius: 0.8em;">
                      <children>
                         <JFXTextField fx:id="username" labelFloat="true" layoutX="90.0" layoutY="122.0" onKeyReleased="#pseudoControl" prefHeight="42.0" prefWidth="230.0" promptText="Pseudo" styleClass="input" stylesheets="@../../../../../../login_fx/src/login_fx/login.css">
@@ -30,7 +36,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXPasswordField>
-                        <Label fx:id="SignIn" layoutX="176.0" layoutY="50.0" text="SignIn" textFill="#0c8390">
+                        <Label fx:id="SignIn" layoutX="176.0" layoutY="50.0" text="Se Connecter" textFill="#0c8390">
                            <font>
                               <Font size="21.0" />
                            </font>
@@ -45,7 +51,7 @@
                         <JFXTextField fx:id="email" labelFloat="true" layoutX="87.0" layoutY="174.0" onKeyReleased="#emailControl" prefHeight="41.0" prefWidth="119.0" promptText="Email" />
                         <JFXTextField fx:id="pays" labelFloat="true" layoutX="87.0" layoutY="233.0" onKeyReleased="#paysControl" prefHeight="42.0" prefWidth="119.0" promptText="Pays" />
                         <FontAwesomeIconView fx:id="homesignup" fill="#01918a" glyphName="CHEVRON_CIRCLE_RIGHT" layoutX="180.0" layoutY="397.0" onMouseClicked="#homesignupAction" size="40" />
-                        <Label fx:id="SignUp" layoutX="169.0" layoutY="14.0" text="Sign Up" textFill="#0b6183">
+                        <Label fx:id="SignUp" layoutX="148.0" layoutY="14.0" text="S'Enregistrer" textFill="#0b6183">
                            <font>
                               <Font size="21.0" />
                            </font>

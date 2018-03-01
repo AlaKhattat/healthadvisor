@@ -122,13 +122,13 @@ public class FXMLDetailsMController implements Initializable {
                     .darkStyle()
                 ;
        if(gm.ModifierStatutMedecin(this.cin.getText(),this.statutCompte.getValue())){
-           notifsucces.show();
                 if(this.statutCompte.getValue().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
 
                 SendEmail se=new SendEmail();
                 String sub="Rendez_Vous Confirmé";
                 String msg="Bonjour,\n Votre Compte a été Valide ";
                 int sendMail = se.sendMail(" healthadvisoresprit@gmail.com","projetpidev","alaeddine.khattat@esprit.tn",sub,msg);  
+           notifsucces.show();
 
       if(sendMail == 0){
           System.out.println("OK Email");}

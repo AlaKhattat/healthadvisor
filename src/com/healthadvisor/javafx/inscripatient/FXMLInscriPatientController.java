@@ -86,7 +86,7 @@ public class FXMLInscriPatientController implements Initializable {
                     .darkStyle();
                 Image img2=new Image("/com/healthadvisor/ressources/user.png");
         Notifications notif2=Notifications.create()
-               .graphic(new ImageView(img))
+               .graphic(new ImageView(img2))
                     .title("Inscription ")
                     .text("Inscription Avec Succés \n Bienvenue")
                     .hideAfter(Duration.seconds(4))

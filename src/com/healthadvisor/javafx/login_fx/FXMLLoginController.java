@@ -111,6 +111,7 @@ public class FXMLLoginController implements Initializable {
     public static String Identifiant;
     public static boolean docteur=false;
     public static boolean patient=false;
+    public static boolean admin=false;
     public static Double LAT_P_Co;
     public static Double LONG_P_Co;
 
@@ -171,6 +172,13 @@ public class FXMLLoginController implements Initializable {
         notif.show();
             
         }else {
+            if(username.getText().equalsIgnoreCase("admin")&&(passwordsiginin.getText().equalsIgnoreCase("admin"))){
+                admin=true;
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
+            Parent root=loader.load();
+            Scene s = holderLogin.getScene(); 
+            s.setRoot(root);
+            }else{
         String usernamesigin=this.username.getText();
         pseudo=usernamesigin;
         String password=this.passwordsiginin.getText();
@@ -206,6 +214,7 @@ public class FXMLLoginController implements Initializable {
             stage.setScene(new Scene(root));
             stage.show();*/
             }      
+        }
         }
     }
     }

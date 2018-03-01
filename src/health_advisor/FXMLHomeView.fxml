@@ -68,6 +68,6 @@
          </right>
       </JFXToolbar>
       <AnchorPane fx:id="holderPane1" layoutX="200.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="51.0" prefHeight="677.0" prefWidth="187.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="51.0" prefHeight="677.0" prefWidth="162.0" />
    </children>
 </AnchorPane>
