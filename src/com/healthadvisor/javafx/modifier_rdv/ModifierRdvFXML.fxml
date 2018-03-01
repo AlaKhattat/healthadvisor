@@ -2,14 +2,29 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane prefHeight="402.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.modifier_rdv.ModifierRdvFXMLController">
-   <content>
-      <VBox fx:id="Vcontainer" alignment="TOP_CENTER" prefHeight="400.0" prefWidth="606.0" />
-   </content>
+
+<AnchorPane prefHeight="591.0" prefWidth="760.0" style="-fx-background-color: rgba(255, 255, 255, 0.56);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.modifier_rdv.ModifierRdvFXMLController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" prefHeight="530.0" prefWidth="760.0">
+         <content>
+            <AnchorPane prefHeight="527.0" prefWidth="753.0">
+               <children>
+                  <VBox fx:id="Vcontainer" alignment="TOP_CENTER" layoutX="4.0" layoutY="14.0" prefHeight="506.0" prefWidth="746.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <BorderPane fx:id="alertPane" layoutX="3.0" layoutY="530.0" prefHeight="61.0" prefWidth="753.0" />
+   </children>
    <stylesheets>
-      <URL value="@style.css" />
-      <URL value="@../../../../../bootstrap3.css" />
+      <URL value="@global.css" />
+      <URL value="@mainMenuSceneStyle.css" />
+      <URL value="@gameSceneStyle.css" />
+      <URL value="@scoreSceneStyle.css" />
+      <URL value="@shortcutsSceneStyle.css" />
    </stylesheets>
-</ScrollPane>
+</AnchorPane>

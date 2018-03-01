@@ -145,5 +145,69 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
        }      
             return false;
     }
+
+    @Override
+    public List<Rendez_Vous> ListRendez_Vous(String patientId) {
+ArrayList<Rendez_Vous> listrdv= new ArrayList<>();
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="select * from rendez_vous where USER_ID='"+patientId+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getTimestamp("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"),rs.getTimestamp("Date_Valid"));
+                listrdv.add(rdv);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listrdv;    }
     
+  @Override
+    public List<Rendez_Vous> ListRendez_Vous_Medecin(String id_medecin) {
+
+    ArrayList<Rendez_Vous> listrdv= new ArrayList<>();
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT rendez_vous.* FROM rendez_vous WHERE rendez_vous.MED_ID='"+id_medecin+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getTimestamp("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"),rs.getTimestamp("Date_Valid"));
+                listrdv.add(rdv);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listrdv;     }
+
+    @Override
+    public int Rendez_Vous_Encours(String id_medecin) {
+  int totalEncours=0;
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT COUNT(rendez_vous.ID) AS encours from rendez_vous WHERE rendez_vous.STATUT='"+StatutRendezVousEnum.ENCOURS.name()+"'AND rendez_vous.MED_ID='"+id_medecin+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+              totalEncours =rs.getInt("encours");
+              return totalEncours;
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totalEncours;     
+    }
 }

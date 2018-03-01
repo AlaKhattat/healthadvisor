@@ -42,6 +42,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.controlsfx.control.table.TableFilter;
 
 /**
  * FXML Controller class
@@ -84,8 +85,26 @@ public class FXMLGererUtilController implements Initializable {
         // TODO
         initColP();
         loadDataP();
+        TableFilter<Patient> tableFilter = new TableFilter<>(tableViewP);
+        tableFilter.setSearchStrategy((input,nomCol) -> {
+        
+    try {
+        return nomCol.contains(input);
+    } catch (Exception e) {
+        return false;
+    }
+});
         initColM();
-        loadDataM();  
+        loadDataM(); 
+            TableFilter<Medecin> tableFilterM = new TableFilter<>(tableViewM);
+        tableFilterM.setSearchStrategy((input,nomMCol) -> {
+        
+    try {
+        return nomMCol.contains(input);
+    } catch (Exception e) {
+        return false;
+    }
+});
     }    
     
    private void initColP() {
@@ -94,10 +113,12 @@ public class FXMLGererUtilController implements Initializable {
         sexeCol.setCellValueFactory(new PropertyValueFactory<>("sexe"));
         paysCol.setCellValueFactory(new PropertyValueFactory<>("pays"));
     }
-
     private void loadDataP() {
          list.clear();
-         gp.ListPatient().stream().map((r) -> {
+          try            {
+
+         gp.AfficherQPatient().stream().map((r) -> {
+             Medecin m=gm.AfficherMedecinLogin(r.getLogin());
              Utilisateur u=gu.AfficherUtilisateurCin(r.getCin_user());
              Patient p=new Patient();
              p.setLogin(r.getLogin());
@@ -106,10 +127,15 @@ public class FXMLGererUtilController implements Initializable {
              p.setPays(u.getPays());
              p.setCin_user(r.getCin_user());
              p.setSexe(u.getSexe());
-          return p;
+             
+             return p;
+           
       }).forEachOrdered((p) -> {
           list.add(p);
       });
+          }catch(Exception e){
+              
+          }
      
         tableViewP.setItems(list);
     }
@@ -132,6 +158,9 @@ public class FXMLGererUtilController implements Initializable {
             med.setLogin_med(m.getLogin_med());
             med.setSexe(u.getSexe());
             med.setSpecialite(m.getSpecialite());
+            med.setAdresse(m.getAdresse());
+            med.setStatut_compte(m.getStatut_compte());
+            med.setDiplome(m.getDiplome());
           return med;
       }).forEachOrdered((med) -> {
           listM.add(med);

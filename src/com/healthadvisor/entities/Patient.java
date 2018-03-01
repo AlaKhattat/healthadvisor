@@ -20,12 +20,22 @@ public class Patient {
     private String prenom;
     private String sexe;
     private String pays;
+    private String photo_profile;
 
 public Patient(){}
-    public Patient(String login, String password, String cin_user) {
+    public Patient(String login, String password, String cin_user,String photo_profile) {
         this.login = login;
         this.password = password;
         this.cin_user = cin_user;
+        this.photo_profile=photo_profile;
+    }
+
+    public String getPhoto_profile() {
+        return photo_profile;
+    }
+
+    public void setPhoto_profile(String photo_profile) {
+        this.photo_profile = photo_profile;
     }
 
     public String getPays() {

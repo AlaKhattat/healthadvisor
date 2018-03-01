@@ -89,5 +89,70 @@ public class GestionUserReponse implements IGestionUserReponse{
         
         return listur;
     }
+
+    @Override
+    public void updateUserReponse(String login, int id_ancienne_reponse, int id_nouvelle_reponse) {
+        
+        try {
+            PreparedStatement prep = myDB.getConnexion().prepareStatement("update user_reponse set ID_REPONSE=? where ID_REPONSE=? and ID_USER=?");
+            prep.setInt(1 ,id_nouvelle_reponse);
+            prep.setInt(2, id_ancienne_reponse);
+            prep.setString(3, login);
+            prep.executeUpdate();
+            System.out.println("Réponse mise à jour.");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public String AfficherUserReponse(String login, int id_sondage) {
+        String rep ="";
+        
+        try {
+            Statement stm = myDB.getConnexion().createStatement();
+            String sql = "select reponses_possibles.reponse as reponse from reponses_possibles, user_reponse where user_reponse.ID_REPONSE=reponses_possibles.ID_REPONSE and user_reponse.ID_USER='"+login+"' and reponses_possibles.ID_SONDAGE='"+id_sondage+"'";
+            ResultSet r = stm.executeQuery(sql);
+            
+            while(r.next()){
+                rep = r.getString("reponse");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionUserReponse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            System.out.println(rep);
+            return rep;
+        }
+
+    @Override
+    public int AfficherIdReponseUser(int id_sondage, String login) {
+        int res=0;
+        
+        try {
+            Statement stm = myDB.getConnexion().createStatement();
+            String sql= "select user_reponse.ID_REPONSE as r from user_reponse, reponses_possibles where user_reponse.ID_REPONSE=reponses_possibles.ID_REPONSE and user_reponse.ID_USER='"+login+"' and reponses_possibles.ID_SONDAGE='"+id_sondage+"'";
+            
+            
+            ResultSet r = stm.executeQuery(sql);
+            
+            while(r.next()){
+            res = r.getInt("r");
+            }
+                
+                
+            } catch (SQLException ex) {
+                
+            Logger.getLogger(GestionStatistiques.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        System.out.println(res);
+        return res;
+    }
+        
+    
+
+
+
     
 }

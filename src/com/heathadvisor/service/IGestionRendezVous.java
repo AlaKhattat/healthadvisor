@@ -16,10 +16,13 @@ public interface IGestionRendezVous {
     
     public void AjouterRendezVous(Rendez_Vous rendezvous);
     public List<Rendez_Vous> ListRendez_Vous();
+    public List<Rendez_Vous> ListRendez_Vous_Medecin(String id_medecin);
+    public List<Rendez_Vous> ListRendez_Vous(String patientId);
     public boolean supprimerRendezVous(int id_rendezvous);
     public String RecupererMedecin(String id_medecin);
     public String RecupererPatient(String id_patient);
     public boolean ModifierRendezVous(Rendez_Vous rdv);
     public boolean ModifierRendezVousdate(Rendez_Vous rdv);
+    public int Rendez_Vous_Encours(String id_medecin);
     
 }

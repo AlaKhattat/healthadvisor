@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1200.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLHomeViewController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="750.0" prefWidth="1200.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="health_advisor.FXMLHomeViewController">
     <stylesheets>
         <URL value="@fxmlhomeview.css" />
     </stylesheets>
@@ -27,19 +27,7 @@
          <right>
             <AnchorPane prefHeight="54.0" prefWidth="470.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="Signin" layoutX="93.0" layoutY="3.0" onMouseClicked="#SigninAction" prefHeight="51.0" prefWidth="124.0" text="SignIn">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@login.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="Signout" layoutX="226.0" layoutY="2.0" onMouseClicked="#SignoutAction" prefHeight="51.0" prefWidth="166.0" text="Sign Out">
+                  <JFXButton fx:id="Signout" layoutX="226.0" layoutY="2.0" onMouseClicked="#SignoutAction" opacity="0.0" prefHeight="51.0" prefWidth="166.0" text="Sign Out">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -51,7 +39,7 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="profile" layoutX="382.0" layoutY="-4.0" onMouseClicked="#profileAction" prefHeight="57.0" prefWidth="169.0" text="Mon Profile">
+                  <JFXButton fx:id="profile" layoutX="382.0" layoutY="-4.0" onMouseClicked="#profileAction" opacity="0.0" prefHeight="57.0" prefWidth="169.0" text="Mon Profile">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,11 +51,23 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton fx:id="Signin" layoutX="216.0" layoutY="2.0" onMouseClicked="#SigninAction" prefHeight="51.0" prefWidth="166.0" ripplerFill="WHITE" text="SignIn">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </right>
       </JFXToolbar>
-      <AnchorPane fx:id="holderPane" layoutX="200.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="51.0" prefHeight="677.0" prefWidth="187.0" />
+      <AnchorPane fx:id="holderPane1" layoutX="200.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="51.0" prefHeight="677.0" prefWidth="162.0" />
    </children>
 </AnchorPane>

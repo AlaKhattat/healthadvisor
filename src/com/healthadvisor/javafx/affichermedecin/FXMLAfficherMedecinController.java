@@ -23,13 +23,17 @@ import gmapsfx.javascript.object.MapOptions;
 import gmapsfx.javascript.object.MapTypeIdEnum;
 import gmapsfx.javascript.object.Marker;
 import gmapsfx.javascript.object.MarkerOptions;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -39,14 +43,17 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.imageio.ImageIO;
 import netscape.javascript.JSObject;
 import org.controlsfx.control.Rating;
 
@@ -59,6 +66,8 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
   private Pagination pagination;
   private Medecin medecin;
   public static Medecin med;
+      @FXML
+    private AnchorPane anchorPane;
     /**
      * Initializes the controller class.
      */
@@ -71,26 +80,36 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         if(FXMLRechercheMedecinInterfaceController.spec!=null)
-        initializePage(FXMLRechercheMedecinInterfaceController.spec);
+        try {
+            initializePage(FXMLRechercheMedecinInterfaceController.spec);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         else {
         if(FXMLRechercheMedecinInterfaceController.nom!=null)
-        {initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
+        {   try {
+            initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         }
     }    
     
-    public void initializePage(String specialite){
+    public void initializePage(String specialite) throws IOException{
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
-        mapView.setLayoutX(618);
+        mapView.setLayoutX(633);
         mapView.setLayoutY(66);
         AnchorPane anchor = new AnchorPane();
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
     ScrollPane p=new ScrollPane();
-    p.setPrefSize(700, 600);
+    p.setPrefSize(620, 600);
+      p.setStyle("-fx-background-color: derive(#0f95d8, 60%);" +
+"    -fx-border-color: transparent;" +
+"    -fx-background-radius: 5em;");
 if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
     }
@@ -98,15 +117,17 @@ else{
     p.setContent(createPageSpécialite(specialite));
 
     anchor.getChildren().addAll(p,mapView);
-    Stage stage = new Stage(StageStyle.DECORATED);
+    anchorPane.getChildren().add(anchor);
+  /*  Stage stage = new Stage(StageStyle.DECORATED);
     Scene scene = new Scene(anchor);
     stage.setScene(scene);
     stage.setTitle("List Medecin");
-    stage.show();
+    stage.show();*/
     }
     }
     
-        public void initializePageNOM(String nomprenom){
+        public void initializePageNOM(String nomprenom) throws IOException{
+        FXMLRechercheMedecinInterfaceController.spec=null;
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
         mapView.setLayoutX(618);
@@ -115,21 +136,20 @@ else{
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
+    anchor.setStyle("-fx-background-color: #AED6F1;");
+
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
+    p.setStyle("-fx-background-color: derive(#0f95d8, 60%);" +
+"    -fx-border-color: transparent;" +
+"    -fx-background-radius: 5em;");
 if(FXMLRechercheMedecinInterfaceController.nom==null)
     p.setContent(createPage());
 else
     p.setContent(createPageNom(nomprenom));
-
-
+  
     anchor.getChildren().addAll(p,mapView);
-    Stage stage = new Stage(StageStyle.DECORATED);
-    Scene scene = new Scene(anchor);
-    stage.setScene(scene);
-    stage.setTitle("List Medecin");
-    stage.show();
+    anchorPane.getChildren().add(anchor);
     }
   public VBox createPage() {
     VBox box = new VBox();
@@ -211,12 +231,24 @@ else
     return box;
   }
     
-  public VBox createPageSpécialite(String spec) {
-    VBox box = new VBox();
-        GestionMedecin gm=new GestionMedecin();
+  public VBox createPageSpécialite(String spec) throws FileNotFoundException, IOException {
+           FXMLRechercheMedecinInterfaceController.nom=null;
+
+        VBox box = new VBox();
+  box.setStyle("-fx-padding: 10;" + 
+                      "-fx-background-color:rgba(63, 127, 191, 0.45);");
+  GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSpecialite(spec)){
        
         VBox element = new VBox();
+        element.setStyle("-fx-padding: 10;" + 
+                      "-fx-border-style: solid inside;" + 
+                      "-fx-border-width: 2;" +
+                      "-fx-border-insets: 5;" + 
+                      "-fx-border-radius: 5;" + 
+                      "-fx-border-color: #fff;"+
+                      "-fx-background-color:rgba(63, 127, 191, 0.19);");
+
         element.setPadding(new Insets(10, 50, 50, 50));
         element.setSpacing(10);
         element.setFillWidth(true);
@@ -274,11 +306,16 @@ else
         adresse.setPrefHeight(32);
         adresse.setLayoutX(168);
         adresse.setLayoutY(111);
+         FileInputStream input;      
+            System.out.println("L'image : "+m.getPhoto_profile());
+            input = new FileInputStream(m.getPhoto_profile());
+            Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
         Circle c=new Circle();
         c.setRadius(56);
         c.setLayoutX(70);
         c.setLayoutY(71);
         c.setFill(Color.AQUAMARINE);
+        c.setFill(new ImagePattern(img_profile));
             AnchorPane anc = new AnchorPane();
             anc.setPrefWidth(410);
             anc.setPrefHeight(241);
@@ -340,7 +377,7 @@ else
     }
     
       
-  public VBox createPageNom(String nomprenom) {    
+  public VBox createPageNom(String nomprenom) throws FileNotFoundException, IOException {    
         VBox box = new VBox();
         GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSnomprenom(nomprenom)){
@@ -403,11 +440,17 @@ else
         adresse.setPrefHeight(32);
         adresse.setLayoutX(168);
         adresse.setLayoutY(111);
+          FileInputStream input;      
+            System.out.println("L'image : "+m.getPhoto_profile());
+            input = new FileInputStream(m.getPhoto_profile());
+            Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
         Circle c=new Circle();
         c.setRadius(56);
         c.setLayoutX(70);
         c.setLayoutY(71);
         c.setFill(Color.AQUAMARINE);
+        c.setFill(new ImagePattern(img_profile));
+
             AnchorPane anc = new AnchorPane();
             anc.setPrefWidth(410);
             anc.setPrefHeight(241);

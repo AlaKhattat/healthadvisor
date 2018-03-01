@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.afficherprofilemed;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
 import com.healthadvisor.javafx.inscrimedecin.FXMLInscriMedecinController;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
@@ -19,7 +20,14 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,20 +35,32 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -78,6 +98,8 @@ public class FXMLProfileMedController implements Initializable {
     private JFXButton modifier;
     @FXML
     private JFXButton confirmer;
+    private Desktop desktop=Desktop.getDesktop();
+    private String image_url;
     String[] sexelist={"Homme","Femme"};
           String[] specialitelist={
 "Anesthésiologie",
@@ -139,50 +161,83 @@ public class FXMLProfileMedController implements Initializable {
     private JFXTextField numtel;
     @FXML
     private Label strenghtP;
+    @FXML
+    private JFXButton modifPos;
+    @FXML
+    private Label statutCompteLabel;
+    @FXML
+    private ImageView statutImage;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private JFXButton profileB;
+    @FXML
+    private Label imageLabel;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        confirmer.setOpacity(0);
-        ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
-        sexe.setItems(sl);
-        ObservableList<String> sll=FXCollections.observableArrayList(specialitelist);
-        specialite.setItems(sll);
-        new ComboBoxAutoComplete<String>(specialite);
-        
-        GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
-        System.out.println("Utilisateur"+u);
-        GestionPatient gp=new GestionPatient();
-        Patient p=gp.AfficherPatientCin(u.getCin());
-        GestionMedecin gm=new GestionMedecin();
-        Medecin m= gm.AfficherMedecinLogin(p.getLogin());
-        
-        sexe.setValue(u.getSexe());
-        specialite.setValue(m.getSpecialite());
-        this.nom.setText(u.getNom());
-        this.prenom.setText(u.getPrenom());
-        this.email.setText(u.getEmail());
-        
-        Date date = u.getDate_naiss();
-        Instant instant = Instant.ofEpochMilli(date.getTime());
-        LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
-        this.date.setValue(res);
-        
-        this.pays.setText(u.getPays());
-        this.ville.setText(u.getVille());
-        this.adresse.setText(m.getAdresse());
-        this.login.setText(p.getLogin());
-        this.password.setText(p.getPassword());
-        this.diplome.setText(m.getDiplome());
-        StringBuilder sb = new StringBuilder();
-        sb.append("");
-        sb.append(u.getNum_tel());
-        String str = sb.toString();
-                
-        this.numtel.setText(str);
+        try {
+            // TODO
+            confirmer.setOpacity(0);
+            ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
+            sexe.setItems(sl);
+            ObservableList<String> sll=FXCollections.observableArrayList(specialitelist);
+            specialite.setItems(sll);
+            new ComboBoxAutoComplete<String>(specialite);
+            
+            GestionUtilisateur gu=new GestionUtilisateur();
+            Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
+            System.out.println("Utilisateur"+u);
+            GestionPatient gp=new GestionPatient();
+            Patient p=gp.AfficherPatientCin(u.getCin());
+            GestionMedecin gm=new GestionMedecin();
+            Medecin m= gm.AfficherMedecinLogin(p.getLogin());
+            
+            sexe.setValue(u.getSexe());
+            specialite.setValue(m.getSpecialite());
+            this.nom.setText(u.getNom());
+            this.prenom.setText(u.getPrenom());
+            this.email.setText(u.getEmail());
+            
+            Date date = u.getDate_naiss();
+            Instant instant = Instant.ofEpochMilli(date.getTime());
+            LocalDate res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+            this.date.setValue(res);
+            FileInputStream input;          
+            input = new FileInputStream(p.getPhoto_profile());
+            Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            image_url=p.getPhoto_profile();
+            this.imageView.setImage(img_profile);
+            this.pays.setText(u.getPays());
+            this.ville.setText(u.getVille());
+            this.adresse.setText(m.getAdresse());
+            this.login.setText(p.getLogin());
+            this.password.setText(p.getPassword());
+            this.diplome.setText(m.getDiplome());
+            this.statutCompteLabel.setText(m.getStatut_compte());
+            if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.NON_VALIDE.name())){
+                statutImage.setImage(new Image("/com/healthadvisor/javafx/afficherprofilemed/notverified.png"));
+            }else {
+                if(m.getStatut_compte().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
+                    statutImage.setImage(new Image("/com/healthadvisor/javafx/afficherprofilemed/checkmark.png"));
+                    
+                }
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append("");
+            sb.append(u.getNum_tel());
+            String str = sb.toString();
+            
+            this.numtel.setText(str);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLProfileMedController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLProfileMedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }    
 
@@ -195,6 +250,9 @@ public class FXMLProfileMedController implements Initializable {
         numtel.setEditable(true);
         ville.setEditable(true);
         pays.setEditable(true);
+        this.modifPos.setDisable(false);
+        this.profileB.setDisable(false);
+
         confirmer.setOpacity(1);
 
 
@@ -213,7 +271,7 @@ public class FXMLProfileMedController implements Initializable {
                     .darkStyle(); 
               Image img2=new Image("/com/healthadvisor/ressources/checked.png");
         Notifications notif2=Notifications.create()
-               .graphic(new ImageView(img))
+               .graphic(new ImageView(img2))
                     .title("Modification Profile")
                     .text("Profile Modifié avec succés")
                     .hideAfter(Duration.seconds(4))
@@ -225,7 +283,8 @@ public class FXMLProfileMedController implements Initializable {
  String email=this.email.getText();
  LocalDate localDate =date.getValue();
  Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
- Date date = Date.from(instant);
+ Date datefinal = Date.from(instant);
+            System.out.println("Date de naissance"+date);
  String sexe=this.sexe.getValue();
  String specialite=this.specialite.getValue();
  String pays=this.pays.getText();
@@ -235,16 +294,18 @@ public class FXMLProfileMedController implements Initializable {
  String diplome=this.diplome.getText();
  String adresse=this.adresse.getText();
  String num_tel=this.numtel.getText();
-         int num=Integer.parseInt(num_tel);
+        int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur(FXMLLoginController.Identifiant, nom, prenom, email, date, sexe, pays, ville,num);
+        Utilisateur u=new Utilisateur(FXMLLoginController.Identifiant, nom, prenom, email, datefinal, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
-        Patient p=new Patient(login, password, u.getCin());
+            System.out.println("L'URL DE L'IMAGE"+image_url);
+        Patient p=new Patient(login, password, u.getCin(),image_url);
         gp.ModifierPatient(p);
         GestionMedecin gm=new GestionMedecin();
-        Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLInscriMedecinController.LAT_P,FXMLInscriMedecinController.LONG_P, login, password, u.getCin());
+            System.out.println("LAtitude"+FXMLLoginController.LAT_P_Co);
+        Medecin m=new Medecin(login, specialite, adresse, diplome, 0,FXMLLoginController.LAT_P_Co,FXMLLoginController.LONG_P_Co,this.statutCompteLabel.getText(), login, password, u.getCin(),image_url);
         gm.ModifierMedecin(m);
 
          
@@ -255,6 +316,8 @@ public class FXMLProfileMedController implements Initializable {
         this.adresse.setEditable(false);
         this.login.setEditable(false);
         this.password.setEditable(false);
+        this.modifPos.setDisable(true);
+        this.profileB.setDisable(true);
         confirmer.setOpacity(0);
         notif2.show();
         }catch(Exception e){
@@ -331,6 +394,59 @@ public class FXMLProfileMedController implements Initializable {
         }else{email.setFocusColor(Color.RED);
         //La c'est pas bon
         }
+    }
+
+    @FXML
+    private void modifPositionAction(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/healthadvisor/javafx/gmap/FXMLDocument.fxml"));
+            Parent parent = loader.load();        
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Recuperer Ma Position");
+            stage.getIcons().add(new Image("/com/healthadvisor/javafx/inscrimedecin/location.png"));
+            stage.setScene(new Scene(parent));
+            stage.show();
+    }
+
+    
+    @FXML
+    private void ParcourirImageP(ActionEvent event) {
+             final FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(anchor.getScene().getWindow());
+        if (file != null) {
+            openFile(file);
+        }
+    }
+ 
+
+    private void openFile(File file) {
+        FileInputStream input;
+        try {
+            desktop.open(file);
+            File dest = new File("C:\\wamp64\\www\\HealthAdvisorImages\\" + file.getName());
+            Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            image_url = dest.toPath().toString();
+            //imageLabel.setText(dest.toPath().toString());
+            System.out.println("URL Image "+image_url);
+            System.out.println("Image enregistrée avec succés");
+            input = new FileInputStream(dest.toPath().toString());
+            javafx.scene.image.Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            imageView.setImage(img_profile);
+        } catch (IOException ex) {
+            System.err.println("Erreur d'enregistrement d'image");
+        }
+    }
+
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.setInitialDirectory(
+                new File("C:\\Users\\aaa\\Desktop\\")
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
     }
     
 }

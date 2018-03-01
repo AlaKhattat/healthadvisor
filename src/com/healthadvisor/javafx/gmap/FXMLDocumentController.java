@@ -112,9 +112,10 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
             //Recuperer longitude altitude
                 FXMLInscriMedecinController.LONG_P=ll.getLongitude();
                 FXMLInscriMedecinController.LAT_P=ll.getLatitude();
-                System.out.println("longitude"+FXMLInscriMedecinController.LONG_P);
+                FXMLLoginController.LAT_P_Co=ll.getLatitude();
+                FXMLLoginController.LONG_P_Co=ll.getLongitude();
             MarkerOptions  markerOpt = new MarkerOptions();
-                markerOpt.position(ll);
+            markerOpt.position(ll);
             
             Marker myMark = new Marker(markerOpt);
             map.addMarker(myMark);   
@@ -136,6 +137,5 @@ public class FXMLDocumentController implements Initializable, MapComponentInitia
 
     @FXML
     private void validerPositionAction(MouseEvent event) {
-        System.out.println("aaaaaa");
     }
 }

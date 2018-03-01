@@ -6,8 +6,12 @@
 package com.healthadvisor.javafx.questionreponse;
 
 import com.healthadvisor.entities.Reponse;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionReponse;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,14 +54,22 @@ public class RepondreQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         QuestionController qc = new QuestionController();
-        Question.setText(qc.question.toString());
+        Question.setText(QuestionUserController.questionStatic.getQuestion());
     }    
 
     @FXML
     private void partagerReponse(ActionEvent event) throws IOException {
+        
+        if(textAreaID.getText().length()<30){
+            Alert alerte = new Alert(Alert.AlertType.WARNING);
+            alerte.setTitle("Dialogue d'erreur");
+            alerte.setHeaderText("Attention !");
+            alerte.setContentText("Votre réponse doit avoir au moins 30 caractères...");
+            alerte.show();
+        }else{
         QuestionController qc = new QuestionController();
         GestionReponse gr = new GestionReponse();
-        Reponse r = new Reponse(0,textAreaID.getText(),FXMLLoginController.pseudo, qc.question,new java.sql.Timestamp(new java.util.Date().getTime()));
+        Reponse r = new Reponse(0,textAreaID.getText(),QuestionUserController.m.getLogin_med(), QuestionUserController.questionStatic,new java.sql.Timestamp(new java.util.Date().getTime()));
         gr.ajouterReponse(r);
         
         Alert alerte = new Alert(Alert.AlertType.INFORMATION);
@@ -65,10 +77,24 @@ public class RepondreQuestionController implements Initializable {
         alerte.setHeaderText("Succès !");
         alerte.setContentText("Votre réponse à été partagée avec succès...");
         alerte.show();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestion.fxml"));
+       
+        
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
         Parent root=loader.load();
         Scene s = paneID.getScene();
         s.setRoot(root);
-    }
+        
+        
+        GestionUtilisateur gu = new GestionUtilisateur();
+        GestionPatient gp = new GestionPatient();
+        Utilisateur u = gu.AfficherUtilisateurCin(QuestionUserController.patient.getCin_user());
+        
+        
+        SendEmail sm = new SendEmail();
+        sm.sendMail("healthadvisoresprit@gmail.com", "projetpidev", u.getEmail() , "Questions & Réponses", "Docteur "+QuestionUserController.m.getLogin_med()+ " a répondu à votre question.\n Question : "+QuestionUserController.questionStatic.getQuestion()+"\n Réponse : "+textAreaID.getText());
+        
+        
+        
+    }}
     
 }

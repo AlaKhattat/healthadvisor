@@ -75,19 +75,21 @@ public class GestionSondage implements IGestionSondage{
     }
 
     @Override
-    public void afficherSondage() {
+    public int afficherIdSondage(String nom) {
         //List<Sondage> sondages = new ArrayList<>();
-          
+        int res=0;
         try {
             Statement stm = myDB.getConnexion().createStatement();
-            ResultSet r= stm.executeQuery("select * from sondage");  
+            ResultSet r= stm.executeQuery("select max(id_sondage) as id from sondage where nom_sondage='"+nom+"'");  
             while(r.next()){
-                System.out.println("ID_SONDAGE = "+r.getInt(1)+" | NOM = "+r.getString(2));     
+                 res = r.getInt("id");   
             }
            
         } catch (SQLException ex) {
             Logger.getLogger(GestionQuestion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(res);
+        return res;
     }
 
     @Override

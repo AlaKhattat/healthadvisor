@@ -14,6 +14,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -37,7 +38,7 @@ public class Tag extends Label{
 			path.getElements().addAll(
 					new MoveTo(0,0),new LineTo(10, 10),
 					new MoveTo(10,0), new LineTo(0,10));
-			path.setStyle("-fx-stroke: white;");
+			path.setStyle("-fx-stroke: black;");
 			/*path.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 				@Override
@@ -71,7 +72,7 @@ public class Tag extends Label{
 				}
 			});
 
-			setStyle("-fx-background-color: silver; -fx-border-radius: 3; -fx-border-color: black;");
+			setStyle("-fx-background-color: white; -fx-border-radius: 3; -fx-border-color: #07c2ed;");
 		}
 
 	}

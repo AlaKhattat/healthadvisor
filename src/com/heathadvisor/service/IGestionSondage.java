@@ -18,6 +18,6 @@ public interface IGestionSondage {
     public void ajouterSondage(Sondage s);
     public void supprimerSondage(Sondage s);
     public void updateSondage (int id, String nom);
-    public void afficherSondage (); 
+    public int afficherIdSondage (String nom); 
     public ArrayList <Sondage> ListSondage();
 }

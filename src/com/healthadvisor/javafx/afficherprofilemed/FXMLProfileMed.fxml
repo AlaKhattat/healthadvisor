@@ -7,21 +7,25 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilemed.FXMLProfileMedController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="675.0" prefWidth="529.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.afficherprofilemed.FXMLProfileMedController">
     <stylesheets>
         <URL value="@fxmlprofilemed.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="136.0" fitWidth="110.0" layoutX="54.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView" fitHeight="136.0" fitWidth="110.0" layoutX="54.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@doctoricon.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
       <Label layoutX="232.0" layoutY="33.0" text="Mon Profile">
          <font>
@@ -55,7 +59,7 @@
       </JFXTextField>
       <JFXDatePicker fx:id="date" defaultColor="#132a5b" disable="true" editable="false" layoutX="29.0" layoutY="368.0" prefHeight="25.0" prefWidth="160.0" promptText="Date de naissance" />
       <JFXComboBox fx:id="sexe" disable="true" labelFloat="true" layoutX="29.0" layoutY="428.0" prefHeight="25.0" prefWidth="160.0" promptText="Sexe" />
-      <JFXTextField fx:id="adresse" editable="false" labelFloat="true" layoutX="310.0" layoutY="266.0" prefHeight="25.0" prefWidth="160.0" promptText="Adresse">
+      <JFXTextField fx:id="adresse" editable="false" labelFloat="true" layoutX="310.0" layoutY="234.0" prefHeight="25.0" prefWidth="160.0" promptText="Adresse">
          <font>
             <Font size="14.0" />
          </font>
@@ -65,8 +69,8 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXComboBox fx:id="specialite" disable="true" labelFloat="true" layoutX="310.0" layoutY="209.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
-      <Rating disable="true" layoutX="210.0" layoutY="89.0" partialRating="true" />
+      <JFXComboBox fx:id="specialite" disable="true" labelFloat="true" layoutX="310.0" layoutY="177.0" prefHeight="25.0" prefWidth="160.0" promptText="Spécialite" />
+      <Rating disable="true" layoutX="210.0" layoutY="73.0" partialRating="true" prefHeight="25.0" prefWidth="139.0" />
       <JFXTextField fx:id="login" editable="false" labelFloat="true" layoutX="310.0" layoutY="460.0" prefHeight="25.0" prefWidth="160.0" promptText="Pseudo">
          <font>
             <Font size="14.0" />
@@ -100,5 +104,31 @@
          </font>
       </JFXTextField>
       <Label fx:id="strenghtP" layoutX="310.0" layoutY="559.0" prefHeight="17.0" prefWidth="160.0" />
+      <JFXButton fx:id="modifPos" disable="true" layoutX="308.0" layoutY="277.0" onMouseClicked="#modifPositionAction" prefHeight="48.0" prefWidth="193.0" text="Modifier Ma Position">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@map.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="statutCompteLabel" layoutX="383.0" layoutY="26.0" prefHeight="40.0" prefWidth="132.0">
+         <graphic>
+            <ImageView fx:id="statutImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="profileB" disable="true" layoutX="210.0" layoutY="125.0" onAction="#ParcourirImageP" prefHeight="25.0" prefWidth="176.0" text="Modifier Photo Profile" textFill="#000fff">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="imageLabel" layoutX="232.0" layoutY="154.0" prefHeight="17.0" prefWidth="110.0" />
    </children>
 </AnchorPane>

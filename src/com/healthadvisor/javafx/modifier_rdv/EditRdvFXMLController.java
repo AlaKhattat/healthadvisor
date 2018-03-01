@@ -5,10 +5,18 @@
  */
 package com.healthadvisor.javafx.modifier_rdv;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Rendez_Vous;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
+import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionRendezVous;
+import com.healthadvisor.service.impl.GestionUtilisateur;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -42,9 +50,10 @@ public class EditRdvFXMLController implements Initializable {
     @FXML
     private DatePicker datePickerRDV;
     @FXML
-    private ComboBox<String> hourMinCombobox;
+    private JFXComboBox<String> hourMinCombobox;
     @FXML
-    private Button btnValiderRdv;
+    private JFXButton btnValiderRdv;
+    public static boolean editDone=false;
 
     /**
      * Initializes the controller class.
@@ -103,17 +112,25 @@ hourMinCombobox.getSelectionModel().select(stringheure);
         Rendez_Vous r=ModifierRdvFXMLController.RDV;
         //Manipulation de date et maj rdv
             String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
             Date dateRDV = formatter.parse(prepDate);
             r.setDate_heure(dateRDV);
             System.out.println(dateRDV);
         //MAJ BDD
         GestionRendezVous grdv=new GestionRendezVous();
         grdv.ModifierRendezVousdate(r);
+        SendEmail email=new SendEmail();
+        GestionMedecin gm=new GestionMedecin();
+        GestionUtilisateur gu=new GestionUtilisateur();
+        Medecin m=gm.AfficherMedecinLogin(r.getMedecin_id());
+        Utilisateur u=gu.AfficherUtilisateurCin(m.getCin_user());
+        
         Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
         stage.close();
-        Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
-        a.show();
+        editDone=true;
+        //email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
+        /*Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
+        a.show();*/
     }
 
   

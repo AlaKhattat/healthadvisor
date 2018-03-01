@@ -176,6 +176,21 @@ public class InfoSante
        }
        return poidIdeal;
     }
+    public double calculCalorieMin(InfoSante info)
+    {
+        // femme  MB = 9,74 x P + 172,9 x T - 4,737 x A + 667,051
+        //homme adulte MB = 13,707 x P + 492,3 x T - 6,673 x A + 77,607
+        double depCalori = 0;
+       if("FEMME".equals(info.sexe))
+       {
+           depCalori = (9.74 * info.poids)+(172.9*(info.taille/100))-(4.737*info.age)+667.051;
+       }
+       else if("HOMME".equals(info.sexe))
+       {
+          depCalori = (13.707 * info.poids)+(492.3*(info.taille/100))-(6.673*info.age)+77.607;
+       }
+       return depCalori;
+    }
     public String interpreterIMC(double IMC)
     {
        String result ="";

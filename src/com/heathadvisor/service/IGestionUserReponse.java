@@ -18,6 +18,9 @@ public interface IGestionUserReponse {
     
     public void ajouterUserReponse(UserReponse ur);
     public void afficherUserReponse(); 
+    public void updateUserReponse(String login, int id_ancienne_reponse, int id_nouvelle_reponse);
     public ArrayList <UserReponse> ListUserReponse();
+    public String AfficherUserReponse(String login, int id_sondage);
+    public int AfficherIdReponseUser(int id_sondage, String reponse);
     
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXProgressBar?>
-<?import java.net.URL?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,48 +12,55 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.suivierendezvous.FXMLSuivieRDVController">
-    <stylesheets>
-        <URL value="@fxmlsuivierdv.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@fxmlsuivierdv.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.suivierendezvous.FXMLSuivieRDVController">
    <children>
       <AnchorPane prefHeight="156.0" prefWidth="800.0">
          <children>
             <HBox prefHeight="135.0" prefWidth="1068.0" spacing="30.0">
                <children>
-                  <AnchorPane prefHeight="166.0" prefWidth="363.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
+                  <AnchorPane prefHeight="123.0" prefWidth="250.0" style="-fx-background-color: #00ADD8;" styleClass="card-unpadded">
                      <children>
                         <Pane layoutX="-1.0" prefHeight="141.0" prefWidth="23.0" style="-fx-background-color: #007390;" />
                         <ImageView fitHeight="97.0" fitWidth="124.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" text="16" />
-                        <Label layoutX="182.0" layoutY="76.0" prefHeight="31.0" prefWidth="210.0" styleClass="custom-white-label" text="Registered doctors" />
-                        <Label layoutX="182.0" layoutY="107.0" prefHeight="33.0" prefWidth="210.0" styleClass="custom-white-label" text="We need you." />
+                        <Label fx:id="nombreRdvTotal" layoutX="182.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="182.0" layoutY="76.0" prefHeight="31.0" prefWidth="210.0" styleClass="custom-white-label" text="Nombre De Rendez_Vous">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="166.0" prefWidth="393.0" style="-fx-background-color: #C70039;" styleClass="card-unpadded">
+                  <AnchorPane fx:id="progressRDV" prefHeight="166.0" prefWidth="393.0" style="-fx-background-color: #C70039;" styleClass="card-unpadded">
                      <children>
                         <Pane layoutX="-1.0" prefHeight="166.0" prefWidth="23.0" style="-fx-background-color: #900C3F;" />
                         <ImageView fitHeight="125.0" fitWidth="124.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label layoutX="209.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label" text="57 of 100 " />
-                        <Label layoutX="182.0" layoutY="76.0" prefHeight="31.0" prefWidth="210.0" styleClass="custom-white-label" text="Unattended appointments" />
-                        <JFXProgressBar layoutX="179.0" layoutY="120.0" progress="0.41" />
+                        <Label fx:id="nombreRdvEncours" layoutX="209.0" layoutY="14.0" prefHeight="67.0" prefWidth="89.0" styleClass="custom-white-title-label">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="182.0" layoutY="76.0" prefHeight="31.0" prefWidth="210.0" styleClass="custom-white-label" text="Rendez_Vous EnCours">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <JFXProgressBar fx:id="progressBar" layoutX="179.0" layoutY="120.0" progress="0.41" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="157.0" prefWidth="205.0" style="-fx-background-color: #F39C12;" styleClass="card">
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0" prefHeight="85.0" prefWidth="159.0">
                            <children>
-                              <Label prefHeight="31.0" prefWidth="153.0" styleClass="custom-white-title-label" text="AUJOURD'HUI" />
-                              <Label prefHeight="20.0" prefWidth="152.0" styleClass="custom-white-title-label" text="Monday" />
-                              <Label prefHeight="20.0" prefWidth="151.0" styleClass="custom-white-title-label" text="12/07/2017" />
+                              <Label prefHeight="31.0" prefWidth="153.0" styleClass="custom-white-title-label" text="AUJOURD'HUI">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="JourAuj" prefHeight="20.0" prefWidth="152.0" styleClass="custom-white-title-label" text="Monday" />
+                              <Label fx:id="dateAujd" prefHeight="20.0" prefWidth="151.0" styleClass="custom-white-title-label" text="12/07/2017" />
                            </children>
                         </VBox>
-                        <ImageView fitHeight="31.0" fitWidth="50.0" layoutX="143.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../Desktop/PI%20DEV/Nouveau%20dossier/hospital-fx-master/src/imgs/Copyright.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </AnchorPane>
                </children>

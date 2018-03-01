@@ -10,6 +10,7 @@ import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.healthadvisor.service.impl.GestionUtilisateur;
+import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
@@ -23,9 +24,14 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,9 +39,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -47,14 +57,21 @@ public class ModifierRdvFXMLController implements Initializable {
     @FXML
     private VBox Vcontainer;
     static Rendez_Vous RDV;
+    @FXML
+    private BorderPane alertPane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(EditRdvFXMLController.editDone==true){
+            AlertMessage am=new AlertMessage();
+            am.showPopup("Modification Effectuée", "Votre demande de modification de Rendez-Vous est pris en charge", 1,alertPane);
+            EditRdvFXMLController.editDone=false;
+        }
         GestionRendezVous grdv =new GestionRendezVous();
-        for(Rendez_Vous rdv :grdv.ListRendez_Vous()){
+        for(Rendez_Vous rdv :grdv.ListRendez_Vous("firas")){
             if(rdv.getStatut_rendezvous().equals("ANNULE")){
                 System.out.println("annule");
             }
@@ -83,7 +100,7 @@ public class ModifierRdvFXMLController implements Initializable {
             FontAwesomeIconView X=new FontAwesomeIconView();
             X.setGlyphName("TIMES");
             X.setGlyphSize(25);
-            Button annule=new Button();
+            JFXButton annule=new JFXButton();
             annule.setGraphic(X);
             annule.setUserData(rdv);
             annule.setOnMouseClicked((event) -> {
@@ -93,8 +110,10 @@ public class ModifierRdvFXMLController implements Initializable {
                     Rendez_Vous r=(Rendez_Vous)annule.getUserData();
                     if(r.getStatut_rendezvous().equals("VALIDE") && DifférenceDates(r.getDate_validation())>24){
                         System.out.println("RDV VALIDE");
-                        Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
-                        impo.show();
+                        AlertMessage am=new AlertMessage();
+                        am.showPopup("Erruer!!!", "Le rendez vous est Valider par votre medecin il y plus que 24 Heures", 0,alertPane);
+                        /*Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
+                        impo.show();*/
                     }
                     else{
                             r.setStatut_rendezvous(StatutRendezVousEnum.ANNULE.name());
@@ -116,7 +135,7 @@ public class ModifierRdvFXMLController implements Initializable {
             FontAwesomeIconView E=new FontAwesomeIconView();
             E.setGlyphName("PENCIL");
             E.setGlyphSize(25);
-            Button modif=new Button();
+            JFXButton modif=new JFXButton();
             modif.setGraphic(E);
             modif.setOnMouseClicked((event) -> {
                 Alert a =new Alert(Alert.AlertType.NONE,"Vous voulez modifier votre rendez vous\n NB : si le rendez vous a été valider par le Medecin vous ne pouvez pas depasser les 24 heures pour Modifier",ButtonType.YES,ButtonType.NO);
@@ -124,9 +143,11 @@ public class ModifierRdvFXMLController implements Initializable {
                 if (result.get()==ButtonType.YES){
                     Rendez_Vous r=(Rendez_Vous)annule.getUserData();
                     if(r.getStatut_rendezvous().equals("VALIDE")&& DifférenceDates(r.getDate_validation())>24){
-                        System.out.println("RDV VALIDE"); 
-                        Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
-                        impo.show();
+                        System.out.println("RDV VALIDE");
+                        AlertMessage am=new AlertMessage();
+                        am.showPopup("Erruer!!!", "Le rendez vous est Valider par votre medecin il y plus que 24 Heures", 0,alertPane);
+                        /*Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
+                        impo.show();*/
                     }
                     else{
                         try {
@@ -138,10 +159,12 @@ public class ModifierRdvFXMLController implements Initializable {
                             Stage stage=new Stage();
                             stage.setScene(s);
                             stage.showAndWait();
+                            
                             try {
                             FXMLLoader loader2=new FXMLLoader(getClass().getResource("ModifierRdvFXML.fxml"));
                             Parent root2=loader2.load();
                             annule.getScene().setRoot(root2);
+                            
                         } catch (IOException ex) {
                             Logger.getLogger(ModifierRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -175,6 +198,6 @@ public class ModifierRdvFXMLController implements Initializable {
         }
          return TimeUnit.HOURS.convert(diff, TimeUnit.MILLISECONDS);
     }
-
     
+   
 }

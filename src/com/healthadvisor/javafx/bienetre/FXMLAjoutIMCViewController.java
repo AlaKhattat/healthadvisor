@@ -96,9 +96,8 @@ public class FXMLAjoutIMCViewController implements Initializable {
         this.spin.setVisible(false);
         IMC = 0;
         
-        patient = new Patient(FXMLLoginController.pseudo, " "," ");
-        patient = new Patient("user1", "password", "to");
-        patient = new Patient(FXMLLoginController.pseudo,"password","to");
+        patient = new Patient(FXMLLoginController.pseudo, " "," ","");
+      
         remplirChamp(patient);
     }
 
@@ -180,20 +179,27 @@ public class FXMLAjoutIMCViewController implements Initializable {
         float poidL = Float.parseFloat(this.poid.getText());
         int ageL = Integer.parseInt(this.age.getText());
         String sexeL = this.sexe.getValue();
+        if(FXMLLoginController.pseudo.equals(""))
+        {
+           patient.setLogin(FXMLLoginController.pseudo);
+        }
         String loginL = patient.getLogin();
-            System.out.println("login:"+loginL);
+        System.out.println("login:"+loginL);
         InfoSante info = new InfoSante(tailleL, poidL, sexeL, loginL, ageL);
         GestionInfoSante ginfo = new GestionInfoSante();
         InfoSante info2 = ginfo.afficherInfoSante(loginL);
-                 if(info2.getTaille()>0)
+              if(info2.getTaille()>0 && info2.getPoids() > 0)
+              {
                  if(info2.getPoids() >0)
                  {
                       ginfo.modifierInfoSante(info);   
                  }
-                 else
-                 {
-                        ginfo.ajouterInfoSante(info);    
-                 }
+              }
+              else
+              {
+                        ginfo.ajouterInfoSante(info); 
+                  
+              }
         spin.setVisible(true);
         Timer time = new Timer(true);
         time.schedule(new TimerTask() {
@@ -204,8 +210,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
                    Platform.runLater(() -> {
                        FXMLAjoutIMCViewController.stage.close();
                 });
-                 
-               
+                  
             }
 
         }, 3000);

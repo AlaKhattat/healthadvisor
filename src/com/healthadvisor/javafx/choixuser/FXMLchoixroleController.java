@@ -6,6 +6,7 @@
 package com.healthadvisor.javafx.choixuser;
 
 import com.healthadvisor.javafx.routes.Routes;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +19,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -91,22 +94,16 @@ public class FXMLchoixroleController implements Initializable {
 
     @FXML
     private void InscriPatient(MouseEvent event) throws IOException {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.InscriPatient)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
-           
-
+            AnchorPane iscripatient = FXMLLoader.load(getClass().getResource(Routes.InscriPatient));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,iscripatient);
     }
 
     @FXML
     private void InscriMedecin(MouseEvent event) throws IOException {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.InscriMedecin)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
+          
+        AnchorPane iscrimedecin = FXMLLoader.load(getClass().getResource(Routes.InscriMedecin));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,iscrimedecin);
+
     }
     
 }

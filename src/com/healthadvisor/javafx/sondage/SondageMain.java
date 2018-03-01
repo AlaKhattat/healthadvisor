@@ -6,6 +6,9 @@
 package com.healthadvisor.javafx.sondage;
 
 import com.healthadvisor.javafx.questionreponse.questionMain;
+import com.healthadvisor.service.impl.GestionReponsesPossibles;
+import com.healthadvisor.service.impl.GestionSondage;
+import com.healthadvisor.service.impl.GestionUserReponse;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +33,7 @@ public class SondageMain extends Application {
         
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("Sondage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("SondageAdmin.fxml"));
             Scene scene = new Scene(root);
         
             primaryStage.setTitle("Sondages");
@@ -45,7 +48,10 @@ public class SondageMain extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         launch(args);
+        
+        
     }
     
 }

@@ -35,13 +35,14 @@ public class GestionQuestion implements IGestionQuestion{
     @Override
     public void ajouterQuestion(Question q) {
         try {
-            String query = "insert into question (QUESTION,ID_PATIENT,date_publication,modification_etat) values (?,?,?,false)";
+            String query = "insert into question (QUESTION,ID_PATIENT,date_publication,modification_etat,specialite) values (?,?,?,false,?)";
             PreparedStatement prep= myDB.getConnexion().prepareStatement(query);
             
             
             prep.setString(1 , q.getQuestion());
             prep.setString(2, q.getId_patient());
             prep.setTimestamp(3, q.getDate_publication());
+            prep.setString(4, q.getSpecialite());
             prep.executeUpdate();
        
             System.out.println("Question ajoutée.");
@@ -101,11 +102,13 @@ public class GestionQuestion implements IGestionQuestion{
                 String textQuestion =r.getString("QUESTION");
                 String loginPatient = r.getString("ID_PATIENT");
                 Timestamp date = r.getTimestamp("date_publication");
+                String specialite = r.getString("specialite");
                 //question.setId(idQuestion);
                 GestionPatient gp=new GestionPatient();
                 question.setId_patient(loginPatient);
                 question.setQuestion(textQuestion);
                 question.setDate_publication(date);
+                question.setSpecialite(specialite);
                 return question;
             }
             
@@ -130,6 +133,7 @@ public class GestionQuestion implements IGestionQuestion{
                 String textQuestion =r.getString("QUESTION");
                 String loginPatient = r.getString("ID_PATIENT");
                 Timestamp date = r.getTimestamp("date_publication");
+                String specialite = r.getString("specialite");
                 question.setId(idQuestion);
                 question.setQuestion(textQuestion);
                 GestionPatient gp = new GestionPatient();
@@ -137,6 +141,7 @@ public class GestionQuestion implements IGestionQuestion{
                 question.setId_patient(patient.getLogin());
                 question.setId_patient(loginPatient);
                 question.setDate_publication(date);
+                question.setSpecialite(specialite);
                 listq.add(question);
             }
             

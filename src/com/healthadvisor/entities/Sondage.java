@@ -15,6 +15,13 @@ public class Sondage {
     private int id;
     private String nom;
 
+    public Sondage(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
+
+    
+    
     public Sondage() {
     }
 

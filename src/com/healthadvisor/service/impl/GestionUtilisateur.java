@@ -61,7 +61,7 @@ public class GestionUtilisateur implements IGestionUtilisateur{
         System.out.println("Modification Utilisateur...");
         try{
                 Statement stm =database.getConnexion().createStatement();
-           String sql="UPDATE utilisateur SET nom='"+utilisateur.getNom()+"', prenom='"+utilisateur.getPrenom()+"', email='"+utilisateur.getEmail()+"', date_naiss='"+utilisateur.getDate_naiss()+"', sexe='"+utilisateur.getSexe()+"', 'pays="+utilisateur.getPays()+"', ville='"+utilisateur.getVille()+"', num_tel='"+utilisateur.getNum_tel()+"' WHERE cin='"+utilisateur.getCin()+"'";
+           String sql="UPDATE utilisateur SET  email='"+utilisateur.getEmail()+"', pays='"+utilisateur.getPays()+"', ville='"+utilisateur.getVille()+"', num_tel="+utilisateur.getNum_tel()+" WHERE cin='"+utilisateur.getCin()+"'";
             stm.executeUpdate(sql);
            System.out.println("Utilisateur bien modifiÃ©");
            

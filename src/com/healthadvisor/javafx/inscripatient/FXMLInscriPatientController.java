@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.javafx.inscripatient;
 
+import com.healthadvisor.encodedmd5.MD5Password;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javafx.routes.Routes;
@@ -12,9 +13,17 @@ import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
+import health_advisor.FXMLHomeViewController;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,10 +35,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -47,6 +59,13 @@ public class FXMLInscriPatientController implements Initializable {
     private JFXButton valider;
     @FXML
     private Label strenghtP;
+    private String url_image;
+    @FXML
+    private ImageView imageView;
+    @FXML
+    private AnchorPane anchor;
+        private Desktop desktop=Desktop.getDesktop();
+
 
     /**
      * Initializes the controller class.
@@ -58,7 +77,7 @@ public class FXMLInscriPatientController implements Initializable {
 
     @FXML
     private void validerPatient(MouseEvent event) throws IOException {
-         Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+                Image img=new Image("/com/healthadvisor/ressources/cancel.png");
         Notifications notif=Notifications.create()
                .graphic(new ImageView(img))
                     .title("Champs Invalide")
@@ -68,7 +87,7 @@ public class FXMLInscriPatientController implements Initializable {
                     .darkStyle();
                 Image img2=new Image("/com/healthadvisor/ressources/user.png");
         Notifications notif2=Notifications.create()
-               .graphic(new ImageView(img))
+               .graphic(new ImageView(img2))
                     .title("Inscription ")
                     .text("Inscription Avec Succés \n Bienvenue")
                     .hideAfter(Duration.seconds(4))
@@ -76,16 +95,13 @@ public class FXMLInscriPatientController implements Initializable {
                     .darkStyle();
         try{
         String login=this.login.getText();
-        String password =this.password.getText();
+        String password =MD5Password.getEncodedPassword(this.password.getText());
         GestionPatient gp= new GestionPatient();
-         Patient p=new Patient(login, password,FXMLLoginController.Identifiant);
-         gp.AjouterPatient(p);
+        Patient p=new Patient(login, password,FXMLLoginController.Identifiant,url_image);
+        gp.AjouterPatient(p);
          
-           FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.LOGINVIEW)); 
-            Parent root=loader.load();
-            Stage stage = new Stage(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
-            stage.show();
+        AnchorPane loginpane = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,loginpane);
             notif2.show();
         }catch(Exception e){
             notif.show();
@@ -135,5 +151,44 @@ public class FXMLInscriPatientController implements Initializable {
                 strenghtP.setText("il faut au moins 8 caractères");
         }
     }
-    
+
+    @FXML
+    private void ParcourirImageP(ActionEvent event) throws IOException {
+             final FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+        File file = fileChooser.showOpenDialog(anchor.getScene().getWindow());
+        if (file != null) {
+            openFile(file);
+        }
+    }
+ 
+
+    private void openFile(File file){
+
+        FileInputStream input;
+        try {                    desktop.open(file);
+
+            File dest = new File("C:\\wamp64\\www\\HealthAdvisorImages\\" + file.getName());
+            Files.copy(file.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            url_image = dest.toPath().toString();
+            System.out.println("Image enregistrée avec succés");
+            input = new FileInputStream(url_image);
+            javafx.scene.image.Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            imageView.setImage(img_profile);
+        } catch (IOException ex) {
+            System.err.println("Erreur d'enregistrement d'image");
+        }
+    }
+
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.setInitialDirectory(
+                new File("C:\\Users\\aaa\\Desktop\\")
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+    }
 }

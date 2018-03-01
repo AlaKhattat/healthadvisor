@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.RepondreQuestionController">
+<AnchorPane id="AnchorPane" fx:id="paneID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.questionreponse.RepondreQuestionController">
    <children>
       <Label fx:id="labelReponseID" layoutX="41.0" layoutY="82.0" text="Tapez votre réponse ..." />
       <TextArea fx:id="textAreaID" layoutX="41.0" layoutY="116.0" prefHeight="200.0" prefWidth="520.0" />

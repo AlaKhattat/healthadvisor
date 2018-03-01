@@ -21,6 +21,15 @@ public class Rendez_Vous {
     private String docteur;
     private String patient;
     private Date date_validation;
+    private String date_rdv;
+
+    public String getDate_rdv() {
+        return date_rdv;
+    }
+
+    public void setDate_rdv(String date_rdv) {
+        this.date_rdv = date_rdv;
+    }
 
 
     public String getDocteur() {
