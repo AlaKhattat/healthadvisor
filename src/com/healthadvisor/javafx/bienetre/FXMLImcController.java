@@ -312,9 +312,11 @@ public class FXMLImcController implements Initializable {
     {
        
         FXMLAjoutIMCViewController cont = new FXMLAjoutIMCViewController();
-        if(patient.getLogin()==null)
+        System.out.println("PATIENT"+patient.getLogin());
+        if(patient.getLogin().equals(" "))
         {
             patient = new Patient(FXMLLoginController.pseudo,"","","");
+            System.out.println(" patient:"+patient.getLogin());
         }
         FXMLAjoutIMCViewController.setPatient(patient);
         FillProgressIndicator fp= (FillProgressIndicator)box.getChildren().get(0);
