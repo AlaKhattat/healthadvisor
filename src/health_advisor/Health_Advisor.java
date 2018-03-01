@@ -39,6 +39,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.StackPane;
@@ -56,7 +57,8 @@ public class Health_Advisor  extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource(Routes.HOMEVIEW));     
-        Scene scene = new Scene(root);   
+        Scene scene = new Scene(root);
+        stage.getIcons().add(new Image("/health_advisor/LOFO.jpg"));
         stage.setScene(scene);
         stage.show();
     }

@@ -87,7 +87,11 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
         }
         else {
         if(FXMLRechercheMedecinInterfaceController.nom!=null)
-        {initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
+        {   try {
+            initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         }
     }    
@@ -120,7 +124,7 @@ else{
     }
     }
     
-        public void initializePageNOM(String nomprenom){
+        public void initializePageNOM(String nomprenom) throws IOException{
         FXMLRechercheMedecinInterfaceController.spec=null;
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
@@ -357,7 +361,7 @@ else
     }
     
       
-  public VBox createPageNom(String nomprenom) {    
+  public VBox createPageNom(String nomprenom) throws FileNotFoundException, IOException {    
         VBox box = new VBox();
         GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSnomprenom(nomprenom)){
@@ -420,11 +424,17 @@ else
         adresse.setPrefHeight(32);
         adresse.setLayoutX(168);
         adresse.setLayoutY(111);
+          FileInputStream input;      
+            System.out.println("L'image : "+m.getPhoto_profile());
+            input = new FileInputStream(m.getPhoto_profile());
+            Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
         Circle c=new Circle();
         c.setRadius(56);
         c.setLayoutX(70);
         c.setLayoutY(71);
         c.setFill(Color.AQUAMARINE);
+        c.setFill(new ImagePattern(img_profile));
+
             AnchorPane anc = new AnchorPane();
             anc.setPrefWidth(410);
             anc.setPrefHeight(241);

@@ -36,6 +36,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
@@ -92,7 +93,81 @@ public class FXMLHomeViewController implements Initializable {
             }
 
         });
-        
+if(FXMLLoginController.admin){
+       
+        Signin.setOpacity(0);
+        Signout.setOpacity(1);
+        Signout.toFront();
+        try {
+            System.out.println("Initialisation Administrateur ...");
+            VBox sidePane = FXMLLoader.load(getClass().getResource("/health_advisor/FXMLDrawer.fxml"));
+            AnchorPane  acceuil= FXMLLoader.load(getClass().getResource(Routes.HOME));
+            StackPane GererUtil = FXMLLoader.load(getClass().getResource(Routes.GererUtilisateur));
+            AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
+            AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
+            AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
+            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
+            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
+       
+            setNode(holderPane,acceuil);
+            drawer.setSidePane(sidePane);
+            ScrollPane ss=new ScrollPane();
+            ss.setContent(sidePane);
+            drawer.getChildren().add(ss);
+            for (Node node : sidePane.getChildren()) {
+                if (node.getAccessibleText() != null) {
+                    node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
+                        switch (node.getAccessibleText()) {
+                            case "acceuil":
+                                drawer.close();
+                                setNode(holderPane,acceuil);
+                                break;
+                         
+                            case "symptome":
+                                drawer.close();                                
+                                setNode(holderPane,Symptome);
+                                break;    
+                            case "geolocalisation":
+                                drawer.close();                                
+                                setNode(holderPane,Geolocalisation);
+                                break; 
+                            case "questionreponse":
+                                drawer.close();                                
+                                setNode(holderPane,QuestionReponse);
+                                break;
+                                case "gererutilisateur":
+                                drawer.close();                                
+                                setNode(holderPane,GererUtil);
+                                break;
+                                case "boutique":
+                                drawer.close();                                
+                                setNode(holderPane,Boutique);
+                                break;
+                                case "sondage":
+                                drawer.close();                                
+                                setNode(holderPane,Sondage);
+                                break;/*/*
+                            case "evenement":
+                                drawer.close();                                
+                                setNode(holderPane,Evenement);
+                                break;
+                            case "article":
+                                drawer.close();                                
+                                setNode(holderPane,Article);
+                                break; */
+                                                          
+                        }
+                    });
+                }
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLHomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}else{
 if(FXMLLoginController.patient){
             profile.setOpacity(1);
 
@@ -333,7 +408,7 @@ if(FXMLLoginController.patient){
     }
 }
     }
-
+    }
     public static void setNode(AnchorPane holderPane,Node node) {
         holderPane.getChildren().clear();        
         holderPane.getChildren().add((Node) node);
@@ -363,12 +438,20 @@ if(FXMLLoginController.patient){
     @FXML
     private void profileAction(MouseEvent event) throws IOException {
         if(FXMLLoginController.docteur){
-                AnchorPane ProfileMedecin = FXMLLoader.load(getClass().getResource(Routes.PROFILEMEDECIN));
-                setNode(holderPane,ProfileMedecin);
+                  Parent root= FXMLLoader.load(getClass().getResource(Routes.PROFILEMEDECIN));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.getIcons().add(new Image("/health_advisor/profile.png"));
+                stage.setScene(scene);
+                stage.show();
         }else{
             if(FXMLLoginController.patient){
-                 AnchorPane ProfilePatient = FXMLLoader.load(getClass().getResource(Routes.PROFILEPATIENT));
-                setNode(holderPane,ProfilePatient);
+                Parent root= FXMLLoader.load(getClass().getResource(Routes.PROFILEPATIENT));
+                Scene scene = new Scene(root);
+                Stage stage=new Stage();
+                stage.getIcons().add(new Image("/health_advisor/profile.png"));
+                stage.setScene(scene);
+                stage.show();
             }
         }
     }
