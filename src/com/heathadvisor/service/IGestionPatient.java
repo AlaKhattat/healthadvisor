@@ -20,6 +20,6 @@ public interface IGestionPatient {
     public Patient AfficherPatientLogin(String login);
     public Patient AfficherPatientCin(String cin);
     public List<Patient> AfficherQPatient();
-    
+    public Patient Verif_Connexion(String pseudo,String motpasse);
 
 }

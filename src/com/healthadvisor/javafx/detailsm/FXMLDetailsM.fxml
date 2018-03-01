@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
@@ -75,5 +76,6 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
+      <JFXSpinner fx:id="spinnerCompte" layoutX="393.0" layoutY="458.0" opacity="0.0" />
    </children>
 </AnchorPane>
