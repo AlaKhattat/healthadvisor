@@ -210,6 +210,7 @@ public class FXMLProfileMedController implements Initializable {
             FileInputStream input;          
             input = new FileInputStream(p.getPhoto_profile());
             Image img_profile = SwingFXUtils.toFXImage(ImageIO.read(input), null);
+            image_url=p.getPhoto_profile();
             this.imageView.setImage(img_profile);
             this.pays.setText(u.getPays());
             this.ville.setText(u.getVille());
@@ -270,7 +271,7 @@ public class FXMLProfileMedController implements Initializable {
                     .darkStyle(); 
               Image img2=new Image("/com/healthadvisor/ressources/checked.png");
         Notifications notif2=Notifications.create()
-               .graphic(new ImageView(img))
+               .graphic(new ImageView(img2))
                     .title("Modification Profile")
                     .text("Profile Modifié avec succés")
                     .hideAfter(Duration.seconds(4))
@@ -401,6 +402,7 @@ public class FXMLProfileMedController implements Initializable {
             Parent parent = loader.load();        
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle("Recuperer Ma Position");
+            stage.getIcons().add(new Image("/com/healthadvisor/javafx/inscrimedecin/location.png"));
             stage.setScene(new Scene(parent));
             stage.show();
     }

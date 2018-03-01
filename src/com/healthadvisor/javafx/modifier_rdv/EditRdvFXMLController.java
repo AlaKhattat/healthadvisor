@@ -108,7 +108,7 @@ hourMinCombobox.getSelectionModel().select(stringheure);
         Rendez_Vous r=ModifierRdvFXMLController.RDV;
         //Manipulation de date et maj rdv
             String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
             Date dateRDV = formatter.parse(prepDate);
             r.setDate_heure(dateRDV);
             System.out.println(dateRDV);

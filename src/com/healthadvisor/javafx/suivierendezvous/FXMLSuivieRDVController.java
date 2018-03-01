@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.editstatutrdv.FXMLEditStatutRDVController;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -93,7 +94,7 @@ public class FXMLSuivieRDVController implements Initializable {
 
     private void loadData() {
         list.clear();
-        gr.ListRendez_Vous().stream().map((r) -> {
+        gr.ListRendez_Vous_Medecin(FXMLLoginController.pseudo).stream().map((r) -> {
             String docteur=gr.RecupererMedecin(r.getMedecin_id());
             String patient=gr.RecupererPatient(r.getPatient_id());
             SimpleDateFormat simpleDate=new SimpleDateFormat("dd MMM yyy à HH:mm");

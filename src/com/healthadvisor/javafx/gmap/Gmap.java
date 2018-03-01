@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -23,7 +24,8 @@ public class Gmap extends Application {
         
         Scene scene = new Scene(root);
        // scene.getStylesheets().add("/gmap/Styles.css");
-        
+                    stage.getIcons().add(new Image("/com/healthadvisor/javafx/inscrimedecin/location.png"));
+
         stage.setTitle("Recuperer Ma Position");
         stage.setScene(scene);
         stage.show();

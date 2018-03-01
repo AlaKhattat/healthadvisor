@@ -44,6 +44,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -99,7 +100,11 @@ public class SymptomeFXMLController implements Initializable {
      
     @FXML
     private FlowPane PaneBox;
+
+    @FXML
+    private Button btnEnvoyer;
     public static ArrayList<Maladie> ResultatAnalyse;
+    private int nbtag;
       
       
     @FXML
@@ -201,8 +206,10 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnAjouterAction(ActionEvent event) {
+        btnEnvoyer.setOpacity(1);
         ObservableList ol=listsymptomes.getSelectionModel().getSelectedItems();
         for(Object x : ol){
+            nbtag++;
             Tag t=new Tag((Symptome)x);
             t.setUserData(x);
             /*Button b =new Button();
@@ -210,7 +217,11 @@ if(subbodypart.disableProperty().getValue()==true){
             t.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent event) {
+                    nbtag--;
                     PaneBox.getChildren().remove(t);
+                    if(nbtag==0){
+                        btnEnvoyer.setOpacity(0);
+                    }
                 }
                 
             });
@@ -224,7 +235,7 @@ if(subbodypart.disableProperty().getValue()==true){
     }
     @FXML
     void btnEnvoyerAction(ActionEvent event) throws IOException{
-        /*String Symptomes="";
+        String Symptomes="";
         ObservableList<Node>ols=PaneBox.getChildren();
         for(Node x : ols){
             Symptome s=(Symptome)x.getUserData();
@@ -237,8 +248,8 @@ if(subbodypart.disableProperty().getValue()==true){
         GestionMaladie gm =new GestionMaladie();
         AccessToken token=new AccessToken();
         ArrayList<Maladie> l=gm.Diagnostique(token.getToken(), Integer.parseInt(anne.getText()), sexe.getValue(), Symptomes);
-        ResultatAnalyse=l;*/
-        AnchorPane a=FXMLLoader.load(getClass().getResource("ResultatAnalyseFXML.fxml"));
+        ResultatAnalyse=l;
+        ScrollPane a=FXMLLoader.load(getClass().getResource("ResultatAnalyseFXML.fxml"));
         FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,a);
         
        /* String Result="";
@@ -256,8 +267,8 @@ if(subbodypart.disableProperty().getValue()==true){
     @Override
     
     public void initialize(URL url, ResourceBundle rb) {
-        btnValider.getStyleClass().add("button");
-        ResultatAnalyse=new ArrayList<>();
+        nbtag=0;
+        /*ResultatAnalyse=new ArrayList<>();
         ArrayList<String> list=new ArrayList<>();
         list.add("Cardiologie");
         list.add("Dentisterie");
@@ -268,7 +279,7 @@ if(subbodypart.disableProperty().getValue()==true){
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
         ResultatAnalyse.add(m);
-        ResultatAnalyse.add(m);
+        ResultatAnalyse.add(m);*/
         listsymptomes.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         String[] sexelist={"Homme","Femme","Garçon","Fille"};
         ObservableList<String> ObservListsexe = FXCollections.observableArrayList(sexelist);

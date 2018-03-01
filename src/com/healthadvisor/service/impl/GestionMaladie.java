@@ -34,7 +34,7 @@ public class GestionMaladie implements IGestionMaladie{
     }
         String n;
         double p;
-        ArrayList<String> l=new ArrayList<>();
+        
         ArrayList<Maladie> maladies=new ArrayList<>();
         URL url;
          String ch="";
@@ -63,7 +63,7 @@ public class GestionMaladie implements IGestionMaladie{
         JSONArray arr=obj.getJSONArray("Home");
         for (int i = 0; i < arr.length(); i++)
         {
-                        l.removeAll(l);
+                        ArrayList<String> l=new ArrayList<>();
             n=(arr.getJSONObject(i).getJSONObject("Issue").getString("Name"));
             p=arr.getJSONObject(i).getJSONObject("Issue").getDouble("Accuracy");
             JSONArray a=arr.getJSONObject(i).getJSONArray("Specialisation");

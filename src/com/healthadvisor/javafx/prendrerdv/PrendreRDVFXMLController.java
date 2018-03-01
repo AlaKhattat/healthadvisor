@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -74,7 +76,18 @@ final Callback<DatePicker, DateCell> dayCellFactory =
                 };
             }
         };
+if(LocalTime.now().isAfter(LocalTime.of(17, 30)) && LocalTime.now().isBefore(LocalTime.of(23, 59)) ){
+datePickerRDV.setValue(LocalDate.now().plusDays(1));
+hourMinCombobox.getSelectionModel().select("09:30");
+}
+else if(LocalTime.now().isBefore(LocalTime.of(7, 30)) && LocalTime.now().isAfter(LocalTime.of(00,01))){
 datePickerRDV.setValue(LocalDate.now());
+hourMinCombobox.getSelectionModel().select("09:30");   
+}
+else{
+datePickerRDV.setValue(LocalDate.now());
+hourMinCombobox.getSelectionModel().select((LocalTime.now().getHour()+2)+":00");
+}
 datePickerRDV.setDayCellFactory(dayCellFactory);
 String[] hhmm={
 "09:30",
@@ -97,6 +110,7 @@ String[] hhmm={
 "19:30"};
 ObservableList<String> sl=FXCollections.observableArrayList(hhmm);
 hourMinCombobox.setItems(sl);
+
     }    
 
     @FXML
@@ -104,17 +118,19 @@ hourMinCombobox.setItems(sl);
         //Preparation Objet RDV
         Rendez_Vous rdv=new Rendez_Vous();
         rdv.setMedecin_id(FXMLAfficherMedecinController.med.getLogin_med());
-        rdv.setPatient_id("sdqqsd");
+        rdv.setPatient_id("firas");
         rdv.setStatut_rendezvous(StatutRendezVousEnum.ENCOURS.name());
         //Manipulation de date
             String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,hh:mm");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
             Date dateRDV = formatter.parse(prepDate);
             rdv.setDate_heure(dateRDV);
             System.out.println(dateRDV);
         //Insertion dans BDD
         GestionRendezVous grdv=new GestionRendezVous();
         grdv.AjouterRendezVous(rdv);
+        Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
+        stage.close();
         Alert a=new Alert(Alert.AlertType.NONE,"Vous recevez une notificatin lorsque le rensdez vous est confirmé",ButtonType.OK);
         a.show();
         
