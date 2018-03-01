@@ -9,19 +9,24 @@ import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.enumeration.StatutMedecinEnum;
+import com.healthadvisor.javafx.suivierendezvous.AlertMaker;
 import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -72,6 +77,8 @@ public class FXMLDetailsMController implements Initializable {
     private JFXComboBox<String> statutCompte;
     String[] statutcmp={StatutMedecinEnum.NON_VALIDE.name(),StatutMedecinEnum.VALIDE.name()};
     GestionMedecin gm=new GestionMedecin();
+    @FXML
+    private JFXSpinner spinnerCompte;
     /**
      * Initializes the controller class.
      */
@@ -112,15 +119,7 @@ public class FXMLDetailsMController implements Initializable {
 
     @FXML
     private void ModifStatutCompte(ActionEvent event) {
-           Image imgsucces=new Image("/com/healthadvisor/ressources/checked.png");
-       Notifications notifsucces=Notifications.create()
-               .graphic(new ImageView(imgsucces))
-                    .title("Modification Statut Compte")
-                    .text("Statut Compte Modifié")
-                    .hideAfter(Duration.seconds(5))
-                    .position(Pos.TOP_RIGHT)
-                    .darkStyle()
-                ;
+      
        if(gm.ModifierStatutMedecin(this.cin.getText(),this.statutCompte.getValue())){
                 if(this.statutCompte.getValue().equalsIgnoreCase(StatutMedecinEnum.VALIDE.name())){
 
@@ -128,10 +127,20 @@ public class FXMLDetailsMController implements Initializable {
                 String sub="Rendez_Vous Confirmé";
                 String msg="Bonjour,\n Votre Compte a été Valide ";
                 int sendMail = se.sendMail(" healthadvisoresprit@gmail.com","projetpidev","alaeddine.khattat@esprit.tn",sub,msg);  
-           notifsucces.show();
 
       if(sendMail == 0){
-          System.out.println("OK Email");}
+          spinnerCompte.setOpacity(1);   
+          Timer tm=new Timer();
+          tm.schedule(new TimerTask() {
+              @Override
+              public void run() {
+                  Platform.runLater(()-> {
+                    AlertMaker.showSimpleAlert("Succés", "Medecin Bien notifé");
+                    spinnerCompte.setOpacity(0);
+                  });
+              }
+          }, 3000);    
+      }
        }
        }
     }

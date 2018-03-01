@@ -16,11 +16,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -80,18 +82,16 @@ public class FXMLHomeViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
      holderPane=holderPane1;
-        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-        transition.setRate(-1);
-        hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
-            transition.setRate(transition.getRate() * -1);
-            transition.play();
-
-            if (drawer.isShown()) {
-                drawer.close();
-            } else {
+          HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
+        task.setRate(-1);
+        hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (Event event) -> {
+            task.setRate(task.getRate() * -1);
+            task.play();
+            if (drawer.isHidden()) {
                 drawer.open();
+            } else {
+                drawer.close();
             }
-
         });
 if(FXMLLoginController.admin){
        
@@ -107,7 +107,7 @@ if(FXMLLoginController.admin){
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
-            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEADMIN));
             /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
        
@@ -182,8 +182,8 @@ if(FXMLLoginController.patient){
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
-            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
-            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            ScrollPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSEPATIENT));
+            ScrollPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEPATIENT));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
            /* ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
@@ -263,8 +263,8 @@ if(FXMLLoginController.patient){
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
-            AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
-            AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGE));
+            ScrollPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSEPATIENT));
+            ScrollPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEPATIENT));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
             /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
             ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
@@ -359,6 +359,7 @@ if(FXMLLoginController.patient){
        
             setNode(holderPane,acceuil);
             drawer.setSidePane(sidePane);
+            
             ScrollPane ss=new ScrollPane();
             ss.setContent(sidePane);
             drawer.getChildren().add(ss);

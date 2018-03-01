@@ -19,10 +19,14 @@ import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.healthadvisor.sms.sendSMS;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,6 +72,8 @@ public class FXMLEditStatutRDVController implements Initializable {
     private JFXButton annuler;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private JFXSpinner spinnerRDV;
     /**
      * Initializes the controller class.
      */
@@ -80,7 +86,7 @@ public class FXMLEditStatutRDVController implements Initializable {
     }    
     
      public void inflateUI(Rendez_Vous rdv) {
-         System.out.println("DAte :"+rdv.getDate_heure().toString());
+       System.out.println("DAte :"+rdv.getDate_heure().toString());
        date.setText(rdv.getDate_heure().toString());
        dater=rdv.getDate_heure();
        docteur.setText(rdv.getDocteur());
@@ -122,6 +128,7 @@ public class FXMLEditStatutRDVController implements Initializable {
                 int sendMail = se.sendMail(" healthadvisoresprit@gmail.com","projetpidev","alaeddine.khattat@esprit.tn",sub,msg);  
 
       if(sendMail == 0){
+        
           System.out.println("OK Email");}
 else{
           System.out.println("Not OK");}
@@ -133,9 +140,22 @@ else{
                         String str = sb.toString();
                         String mess="Votre rendez_vous est confirmé le"+dater.toString();
                         String sendsms=ss.sendSms(mess,str);
+                     boolean v=true;
                 if(sendsms!=null){
+                    spinnerRDV.setOpacity(1);
+                    
+          Timer tm=new Timer();
+          tm.schedule(new TimerTask() {
+              @Override
+              public void run() {
+                  Platform.runLater(()-> {
                     System.out.println("OK sms");
                     AlertMaker.showSimpleAlert("Succés", "Patient Bien notifé");
+                    spinnerRDV.setOpacity(0);
+                  });
+              }
+          }, 4000);
+                 
 
                 }
             }

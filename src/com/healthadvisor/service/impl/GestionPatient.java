@@ -165,6 +165,25 @@ System.out.println("Patient bien modifie");
         }
         return listp;    }
 
+    @Override
+    public Patient Verif_Connexion(String pseudo, String motpasse) {
+        Patient patient =null;
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="select * from patient where login='"+pseudo+"'AND password='"+motpasse+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"),rs.getString("photo_profile"));
+            System.out.println("Recuperation avec succes");  
+            }
+           
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return patient;      }
+
   
     
 }

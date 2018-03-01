@@ -1,14 +1,31 @@
 .button{
-    -fx-text-fill: #e0d9d9;
-    -fx-background-color: #081B33;
-    -fx-border-color: #081B33;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
+    -fx-text-fill: #151618;
+    -fx-border-color: #0D47A1;
     -fx-font-size: 13pt;
 }
 
 .button:hover{
-    -fx-border-color: #DAF7A6;
-    -fx-background-color: #DAF7A6;
-    -fx-text-fill: #081B33;
+    -fx-border-color: #081e2b;
+    -fx-background-color: #1565C0;
+    -fx-text-fill: #ffffff;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+   -fx-border-radius: 0px;
+   -fx-background-radius: 0px;
+}
+.scroll-pane {
+   -fx-background-color: transparent;
+   -fx-border-radius: 0px;
+   -fx-background-radius: 0px;
+}
+.label {
+     font-family: Roboto;
+    -fx-font-size: 15px;
+    -fx-font-weight: regular;
+    -fx-text-fill: #111111;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+#rating:hover{
+    -fx-background-color:rgba(255, 255, 255, 0);
 }

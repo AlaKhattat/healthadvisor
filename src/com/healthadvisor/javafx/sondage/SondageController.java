@@ -11,6 +11,7 @@ import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.javafx.questionreponse.questionMain;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionSondage;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -66,10 +68,11 @@ public class SondageController implements Initializable {
     @FXML
     private void repondreBtnAction(ActionEvent event) throws IOException {
         //SondageMain sm = new SondageMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterSondage.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("ConsulterSondage.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
 
     @FXML

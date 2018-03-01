@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.questionreponse;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.service.impl.GestionQuestion;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -117,11 +119,9 @@ public class QuestionController implements Initializable {
 
     private void btnPoserQuestionAction(ActionEvent event) throws IOException {
         
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("AjouterQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        AnchorPane a = FXMLLoader.load(getClass().getResource("AjouterQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
         
         
         
@@ -130,11 +130,10 @@ public class QuestionController implements Initializable {
     @FXML
     private void btnConsulterQuestion(ActionEvent event) throws IOException {
         
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        AnchorPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
 
     @FXML

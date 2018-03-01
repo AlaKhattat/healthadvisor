@@ -5,6 +5,8 @@
  */
 package com.healthadvisor.javafx.geolocalisation;
 
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,7 +50,7 @@ public class MapsFXMLController implements Initializable {
     WebView webView ;
     WebEngine webEngine;
     @FXML
-    private TextField seachPlacestxt;
+    private JFXTextField seachPlacestxt;
     @FXML
     private AnchorPane anchor;
     @FXML
@@ -56,17 +58,17 @@ public class MapsFXMLController implements Initializable {
     @FXML
     private MenuItem menuItem;
     @FXML
-    private RadioButton RdBtnPharmacie;
+    private JFXRadioButton RdBtnPharmacie;
     @FXML
-    private RadioButton RdBtnHopital;
+    private JFXRadioButton RdBtnHopital;
     @FXML
-    private RadioButton RdBtnDocteur;
+    private JFXRadioButton RdBtnDocteur;
     @FXML
-    private RadioButton RdBtnPhysio;
+    private JFXRadioButton RdBtnPhysio;
     @FXML
-    private RadioButton RdBtnGym;
+    private JFXRadioButton RdBtnGym;
     @FXML
-    private RadioButton RdBtnSpa;
+    private JFXRadioButton RdBtnSpa;
     @FXML
     private StackPane stackPane;
     @FXML
@@ -141,10 +143,13 @@ public class MapsFXMLController implements Initializable {
     }
     @FXML
     private void onBtnClearAction(ActionEvent event) {
+        if(Markercount>0){
         webEngine.executeScript("deleteMarkers();");
+        }
         seachPlacestxt.setText("");
         Markercount=0;
         nbrRequest=0;
+        
     }
 
     @Override

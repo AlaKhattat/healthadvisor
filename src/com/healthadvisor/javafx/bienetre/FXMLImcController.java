@@ -871,6 +871,8 @@ public class FXMLImcController implements Initializable {
        }
      
     }
+    
+   
     @FXML
     public void chargerVideoCalorique()
     {

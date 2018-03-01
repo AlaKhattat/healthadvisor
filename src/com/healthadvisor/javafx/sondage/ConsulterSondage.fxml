@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="AnchorID" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.ConsulterSondageController">
+<AnchorPane id="AnchorPane" fx:id="AnchorID" prefHeight="600.0" prefWidth="1000.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.ConsulterSondageController">
    <children>
-      <Label fx:id="labelSondage" layoutX="46.0" layoutY="48.0" text="Sondage" />
-      <Label fx:id="SondageText" layoutX="46.0" layoutY="77.0" text="Label" />
-      <Button fx:id="btnEnvoyer" layoutX="271.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnEnvoyerAction" text="Envoyer" />
-      <Button fx:id="Retour" layoutX="271.0" layoutY="335.0" mnemonicParsing="false" onAction="#RetourBtnAction" prefHeight="25.0" prefWidth="58.0" text="Retour" />
+      <Label fx:id="labelSondage" layoutX="46.0" layoutY="48.0" prefHeight="17.0" prefWidth="538.0" text="Sondage" />
+      <Label fx:id="SondageText" layoutX="46.0" layoutY="77.0" prefHeight="17.0" prefWidth="528.0" text="Label" />
+      <Button fx:id="btnEnvoyer" layoutX="466.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnEnvoyerAction" text="Envoyer" />
+      <Button fx:id="Retour" layoutX="466.0" layoutY="394.0" mnemonicParsing="false" onAction="#RetourBtnAction" prefHeight="27.0" prefWidth="67.0" text="Retour" />
    </children>
 </AnchorPane>

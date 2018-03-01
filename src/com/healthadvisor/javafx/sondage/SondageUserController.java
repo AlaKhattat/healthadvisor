@@ -13,6 +13,7 @@ import com.healthadvisor.javafx.questionreponse.QuestionUserController;
 import static com.healthadvisor.javafx.questionreponse.QuestionUserController.questionStatic;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionSondage;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +30,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -45,7 +47,7 @@ public class SondageUserController implements Initializable {
     @FXML
     private Label label;
     public static Sondage sondageStatic;
-    public static Patient patient = new Patient("gara","gara","54789654","c:/ccc");
+    public static Patient patient = new Patient("haboub","haboub","1254789","c:/ccc");
 
     /**
      * Initializes the controller class.
@@ -75,10 +77,11 @@ public class SondageUserController implements Initializable {
                 sondage.setOnAction((event) -> {
                     try {
                         sondageStatic=(Sondage)sondage.getUserData();
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterSondage.fxml"));
-                        Parent root=loader.load();
-                        Scene sc = Vcontainer.getScene();
-                        sc.setRoot(root);
+                        
+                        AnchorPane a = FXMLLoader.load(getClass().getResource("ConsulterSondage.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(SondageUserController.class.getName()).log(Level.SEVERE, null, ex);
                     }

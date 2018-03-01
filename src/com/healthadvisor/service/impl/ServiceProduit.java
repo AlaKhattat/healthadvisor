@@ -315,41 +315,11 @@ public class ServiceProduit implements InterfaceProduit{
     @Override
     public List<Produit> ListProduits_Image(boolean img) {
         List<Produit>tabE = new ArrayList<>();
-if(img){
-      try
-      {
-          String sql = "select * from produit where url_image != '' ;";
-          Statement stm = db.getConnexion().createStatement();
-          ResultSet s = stm.executeQuery(sql);
-          
-          while(s.next())
-          {
-              Produit p=new Produit();
-              p.setId_produit(s.getInt(1));
-              p.setReference(s.getString(2));
-              p.setNom(s.getString(3));
-              p.setPrix_vente(s.getFloat(4));
-              p.setUrl_image(s.getString(5));
-              p.setDescription(s.getString(6));
-              p.setType(s.getString(7));
-              p.setDate_mise(s.getDate(8));
-              p.setPromotion(s.getFloat(9));
-              p.setId_user(s.getString(10));
-              p.setQuantite(s.getInt(11));
-              p.setSignaler(s.getInt(12));
-              tabE.add(p);
-          }
-          System.out.println("patientiez en cours d'affichage");
-      }
-      catch(SQLException add)
-      {
-          System.out.println("probleme d'affichage ");
-      }
-}
-else{
+    
+   if(img==true){
     try
       {
-          String sql = "select * from produit where url_image ='' ;";
+          String sql = "select * from produit where url_image not Like '%DefaultBienEtre%' and url_image not Like '%DefaultSante%' ;";
           Statement stm = db.getConnexion().createStatement();
           ResultSet s = stm.executeQuery(sql);
           
@@ -369,8 +339,9 @@ else{
               p.setQuantite(s.getInt(11));
               p.setSignaler(s.getInt(12));
               tabE.add(p);
+              
           }
-          System.out.println("patientiez en cours d'affichage");
+          
       }
       catch(SQLException add)
       {
@@ -485,6 +456,169 @@ else{
       }
       return tabE.get(0);
     }
+
+    @Override
+    public boolean VerifierExistance_Produit(String ref) {
+     
+      try
+      {
+          String sql = "select * from produit where reference = '"+ref+"' ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          if(s.next()){
+              return false;
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return true;
+    }
+
+    @Override
+    public List<Produit> ListeProduits_Promotion(float prom_min) {
+         List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where promotion >="+ prom_min+" ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE;
+    }
+
+    @Override
+    public List<Produit> ListProduits_Date(Date date_min) {
+         List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where date_mise >='"+ date_min+ "';";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE;
+    }
+
+   
+
+    @Override
+    public List<Produit> ListProduits_DateMax(Date date_max) {
+        List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where date_mise <= '"+ date_max+ "' ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE;
+    }
+
+    @Override
+    public List<Produit> ListProduits_Prix(float prix_min) {
+         List<Produit>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from produit where prix_vente >="+ prix_min+"  ;";
+          Statement stm = db.getConnexion().createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          
+          while(s.next())
+          {
+              Produit p=new Produit();
+              p.setId_produit(s.getInt(1));
+              p.setReference(s.getString(2));
+              p.setNom(s.getString(3));
+              p.setPrix_vente(s.getFloat(4));
+              p.setUrl_image(s.getString(5));
+              p.setDescription(s.getString(6));
+              p.setType(s.getString(7));
+              p.setDate_mise(s.getDate(8));
+              p.setPromotion(s.getFloat(9));
+              p.setId_user(s.getString(10));
+              p.setQuantite(s.getInt(11));
+              p.setSignaler(s.getInt(12));
+              tabE.add(p);
+          }
+          System.out.println("hhhhhhhhhhhhhhhh  "+tabE.size());
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      return tabE;
+    }
+
     
     
     

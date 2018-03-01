@@ -10,6 +10,7 @@ import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.healthadvisor.service.impl.GestionUtilisateur;
+import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
@@ -99,7 +100,7 @@ public class ModifierRdvFXMLController implements Initializable {
             FontAwesomeIconView X=new FontAwesomeIconView();
             X.setGlyphName("TIMES");
             X.setGlyphSize(25);
-            Button annule=new Button();
+            JFXButton annule=new JFXButton();
             annule.setGraphic(X);
             annule.setUserData(rdv);
             annule.setOnMouseClicked((event) -> {
@@ -110,7 +111,7 @@ public class ModifierRdvFXMLController implements Initializable {
                     if(r.getStatut_rendezvous().equals("VALIDE") && DifférenceDates(r.getDate_validation())>24){
                         System.out.println("RDV VALIDE");
                         AlertMessage am=new AlertMessage();
-                        am.showPopup("", "Le rendez vous est Valider par votre medecin il y plus que 24 Heures", 0,alertPane);
+                        am.showPopup("Erruer!!!", "Le rendez vous est Valider par votre medecin il y plus que 24 Heures", 0,alertPane);
                         /*Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
                         impo.show();*/
                     }
@@ -134,7 +135,7 @@ public class ModifierRdvFXMLController implements Initializable {
             FontAwesomeIconView E=new FontAwesomeIconView();
             E.setGlyphName("PENCIL");
             E.setGlyphSize(25);
-            Button modif=new Button();
+            JFXButton modif=new JFXButton();
             modif.setGraphic(E);
             modif.setOnMouseClicked((event) -> {
                 Alert a =new Alert(Alert.AlertType.NONE,"Vous voulez modifier votre rendez vous\n NB : si le rendez vous a été valider par le Medecin vous ne pouvez pas depasser les 24 heures pour Modifier",ButtonType.YES,ButtonType.NO);
@@ -142,9 +143,11 @@ public class ModifierRdvFXMLController implements Initializable {
                 if (result.get()==ButtonType.YES){
                     Rendez_Vous r=(Rendez_Vous)annule.getUserData();
                     if(r.getStatut_rendezvous().equals("VALIDE")&& DifférenceDates(r.getDate_validation())>24){
-                        System.out.println("RDV VALIDE"); 
-                        Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
-                        impo.show();
+                        System.out.println("RDV VALIDE");
+                        AlertMessage am=new AlertMessage();
+                        am.showPopup("Erruer!!!", "Le rendez vous est Valider par votre medecin il y plus que 24 Heures", 0,alertPane);
+                        /*Alert impo=new Alert(Alert.AlertType.ERROR,"Le rendez vous est Valider par votre medecin il y plus que 24 Heures");
+                        impo.show();*/
                     }
                     else{
                         try {

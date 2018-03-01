@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Sondage;
 import static com.healthadvisor.javafx.sondage.SondageController.sondage;
 import com.healthadvisor.service.impl.GestionSondage;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,11 +25,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -48,6 +51,8 @@ public class SondageAdminController implements Initializable {
     private Button ajouterBtn;
     @FXML
     private TextField searchBarID;
+    @FXML
+    private Button btnSupprimer;
 
     /**
      * Initializes the controller class.
@@ -91,10 +96,10 @@ public class SondageAdminController implements Initializable {
     @FXML
     private void statBtnAction(ActionEvent event) throws IOException {
         SondageController.sondage=tableID.getSelectionModel().getSelectedItem();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("Stat.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("Stat.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
     }
 
     @FXML
@@ -104,10 +109,22 @@ public class SondageAdminController implements Initializable {
 
     @FXML
     private void AjouterBtnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ajouterSondage.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("ajouterSondage.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
+    }
+
+    @FXML
+    private void btnSupprimerAction(ActionEvent event) throws IOException {
+        GestionSondage gs = new GestionSondage();
+        gs.supprimerSondage(tableID.getSelectionModel().getSelectedItem());
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("SondageAdmin.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
     
 }

@@ -80,14 +80,16 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         if(FXMLRechercheMedecinInterfaceController.spec!=null)
-        try {
+        try {        mapView.setOpacity(0.0);
+
             initializePage(FXMLRechercheMedecinInterfaceController.spec);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
         }
         else {
         if(FXMLRechercheMedecinInterfaceController.nom!=null)
-        {   try {
+        {   try {        mapView.setOpacity(0.0);
+
             initializePageNOM(FXMLRechercheMedecinInterfaceController.nom);
             } catch (IOException ex) {
                 Logger.getLogger(FXMLAfficherMedecinController.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,17 +99,19 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     }    
     
     public void initializePage(String specialite) throws IOException{
+       
         mapView.setPrefWidth(348);
         mapView.setPrefHeight(397);
         mapView.setLayoutX(633);
         mapView.setLayoutY(66);
+        mapView.setOpacity(0.0);mapView.setStyle("-fx-background-color: #BBDEFB;");
         AnchorPane anchor = new AnchorPane();
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
     ScrollPane p=new ScrollPane();
     p.setPrefSize(620, 600);
+      p.setStyle("-fx-border-color: transparent;");
 if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
     }
@@ -134,9 +138,11 @@ else{
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
+
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
+          p.setStyle("-fx-border-color: transparent;");
+
 if(FXMLRechercheMedecinInterfaceController.nom==null)
     p.setContent(createPage());
 else
@@ -228,11 +234,20 @@ else
   public VBox createPageSpécialite(String spec) throws FileNotFoundException, IOException {
            FXMLRechercheMedecinInterfaceController.nom=null;
 
-      VBox box = new VBox();
-        GestionMedecin gm=new GestionMedecin();
+        VBox box = new VBox();
+  box.setStyle("-fx-background-color:rgba(255, 255, 255, 0.45);");
+  GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSpecialite(spec)){
        
         VBox element = new VBox();
+        element.setStyle("-fx-padding: 10;" + 
+                      "-fx-border-style: solid inside;" + 
+                      "-fx-border-width: 2;" +
+                      "-fx-border-insets: 5;" + 
+                      "-fx-border-radius: 5;" + 
+                      "-fx-border-color: #BBDEFB;"+
+                      "-fx-background-color:rgba(255, 255, 255, 0.45);");
+
         element.setPadding(new Insets(10, 50, 50, 50));
         element.setSpacing(10);
         element.setFillWidth(true);
@@ -265,6 +280,7 @@ else
         AfficherPosition(position, m);
         Rating r=new Rating();
         r.setPartialRating(true);
+        r.setId("rating");
         r.setRating(3);
         Pane p=new Pane();
         p.setPrefWidth(547);
@@ -352,17 +368,22 @@ else
     
     //fonction prendre rdv
     public void AfficherPosition(JFXButton btn,Medecin m){
-          System.out.println("Afficher Position ... "+m);
+                   mapView.setOpacity(1);
+
+        System.out.println("Afficher Position ... "+m);
           btn.setOnAction((event) -> {
           System.out.println("Recuperation Position ..."); 
           medecin=m;
           mapInitialized();
+
       });
     }
     
       
   public VBox createPageNom(String nomprenom) throws FileNotFoundException, IOException {    
         VBox box = new VBox();
+          box.setStyle("-fx-background-color:rgba(255, 255, 255, 0.45);");
+
         GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSnomprenom(nomprenom)){
        
@@ -370,6 +391,13 @@ else
         element.setPadding(new Insets(10, 50, 50, 50));
         element.setSpacing(10);
         element.setFillWidth(true);
+        element.setStyle("-fx-padding: 10;" + 
+                      "-fx-border-style: solid inside;" + 
+                      "-fx-border-width: 2;" +
+                      "-fx-border-insets: 5;" + 
+                      "-fx-border-radius: 5;" + 
+                      "-fx-border-color: #BBDEFB;"+
+                      "-fx-background-color:rgba(255, 255, 255, 0.45);");
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
