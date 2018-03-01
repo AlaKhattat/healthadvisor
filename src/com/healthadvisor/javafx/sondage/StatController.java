@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.sondage;
 import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionStatistiques;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
 
@@ -43,6 +46,7 @@ public class StatController implements Initializable {
     private AnchorPane paneID;
     @FXML
     private Button retourBtn;
+    private VBox vbox;
 
     /**
      * Initializes the controller class.
@@ -59,6 +63,8 @@ public class StatController implements Initializable {
         /*stage.setTitle("Résultat sondage");
         stage.setWidth(500);
         stage.setHeight(500);*/
+        
+        
         
         GestionStatistiques gs = new GestionStatistiques();
         int nbrTotalReponses = gs.countReponsesSondage(SondageController.sondage.getId());
@@ -95,8 +101,8 @@ public class StatController implements Initializable {
             new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
                 
-                caption.setTranslateX(e.getSceneX());
-                caption.setTranslateY(e.getSceneY());
+                caption.setTranslateX(e.getSceneX()-240);
+                caption.setTranslateY(e.getSceneY()-110);
                 caption.setText(String.format("%.1f",(data.getPieValue())/nbrTotalReponses*100) + "%");
              }
         });
@@ -115,6 +121,7 @@ public class StatController implements Initializable {
         paneID.getChildren().add(chart);
         paneID.getChildren().add(caption);
         
+        
         //scene.getRoot().getChildren().add(chart);
         /*stage.setScene(scene);
         stage.show();*/
@@ -122,10 +129,11 @@ public class StatController implements Initializable {
 
     @FXML
     private void RetourBtnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageAdmin.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("SondageAdmin.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+                        
+       
     }
 }
         

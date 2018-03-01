@@ -5,13 +5,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.SondageController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" stylesheets="@FlatBee.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.sondage.SondageController">
    <children>
-      <TableView fx:id="tableID" onMouseClicked="#tableViewEvent" prefHeight="333.0" prefWidth="600.0">
+      <TableView fx:id="tableID" onMouseClicked="#tableViewEvent" prefHeight="528.0" prefWidth="1000.0">
         <columns>
-          <TableColumn fx:id="columnID" prefWidth="599.0" text="Sondages" />
+          <TableColumn fx:id="columnID" prefWidth="999.0000114440918" text="Sondages" />
         </columns>
       </TableView>
-      <Button fx:id="repondreBtnID" layoutX="234.0" layoutY="352.0" mnemonicParsing="false" onAction="#repondreBtnAction" text="Répondre au sondage" />
+      <Button fx:id="repondreBtnID" layoutX="424.0" layoutY="538.0" mnemonicParsing="false" onAction="#repondreBtnAction" text="Répondre au sondage" />
    </children>
 </AnchorPane>
