@@ -54,7 +54,7 @@ public class ModifierRdvFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         GestionRendezVous grdv =new GestionRendezVous();
-        for(Rendez_Vous rdv :grdv.ListRendez_Vous()){
+        for(Rendez_Vous rdv :grdv.ListRendez_Vous("firas")){
             if(rdv.getStatut_rendezvous().equals("ANNULE")){
                 System.out.println("annule");
             }
