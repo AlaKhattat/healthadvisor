@@ -362,55 +362,13 @@
                                  <content>
                                     <AnchorPane prefHeight="413.0" prefWidth="1102.0" styleClass="card-unpadded">
                                        <children>
-                                          <VBox layoutX="10.0" layoutY="28.0" prefHeight="30.0" prefWidth="1092.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="1092.0">
-                                                   <VBox.margin>
-                                                      <Insets bottom="20.0" />
-                                                   </VBox.margin>
-                                                </HBox>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME DISSOCIE" />
-                                             </children>
-                                          </VBox>
-                                          <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
-                                             <children>
-                                                <VBox prefHeight="80.0" prefWidth="526.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="574.0">
-                                                         <VBox.margin>
-                                                            <Insets right="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0" />
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets right="2.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <JFXSpinner prefHeight="28.0" prefWidth="36.0">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </JFXSpinner>
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="474.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="100.0" />
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0">
-                                                         <VBox.margin>
-                                                            <Insets left="10.0" />
-                                                         </VBox.margin>
-                                                      </JFXProgressBar>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <VBox layoutX="60.0" layoutY="102.0" prefHeight="266.0" prefWidth="439.0" spacing="10.0">
+                                          <VBox layoutX="60.0" layoutY="71.0" prefHeight="297.0" prefWidth="439.0" spacing="10.0">
                                              <padding>
                                                 <Insets top="10.0" />
                                              </padding>
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="437.0" text="Programme du jour" />
-                                                <JFXListView fx:id="regimeDujour" />
+                                                <JFXListView fx:id="regimeDiss" />
                                              </children>
                                           </VBox>
                                           <VBox layoutX="605.0" layoutY="91.0" prefHeight="302.0" prefWidth="431.0" spacing="15.0">
@@ -418,11 +376,12 @@
                                                 <Insets top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXComboBox fx:id="sportUserDissocie" onAction="#chargerVideoDissocie" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="paneDissocie" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
-                                          <JFXButton layoutX="60.0" layoutY="413.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
+                                          <JFXButton layoutX="60.0" layoutY="381.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME DISSOCIE" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -438,7 +397,7 @@
                                                       <Insets bottom="20.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME JEUN" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME MICRONUTRITION" />
                                              </children>
                                           </VBox>
                                           <HBox layoutX="7.0" layoutY="45.0" prefHeight="36.0" prefWidth="1092.0">
@@ -488,8 +447,8 @@
                                                 <Insets top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane11" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXComboBox fx:id="sportUserMicronutrition" onAction="#chargerVideoMicro" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="paneMicronutrition" prefHeight="223.0" prefWidth="436.0" />
                                                 <JFXButton onMouseClicked="#nePlusSuivreRegime" prefHeight="37.0" prefWidth="219.0" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
                                              </children>
                                           </VBox>
@@ -503,46 +462,9 @@
                                        <children>
                                           <VBox layoutX="10.0" layoutY="28.0" prefHeight="30.0" prefWidth="1092.0">
                                              <children>
-                                                <HBox prefHeight="40.0" prefWidth="1092.0">
-                                                   <VBox.margin>
-                                                      <Insets bottom="20.0" />
-                                                   </VBox.margin>
-                                                </HBox>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME JEUN" />
                                              </children>
                                           </VBox>
-                                          <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
-                                             <children>
-                                                <VBox prefHeight="80.0" prefWidth="526.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="574.0">
-                                                         <VBox.margin>
-                                                            <Insets right="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0" />
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets right="2.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <JFXSpinner prefHeight="28.0" prefWidth="36.0">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </JFXSpinner>
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="474.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="100.0" />
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0">
-                                                         <VBox.margin>
-                                                            <Insets left="10.0" />
-                                                         </VBox.margin>
-                                                      </JFXProgressBar>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
                                           <VBox layoutX="60.0" layoutY="102.0" prefHeight="266.0" prefWidth="439.0" spacing="10.0">
                                              <padding>
                                                 <Insets top="10.0" />
@@ -576,8 +498,8 @@
                                                 <Insets top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane1" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXComboBox fx:id="sportUserJeune" onAction="#chargerVideoJeune" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="paneJeune" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
                                           <JFXButton layoutX="832.0" layoutY="375.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
@@ -596,41 +518,9 @@
                                                       <Insets bottom="20.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME HYPER PROTEINE" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME HYPER CALORIQUE" />
                                              </children>
                                           </VBox>
-                                          <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
-                                             <children>
-                                                <VBox prefHeight="80.0" prefWidth="526.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="574.0">
-                                                         <VBox.margin>
-                                                            <Insets right="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0" />
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets right="2.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <JFXSpinner prefHeight="28.0" prefWidth="36.0">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </JFXSpinner>
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="474.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="100.0" />
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0">
-                                                         <VBox.margin>
-                                                            <Insets left="10.0" />
-                                                         </VBox.margin>
-                                                      </JFXProgressBar>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
                                           <VBox layoutX="60.0" layoutY="102.0" prefHeight="266.0" prefWidth="439.0" spacing="10.0">
                                              <padding>
                                                 <Insets top="10.0" />
@@ -645,8 +535,8 @@
                                                 <Insets top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXComboBox fx:id="sportUserCalorique" onAction="#chargerVideoCalorique" prefHeight="30.0" prefWidth="431.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="paneCalorique" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
                                           <JFXButton layoutX="737.0" layoutY="382.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />
@@ -665,41 +555,9 @@
                                                       <Insets bottom="20.0" />
                                                    </VBox.margin>
                                                 </HBox>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME HYPER PROTEINE" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="1105.0" text="REGIME HYPO GLUCIDIQUE" />
                                              </children>
                                           </VBox>
-                                          <HBox layoutX="7.0" layoutY="45.0" prefHeight="80.0" prefWidth="1092.0">
-                                             <children>
-                                                <VBox prefHeight="80.0" prefWidth="526.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="574.0">
-                                                         <VBox.margin>
-                                                            <Insets right="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0" />
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets right="2.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <JFXSpinner prefHeight="28.0" prefWidth="36.0">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </JFXSpinner>
-                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="80.0" prefWidth="474.0">
-                                                   <children>
-                                                      <HBox prefHeight="41.0" prefWidth="100.0" />
-                                                      <JFXProgressBar prefHeight="7.0" prefWidth="490.0">
-                                                         <VBox.margin>
-                                                            <Insets left="10.0" />
-                                                         </VBox.margin>
-                                                      </JFXProgressBar>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
                                           <VBox layoutX="60.0" layoutY="102.0" prefHeight="340.0" prefWidth="439.0" spacing="10.0">
                                              <padding>
                                                 <Insets top="10.0" />
@@ -714,8 +572,8 @@
                                                 <Insets top="20.0" />
                                              </padding>
                                              <children>
-                                                <JFXComboBox fx:id="sportUser1" onAction="#chargerVideo" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
-                                                <StackPane fx:id="pane" prefHeight="223.0" prefWidth="436.0" />
+                                                <JFXComboBox fx:id="sportUserGlucidique" onAction="#chargerVideoGlucidique" prefHeight="25.0" prefWidth="411.0" promptText="quel sport voudrai vous faire aujourdhui?" />
+                                                <StackPane fx:id="paneGlucidique" prefHeight="223.0" prefWidth="436.0" />
                                              </children>
                                           </VBox>
                                           <JFXButton layoutX="619.0" layoutY="397.0" onMouseClicked="#nePlusSuivreRegime" style="-fx-background-color: red;" styleClass="blue-btn" text="ne plus suivre ce regime" />

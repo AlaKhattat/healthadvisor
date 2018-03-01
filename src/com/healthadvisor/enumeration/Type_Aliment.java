@@ -19,7 +19,7 @@ public enum Type_Aliment
     volailles,
     poissons,
     haricot_sec,
-    oeufs,
+    ouefs,
     noix,
     pains,
     cacao,
@@ -29,6 +29,5 @@ public enum Type_Aliment
     thes,
     jus,
     fruitsMer
-    
     
 }
