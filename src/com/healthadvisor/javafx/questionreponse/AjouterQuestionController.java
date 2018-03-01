@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Question;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionQuestion;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -26,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
@@ -155,20 +157,16 @@ public class AjouterQuestionController implements Initializable {
         alerte.setHeaderText("Succès !");
         alerte.setContentText("Votre question à été partagée avec succès...");
         alerte.show();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("QuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        ScrollPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
     }}
 
     @FXML
     private void btnRetour(ActionEvent event) throws IOException {
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("QuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        ScrollPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
     
 }

@@ -16,6 +16,8 @@ import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
 import com.healthadvisor.service.impl.GestionStatistiques;
 import com.healthadvisor.service.impl.GestionUserReponse;
+import com.jfoenix.controls.JFXRadioButton;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -36,6 +38,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -81,7 +84,7 @@ public class ConsulterSondageController implements Initializable {
         
         for(int i=0;i< grp.ListReponsesPossibles(SondageUserController.sondageStatic.getId()).size();i++){
             
-            RadioButton r = new RadioButton();
+            JFXRadioButton r = new JFXRadioButton();
             r.setText(grp.ListReponsesPossibles(SondageUserController.sondageStatic.getId()).get(i).getReponse());
             r.setToggleGroup(g);
             r.setSelected(false);
@@ -113,11 +116,9 @@ public class ConsulterSondageController implements Initializable {
     @FXML
     private void RetourBtnAction(ActionEvent event) throws IOException {
         
-        SondageMain sm = new SondageMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageUser.fxml"));
-        Parent root=loader.load();
-        Scene s = AnchorID.getScene();
-        s.setRoot(root);
+        ScrollPane a = FXMLLoader.load(getClass().getResource("SondageUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
     }
 
     @FXML

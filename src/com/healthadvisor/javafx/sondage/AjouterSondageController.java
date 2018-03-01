@@ -9,6 +9,7 @@ import com.healthadvisor.entities.ReponsesPossibles;
 import com.healthadvisor.entities.Sondage;
 import com.healthadvisor.service.impl.GestionReponsesPossibles;
 import com.healthadvisor.service.impl.GestionSondage;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
@@ -39,6 +41,8 @@ public class AjouterSondageController implements Initializable {
     private TextArea textAreaID;
     @FXML
     private Button btnPublier;
+    @FXML
+    private Button btnRetour;
     /**
      * Initializes the controller class.
      */
@@ -77,12 +81,18 @@ public class AjouterSondageController implements Initializable {
             grp.ajouterReponsesPossibles(0,"4", x);
             grp.ajouterReponsesPossibles(0,"5", x);
 
-
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("SondageAdmin.fxml"));
-            Parent root=loader.load();
-            Scene sc = paneID.getScene();
-            sc.setRoot(root);
+            
+            AnchorPane a = FXMLLoader.load(getClass().getResource("SondageAdmin.fxml"));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+            
+            
         }
+    }
+
+    @FXML
+    private void btnRetourAction(ActionEvent event) throws IOException {
+            AnchorPane a = FXMLLoader.load(getClass().getResource("SondageAdmin.fxml"));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
 
     
