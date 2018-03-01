@@ -11,6 +11,7 @@ import com.healthadvisor.entities.Question;
 import static com.healthadvisor.javafx.questionreponse.QuestionController.question;
 import com.healthadvisor.service.impl.GestionQuestion;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -80,10 +82,11 @@ public class QuestionUserController implements Initializable {
             question.setOnAction((event) -> {
                     try {
                         questionStatic=(Question)question.getUserData();
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
-                        Parent root=loader.load();
-                        Scene s = paneID.getScene();
-                        s.setRoot(root);
+                        
+                        ScrollPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestionUser.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+                        
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(QuestionUserController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -121,11 +124,10 @@ public class QuestionUserController implements Initializable {
     @FXML
     private void btnPlusAction(ActionEvent event) throws IOException {
         
-        //questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("AjouterQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("AjouterQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
     }
 }
     

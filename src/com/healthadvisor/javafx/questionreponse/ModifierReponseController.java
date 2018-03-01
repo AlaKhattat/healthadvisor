@@ -6,6 +6,7 @@
 package com.healthadvisor.javafx.questionreponse;
 
 import com.healthadvisor.service.impl.GestionReponse;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
@@ -59,25 +61,26 @@ public class ModifierReponseController implements Initializable {
         Optional<ButtonType> result = alerte.showAndWait();
         if (result.get() == ButtonType.OK)
         {
+            
+           
+            
             GestionReponse gr = new GestionReponse();
             gr.updateReponse(ConsulterQuestionUserController.reponseStatic.getId(), reponseText.getText());
         }else{
             
         }
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = AnchorID.getScene();
-        s.setRoot(root);
+        ScrollPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
 
     @FXML
     private void btnRetour(ActionEvent event) throws IOException {
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = AnchorID.getScene();
-        s.setRoot(root);
+        
+        ScrollPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
     
 }
