@@ -58,6 +58,22 @@ public class GestionUserRegime implements IGestionUserRegime
         } 
         return prog;
     }
+    public void supprimerProgrammeRegime(Patient p,ProgrammeRegime programme)
+    {
+        ProgrammeRegime prog = new ProgrammeRegime();
+        try
+        { 
+          String query="delete from  regime_user  where ID_USER=? and ID_REGIME=? "; 
+          PreparedStatement statement = database.getConnexion().prepareStatement(query);//adding diet in diet table
+          statement.setString(1, p.getLogin());
+          statement.setString(2,programme.getNomRegime());
+          statement.executeUpdate();
+        }
+        catch(SQLException exception)
+        {
+            System.out.println("Echec de suppression erreur: state:"+exception.getSQLState()+" message:"+exception.getMessage());
+        }    
+    }
 
     @Override
     public void ajouterProgrammeRegime(Patient p,ProgrammeRegime programme)
