@@ -11,6 +11,7 @@ import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.ServiceCommande;
 import com.healthadvisor.service.impl.ServiceLigne_Commande;
 import com.healthadvisor.service.impl.ServiceProduit;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -167,12 +168,12 @@ public class FXMLAfficherPanierController implements Initializable {
           Label esp3=new Label();
           esp3.setText("");
           
-          Button Diminuer_NBprod=new Button();
+          JFXButton Diminuer_NBprod=new JFXButton();
           Diminuer_NBprod.setText("Diminuer Nbre");
           DisableButton_Diminuer(Diminuer_NBprod,indice_prod_panier);
           DiminuerNB_Produits(Diminuer_NBprod,indice_prod_panier,nb_produits,prix_total,p,Diminuer_NBprod);
           
-          Button Supp_Panier=new Button();
+          JFXButton Supp_Panier=new JFXButton();
           Supp_Panier.setText("Retirer du Panier");
           SupprimerProduit_Panier(Supp_Panier, indice_prod_panier,p);
           
@@ -208,7 +209,7 @@ public class FXMLAfficherPanierController implements Initializable {
            scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
     
-    public void DiminuerNB_Produits(Button btn,int indice_produit,Label lbl_NBproduits,Label lblPrix,Produit p,Button btn_dimin){
+    public void DiminuerNB_Produits(JFXButton btn,int indice_produit,Label lbl_NBproduits,Label lblPrix,Produit p,JFXButton btn_dimin){
         
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -245,7 +246,7 @@ public class FXMLAfficherPanierController implements Initializable {
     }
     
     //Supprimer un produit du panier
-    public void SupprimerProduit_Panier(Button btn,int indice_produit,Produit p){
+    public void SupprimerProduit_Panier(JFXButton btn,int indice_produit,Produit p){
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -423,7 +424,7 @@ public class FXMLAfficherPanierController implements Initializable {
     }
     
     //griser button diminuer si qte=1
-    public void DisableButton_Diminuer(Button btn,int indice_produit){
+    public void DisableButton_Diminuer(JFXButton btn,int indice_produit){
         if(Integer.parseInt(panier.get(indice_produit).get(1).toString())==1){
             btn.setDisable(true);
         }

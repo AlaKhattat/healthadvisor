@@ -149,7 +149,7 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
                       }
                   });
               }
-          }, 1000); 
+          }, 3000); 
      
         
         

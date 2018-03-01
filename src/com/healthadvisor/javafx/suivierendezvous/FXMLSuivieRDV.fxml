@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXProgressBar?>
-<?import java.net.URL?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -15,10 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.suivierendezvous.FXMLSuivieRDVController">
-    <stylesheets>
-        <URL value="@fxmlsuivierdv.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="550.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@fxmlsuivierdv.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.suivierendezvous.FXMLSuivieRDVController">
    <children>
       <AnchorPane prefHeight="156.0" prefWidth="800.0">
          <children>

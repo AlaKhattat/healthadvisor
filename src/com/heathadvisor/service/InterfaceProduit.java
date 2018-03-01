@@ -26,5 +26,10 @@ public interface InterfaceProduit {
     public List<Produit> ListProduits_User(String id_user);
     public List<Produit> ListProduits_Signaler(int signaler);
     public Produit ConsulterProduit_Reference(String ref);
+    public boolean VerifierExistance_Produit(String ref);
+    public List<Produit> ListeProduits_Promotion(float prom_min);
+    public List<Produit> ListProduits_Date(Date date_min);
+    public List<Produit> ListProduits_Prix(float prix_min);
+    public List<Produit> ListProduits_DateMax(Date date_max);
     
 }
