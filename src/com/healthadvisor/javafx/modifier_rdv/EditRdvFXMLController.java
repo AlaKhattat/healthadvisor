@@ -50,6 +50,7 @@ public class EditRdvFXMLController implements Initializable {
     private ComboBox<String> hourMinCombobox;
     @FXML
     private Button btnValiderRdv;
+    public static boolean editDone=false;
 
     /**
      * Initializes the controller class.
@@ -123,9 +124,10 @@ hourMinCombobox.getSelectionModel().select(stringheure);
         
         Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
         stage.close();
-        email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
-        Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
-        a.show();
+        editDone=true;
+        //email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
+        /*Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
+        a.show();*/
     }
 
   
