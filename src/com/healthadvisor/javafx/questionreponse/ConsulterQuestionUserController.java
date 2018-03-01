@@ -17,8 +17,13 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -41,6 +46,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -68,9 +74,29 @@ public class ConsulterQuestionUserController implements Initializable {
     private Button btnSupprimer;
     @FXML
     private Button shareID;
+    @FXML
+    private Label errModif;
     /**
      * Initializes the controller class.
      */
+    
+    
+    public static long DifférenceDates(Date date_mise){
+        long diff=0;
+        try {
+            DateFormat date_format = new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss");
+            Date date = new Date();
+            Date date_sys= date_format.parse(date_format.format(date));
+             diff = date_sys.getTime() - date_mise.getTime();
+            System.out.println ("Seconds: " + TimeUnit.SECONDS.convert(diff, TimeUnit.MILLISECONDS));
+             } catch (ParseException ex) {
+            Logger.getLogger(ConsulterQuestionUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return TimeUnit.SECONDS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -80,6 +106,16 @@ public class ConsulterQuestionUserController implements Initializable {
         shareID.setUserData(QuestionUserController.questionStatic);
         btnModifier.setUserData(0);
         questionLabel.setText(QuestionUserController.questionStatic.getQuestion());
+        
+        //tester temps
+        Date d = new Date (QuestionUserController.questionStatic.getDate_publication().getTime());
+        if (DifférenceDates(d)>10){
+            btnModifier.setOpacity(0);
+            errModif.setText("Vous ne pouvez plus modifier cette question car vous avez depassez 10 secondes.");
+            errModif.setStyle("-fx-text-fill: #D92A27");
+            
+        }
+        
         
         if(!QuestionUserController.m.getSpecialite().equals(QuestionUserController.questionStatic.getSpecialite())){
             shareID.setOpacity(0);
