@@ -105,9 +105,11 @@ public class FXMLAfficherMedecinController implements  Initializable, MapCompone
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
     ScrollPane p=new ScrollPane();
     p.setPrefSize(620, 600);
+      p.setStyle("-fx-background-color: derive(#0f95d8, 60%);" +
+"    -fx-border-color: transparent;" +
+"    -fx-background-radius: 5em;");
 if(FXMLRechercheMedecinInterfaceController.spec==null){
     p.setContent(createPage());
     }
@@ -134,9 +136,13 @@ else{
     anchor.setPrefWidth(1000);
     anchor.setPrefHeight(600);
     anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
+    anchor.setStyle("-fx-background-color: #AED6F1;");
+
     ScrollPane p=new ScrollPane();
     p.setPrefSize(700, 600);
+    p.setStyle("-fx-background-color: derive(#0f95d8, 60%);" +
+"    -fx-border-color: transparent;" +
+"    -fx-background-radius: 5em;");
 if(FXMLRechercheMedecinInterfaceController.nom==null)
     p.setContent(createPage());
 else
@@ -228,11 +234,21 @@ else
   public VBox createPageSpécialite(String spec) throws FileNotFoundException, IOException {
            FXMLRechercheMedecinInterfaceController.nom=null;
 
-      VBox box = new VBox();
-        GestionMedecin gm=new GestionMedecin();
+        VBox box = new VBox();
+  box.setStyle("-fx-padding: 10;" + 
+                      "-fx-background-color:rgba(63, 127, 191, 0.45);");
+  GestionMedecin gm=new GestionMedecin();
         for(Medecin m:gm.AfficherMedecinSpecialite(spec)){
        
         VBox element = new VBox();
+        element.setStyle("-fx-padding: 10;" + 
+                      "-fx-border-style: solid inside;" + 
+                      "-fx-border-width: 2;" +
+                      "-fx-border-insets: 5;" + 
+                      "-fx-border-radius: 5;" + 
+                      "-fx-border-color: #fff;"+
+                      "-fx-background-color:rgba(63, 127, 191, 0.19);");
+
         element.setPadding(new Insets(10, 50, 50, 50));
         element.setSpacing(10);
         element.setFillWidth(true);
