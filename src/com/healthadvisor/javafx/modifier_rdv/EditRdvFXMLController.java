@@ -17,6 +17,7 @@ import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSpinner;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,6 +27,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +59,8 @@ public class EditRdvFXMLController implements Initializable {
     private JFXComboBox<String> hourMinCombobox;
     @FXML
     private JFXButton btnValiderRdv;
+    @FXML
+    private JFXSpinner spinner;
     public static boolean editDone=false;
 
     /**
@@ -108,27 +116,43 @@ hourMinCombobox.getSelectionModel().select(stringheure);
 
     @FXML
     private void btnValiderAction(ActionEvent event) throws ParseException {
-        //Preparation Objet RDV
-        Rendez_Vous r=ModifierRdvFXMLController.RDV;
-        //Manipulation de date et maj rdv
-            String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
-            Date dateRDV = formatter.parse(prepDate);
-            r.setDate_heure(dateRDV);
-            System.out.println(dateRDV);
-        //MAJ BDD
-        GestionRendezVous grdv=new GestionRendezVous();
-        grdv.ModifierRendezVousdate(r);
-        SendEmail email=new SendEmail();
-        GestionMedecin gm=new GestionMedecin();
-        GestionUtilisateur gu=new GestionUtilisateur();
-        Medecin m=gm.AfficherMedecinLogin(r.getMedecin_id());
-        Utilisateur u=gu.AfficherUtilisateurCin(m.getCin_user());
+        spinner.setOpacity(1);
+        btnValiderRdv.setOpacity(0);
+        Timer t=new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    try {
+                        //Preparation Objet RDV
+                        Rendez_Vous r=ModifierRdvFXMLController.RDV;
+                        //Manipulation de date et maj rdv
+                        String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();
+                        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
+                        Date dateRDV = formatter.parse(prepDate);
+                        r.setDate_heure(dateRDV);
+                        System.out.println(dateRDV);
+                        //MAJ BDD
+                        GestionRendezVous grdv=new GestionRendezVous();
+                        grdv.ModifierRendezVousdate(r);
+                        SendEmail email=new SendEmail();
+                        GestionMedecin gm=new GestionMedecin();
+                        GestionUtilisateur gu=new GestionUtilisateur();
+                        Medecin m=gm.AfficherMedecinLogin(r.getMedecin_id());
+                        Utilisateur u=gu.AfficherUtilisateurCin(m.getCin_user());
+                        email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
+                        Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
+                        editDone=true;
+                        spinner.setOpacity(0);
+                        btnValiderRdv.setOpacity(1);
+                        stage.close();
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+         });
+            }
+        },500);
         
-        Stage stage = (Stage) btnValiderRdv.getScene().getWindow();
-        stage.close();
-        editDone=true;
-        email.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Rendez vous modifié", "Le Patient "+r.getPatient_id()+" a modifié son rendez vous pour le "+prepDate);
         /*Alert a=new Alert(Alert.AlertType.NONE,"Votre RDV est à mis à jour",ButtonType.OK);
         a.show();*/
     }
