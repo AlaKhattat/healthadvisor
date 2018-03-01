@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.javafx.inscrimedecin;
 
+import com.healthadvisor.encodedmd5.MD5Password;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.enumeration.StatutMedecinEnum;
@@ -163,7 +164,7 @@ public static Double LONG_P;
                     .darkStyle();
         try {
         String login=this.login.getText();
-        String password =this.password.getText();
+        String password =MD5Password.getEncodedPassword(this.password.getText());
         String specialite=this.spécialite.getValue();
         String adresse=this.adresse.getText();
          GestionMedecin gm=new GestionMedecin();

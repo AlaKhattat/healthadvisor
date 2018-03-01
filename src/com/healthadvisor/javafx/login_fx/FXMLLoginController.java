@@ -5,11 +5,13 @@
  */
 package com.healthadvisor.javafx.login_fx;
 
+import com.healthadvisor.encodedmd5.MD5Password;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.enumeration.StatutMedecinEnum;
 import com.healthadvisor.javafx.routes.Routes;
+import com.healthadvisor.javafx.suivierendezvous.AlertMaker;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
@@ -17,11 +19,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Year;
@@ -30,8 +35,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -114,10 +124,19 @@ public class FXMLLoginController implements Initializable {
     public static boolean admin=false;
     public static Double LAT_P_Co;
     public static Double LONG_P_Co;
-
+    public boolean nomC=false;
+    public boolean prenomC=false;
+    public boolean emailC=false;
+    public boolean paysC=false;
+    public boolean villeC=false;
+    public boolean cinC=false;
+    public boolean num_telC=false;
+    
                 public static ArrayList<ArrayList> panier;
     @FXML
     private AnchorPane holderLogin;
+    @FXML
+    private JFXSpinner spinnerSignin;
            
 
     /**
@@ -126,6 +145,7 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        spinnerSignin.setOpacity(0);
                 final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
      public DateCell call(final DatePicker datePicker) {
          return new DateCell() {
@@ -158,9 +178,16 @@ public class FXMLLoginController implements Initializable {
     }
 
     @FXML
-    private void homeAction(MouseEvent event) throws IOException {
+    private void homeAction(MouseEvent event) throws IOException, NoSuchAlgorithmException {
         //Sign IN
-        if(username.getText().isEmpty()||passwordsiginin.getText().isEmpty()){
+         spinnerSignin.setOpacity(1);   
+          Timer tm=new Timer();
+          tm.schedule(new TimerTask() {
+              @Override
+              public void run() {
+                  Platform.runLater(()-> {
+
+                           if(username.getText().isEmpty()||passwordsiginin.getText().isEmpty()){
               Image img=new Image("/com/healthadvisor/ressources/cancel.png");
         Notifications notif=Notifications.create()
                .graphic(new ImageView(img))
@@ -171,31 +198,38 @@ public class FXMLLoginController implements Initializable {
                     .darkStyle();  
         notif.show();
             
-        }else {
+        }else 
             if(username.getText().equalsIgnoreCase("admin")&&(passwordsiginin.getText().equalsIgnoreCase("admin"))){
+                System.out.println("Recuperation Admin");
                 admin=true;
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
-            Parent root=loader.load();
-            Scene s = holderLogin.getScene(); 
-            s.setRoot(root);
+            Parent root;
+                               try {
+                                   root = loader.load();
+                                     Scene s = holderLogin.getScene(); 
+                                     s.setRoot(root);
+                               } catch (IOException ex) {
+                                   Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+          
             }else{
-        String usernamesigin=this.username.getText();
+        String usernamesigin=username.getText();
         pseudo=usernamesigin;
-        String password=this.passwordsiginin.getText();
-        Patient p= gp.AfficherPatientLogin(pseudo);
-       if(p!=null){
-
+        String password=passwordsiginin.getText();
+        
+        Patient p= gp.Verif_Connexion(pseudo,MD5Password.getEncodedPassword(password));
+        System.out.println("Recuperer Utilisateur "+p);
+           
+            if (p!=null) {
             Identifiant=p.getCin_user();
             patient=true;
-            if (p.getPassword().equalsIgnoreCase(password)) {
-           
             try{
             Medecin m=gm.AfficherMedecinLogin(p.getLogin());
             if(m.getLogin_med()!=null){
                 System.out.println("Medecin ...");
                 LAT_P_Co=m.getLat_p();
                 LONG_P_Co=m.getLong_p();
-                System.out.println("LAtitude"+LAT_P_Co+"Longitude"+LONG_P_Co);
+                System.out.println("LAtitude :"+LAT_P_Co+"Longitude :"+LONG_P_Co);
                 patient=false;
                 docteur=true;
                 
@@ -206,17 +240,43 @@ public class FXMLLoginController implements Initializable {
           
 
             FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
-            Parent root=loader.load();
-            Scene s = holderLogin.getScene(); 
-            s.setRoot(root);
+            Parent root;
+            try {
+                root = loader.load();
+                Scene s = holderLogin.getScene(); 
+                s.setRoot(root);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
             /*
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setScene(new Scene(root));
             stage.show();*/
-            }      
+            }  else{
+        System.out.println("Mot de Pass InCorrecte");
+        Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Pseudo Ou Mot de pass Invalide ")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle(); 
+        notif.show();
+            }    
+        
         }
-        }
-    }
+                      
+                      
+                      
+                      
+                      spinnerSignin.setOpacity(0);
+                  });
+              }
+          }, 3000); 
+   
+    
     }
 
     @FXML
@@ -229,8 +289,50 @@ public class FXMLLoginController implements Initializable {
                     .hideAfter(Duration.seconds(4))
                     .position(Pos.TOP_RIGHT)
                     .darkStyle();   
-         try{
+ 
+        if(!cinC){
+            cin.setUnFocusColor(Color.RED);      
+            System.out.println("cin vide");
+            notif.show();
 
+        }else
+            if(!nomC){
+                          nom.setUnFocusColor(Color.RED);
+          notif.show();
+
+            }else
+                if(!prenomC){
+                               prenom.setUnFocusColor(Color.RED);
+         notif.show();
+
+                }else 
+                    if(!paysC){
+                                pays.setUnFocusColor(Color.RED);
+        notif.show();
+
+                    }else
+                        if(!villeC){
+                                        ville.setUnFocusColor(Color.RED);
+        notif.show();
+
+                                }else
+                            if(!num_telC){
+                                           numtel.setUnFocusColor(Color.RED);
+         notif.show();
+
+                            }else
+                                if(!emailC){
+                                                email.setUnFocusColor(Color.RED);
+        notif.show();
+
+                                }else{
+                            
+                        
+                    
+                
+            
+            
+ try{
  String cin=this.cin.getText();
  Identifiant=cin;
  String nom=this.nom.getText();
@@ -258,7 +360,7 @@ public class FXMLLoginController implements Initializable {
         notif.show();
  
         }
-       
+ }     
   
 }
 
@@ -273,8 +375,12 @@ public class FXMLLoginController implements Initializable {
     private void nomControl(KeyEvent event) {
         if(nom.getText().isEmpty()){
             nom.setFocusColor(Color.RED);
+            nomC=false;
         }else {
             nom.setFocusColor(Color.BLUE);
+            nom.setUnFocusColor(Color.GRAY);
+                        nomC=true;
+
         }
     }
 
@@ -282,8 +388,14 @@ public class FXMLLoginController implements Initializable {
     private void prenomControl(KeyEvent event) {
           if(prenom.getText().isEmpty()){
             prenom.setFocusColor(Color.RED);
+                        prenomC=false;
+
         }else {
             prenom.setFocusColor(Color.BLUE);
+                        prenom.setUnFocusColor(Color.GRAY);
+           
+            prenomC=true;
+
         }
     }
 
@@ -296,7 +408,11 @@ public class FXMLLoginController implements Initializable {
         if (controler.matches()){
         //Ok : la saisie est bonne
         email.setFocusColor(Color.BLUE);
+        emailC=true;
+          email.setUnFocusColor(Color.GRAY);
+
         }else{email.setFocusColor(Color.RED);
+        emailC=false;
         //La c'est pas bon
         }
     }
@@ -304,8 +420,11 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private void paysControl(KeyEvent event) {
             if(pays.getText().isEmpty()){
+                paysC=false;
             pays.setFocusColor(Color.RED);
-        }else {
+        }else {            pays.setUnFocusColor(Color.GRAY);
+
+                paysC=true;
             pays.setFocusColor(Color.BLUE);
         }
     }
@@ -314,13 +433,18 @@ public class FXMLLoginController implements Initializable {
     private void cinControl(KeyEvent event) {
        String num=cin.getText();
        if(num.length()<8 || num.length() >8 ){
-       cin.setFocusColor(Color.RED);
+           cinC=false;
+           cin.setFocusColor(Color.RED);
        }else {
        try{
+                       cin.setUnFocusColor(Color.GRAY);
+
+          cinC=true; 
        cin.setFocusColor(Color.BLUE);
        int numcin=Integer.parseInt(num);
        }catch(NumberFormatException ex)  {
        cin.setFocusColor(Color.RED);
+       cinC=false;
        }
        }
     }
@@ -329,7 +453,10 @@ public class FXMLLoginController implements Initializable {
     private void villeControl(KeyEvent event) {
                 if(ville.getText().isEmpty()){
             ville.setFocusColor(Color.RED);
-        }else {
+            villeC=false;
+        }else {            ville.setUnFocusColor(Color.GRAY);
+
+                    villeC=true;
             ville.setFocusColor(Color.BLUE);
         }
     }
@@ -338,7 +465,9 @@ public class FXMLLoginController implements Initializable {
     private void sexeControl(InputMethodEvent event) {
                 if(sexe.getValue().isEmpty()){
             sexe.setFocusColor(Color.RED);
+            
         }else {
+
             sexe.setFocusColor(Color.BLUE);
         }
     }
@@ -348,19 +477,22 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private void telControl(KeyEvent event) {
        String num=numtel.getText();
-       try{
+       try{            numtel.setUnFocusColor(Color.GRAY);
+
+           num_telC=true;
        numtel.setFocusColor(Color.BLUE);
        int numtel=Integer.parseInt(num);
        }catch(NumberFormatException ex)  {
        numtel.setFocusColor(Color.RED);
+       num_telC=false;
 
        }}
 
     @FXML
     private void pseudoControl(KeyEvent event) {
-                if(username.getText().isEmpty()){
+            if(username.getText().isEmpty()){
             username.setFocusColor(Color.RED);
-        }else {
+        }else {            
             username.setFocusColor(Color.BLUE);
         }
     }
@@ -376,8 +508,8 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void dateControl(ActionEvent event) {
-   
- 
 }
-    
+  
+	
+
 }

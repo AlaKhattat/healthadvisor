@@ -167,5 +167,26 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
             Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listrdv;     }
-    
+
+    @Override
+    public int Rendez_Vous_Encours(String id_medecin) {
+  int totalEncours=0;
+        try {
+            System.out.println("Recupération...");
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT COUNT(rendez_vous.ID) AS encours from rendez_vous WHERE rendez_vous.STATUT='"+StatutRendezVousEnum.ENCOURS.name()+"'AND rendez_vous.MED_ID='"+id_medecin+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+              totalEncours =rs.getInt("encours");
+              return totalEncours;
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionRendezVous.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totalEncours;     
+    }
 }

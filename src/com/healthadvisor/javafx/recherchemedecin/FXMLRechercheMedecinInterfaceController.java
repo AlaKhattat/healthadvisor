@@ -10,15 +10,22 @@ import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import com.healthadvisor.javafx.inscrimedecin.ComboBoxAutoComplete;
 import com.healthadvisor.javafx.routes.Routes;
+import com.healthadvisor.javafx.suivierendezvous.AlertMaker;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXTextField;
 import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,10 +48,6 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
 
     @FXML
     private JFXComboBox<String> specialite;
-    @FXML
-    private JFXTextField adresse;
-    @FXML
-    private JFXTextField adresse2;
     
     public static String spec=null;
     public static String nom=null;
@@ -54,12 +57,15 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     GestionUtilisateur gu=new GestionUtilisateur();
     @FXML
     private JFXButton rdvNom;
+    @FXML
+    private JFXProgressBar progressRecherche;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        progressRecherche.setOpacity(0);
             String[] specialitelist={
 "Allergologie",
 "Andrologie",
@@ -126,9 +132,25 @@ public class FXMLRechercheMedecinInterfaceController implements Initializable {
     private void rdvSpecialite(MouseEvent event) throws IOException {
        nom=null;
         spec=this.specialite.getValue();
+ progressRecherche.setOpacity(1);   
+          Timer tm=new Timer();
+          tm.schedule(new TimerTask() {
+              @Override
+              public void run() {
+                  Platform.runLater(()-> {
+        AnchorPane affichermed;
+                      try {
+                          affichermed = FXMLLoader.load(getClass().getResource(Routes.AFFICHERMEDECIN));
+                          FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,affichermed);
+        progressRecherche.setOpacity(0);
 
-        AnchorPane affichermed = FXMLLoader.load(getClass().getResource(Routes.AFFICHERMEDECIN));
-        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,affichermed);
+                      } catch (IOException ex) {
+                          Logger.getLogger(FXMLRechercheMedecinInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+                  });
+              }
+          }, 1000); 
+     
         
         
         

@@ -5,6 +5,7 @@
  */
 package com.healthadvisor.javafx.inscripatient;
 
+import com.healthadvisor.encodedmd5.MD5Password;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javafx.routes.Routes;
@@ -94,7 +95,7 @@ public class FXMLInscriPatientController implements Initializable {
                     .darkStyle();
         try{
         String login=this.login.getText();
-        String password =this.password.getText();
+        String password =MD5Password.getEncodedPassword(this.password.getText());
         GestionPatient gp= new GestionPatient();
         Patient p=new Patient(login, password,FXMLLoginController.Identifiant,url_image);
         gp.AjouterPatient(p);
