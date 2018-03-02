@@ -16,10 +16,10 @@
    <children>
       <JFXTimePicker fx:id="timeF" defaultColor="#19416f" layoutX="67.0" layoutY="369.0" prefHeight="30.0" prefWidth="220.0" promptText="Heure" />
       <ImageView fx:id="imgView" fitHeight="200.0" fitWidth="200.0" layoutX="778.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXTextField fx:id="nomF" focusColor="#19416f" labelFloat="true" layoutX="67.0" layoutY="201.0" onKeyReleased="#nomController" prefHeight="30.0" prefWidth="220.0" promptText="Nom" />
-      <JFXTextField fx:id="endroitF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="206.0" onKeyReleased="#endroitController" prefHeight="30.0" prefWidth="220.0" promptText="Endroit" />
-      <JFXComboBox fx:id="typeCombo" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="285.0" prefHeight="30.0" prefWidth="220.0" promptText="Type" />
-      <JFXTextField fx:id="maxF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="374.0" onKeyReleased="#numController" prefHeight="30.0" prefWidth="220.0" promptText="Nombre de participants" />
+      <JFXTextField fx:id="nomF" focusColor="#19416f" labelFloat="true" layoutX="67.0" layoutY="201.0" onKeyReleased="#nomController" prefHeight="30.0" prefWidth="220.0" promptText="Nom" unFocusColor="#19416f" />
+      <JFXTextField fx:id="endroitF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="206.0" onKeyReleased="#endroitController" prefHeight="30.0" prefWidth="220.0" promptText="Endroit" unFocusColor="#19416f" />
+      <JFXComboBox fx:id="typeCombo" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="285.0" prefHeight="30.0" prefWidth="220.0" promptText="Type" unFocusColor="#19416f" />
+      <JFXTextField fx:id="maxF" focusColor="#19416f" labelFloat="true" layoutX="486.0" layoutY="374.0" onKeyReleased="#numController" prefHeight="30.0" prefWidth="220.0" promptText="Nombre de participants" unFocusColor="#19416f" />
       <JFXButton fx:id="modifBut" layoutX="850.0" layoutY="500.0" onAction="#modifFx" text="Valider" textAlignment="CENTER" textFill="#19416f" />
       <JFXButton fx:id="imgBut" layoutX="831.0" layoutY="375.0" onAction="#ParcourirImage" text="Insérer image" textFill="#19416f" />
       <Label fx:id="avertNom" layoutX="67.0" layoutY="238.0" textFill="#f21010" />

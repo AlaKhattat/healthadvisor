@@ -4,6 +4,7 @@ import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.service.impl.GestionEvenement;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer.Record;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -31,6 +32,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -51,19 +53,15 @@ public class ListeEvenementFXMLController implements Initializable {
     @FXML
     private TableColumn<Evenement, String> typeCol;
     @FXML
-    private TableColumn<Evenement, Integer> maxpCol;
-    @FXML
-    private TableColumn<Evenement, String> imgCol;
+    private TableColumn<Evenement, String> createurCol;
     @FXML
     private TableColumn<Evenement, String> validCol;
     @FXML
     private TableColumn supCol;
     @FXML
-    private TableColumn modifCol;
-    @FXML
     private TableColumn affichCol;
     @FXML
-    private Button back;
+    private FontAwesomeIconView back;
     @FXML
     private AnchorPane anchor;
 
@@ -72,6 +70,7 @@ public class ListeEvenementFXMLController implements Initializable {
     private ObservableList<Evenement> evtData = FXCollections.observableArrayList(listE);
     @FXML
     private JFXTextField rechL;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,10 +90,8 @@ public class ListeEvenementFXMLController implements Initializable {
                 new PropertyValueFactory<Evenement, String>("Endroit"));
         typeCol.setCellValueFactory(
                 new PropertyValueFactory<Evenement, String>("Type"));
-        imgCol.setCellValueFactory(
-                new PropertyValueFactory<Evenement, String>("Image"));
-        maxpCol.setCellValueFactory(
-                new PropertyValueFactory<Evenement, Integer>("nbrMax"));
+        createurCol.setCellValueFactory(
+                new PropertyValueFactory<Evenement, String>("logCreateur"));
         validCol.setCellValueFactory(
                 new PropertyValueFactory<Evenement, String>("Valid"));
         supCol.setCellValueFactory(
@@ -109,20 +106,6 @@ public class ListeEvenementFXMLController implements Initializable {
             @Override
             public TableCell<Record, Boolean> call(TableColumn<Record, Boolean> param) {
                 return new DelButton(evtData);
-            }
-        });
-        modifCol.setCellValueFactory(
-                new Callback<TableColumn.CellDataFeatures<Record, Boolean>, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Record, Boolean> param) {
-                return new SimpleBooleanProperty(param.getValue() != null);
-            }
-        });
-        modifCol.setCellFactory(
-                new Callback<TableColumn<Record, Boolean>, TableCell<Record, Boolean>>() {
-            @Override
-            public TableCell<Record, Boolean> call(TableColumn<Record, Boolean> param) {
-                return new ModifButton();
             }
         });
         affichCol.setCellValueFactory(
@@ -140,20 +123,6 @@ public class ListeEvenementFXMLController implements Initializable {
             }
         });
 
-    }
-
-    @FXML
-    private void redirectBack(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
-        try {
-            Parent root;
-            root = loader.load();
-            InterfacePrincipaleFXMLController interf = loader.getController();
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void RechercheNomEvenement(ObservableList<Evenement> evtData, TableView<Evenement> tabEvt, JFXTextField txtRecherche) {
@@ -175,6 +144,20 @@ public class ListeEvenementFXMLController implements Initializable {
             sortedEvt.comparatorProperty().bind(tabEvt.comparatorProperty());
             tabEvt.setItems(sortedEvt);
         });
+    }
+
+    @FXML
+    private void redirectBack(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
+        try {
+            Parent root;
+            root = loader.load();
+            InterfacePrincipaleFXMLController interf = loader.getController();
+            Scene scene = anchor.getScene();
+            scene.setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

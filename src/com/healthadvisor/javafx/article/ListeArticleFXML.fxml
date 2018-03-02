@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Button?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.ListeArticleFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.article.ListeArticleFXMLController">
    <children>
-      <TableView fx:id="tabArt" layoutX="66.0" layoutY="90.0" prefHeight="466.0" prefWidth="902.0">
+      <TableView fx:id="tabArt" layoutX="32.0" layoutY="79.0" prefHeight="486.0" prefWidth="932.0">
         <columns>
           <TableColumn fx:id="refCol" prefWidth="75.0" text="Référence" />
           <TableColumn fx:id="titreCol" prefWidth="75.0" text="Titre" />
-            <TableColumn fx:id="descCol" prefWidth="102.0" text="Description" />
-            <TableColumn fx:id="contCol" prefWidth="133.0" text="Contenu" />
-            <TableColumn fx:id="medCol" prefWidth="131.0" text="Medecin" />
-            <TableColumn fx:id="noteCol" prefWidth="78.0" text="Note" />
-            <TableColumn fx:id="validCol" prefWidth="96.0" text="Statut" />
-            <TableColumn fx:id="supCol" prefWidth="109.0" text="Suppression" />
-            <TableColumn fx:id="affichCol" prefWidth="105.0" text="Affichage" />
+            <TableColumn fx:id="descCol" prefWidth="112.66668701171875" text="Description" />
+            <TableColumn fx:id="contCol" prefWidth="145.66668701171875" text="Contenu" />
+            <TableColumn fx:id="medCol" prefWidth="99.33331298828125" text="Auteur" />
+            <TableColumn fx:id="noteCol" prefWidth="112.0" text="Note" />
+            <TableColumn fx:id="validCol" prefWidth="107.0" text="Statut" />
+            <TableColumn fx:id="supCol" prefWidth="106.3333740234375" text="Suppression" />
+            <TableColumn fx:id="affichCol" prefWidth="97.0" text="Affichage" />
         </columns>
       </TableView>
-      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#redirectBack" text="Précédent" />
-      <JFXTextField fx:id="rechF" layoutX="789.0" layoutY="27.0" prefHeight="25.0" prefWidth="179.0" promptText="Rechercher" />
+      <JFXTextField fx:id="rechF" focusColor="#19416f" labelFloat="true" layoutX="786.0" layoutY="27.0" prefHeight="25.0" prefWidth="179.0" promptText="Rechercher" unFocusColor="#19416f" />
+      <FontAwesomeIconView fx:id="back" fill="#19416f" glyphName="CHEVRON_CIRCLE_LEFT" layoutX="39.0" layoutY="51.0" onMouseClicked="#redirectBack" size="40" />
    </children>
 </AnchorPane>

@@ -7,26 +7,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.DetailsEvenementsFXMLController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #dae3ee;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.DetailsEvenementsFXMLController">
    <children>
-      <Label layoutX="345.0" layoutY="134.0" prefHeight="67.0" prefWidth="87.0" text="Succés !" textAlignment="CENTER">
+      <Label layoutX="454.0" layoutY="140.0" prefHeight="67.0" prefWidth="87.0" text="Succés !" textAlignment="CENTER" textFill="#19416f">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="nomLab" layoutX="37.0" layoutY="246.0" text="Label" />
-      <Label fx:id="dateLab" layoutX="37.0" layoutY="289.0" text="Label" />
-      <Label fx:id="heureLab" layoutX="37.0" layoutY="324.0" text="Label" />
-      <Label fx:id="endroitLab" layoutX="37.0" layoutY="364.0" text="Label" />
-      <Label fx:id="typeLab" layoutX="313.0" layoutY="246.0" text="Label" />
-      <ImageView fx:id="imgView" fitHeight="150.0" fitWidth="200.0" layoutX="522.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="maxLab" layoutX="313.0" layoutY="355.0" text="Label" />
-      <ImageView fx:id="confirm" fitHeight="130.0" fitWidth="141.0" layoutX="323.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="nomLab" layoutX="37.0" layoutY="246.0" text="Label" textFill="#19416f" />
+      <Label fx:id="dateLab" layoutX="37.0" layoutY="289.0" text="Label" textFill="#19416f" />
+      <Label fx:id="heureLab" layoutX="192.0" layoutY="289.0" text="Label" textFill="#19416f" />
+      <Label fx:id="endroitLab" layoutX="390.0" layoutY="291.0" text="Label" textFill="#19416f" />
+      <Label fx:id="typeLab" layoutX="192.0" layoutY="246.0" text="Label" textFill="#19416f" />
+      <ImageView fx:id="imgView" fitHeight="200.0" fitWidth="200.0" layoutX="730.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="maxLab" layoutX="569.0" layoutY="291.0" text="Label" textFill="#19416f" />
+      <ImageView fx:id="confirm" fitHeight="130.0" fitWidth="141.0" layoutX="433.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@validation.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="modif" layoutX="270.0" layoutY="500.0" onAction="#redirectModif" text="Modifier" />
-      <JFXButton fx:id="back" layoutX="454.0" layoutY="500.0" onAction="#redirectBack" text="Retour" />
+      <JFXButton fx:id="modif" layoutX="367.0" layoutY="499.0" onAction="#redirectModif" text="Modifier" textFill="#19416f" />
+      <JFXButton fx:id="back" layoutX="551.0" layoutY="499.0" onAction="#redirectBack" text="Retour" textFill="#19416f" />
    </children>
 </AnchorPane>

@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.evenement.InterfacePrincipaleFXMLController">
    <children>
-      <Hyperlink fx:id="list" layoutX="240.0" layoutY="88.0" onAction="#redirectList" text="Liste des événements" />
-      <Hyperlink fx:id="gestion" layoutX="239.0" layoutY="294.0" onAction="#redirectGestion" text="Gérer les événements" />
-      <Hyperlink fx:id="myEvt" layoutX="252.0" layoutY="189.0" onAction="#redirectMy" text="Mes événements" />
+      <ImageView fitHeight="600.0" fitWidth="1000.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@fond3.jpg" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="list" layoutX="249.0" layoutY="94.0" onAction="#redirectList" style="-fx-background-color: #dae3ee;" text="Liste des événements" textFill="#19416f">
+         <font>
+            <Font name="System Bold" size="50.0" />
+         </font></Hyperlink>
+      <Hyperlink fx:id="myEvt" layoutX="297.0" layoutY="328.0" onAction="#redirectMy" style="-fx-background-color: #dae3ee;" text="Mes événements" textFill="#19416f">
+         <font>
+            <Font name="System Bold" size="50.0" />
+         </font></Hyperlink>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dae3ee" height="70.0" layoutX="906.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <FontAwesomeIconView fx:id="gestion" fill="#19416f" glyphName="WRENCH" layoutX="922.0" layoutY="57.0" onMouseClicked="#redirectGestion" size="40" />
    </children>
 </AnchorPane>

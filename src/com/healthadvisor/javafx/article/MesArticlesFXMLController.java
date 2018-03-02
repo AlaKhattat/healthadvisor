@@ -45,6 +45,7 @@ public class MesArticlesFXMLController implements Initializable {
     GestionArticle ga = new GestionArticle();
     Date d3 = new Date(1970, 17, 4, 9, 5, 3);
     Medecin m=new Medecin(); //SESSION MEDECIN
+    
     @FXML
     private FontAwesomeIconView back;
     @FXML
@@ -88,6 +89,7 @@ public class MesArticlesFXMLController implements Initializable {
                         cnt.setTagsL(tag);
                         cnt.setTitre(titre);
                         cnt.setRating(note);
+                        cnt.setUrl(a.getImage());
                         cnt.setRetour("mes");
                         details.setRetour("mes");
                         Scene scene = anchor.getScene();

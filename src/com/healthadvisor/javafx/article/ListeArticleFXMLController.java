@@ -4,6 +4,7 @@ import com.healthadvisor.entities.Article;
 import com.healthadvisor.service.impl.GestionArticle;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer.Record;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -46,13 +48,11 @@ public class ListeArticleFXMLController extends TableCell<Record, Boolean> imple
     @FXML
     private TableColumn<Article, String> medCol;
     @FXML
-    private TableColumn<Article, String> imgCol;
-    @FXML
     private TableColumn supCol;
     @FXML
     private TableColumn affichCol;
     @FXML
-    private Button back;
+    private FontAwesomeIconView back;
     @FXML
     private AnchorPane anchor;
     @FXML
@@ -82,8 +82,6 @@ public class ListeArticleFXMLController extends TableCell<Record, Boolean> imple
                 new PropertyValueFactory<Article, String>("Contenu"));
         medCol.setCellValueFactory(
                 new PropertyValueFactory<Article, String>("IdMed"));
-        imgCol.setCellValueFactory(
-                new PropertyValueFactory<Article, String>("Image"));
         noteCol.setCellValueFactory(
                 new PropertyValueFactory<Article, Double>("Note"));
         validCol.setCellValueFactory(
@@ -118,20 +116,6 @@ public class ListeArticleFXMLController extends TableCell<Record, Boolean> imple
         });
     }
 
-    @FXML
-    private void redirectBack(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
-        try {
-            Parent root;
-            root = loader.load();
-            InterfacePrincipaleFXMLController interf = loader.getController();
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void RechercheNomArticle(ObservableList<Article> articleData, TableView<Article> tabArt, JFXTextField txtRecherche) {
         FilteredList<Article> filteredData = new FilteredList<>(articleData, e -> true);
         txtRecherche.setOnKeyReleased(e -> {
@@ -152,13 +136,14 @@ public class ListeArticleFXMLController extends TableCell<Record, Boolean> imple
             tabArt.setItems(sortedArticle);
         });
     }
-    
-    public void Reload(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListeArticleFXML.fxml"));
+
+    @FXML
+    private void redirectBack(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
         try {
             Parent root;
             root = loader.load();
-            ListeArticleFXMLController listFX = loader.getController();
+            InterfacePrincipaleFXMLController interf = loader.getController();
             Scene scene = anchor.getScene();
             scene.setRoot(root);
         } catch (IOException ex) {

@@ -87,6 +87,7 @@ public class NaviguerArticlesFXMLController implements Initializable {
                         cnt.setTagsL(tag);
                         cnt.setTitre(titre);
                         cnt.setRating(note);
+                        cnt.setUrl(a.getImage());
                         cnt.setRetour("navig");
                         details.setRetour("navig");             
                         Scene scene = anchor.getScene();

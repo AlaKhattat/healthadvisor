@@ -1,6 +1,7 @@
 
 package com.healthadvisor.javafx.article;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -23,7 +25,7 @@ public class InterfacePrincipaleFXMLController implements Initializable {
     @FXML
     private Hyperlink list;
     @FXML
-    private Hyperlink gestion;
+    private FontAwesomeIconView gestion;
     @FXML
     private Hyperlink mesArticles;
 
@@ -47,14 +49,13 @@ public class InterfacePrincipaleFXMLController implements Initializable {
         }
     }
 
-
     @FXML
-    private void redirectGestion(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListeArticleFXML.fxml"));
+    private void redirectMyArt(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MesArticlesFXML.fxml"));
         try {
             Parent root;
             root = loader.load();
-            ListeArticleFXMLController list = loader.getController();
+            MesArticlesFXMLController mine = loader.getController();
             Scene scene = anchor.getScene();
             scene.setRoot(root);
         } catch (IOException ex) {
@@ -63,12 +64,12 @@ public class InterfacePrincipaleFXMLController implements Initializable {
     }
 
     @FXML
-    private void redirectMyArt(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MesArticlesFXML.fxml"));
+    private void redirectGestion(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListeArticleFXML.fxml"));
         try {
             Parent root;
             root = loader.load();
-            MesArticlesFXMLController mine = loader.getController();
+            ListeArticleFXMLController list = loader.getController();
             Scene scene = anchor.getScene();
             scene.setRoot(root);
         } catch (IOException ex) {

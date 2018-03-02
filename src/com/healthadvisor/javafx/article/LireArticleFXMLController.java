@@ -81,6 +81,7 @@ public class LireArticleFXMLController implements Initializable {
 
     Date d2 = new Date(1970, 9, 9);
     Patient p=new Patient(); //SESSION PATIENT
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         validCombo.getItems().addAll("Valider", "Retirer");
@@ -92,7 +93,7 @@ public class LireArticleFXMLController implements Initializable {
         try {
             Document doc = new Document();
             try {
-                PdfWriter.getInstance(doc, new FileOutputStream(titre.getText() + ".pdf"));
+                PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Tarek\\Desktop\\"+titre.getText() + ".pdf"));
 
             } catch (DocumentException ex) {
                 Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, ex);

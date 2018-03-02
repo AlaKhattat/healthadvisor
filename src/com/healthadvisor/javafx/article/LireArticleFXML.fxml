@@ -34,7 +34,7 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <JFXComboBox fx:id="validCombo" focusColor="#19416f" layoutX="839.0" layoutY="368.0" prefHeight="25.0" prefWidth="104.0" />
+      <JFXComboBox fx:id="validCombo" focusColor="#19416f" labelFloat="true" layoutX="839.0" layoutY="368.0" prefHeight="25.0" prefWidth="104.0" unFocusColor="#19416f" />
       <JFXButton fx:id="validBut" layoutX="853.0" layoutY="423.0" onAction="#validArticle" prefHeight="25.0" prefWidth="80.0" text="Confirmer" textFill="#19416f" />
       <JFXButton fx:id="modif" layoutX="853.0" layoutY="475.0" onAction="#redirectModif" prefWidth="80.0" text="Modifier" textFill="#19416f" />
       <JFXButton fx:id="pdfBut" layoutX="853.0" layoutY="519.0" onAction="#savePdf" prefWidth="80.0" text="Télécharger" textFill="#19416f" />

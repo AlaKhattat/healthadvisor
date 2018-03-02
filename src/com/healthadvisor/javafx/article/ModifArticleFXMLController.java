@@ -316,7 +316,7 @@ public class ModifArticleFXMLController implements Initializable {
             lire.setRating(art.getNote());
             lire.setTagsL(art.getTags());
             lire.setImg(art.getImage());
-            lire.setUrl(url_image);
+            lire.setUrl(art.getImage());
             lire.setRetour(retour);
             Scene sc = anchor.getScene();
             sc.setRoot(root);

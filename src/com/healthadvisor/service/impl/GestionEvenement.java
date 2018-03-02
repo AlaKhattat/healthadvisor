@@ -1,6 +1,5 @@
 package com.healthadvisor.service.impl;
 
-import com.healthadvisor.javafx.article.AjoutArticleFXMLController;
 import com.healthadvisor.database.MyDB;
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Evenement_Participants;
