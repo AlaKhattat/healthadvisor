@@ -6,6 +6,7 @@ import com.healthadvisor.entities.Ligne_Commande;
 import com.healthadvisor.javamail.pdf;
 import com.healthadvisor.entities.Produit;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import static com.healthadvisor.javafx.login_fx.FXMLLoginController.panier;
 import static com.healthadvisor.javamail.EmailAttachmentSender.sendEmailWithAttachments;
 import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.ServiceCommande;
@@ -75,6 +76,7 @@ public class FXMLAfficherPanierController implements Initializable {
     ServiceProduit servP=new ServiceProduit();
     ServiceCommande servC=new ServiceCommande();
     ServiceLigne_Commande servLC=new ServiceLigne_Commande();
+    List<ArrayList> lst_cmd;
     @FXML
     private Button btnPasser_Commande;
     
@@ -327,7 +329,8 @@ public class FXMLAfficherPanierController implements Initializable {
 
     @FXML
     private void PasserCommande(ActionEvent event) {
-          
+        lst_cmd=new ArrayList<>();
+         String prix="";
         try {
             Commande cmd=new Commande();
             cmd.setID_client(FXMLLoginController.pseudo);
@@ -335,7 +338,7 @@ public class FXMLAfficherPanierController implements Initializable {
             Date date = new Date();
             cmd.setDate_commande(date_format.parse(date_format.format(date)));
             cmd.setMode_payement("paypal");
-            cmd.setReference_commande("123456"); // ce code doit étre généré aléatoirement
+            cmd.setReference_commande("123464"); // ce code doit étre généré aléatoirement
             servC.AjouterCommande(cmd);
             Commande c=servC.ConsulterCommande(cmd.getReference_commande());
             for(int i=0;i<FXMLLoginController.panier.size();i++){
@@ -343,14 +346,20 @@ public class FXMLAfficherPanierController implements Initializable {
                 lc.setId_commande(c.getNum_commande());
                 Produit p=servP.ConsulterProduit(FXMLLoginController.panier.get(i).get(0).toString());
                 lc.setId_produit(p.getId_produit());
-                lc.setQuantite(Integer.parseInt(FXMLLoginController.panier.get(i).get(1).toString()));
-                lc.setPrix_commande(CalculerPrix_Total(FXMLLoginController.panier));
+                lc.setQuantite(Integer.parseInt(panier.get(i).get(1).toString()));
+                lc.setPrix_commande(CalculerPrix_Total(panier));
+                prix=""+CalculerPrix_Total(panier);
+                ArrayList array=new ArrayList();
+                array.add(p.getNom());   
+                array.add(lc.getQuantite());
+                array.add(p.getPrix_vente());   
+                lst_cmd.add(array);
                 servLC.AjouterLigne_Commande(lc);
             }
             Alert_PasserCommande();
             
             //il faut preparer l'email de la facture
-            pdf.savePdf("facture");
+            pdf.savePdf("facture",lst_cmd,prix);
             String mailFrom = "habib.hentati@esprit.tn";
         String password = "motdepasse58633912";
  
@@ -363,7 +372,7 @@ public class FXMLAfficherPanierController implements Initializable {
         String[] attachFiles = new String[1];
        // attachFiles[0] = "C:/Users/HABOUB/Desktop/althere.jpeg";
        // attachFiles[1] = "C:/Users/HABOUB/Desktop/Prosit_4_Partie1.pdf";
-        attachFiles[0] = "C:/Users/aaa/Documents/NetBeansProjects/Health_Advisorr/facture.pdf";
+        attachFiles[0] = "C:/Users/aaa/Documents/NetBeansProjects/healthadvisor/facture.pdf";
  
         try {
             sendEmailWithAttachments( mailFrom, password, mailTo,subject, message, attachFiles);
