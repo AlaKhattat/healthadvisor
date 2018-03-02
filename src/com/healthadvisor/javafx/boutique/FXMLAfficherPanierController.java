@@ -74,6 +74,7 @@ public class FXMLAfficherPanierController implements Initializable {
     ServiceProduit servP=new ServiceProduit();
     ServiceCommande servC=new ServiceCommande();
     ServiceLigne_Commande servLC=new ServiceLigne_Commande();
+    List<ArrayList> lst_cmd;
     @FXML
     private Button btnPasser_Commande;
     
@@ -334,7 +335,8 @@ public class FXMLAfficherPanierController implements Initializable {
 
     @FXML
     private void PasserCommande(ActionEvent event) {
-          
+        lst_cmd=new ArrayList<>();
+         String prix="";
         try {
             Commande cmd=new Commande();
             cmd.setID_client(FXMLProduitController.login_user);
@@ -342,7 +344,7 @@ public class FXMLAfficherPanierController implements Initializable {
             Date date = new Date();
             cmd.setDate_commande(date_format.parse(date_format.format(date)));
             cmd.setMode_payement("paypal");
-            cmd.setReference_commande("123456"); // ce code doit étre généré aléatoirement
+            cmd.setReference_commande("123464"); // ce code doit étre généré aléatoirement
             servC.AjouterCommande(cmd);
             Commande c=servC.ConsulterCommande(cmd.getReference_commande());
             for(int i=0;i<panier.size();i++){
@@ -352,12 +354,18 @@ public class FXMLAfficherPanierController implements Initializable {
                 lc.setId_produit(p.getId_produit());
                 lc.setQuantite(Integer.parseInt(panier.get(i).get(1).toString()));
                 lc.setPrix_commande(CalculerPrix_Total(panier));
+                prix=""+CalculerPrix_Total(panier);
+                ArrayList array=new ArrayList();
+                array.add(p.getNom());   
+                array.add(lc.getQuantite());
+                array.add(p.getPrix_vente());   
+                lst_cmd.add(array);
                 servLC.AjouterLigne_Commande(lc);
             }
             Alert_PasserCommande();
             
             //il faut preparer l'email de la facture
-            pdf.savePdf("facture");
+            pdf.savePdf("facture",lst_cmd,prix);
             String mailFrom = "habib.hentati@esprit.tn";
         String password = "motdepasse58633912";
  
