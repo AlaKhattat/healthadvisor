@@ -143,14 +143,10 @@ public class FXMLImcController implements Initializable {
     private VBox lesSports;
     @FXML
     private Tab suivreRegime1;
-    @FXML
-    private JFXListView<String> regimeDujour;
-    @FXML
     private JFXComboBox<String> sportUser;
     @FXML
     private Tab suivreRegime121;
  
-    @FXML
     private StackPane pane;
     
     private WebView view;
@@ -161,8 +157,6 @@ public class FXMLImcController implements Initializable {
     @FXML
     private JFXButton startJeune;
     @FXML
-    private StackPane pane1;
-    @FXML
     private JFXTextField rechercheManger;
     private int heure;
     private int minute;
@@ -172,8 +166,6 @@ public class FXMLImcController implements Initializable {
     private JFXListView<String> dejeuner;
     private JFXListView<String> gouter;
     private JFXListView<String> diner;  
-    @FXML
-    private StackPane pane11;
     @FXML
     private JFXListView<String> ptitdej_micro;
     @FXML
@@ -191,8 +183,6 @@ public class FXMLImcController implements Initializable {
     @FXML
     private JFXListView<String> programmeCalorie;
     @FXML
-    private JFXComboBox<?> sportUser1;
-    @FXML
     private ContextMenu resultatChearch;
     @FXML
     private JFXListView<String> calorieC;
@@ -205,21 +195,38 @@ public class FXMLImcController implements Initializable {
     @FXML
     private JFXTabPane bienetre;
     @FXML
-    private JFXTextField rechercheManger1;
-    @FXML
     private ContextMenu resultatChearch1;
     @FXML
     private MenuItem itemMenu1;
     @FXML
-    private JFXListView<?> calorieC1;
-    @FXML
-    private Label totalCalorie1;
-    @FXML
-    private JFXTextArea calorieMin1;
-    @FXML
     private Tab sansIMC;
     @FXML
     private VBox error;
+    @FXML
+    private JFXButton precRegime2;
+    @FXML
+    private JFXComboBox<String> sportUserDissocie;
+    @FXML
+    private StackPane paneDissocie;
+    @FXML
+    private JFXComboBox<String> sportUserMicronutrition;
+    @FXML
+    private StackPane paneMicronutrition;
+    @FXML
+    private JFXComboBox<String> sportUserJeune;
+    @FXML
+    private StackPane paneJeune;
+    @FXML
+    private JFXComboBox<String> sportUserCalorique;
+    @FXML
+    private StackPane paneCalorique;
+    @FXML
+    private JFXComboBox<String> sportUserGlucidique;
+    @FXML
+    private StackPane paneGlucidique;
+    public static Double IMC = 0d;
+    @FXML
+    private JFXListView<String> regimeDiss;
     
     public Patient getPatient() {
         return patient;
@@ -285,14 +292,18 @@ public class FXMLImcController implements Initializable {
                 typeregime.add("le regime hyperprotéiné");typeregime.add("le regime hypocalorique ou hypoglucidique");
                 this.regimeEffectue.getItems().addAll(typeregime);            
                 this.view = new WebView();                
-                this.pane.getChildren().add(view);
+                this.paneCalorique.getChildren().add(view);
+                this.paneDissocie.getChildren().add(view);
+                this.paneGlucidique.getChildren().add(view);
+                this.paneJeune.getChildren().add(view);
+                this.paneMicronutrition.getChildren().add(view);
                 heure = 0;
                 minute = 0;
                 this.ptitDej = new JFXListView<>();
                 this.dejeuner = new JFXListView<>();
                 this.diner = new JFXListView<>();
                 this.gouter = new JFXListView<>();
-                this.regimeDujour = new JFXListView<>();
+                this.regimeDiss = new JFXListView<>();
                 this.calorieMin.setDisable(true);
                // this.tabRegime.setStyle("-fx-tab-max-height:0");
     } 
@@ -330,17 +341,17 @@ public class FXMLImcController implements Initializable {
                 @Override
                 public void run() 
                 {
-                  if(FXMLAjoutIMCViewController.IMC > 0)
+                  if(IMC > 0)
                   {
                     
                       Platform.runLater(() -> {
-                          animationCercle(fp,FXMLAjoutIMCViewController.IMC);
+                          animationCercle(fp,IMC);
                           
-                          System.out.println("okk imc:"+FXMLAjoutIMCViewController.IMC);
+                          System.out.println("okk imc:"+IMC);
                          
                           time2.cancel();
                           time2.purge();
-                          FXMLAjoutIMCViewController.IMC =0;
+                          //IMC =0;
                           tabRegime.getSelectionModel().select(0);
                       });
                                      
@@ -388,7 +399,7 @@ public class FXMLImcController implements Initializable {
                  {
                      Platform.runLater(() -> {
                          interpretIMC.setTextFill(Color.CORAL);
-                         interpretIMC.setText(info.interpreterIMC(FXMLAjoutIMCViewController.IMC));
+                         interpretIMC.setText(info.interpreterIMC(IMC));
                          imcRegime.setText(Double.toString(progress.getProgress()));
                          poidRegime.setText(Double.toString(info.getPoids()));
                          imcIdealRegime.setText(Double.toString(info.calculPoidIdeal(info))+" Kg");
@@ -565,12 +576,8 @@ public class FXMLImcController implements Initializable {
                 aller.add(check.getText());
             }
            
-        }
-       
-       
-        
-        allergiesElement.addAll(this.listeAllergieSup.getItems());
-        
+        }                      
+        allergiesElement.addAll(this.listeAllergieSup.getItems());        
         maladiesL.addAll(this.listMaladies.getItems());
         System.out.println("index:"+regimes.indexOf(regime));
         aller.addAll(allergiesElement);         
@@ -589,8 +596,8 @@ public class FXMLImcController implements Initializable {
     public void chargerSport()
     {
         Regime regime = new Regime();
-         if(this.regimePropose.getValue()!=null)
-         {
+       if(this.regimePropose.getValue()!=null)
+       {
           regime.setId_regime(this.regimePropose.getValue());
           System.out.println("prop"+this.regimePropose.getValue());
           GestionRegime gregime = new GestionRegime();
@@ -598,12 +605,15 @@ public class FXMLImcController implements Initializable {
           regime = regimes.get(regimes.indexOf(regime));
           System.out.println("rr:" +regime);
           this.lesSports.getChildren().clear();
+        if(regime.getSports()!=null)
+        {
           for(Sport i : regime.getSports())
           {
             JFXCheckBox ch1 = new JFXCheckBox(i.getNom_sport()); 
             this.lesSports.getChildren().add(ch1);
           }
-         }    
+        }
+      }
     }
     
     @FXML
@@ -735,7 +745,7 @@ public class FXMLImcController implements Initializable {
         Regime regime = new Regime();
         regime.setId_regime(prog.getNomRegime());
         InfoSante info =g.afficherInfoSante(patient.getLogin());
-        System.out.println("info:"+info);
+        //System.out.println("info:"+info);
       if(info.getAge()>0  && info.getTaille()>0d) 
       {
        if(regimes!=null)
@@ -744,29 +754,81 @@ public class FXMLImcController implements Initializable {
         {
          regime = regimes.get(regimes.indexOf(regime));
         }
-        System.out.println("prog est:"+prog);
+        System.out.println("prog est:"+prog.getNomRegime());
         switch(prog.getNomRegime())
         {
             case "regime dissocie":
                                    tabRegime.getSelectionModel().select(2);
                                    regimeDissocie(regime, prog, guser);
+                                   if(prog.getSport()!=null)
+                                   {
+                                    for(String sport: prog.getSport())
+                                    {
+                                       if(sportUserDissocie.getItems().contains(sport)==false)
+                                       {
+                                           sportUserDissocie.getItems().add(sport);
+                                           
+                                       }
+                                    }
+                                   }
                                    break;
             case "micronutrition":
                                    tabRegime.getSelectionModel().select(3);
                                    regimeMicronutrition(regime, prog, guser);
+                                   if(prog.getSport()!=null)
+                                   {
+                                    for(String sport: prog.getSport())
+                                    {
+                                       if(sportUserMicronutrition.getItems().contains(sport)==false)
+                                       {
+                                           sportUserMicronutrition.getItems().add(sport);
+                                           
+                                       }
+                                    }
+                                   }
                                    break;
-            case "regime jeune":
+            case "le jeune":
                                    tabRegime.getSelectionModel().select(4);
                                    regimeJeune();
+                                   if(prog.getSport()!=null)
+                                   {
+                                    for(String sport: prog.getSport())
+                                    {
+                                       if(sportUserJeune.getItems().contains(sport)==false)
+                                       {
+                                           sportUserJeune.getItems().add(sport);
+                                       }
+                                    }
+                                   }
                                    break;
-            case "hyper proteine":
+            case "regime hyperproteine":
                                    tabRegime.getSelectionModel().select(5);
                                    regimeHyperProteine(regime,prog,guser);
+                                   if(prog.getSport()!=null)
+                                   {
+                                    for(String sport: prog.getSport())
+                                    {
+                                       if(sportUserCalorique.getItems().contains(sport)==false)
+                                       {
+                                           sportUserCalorique.getItems().add(sport);
+                                       }
+                                    }
+                                   }
                                    break;
             
-            case "regime calorique":
+            case "regime hypocalorique":
                                    tabRegime.getSelectionModel().select(6);
                                    hypoCalorique(regime,prog,guser);
+                                   if(prog.getSport()!=null)
+                                   {
+                                    for(String sport: prog.getSport())
+                                    {
+                                       if(sportUserGlucidique.getItems().contains(sport)==false)
+                                       {
+                                           sportUserGlucidique.getItems().add(sport);
+                                       }
+                                    }
+                                   }
                                    break;
             default:
                                    tabRegime.getSelectionModel().select(0);                                                          
@@ -787,18 +849,10 @@ public class FXMLImcController implements Initializable {
          error.getChildren().add(label); error.getChildren().add(button);
                  
       }
-       if(prog.getSport()!=null)
-       {
-        for(String sport: prog.getSport())
-        {
-           if(sportUser.getItems().contains(sport)==false)
-           {
-               sportUser.getItems().add(sport);
-           }
-        }
-       }
+     
     }
     
+    @FXML
     public void nePlusSuivreRegime()
     {
        
@@ -817,30 +871,125 @@ public class FXMLImcController implements Initializable {
        }
      
     }
+    
+   
     @FXML
-    public void chargerVideo()
+    public void chargerVideoCalorique()
     {
         //Exercices Biceps |Exercices des Abdominaux
         HashMap<String,String>tabVideo = new HashMap<>();
         tabVideo.put("Exercices Biceps".trim(), "exerciceBiceps.html");
         tabVideo.put(" Exercices des Abdominaux".trim(),"exerciceAbdominaux.html");
-        String nomSport = this.sportUser.getValue().trim();
+        tabVideo.put(" Exercices des Fessiers".trim(),"exerciceFessiers.html");
+        tabVideo.put(" Exercices des Poitrine".trim(),"exercicePoitrine.html");
+        
+        String nomSport = this.sportUserCalorique.getValue().trim();
         System.out.println(tabVideo);
         for(Map.Entry i : tabVideo.entrySet())
         {
                String sansSpace = i.getKey().toString().trim();
                 if(sansSpace.equals(nomSport))
                 {
-                    this.pane.getChildren().clear();
+                    this.paneCalorique.getChildren().clear();
                     this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
-                    this.pane.getChildren().add(view);  
+                    this.paneCalorique.getChildren().add(view);  
                 }           
         }                
     }
+    @FXML
+    public void chargerVideoDissocie()
+    {
+        //Exercices Biceps |Exercices des Abdominaux
+        HashMap<String,String>tabVideo = new HashMap<>();
+        tabVideo.put("Exercices Biceps".trim(), "exerciceBiceps.html");
+        tabVideo.put(" Exercices des Abdominaux".trim(),"exerciceAbdominaux.html");
+        tabVideo.put(" Exercices des Fessiers".trim(),"exerciceFessiers.html");
+        tabVideo.put(" Exercices des Poitrine".trim(),"exercicePoitrine.html");
+        String nomSport = this.sportUserDissocie.getValue().trim();
+        System.out.println(tabVideo);
+        for(Map.Entry i : tabVideo.entrySet())
+        {
+               String sansSpace = i.getKey().toString().trim();
+                if(sansSpace.equals(nomSport))
+                {
+                    this.paneDissocie.getChildren().clear();
+                    this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
+                    this.paneDissocie.getChildren().add(view);  
+                }           
+        }                
+    }
+    @FXML
+    public void chargerVideoGlucidique()
+    {
+        //Exercices Biceps |Exercices des Abdominaux
+        HashMap<String,String>tabVideo = new HashMap<>();
+        tabVideo.put("Exercices Biceps".trim(), "exerciceBiceps.html");
+        tabVideo.put(" Exercices des Abdominaux".trim(),"exerciceAbdominaux.html");
+        tabVideo.put(" Exercices des Fessiers".trim(),"exerciceFessiers.html");
+        tabVideo.put(" Exercices des Poitrine".trim(),"exercicePoitrine.html");
+        String nomSport = this.sportUserGlucidique.getValue().trim();
+        System.out.println(tabVideo);
+        for(Map.Entry i : tabVideo.entrySet())
+        {
+               String sansSpace = i.getKey().toString().trim();
+                if(sansSpace.equals(nomSport))
+                {
+                    this.paneGlucidique.getChildren().clear();
+                    this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
+                    this.paneGlucidique.getChildren().add(view);  
+                }           
+        }                
+    }
+    @FXML
+    public void chargerVideoMicro()
+    {
+        //Exercices Biceps |Exercices des Abdominaux
+        HashMap<String,String>tabVideo = new HashMap<>();
+        tabVideo.put("Exercices Biceps".trim(), "exerciceBiceps.html");
+        tabVideo.put(" Exercices des Abdominaux".trim(),"exerciceAbdominaux.html");
+        tabVideo.put(" Exercices des Fessiers".trim(),"exerciceFessiers.html");
+        tabVideo.put(" Exercices des Poitrine".trim(),"exercicePoitrine.html");
+        String nomSport = this.sportUserMicronutrition.getValue().trim();
+        System.out.println(tabVideo);
+        for(Map.Entry i : tabVideo.entrySet())
+        {
+               String sansSpace = i.getKey().toString().trim();
+                if(sansSpace.equals(nomSport))
+                {
+                    this.paneMicronutrition.getChildren().clear();
+                    this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
+                    this.paneMicronutrition.getChildren().add(view);  
+                }           
+        }                
+    }
+    @FXML
+    public void chargerVideoJeune()
+    {
+        //Exercices Biceps |Exercices des Abdominaux
+        HashMap<String,String>tabVideo = new HashMap<>();
+        tabVideo.put("Exercices Biceps".trim(), "exerciceBiceps.html");
+        tabVideo.put(" Exercices des Abdominaux".trim(),"exerciceAbdominaux.html");
+        tabVideo.put(" Exercices des Fessiers".trim(),"exerciceFessiers.html");
+        tabVideo.put(" Exercices des Poitrine".trim(),"exercicePoitrine.html");
+        String nomSport = this.sportUserJeune.getValue().trim();
+        System.out.println(tabVideo);
+        for(Map.Entry i : tabVideo.entrySet())
+        {
+               String sansSpace = i.getKey().toString().trim();
+                if(sansSpace.equals(nomSport))
+                {
+                    this.paneJeune.getChildren().clear();
+                    this.view.getEngine().load(getClass().getResource(tabVideo.get(sansSpace)).toExternalForm());
+                    this.paneJeune.getChildren().add(view);  
+                }           
+        }                
+    }
+    
   public void regimeDissocie(Regime regime,ProgrammeRegime prog,GestionUserRegime guser)
   {    
         Date dateAujdh = new Date();
         DateFormat fo = new SimpleDateFormat("yyyy-MM-dd");
+         // regimeDujour.getItems().clear();
         if(prog.getAlimentJour().isEmpty() || prog.getDateJour().toString().compareTo(fo.format(dateAujdh))!=0) //s'il sagit du premier jour  du suivuie de regime
         {
             Map<Integer,List<Aliment>> proposition = prog.regimeDissocie(regime);
@@ -856,9 +1005,9 @@ public class FXMLImcController implements Initializable {
             System.out.println("aliment:"+aliments);
             for(Aliment i: aliments)
             {
-               if(regimeDujour.getItems().contains(i.getNom_aliment())==false)
+               if(regimeDiss.getItems().contains(i.getNom_aliment())==false)
                {
-                regimeDujour.getItems().add(i.getNom_aliment());
+                regimeDiss.getItems().add(i.getNom_aliment());
                }
             }
             prog.setAlimentJour(a.totalNomAliment(aliments));
@@ -868,10 +1017,13 @@ public class FXMLImcController implements Initializable {
         }
         else
         {
-            regimeDujour.getItems().clear();
+            
+          
              for(String i: prog.getAlimentJour())
-            {        
-                regimeDujour.getItems().add(i);            
+            {   
+                System.out.println("--------------------prog----++-++-+-+-+-+:"+i);
+                regimeDiss.getItems().add(i);  
+                regimeDiss.getItems().add("hhhh");
             }
         }
    }
@@ -970,6 +1122,7 @@ public class FXMLImcController implements Initializable {
                }              
            }
   }
+    @FXML
   public void precRegime2()
   {
       tabRegime.getSelectionModel().select(0);

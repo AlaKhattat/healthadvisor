@@ -5,15 +5,20 @@
  */
 package com.healthadvisor.javafx.questionreponse;
 
+import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionReponse;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -41,6 +46,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -100,35 +106,45 @@ public class ConsulterQuestionUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        System.err.println(QuestionUserController.patient.getLogin());
-        System.err.println(QuestionUserController.questionStatic.getId_patient());
+   
         
         shareID.setUserData(QuestionUserController.questionStatic);
         btnModifier.setUserData(0);
         questionLabel.setText(QuestionUserController.questionStatic.getQuestion());
         
+        if(FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
         //tester temps
         Date d = new Date (QuestionUserController.questionStatic.getDate_publication().getTime());
+       
         if (DifférenceDates(d)>10){
             btnModifier.setOpacity(0);
             errModif.setText("Vous ne pouvez plus modifier cette question car vous avez depassez 10 secondes.");
             errModif.setStyle("-fx-text-fill: #D92A27");
             
         }
+        else{
+            btnModifier.setText("");
+        }}
         
         
-        if(!QuestionUserController.m.getSpecialite().equals(QuestionUserController.questionStatic.getSpecialite())){
+        
+        GestionMedecin gm=new GestionMedecin();
+        GestionPatient gp= new GestionPatient();
+        if(FXMLLoginController.docteur){
+        Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+        Medecin m=gm.AfficherMedecinLogin(p.getLogin());
+        if(!m.getSpecialite().equals(QuestionUserController.questionStatic.getSpecialite())){
             shareID.setOpacity(0);
         }
         
-        if(!QuestionUserController.patient.getLogin().equals(QuestionUserController.questionStatic.getId_patient())){
+        if(!FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
             btnModifier.setOpacity(0);
         }
         
-        if(!QuestionUserController.patient.getLogin().equals(QuestionUserController.questionStatic.getId_patient())){
+        if(!FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
             btnSupprimer.setOpacity(0);
         }
-        
+        }
         
         
         
@@ -165,19 +181,19 @@ public class ConsulterQuestionUserController implements Initializable {
                 h.setPadding(new Insets(10, 0, 10, 10));
                 
                 Button modifier= new Button();
-                FontAwesomeIconView f = new FontAwesomeIconView();
-                f.setGlyphName("PENCIL");
-                f.setGlyphSize(14);
-                modifier.setGraphic(f);
+                modifier.setText("Modifier");
+                modifier.setPrefWidth(82);
+                modifier.setPrefHeight(27);
                 
                 modifier.setUserData(r);
                 modifier.setOnAction((event) -> {
+                    
                     reponseStatic=(Reponse)modifier.getUserData();
                     try {
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
-                        Parent root=loader.load();
-                        Scene s = paneID.getScene();
-                        s.setRoot(root);
+                        AnchorPane a = FXMLLoader.load(getClass().getResource("ModifierReponse.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+                        
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(ConsulterQuestionUserController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -185,10 +201,9 @@ public class ConsulterQuestionUserController implements Initializable {
                 });
                 
                 Button supprimer= new Button();
-                FontAwesomeIconView f1 = new FontAwesomeIconView();
-                f1.setGlyphName("TRASH");
-                f1.setGlyphSize(14);
-                supprimer.setGraphic(f1);
+                supprimer.setText("Supprimer");
+                supprimer.setPrefWidth(82);
+                supprimer.setPrefHeight(27);
                 
                 supprimer.setUserData(r);
                 
@@ -210,10 +225,10 @@ public class ConsulterQuestionUserController implements Initializable {
                             
                         }
                         
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
-                        Parent root=loader.load();
-                        Scene s = paneID.getScene();
-                        s.setRoot(root);
+                        ScrollPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestionUser.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+                        
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(ConsulterQuestionUserController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -233,10 +248,11 @@ public class ConsulterQuestionUserController implements Initializable {
 
     @FXML
     private void retourBtnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("QuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        ScrollPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
 
     @FXML
@@ -250,12 +266,23 @@ public class ConsulterQuestionUserController implements Initializable {
         }else{
             //btnModifier.setText("Valider");
             
-           GestionQuestion gq = new GestionQuestion();
+            if(textAreaID.getText().length()<30){
+            Alert alerte = new Alert(Alert.AlertType.WARNING);
+            alerte.setTitle("Dialogue d'erreur");
+            alerte.setHeaderText("Attention !");
+            alerte.setContentText("Votre question doit avoir au mois 30 caractères...");
+            alerte.show();
+            }
+            else{
+            
+            
+            GestionQuestion gq = new GestionQuestion();
             gq.updateQuestion(QuestionUserController.questionStatic.getId(),textAreaID.getText());
             QuestionUserController.questionStatic.setQuestion(textAreaID.getText());
             textAreaID.setOpacity(0);
             questionLabel.setText(textAreaID.getText());
             btnModifier.setUserData(0);
+            }
         }
     }
 
@@ -275,23 +302,20 @@ public class ConsulterQuestionUserController implements Initializable {
         }else{
             
         }
+        AnchorPane a = FXMLLoader.load(getClass().getResource("QuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("QuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+       
         
     }
 
     @FXML
     private void shareIDAction(ActionEvent event) throws IOException {
         
+        AnchorPane a = FXMLLoader.load(getClass().getResource("RepondreQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
         
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("RepondreQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
         
         
     }

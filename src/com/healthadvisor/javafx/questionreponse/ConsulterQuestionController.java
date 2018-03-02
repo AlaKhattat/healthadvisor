@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Question;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.service.impl.GestionQuestion;
 import com.healthadvisor.service.impl.GestionReponse;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -32,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -154,27 +156,22 @@ public class ConsulterQuestionController implements Initializable {
             
         }
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("question.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        AnchorPane a = FXMLLoader.load(getClass().getResource("question.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
 
     @FXML
     private void retourAction(ActionEvent event) throws IOException {
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("question.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("question.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
     }
 
     private void btnRepondre(ActionEvent event) throws IOException {
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("RepondreQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("RepondreQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
     }
 
     @FXML
@@ -193,18 +190,18 @@ public class ConsulterQuestionController implements Initializable {
             
         }
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestion.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestion.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
     }
 
     private void modifierReponseBtn(ActionEvent event) throws IOException {
-        questionMain qm = new questionMain();
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
-        Parent root=loader.load();
-        Scene s = tableID.getScene();
-        s.setRoot(root);
+        
+        AnchorPane a = FXMLLoader.load(getClass().getResource("ModifierReponse.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+        
     }
 
     @FXML

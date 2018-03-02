@@ -63,7 +63,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
     @FXML
     private DialogPane pane;
     public static Patient patient;
-    public static double IMC;
+    //public static double IMC;
    
 
     /*public void setEtat(int etat) {
@@ -94,7 +94,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
         this.sexe.setValue(sexe.getItems().get(0));
 
         this.spin.setVisible(false);
-        IMC = 0;
+        
         
         patient = new Patient(FXMLLoginController.pseudo, " "," ","");
       
@@ -206,7 +206,7 @@ public class FXMLAjoutIMCViewController implements Initializable {
             @Override
             public void run() {
                 spin.setVisible(false);
-                IMC = info.calculIMC(info);
+                FXMLImcController.IMC = info.calculIMC(info);
                    Platform.runLater(() -> {
                        FXMLAjoutIMCViewController.stage.close();
                 });
@@ -248,7 +248,7 @@ public void closeIMCAJOUT()
             this.age.setText(Integer.toString(info.getAge()));
             this.poid.setText(Double.toString(info.getPoids()));
             this.sexe.setValue(info.getSexe());
-            IMC = info.calculIMC(info);
+            FXMLImcController.IMC = info.calculIMC(info);
         }
        
     }

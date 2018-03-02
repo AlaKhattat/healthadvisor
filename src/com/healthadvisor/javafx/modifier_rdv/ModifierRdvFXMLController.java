@@ -7,11 +7,14 @@ package com.healthadvisor.javafx.modifier_rdv;
 
 import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.javafx.routes.Routes;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.jfoenix.controls.JFXButton;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -39,6 +42,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -65,13 +69,15 @@ public class ModifierRdvFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("Initialisation Modif");
         if(EditRdvFXMLController.editDone==true){
             AlertMessage am=new AlertMessage();
             am.showPopup("Modification Effectuée", "Votre demande de modification de Rendez-Vous est pris en charge", 1,alertPane);
             EditRdvFXMLController.editDone=false;
         }
         GestionRendezVous grdv =new GestionRendezVous();
-        for(Rendez_Vous rdv :grdv.ListRendez_Vous("firas")){
+        System.out.println("Modifier Rdv Interface");
+        for(Rendez_Vous rdv :grdv.ListRendez_Vous(FXMLLoginController.pseudo)){
             if(rdv.getStatut_rendezvous().equals("ANNULE")){
                 System.out.println("annule");
             }
@@ -119,9 +125,8 @@ public class ModifierRdvFXMLController implements Initializable {
                             r.setStatut_rendezvous(StatutRendezVousEnum.ANNULE.name());
                             grdv.ModifierRendezVous(r);
                             try {
-                            FXMLLoader loader=new FXMLLoader(getClass().getResource("ModifierRdvFXML.fxml"));
-                            Parent root=loader.load();
-                            annule.getScene().setRoot(root);
+                          AnchorPane modifierrdv = FXMLLoader.load(getClass().getResource(Routes.MODIFRDV));
+                          FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,modifierrdv);
                         } catch (IOException ex) {
                             Logger.getLogger(ModifierRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -161,9 +166,8 @@ public class ModifierRdvFXMLController implements Initializable {
                             stage.showAndWait();
                             
                             try {
-                            FXMLLoader loader2=new FXMLLoader(getClass().getResource("ModifierRdvFXML.fxml"));
-                            Parent root2=loader2.load();
-                            annule.getScene().setRoot(root2);
+                            AnchorPane modifierrdv = FXMLLoader.load(getClass().getResource(Routes.MODIFRDV));
+                          FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,modifierrdv);
                             
                         } catch (IOException ex) {
                             Logger.getLogger(ModifierRdvFXMLController.class.getName()).log(Level.SEVERE, null, ex);

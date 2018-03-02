@@ -50,7 +50,7 @@ public class ProgrammeRegime
                                  Type_Aliment.cacao.toString(),
                                  Type_Aliment.pains.toString(),
                                  Type_Aliment.thes.toString());
-     dejDense = Arrays.asList(Type_Aliment.oeufs.toString(),
+     dejDense = Arrays.asList(Type_Aliment.ouefs.toString(),
                               Type_Aliment.poissons.toString(),
                               Type_Aliment.viandes.toString(),
                               Type_Aliment.pates.toString(),
@@ -66,7 +66,7 @@ public class ProgrammeRegime
                                 Type_Aliment.haricot_sec.toString());
      proteines = Arrays.asList(Type_Aliment.cereales.toString(),
                                Type_Aliment.laitier.toString(),
-                               Type_Aliment.oeufs.toString(),
+                               Type_Aliment.ouefs.toString(),
                                Type_Aliment.poissons.toString(),
                                Type_Aliment.viandes.toString(),
                                Type_Aliment.volailles.toString(),
@@ -77,7 +77,7 @@ public class ProgrammeRegime
                               Type_Aliment.jus.toString(),
                               Type_Aliment.matiereGrasse.toString(),
                               Type_Aliment.legumes.toString(),
-                              Type_Aliment.oeufs.toString(),
+                              Type_Aliment.ouefs.toString(),
                               Type_Aliment.poissons.toString()
                               );
     }

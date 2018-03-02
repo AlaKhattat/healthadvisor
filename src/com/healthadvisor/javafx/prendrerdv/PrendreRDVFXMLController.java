@@ -9,6 +9,7 @@ import com.healthadvisor.entities.Rendez_Vous;
 import com.healthadvisor.enumeration.StatutRendezVousEnum;
 import com.healthadvisor.javafx.affichermedecin.FXMLAfficherMedecinController;
 import static com.healthadvisor.javafx.article.ListeArticleFXMain.stage;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionRendezVous;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -36,8 +37,10 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
@@ -61,7 +64,31 @@ public class PrendreRDVFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(FXMLAfficherMedecinController.med.getLogin_med());
-final Callback<DatePicker, DateCell> dayCellFactory = 
+
+if(LocalTime.now().isAfter(LocalTime.of(17, 30)) && LocalTime.now().isBefore(LocalTime.of(23, 59)) ){
+    final Callback<DatePicker, DateCell> dayCellFactory = 
+            new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                           
+                            if (item.isBefore(LocalDate.now().plusDays(1)) || item.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                            }   
+                    }
+                };
+            }
+        };
+datePickerRDV.setDayCellFactory(dayCellFactory);
+datePickerRDV.setValue(LocalDate.now().plusDays(1));
+hourMinCombobox.getSelectionModel().select("09:30");
+}
+else if(LocalTime.now().isBefore(LocalTime.of(7, 30)) && LocalTime.now().isAfter(LocalTime.of(00,01))){
+    final Callback<DatePicker, DateCell> dayCellFactory = 
             new Callback<DatePicker, DateCell>() {
                 @Override
                 public DateCell call(final DatePicker datePicker) {
@@ -78,19 +105,32 @@ final Callback<DatePicker, DateCell> dayCellFactory =
                 };
             }
         };
-if(LocalTime.now().isAfter(LocalTime.of(17, 30)) && LocalTime.now().isBefore(LocalTime.of(23, 59)) ){
-datePickerRDV.setValue(LocalDate.now().plusDays(1));
-hourMinCombobox.getSelectionModel().select("09:30");
-}
-else if(LocalTime.now().isBefore(LocalTime.of(7, 30)) && LocalTime.now().isAfter(LocalTime.of(00,01))){
+datePickerRDV.setDayCellFactory(dayCellFactory);
 datePickerRDV.setValue(LocalDate.now());
 hourMinCombobox.getSelectionModel().select("09:30");   
 }
 else{
+    final Callback<DatePicker, DateCell> dayCellFactory = 
+            new Callback<DatePicker, DateCell>() {
+                @Override
+                public DateCell call(final DatePicker datePicker) {
+                    return new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                           
+                            if (item.isBefore(LocalDate.now()) || item.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                                    setDisable(true);
+                                    setStyle("-fx-background-color: #ffc0cb;");
+                            }   
+                    }
+                };
+            }
+        };
+datePickerRDV.setDayCellFactory(dayCellFactory);
 datePickerRDV.setValue(LocalDate.now());
 hourMinCombobox.getSelectionModel().select((LocalTime.now().getHour()+2)+":00");
 }
-datePickerRDV.setDayCellFactory(dayCellFactory);
 String[] hhmm={
 "09:30",
 "10:00",
@@ -120,7 +160,7 @@ hourMinCombobox.setItems(sl);
         //Preparation Objet RDV
         Rendez_Vous rdv=new Rendez_Vous();
         rdv.setMedecin_id(FXMLAfficherMedecinController.med.getLogin_med());
-        rdv.setPatient_id("firas");
+        rdv.setPatient_id(FXMLLoginController.pseudo);
         rdv.setStatut_rendezvous(StatutRendezVousEnum.ENCOURS.name());
         //Manipulation de date
             String prepDate = datePickerRDV.getValue().toString()+","+hourMinCombobox.getValue();

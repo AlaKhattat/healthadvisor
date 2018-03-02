@@ -5,13 +5,16 @@
  */
 package com.healthadvisor.javafx.questionreponse;
 
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Reponse;
 import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionReponse;
 import com.healthadvisor.service.impl.GestionUtilisateur;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
@@ -69,7 +73,7 @@ public class RepondreQuestionController implements Initializable {
         }else{
         QuestionController qc = new QuestionController();
         GestionReponse gr = new GestionReponse();
-        Reponse r = new Reponse(0,textAreaID.getText(),QuestionUserController.m.getLogin_med(), QuestionUserController.questionStatic,new java.sql.Timestamp(new java.util.Date().getTime()));
+        Reponse r = new Reponse(0,textAreaID.getText(),FXMLLoginController.pseudo, QuestionUserController.questionStatic,new java.sql.Timestamp(new java.util.Date().getTime()));
         gr.ajouterReponse(r);
         
         Alert alerte = new Alert(Alert.AlertType.INFORMATION);
@@ -79,19 +83,20 @@ public class RepondreQuestionController implements Initializable {
         alerte.show();
        
         
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("ConsulterQuestionUser.fxml"));
-        Parent root=loader.load();
-        Scene s = paneID.getScene();
-        s.setRoot(root);
+        ScrollPane a = FXMLLoader.load(getClass().getResource("ConsulterQuestionUser.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane, a);
+        
+       
         
         
         GestionUtilisateur gu = new GestionUtilisateur();
         GestionPatient gp = new GestionPatient();
-        Utilisateur u = gu.AfficherUtilisateurCin(QuestionUserController.patient.getCin_user());
+        Utilisateur u = gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
         
-        
+               GestionMedecin gm=new GestionMedecin();
+        Medecin m=gm.AfficherMedecinLogin(FXMLLoginController.pseudo); 
         SendEmail sm = new SendEmail();
-        sm.sendMail("healthadvisoresprit@gmail.com", "projetpidev", u.getEmail() , "Questions & Réponses", "Docteur "+QuestionUserController.m.getLogin_med()+ " a répondu à votre question.\n Question : "+QuestionUserController.questionStatic.getQuestion()+"\n Réponse : "+textAreaID.getText());
+        sm.sendMail("healthadvisoresprit@gmail.com", "projetpidev", u.getEmail() , "Questions & Réponses", "Docteur "+m.getNom()+" "+m.getPrenom()+" a répondu à votre question.\n Question : "+QuestionUserController.questionStatic.getQuestion()+"\n Réponse : "+textAreaID.getText());
         
         
         

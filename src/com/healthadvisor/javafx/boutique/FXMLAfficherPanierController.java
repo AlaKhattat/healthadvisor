@@ -5,7 +5,8 @@ import com.healthadvisor.entities.Commande;
 import com.healthadvisor.entities.Ligne_Commande;
 import com.healthadvisor.javamail.pdf;
 import com.healthadvisor.entities.Produit;
-import static com.healthadvisor.javafx.boutique.FXMLAfficherProduitController.panier;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import static com.healthadvisor.javafx.login_fx.FXMLLoginController.panier;
 import static com.healthadvisor.javamail.EmailAttachmentSender.sendEmailWithAttachments;
 import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.ServiceCommande;
@@ -13,6 +14,7 @@ import com.healthadvisor.service.impl.ServiceLigne_Commande;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
+import health_advisor.FXMLHomeViewController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -82,12 +84,12 @@ public class FXMLAfficherPanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         //afficher prixtotal des produits du panier
-        lblPrix_total.setText("Le prix total est :"+CalculerPrix_Total(panier));
+        lblPrix_total.setText("Le prix total est :"+CalculerPrix_Total(FXMLLoginController.panier));
         
         
         List<Produit> lst_P=new ArrayList<>();
-        for(int i=0;i<panier.size();i++){
-            lst_P.add(servP.ConsulterProduit((String) panier.get(i).get(0)));  
+        for(int i=0;i<FXMLLoginController.panier.size();i++){
+            lst_P.add(servP.ConsulterProduit((String) FXMLLoginController.panier.get(i).get(0)));  
                 }
        
        
@@ -155,13 +157,13 @@ public class FXMLAfficherPanierController implements Initializable {
           esp1.setText("");
           
           Label nb_produits=new Label();
-          nb_produits.setText("Nombre de "+p.getNom()+" est :"+panier.get(indice_prod_panier).get(1).toString());
+          nb_produits.setText("Nombre de "+p.getNom()+" est :"+FXMLLoginController.panier.get(indice_prod_panier).get(1).toString());
           
           Label esp4=new Label();
           esp1.setText("");
           
           Label prix_total=new Label();
-          float prix=servP.ConsulterProduit((String) panier.get(indice_prod_panier).get(0)).getPrix_vente()* Integer.parseInt(panier.get(indice_prod_panier).get(1).toString());
+          float prix=servP.ConsulterProduit((String) FXMLLoginController.panier.get(indice_prod_panier).get(0)).getPrix_vente()* Integer.parseInt(FXMLLoginController.panier.get(indice_prod_panier).get(1).toString());
           float promotion=(prix*p.getPromotion())/100;
           prix_total.setText("Prix total est :"+(prix-promotion)+"DT");
           
@@ -215,7 +217,7 @@ public class FXMLAfficherPanierController implements Initializable {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                int nb_prod=(int) panier.get(indice_produit).get(1);
+                int nb_prod=(int) FXMLLoginController.panier.get(indice_produit).get(1);
                 List<Integer> choices = new ArrayList<>();
                 for(int i=1;i<nb_prod;i++){
                     choices.add(i);
@@ -230,10 +232,10 @@ public class FXMLAfficherPanierController implements Initializable {
                 Optional<Integer> result = dialog.showAndWait();
                 if (result.isPresent()){
                     
-                    lblPrix.setText("Le prix total est"+CalculerPrix_DiminuerQte(p,Integer.parseInt(panier.get(indice_produit).get(1).toString()),result.get()));
-                    panier.get(indice_produit).set(1,Integer.parseInt(panier.get(indice_produit).get(1).toString())-result.get());
-                    lbl_NBproduits.setText("Nombre de "+p.getNom()+" est :"+panier.get(indice_produit).get(1).toString());
-                    lblPrix_total.setText("Le prix total est"+CalculerPrix_Total(panier));
+                    lblPrix.setText("Le prix total est"+CalculerPrix_DiminuerQte(p,Integer.parseInt(FXMLLoginController.panier.get(indice_produit).get(1).toString()),result.get()));
+                    FXMLLoginController.panier.get(indice_produit).set(1,Integer.parseInt(FXMLLoginController.panier.get(indice_produit).get(1).toString())-result.get());
+                    lbl_NBproduits.setText("Nombre de "+p.getNom()+" est :"+FXMLLoginController.panier.get(indice_produit).get(1).toString());
+                    lblPrix_total.setText("Le prix total est"+CalculerPrix_Total(FXMLLoginController.panier));
                     Reload();
                     
         }
@@ -252,17 +254,17 @@ public class FXMLAfficherPanierController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 
-                panier.remove(indice_produit);
-                lblPrix_total.setText("Le prix total est"+CalculerPrix_Total(panier));
-                FXMLAfficherProduitController.nb_produits_panier=FXMLAfficherProduitController.nb_produits_panier-1;
+                FXMLLoginController.panier.remove(indice_produit);
+                lblPrix_total.setText("Le prix total est"+CalculerPrix_Total(FXMLLoginController.panier));
+                FXMLLoginController.nb_produits_panier=FXMLLoginController.nb_produits_panier-1;
                 pan_panier.getChildren().removeAll(scroll);
                 pan_panier.getChildren().removeAll(s);
                 g=new GridPane();
                 s=new ScrollPane();
                 Configurer_GridScroll(g,s);
                 List<Produit> lst_P=new ArrayList<>();
-                for(int i=0;i<panier.size();i++){
-                    lst_P.add(servP.ConsulterProduit((String) panier.get(i).get(0)));  
+                for(int i=0;i<FXMLLoginController.panier.size();i++){
+                    lst_P.add(servP.ConsulterProduit((String) FXMLLoginController.panier.get(i).get(0)));  
                 }
                 for(int i=0;i<lst_P.size();i++)
                 {
@@ -276,10 +278,8 @@ public class FXMLAfficherPanierController implements Initializable {
     @FXML
     private void InterfaceAjouter(ActionEvent event) {
          try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_panier.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,10 +288,8 @@ public class FXMLAfficherPanierController implements Initializable {
     @FXML
     private void InterfaceFiltre(ActionEvent event) {
          try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduit.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_panier.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduit.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -300,10 +298,8 @@ public class FXMLAfficherPanierController implements Initializable {
     @FXML
     private void InterfacePublie(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduitPublie.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_panier.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherProduitPublie.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -313,10 +309,8 @@ public class FXMLAfficherPanierController implements Initializable {
     public void Reload(){
       
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherPanier.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan_panier.getScene(); 
-            s.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherPanier.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -339,7 +333,7 @@ public class FXMLAfficherPanierController implements Initializable {
          String prix="";
         try {
             Commande cmd=new Commande();
-            cmd.setID_client(FXMLProduitController.login_user);
+            cmd.setID_client(FXMLLoginController.pseudo);
             DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             cmd.setDate_commande(date_format.parse(date_format.format(date)));
@@ -347,10 +341,10 @@ public class FXMLAfficherPanierController implements Initializable {
             cmd.setReference_commande("123464"); // ce code doit étre généré aléatoirement
             servC.AjouterCommande(cmd);
             Commande c=servC.ConsulterCommande(cmd.getReference_commande());
-            for(int i=0;i<panier.size();i++){
+            for(int i=0;i<FXMLLoginController.panier.size();i++){
                 Ligne_Commande lc=new Ligne_Commande();
                 lc.setId_commande(c.getNum_commande());
-                Produit p=servP.ConsulterProduit(panier.get(i).get(0).toString());
+                Produit p=servP.ConsulterProduit(FXMLLoginController.panier.get(i).get(0).toString());
                 lc.setId_produit(p.getId_produit());
                 lc.setQuantite(Integer.parseInt(panier.get(i).get(1).toString()));
                 lc.setPrix_commande(CalculerPrix_Total(panier));
@@ -378,7 +372,7 @@ public class FXMLAfficherPanierController implements Initializable {
         String[] attachFiles = new String[1];
        // attachFiles[0] = "C:/Users/HABOUB/Desktop/althere.jpeg";
        // attachFiles[1] = "C:/Users/HABOUB/Desktop/Prosit_4_Partie1.pdf";
-        attachFiles[0] = "C:/Users/HABOUB/Documents/NetBeansProjects/Health_Advisorr/facture.pdf";
+        attachFiles[0] = "C:/Users/aaa/Documents/NetBeansProjects/Health_Advisorr/facture.pdf";
  
         try {
             sendEmailWithAttachments( mailFrom, password, mailTo,subject, message, attachFiles);
@@ -433,7 +427,7 @@ public class FXMLAfficherPanierController implements Initializable {
     
     //griser button diminuer si qte=1
     public void DisableButton_Diminuer(JFXButton btn,int indice_produit){
-        if(Integer.parseInt(panier.get(indice_produit).get(1).toString())==1){
+        if(Integer.parseInt(FXMLLoginController.panier.get(indice_produit).get(1).toString())==1){
             btn.setDisable(true);
         }
     }

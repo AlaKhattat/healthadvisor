@@ -202,19 +202,19 @@ public class InfoSante
       {
           result="vous etes en etat de Maigreur suivez un de nos regime";
       }
-      else if(IMC >= 18.5 && IMC < 25 )
+      else if(IMC >= 18.5 && IMC < 25d )
       {
           result="vous avez une Corpulence normale ";
       }
-      else if(IMC >= 25 && IMC < 30 )
+      else if(IMC >= 25 && IMC < 30d )
       {
           result="vous etes en etat de Surpoids suivez un de nos regimes";
       }
-      else if(IMC >= 30 && IMC < 35 )
+      else if(IMC >= 30 && IMC < 35d )
       {
           result="vous etes en etat d'Obesite moderee suivez un de nos regimes";
       }
-      else if(IMC >= 35 && IMC < 40 )
+      else if(IMC >= 35 && IMC < 40d )
       {
           result="vous etes en etat d'Obesite severe suivez un de nos regime";
       }
@@ -222,6 +222,7 @@ public class InfoSante
       {
           result="vous etes en etat Obesité morbide suivez un de nos regime";      
       }
+      
       return result;
     }
     
