@@ -108,7 +108,7 @@ if(FXMLLoginController.admin){
             StackPane GererUtil = FXMLLoader.load(getClass().getResource(Routes.GererUtilisateur));
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
-            AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUE));
+            AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUEADMIN));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEADMIN));
             /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));

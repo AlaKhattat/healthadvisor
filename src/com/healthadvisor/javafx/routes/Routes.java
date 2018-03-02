@@ -33,5 +33,6 @@ public class Routes {
     public static String EVENEMENT ="/com/healthadvisor/javafx/evenement/NaviguerEvenementsFXML.fxml";
     public static String ARTICLE ="/com/healthadvisor/javafx/article/NaviguerArticlesFXML.fxml";
     public static String MODIFRDV ="/com/healthadvisor/javafx/modifier_rdv/ModifierRdvFXML.fxml";
+    public static String BOUTIQUEADMIN ="/com/healthadvisor/javafx/boutique/FXMLGererProduit_Admin.fxml";
     
 }

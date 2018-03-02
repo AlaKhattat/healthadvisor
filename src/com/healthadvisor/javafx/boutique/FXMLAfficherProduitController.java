@@ -484,10 +484,8 @@ public class FXMLAfficherProduitController implements Initializable {
     @FXML
     private void Passer(ActionEvent event) {
         try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherPanier.fxml")); 
-            Parent root=loader.load();
-            Scene s = pan.getScene(); 
-            s.setRoot(root);
+             AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("FXMLAfficherPanier.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -542,21 +540,21 @@ public class FXMLAfficherProduitController implements Initializable {
 
     @FXML
     private void txt_promMIN_C(KeyEvent event) {
-       if(ControleSaisie_Float(txt_promMIN, prom_minC, prom_maxC, txt_promMAX,1)==true){
+       if(ControleSaisie_Float(txt_promMIN, prom_minC, prom_maxC, txt_promMAX)==true){
         prom_minC=false;
        }
     }
 
     @FXML
     private void txt_promMAX_C(KeyEvent event) {
-       if(ControleSaisie_Float(txt_promMIN, prom_minC, prom_maxC, txt_promMAX,1)==true){
+       if(ControleSaisie_Float(txt_promMIN, prom_minC, prom_maxC, txt_promMAX)==true){
            prom_maxC=false;
        }
     }
 
     @FXML
     private void txt_prixMIN_C(KeyEvent event) {
-        if(ControleSaisie_Float(txt_prixMIN, prix_maxC, prix_minC, txt_prixMAX,0)==true){
+        if(ControleSaisie_Float(txt_prixMIN, prix_maxC, prix_minC, txt_prixMAX)==true){
          prix_minC=false;   
         }
         
@@ -564,7 +562,7 @@ public class FXMLAfficherProduitController implements Initializable {
 
     @FXML
     private void txt_prixMAX_C(KeyEvent event) {
-        if(ControleSaisie_Float(txt_prixMIN, prix_maxC, prix_minC, txt_prixMAX,0)==true){
+        if(ControleSaisie_Float(txt_prixMIN, prix_maxC, prix_minC, txt_prixMAX)==true){
          prix_maxC=false;   
         }
     }
@@ -573,7 +571,7 @@ public class FXMLAfficherProduitController implements Initializable {
     
     
 
-     public boolean ControleSaisie_Float(JFXTextField txtmin,boolean verifmin,boolean verifmax,JFXTextField txtmax,int x){
+     public boolean ControleSaisie_Float(JFXTextField txtmin,boolean verifmin,boolean verifmax,JFXTextField txtmax){
        boolean res=false;
          String min=txtmin.getText();
         String max=txtmax.getText();
@@ -581,15 +579,9 @@ public class FXMLAfficherProduitController implements Initializable {
           
        float res_min=Float.parseFloat(min);
        float res_max=Float.parseFloat(max);
+           System.out.println(res_min+"    hello");
        if(res_min<0 || res_max <0){
-           if(x==1){
-               if(res_min>=100 || res_max>=100){
-                   txtmin.setFocusColor(Color.RED);
-                    txtmax.setFocusColor(Color.RED);
-                    verifmin=false;
-                    verifmax=false;
-               }
-           }
+         
            txtmin.setFocusColor(Color.RED);
            txtmax.setFocusColor(Color.RED);
            verifmin=false;
@@ -615,11 +607,12 @@ public class FXMLAfficherProduitController implements Initializable {
            }
        }catch(NumberFormatException ex)  {
        txtmin.setFocusColor(Color.RED);
-       txtmin.setFocusColor(Color.RED);
+       //txtmin.setFocusColor(Color.RED);
        verifmin=false;
        verifmax=false;
        res=true;
-           System.err.println(verifmin+"   "+verifmax);
+       return res;
+          // System.err.println(verifmin+"   "+verifmax);
     }
        return res;
     }

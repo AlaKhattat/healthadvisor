@@ -372,7 +372,7 @@ public class FXMLAfficherPanierController implements Initializable {
         String[] attachFiles = new String[1];
        // attachFiles[0] = "C:/Users/HABOUB/Desktop/althere.jpeg";
        // attachFiles[1] = "C:/Users/HABOUB/Desktop/Prosit_4_Partie1.pdf";
-        attachFiles[0] = "C:/Users/aaa/Documents/NetBeansProjects/Health_Advisorr/facture.pdf";
+        attachFiles[0] = "C:/Users/aaa/Documents/NetBeansProjects/healthadvisor/facture.pdf";
  
         try {
             sendEmailWithAttachments( mailFrom, password, mailTo,subject, message, attachFiles);

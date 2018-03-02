@@ -131,7 +131,7 @@ public class FXMLProduitController implements Initializable {
     
     
     
-    private boolean ref_C=false,nom_C=false,prix_C=false,type_Ctrl=false,prom_C=false,qnte_C=false;
+    private boolean ref_C=true,nom_C=true,prix_C=true,type_Ctrl=true,prom_C=true,qnte_C=true;
     private Desktop desktop = Desktop.getDesktop();
     ServiceProduit servP=new ServiceProduit();
     private Path url_destination,url_source;
