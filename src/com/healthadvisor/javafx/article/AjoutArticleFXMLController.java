@@ -3,11 +3,16 @@ package com.healthadvisor.javafx.article;
 
 import com.healthadvisor.entities.Article;
 import com.healthadvisor.entities.Medecin;
+import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionArticle;
+import com.healthadvisor.service.impl.GestionMedecin;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -77,8 +82,10 @@ public class AjoutArticleFXMLController implements Initializable {
     private ObservableList<String> tagsOL = FXCollections.observableArrayList(tagsList);
     
     Date d3 = new Date(1970, 17, 4, 9, 5, 3);
-    Medecin m=new Medecin(); //SESSION MEDECIN
-    @FXML
+   GestionPatient gp=new GestionPatient();
+    GestionMedecin gm=new GestionMedecin();
+     
+            @FXML
     private FontAwesomeIconView back;
     @FXML
     private JFXButton imgBut;
@@ -120,7 +127,7 @@ public class AjoutArticleFXMLController implements Initializable {
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("Choisir une image");
         fileChooser.setInitialDirectory(
-                new File("C:\\Users\\Tarek\\Desktop\\")
+                new File("C:\\Users\\aaa\\Desktop\\")
         );
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -131,6 +138,9 @@ public class AjoutArticleFXMLController implements Initializable {
 
     @FXML
     private void ajoutArtFx(ActionEvent event) throws IOException {
+          Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+
+    Medecin m=gm.AfficherMedecinLogin(p.getLogin());
         String titre = titreF.getText();
         String desc = descF.getText();
         String cont = contF.getText();
@@ -140,8 +150,7 @@ public class AjoutArticleFXMLController implements Initializable {
         if (permission == true) {
             ga.ajouterArticle(a);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsArticlesFXML.fxml"));
-            Parent root;
-            root = loader.load();
+           
             DetailsArticlesFXMLController details = loader.getController();
             details.setTitreL(titre);
             details.setDescL(desc);
@@ -151,8 +160,8 @@ public class AjoutArticleFXMLController implements Initializable {
             int id=ga.dernierArt();
             details.setId(id);
             details.setRetour(retour);
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+           AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } else {
             Alert al;
             al = new Alert(Alert.AlertType.ERROR);
@@ -166,24 +175,16 @@ public class AjoutArticleFXMLController implements Initializable {
     @FXML
     private void redirectBack(MouseEvent event) {
         if (retour.equals("navig")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                NaviguerArticlesFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+              AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("NaviguerArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(NaviguerArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (retour.equals("mes")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                MesArticlesFXMLController mes = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+                         AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("MesArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(MesArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }

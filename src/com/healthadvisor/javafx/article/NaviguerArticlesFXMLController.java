@@ -3,6 +3,7 @@ package com.healthadvisor.javafx.article;
 import com.healthadvisor.entities.Article;
 import com.healthadvisor.service.impl.GestionArticle;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -74,8 +75,7 @@ public class NaviguerArticlesFXMLController implements Initializable {
                     double note = a.getNote();
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("LireArticleFXML.fxml"));
-                        Parent root;
-                        root = loader.load();
+                
                         LireArticleFXMLController cnt = loader.getController();
                         DetailsArticlesFXMLController details=new DetailsArticlesFXMLController();
                         AjoutArticleFXMLController ajout=new AjoutArticleFXMLController();
@@ -90,8 +90,8 @@ public class NaviguerArticlesFXMLController implements Initializable {
                         cnt.setUrl(a.getImage());
                         cnt.setRetour("navig");
                         details.setRetour("navig");             
-                        Scene scene = anchor.getScene();
-                        scene.setRoot(root);
+                           AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("LireArticleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
                     } catch (IOException ex) {
                         Logger.getLogger(NaviguerArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -119,13 +119,9 @@ public class NaviguerArticlesFXMLController implements Initializable {
 
     @FXML
     private void redirectBack(MouseEvent event) {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
         try {
-            Parent root;
-            root = loader.load();
-            InterfacePrincipaleFXMLController interf = loader.getController();
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+                  AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("InterfacePrincipaleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -133,14 +129,12 @@ public class NaviguerArticlesFXMLController implements Initializable {
 
     @FXML
     private void ajoutArt(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutArticleFXML.fxml"));
         try {
-            Parent root;
-            root = loader.load();
-            AjoutArticleFXMLController ajoutA = loader.getController();
+       
+            AjoutArticleFXMLController ajoutA = new AjoutArticleFXMLController();
             ajoutA.setRetour("navig");
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("AjoutArticleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }

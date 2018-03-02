@@ -103,8 +103,8 @@ public class EmailAttachmentSender {
         // SMTP info
       //  String host = "smtp.gmail.com";
        // String port = "587";
-        String mailFrom = "habib.hentati@esprit.tn";
-        String password = "motdepasse58633912";
+        String mailFrom = "healthadvisoresprit@gmail.com";
+        String password = "projetpidev";
  
         // message info
         String mailTo = "habib-hentati@hotmail.com";

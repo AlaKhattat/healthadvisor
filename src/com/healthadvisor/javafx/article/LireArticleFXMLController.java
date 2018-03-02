@@ -3,9 +3,12 @@ package com.healthadvisor.javafx.article;
 
 import com.healthadvisor.entities.Article;
 import com.healthadvisor.entities.Article_Votes;
+import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionArticle;
 import com.healthadvisor.service.impl.GestionArticleVotes;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -36,6 +39,7 @@ import com.itextpdf.text.Element;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.sql.Date;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -80,8 +84,9 @@ public class LireArticleFXMLController implements Initializable {
     private static Font contFont = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.NORMAL);
 
     Date d2 = new Date(1970, 9, 9);
-    Patient p=new Patient(); //SESSION PATIENT
-    
+    GestionPatient gp= new GestionPatient();
+         Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         validCombo.getItems().addAll("Valider", "Retirer");
@@ -93,7 +98,7 @@ public class LireArticleFXMLController implements Initializable {
         try {
             Document doc = new Document();
             try {
-                PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\Tarek\\Desktop\\"+titre.getText() + ".pdf"));
+                PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\aaa\\Desktop\\"+titre.getText() + ".pdf"));
 
             } catch (DocumentException ex) {
                 Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,25 +181,17 @@ public class LireArticleFXMLController implements Initializable {
     @FXML
     private void redirectBack(MouseEvent event) {
         if (retour.equals("mes")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                MesArticlesFXMLController mes = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+         AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("MesArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(MesArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else if (retour.equals("navig")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                NaviguerArticlesFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+                AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("NaviguerArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(NaviguerArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -207,8 +204,7 @@ public class LireArticleFXMLController implements Initializable {
         try {
             GestionArticle ga = new GestionArticle();
             Article art = ga.rechercheRef(id);
-            Parent root;
-            root = loader.load();
+        
             ModifArticleFXMLController cnt = loader.getController();
             cnt.setRef(id);
             cnt.setContF(cont.getText());
@@ -218,8 +214,8 @@ public class LireArticleFXMLController implements Initializable {
             cnt.setTitreF(titre.getText());
             cnt.setRetour(retour);
             cnt.affichage = true;
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+             AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("ModifArticleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
 

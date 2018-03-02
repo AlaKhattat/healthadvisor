@@ -3,13 +3,16 @@ package com.healthadvisor.javafx.evenement;
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Evenement_Participants;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionEvenement;
 import com.healthadvisor.service.impl.GestionEvenementParticipants;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,7 +82,6 @@ public class AjoutEvenementFXMLController implements Initializable {
     private boolean permission;
     private Desktop desktop = Desktop.getDesktop();
     Date d2 = new Date(1970, 9, 9);
-    Patient p=new Patient(); //SESSION PATIENT
     
     private String retour;
     @FXML
@@ -139,7 +141,7 @@ public class AjoutEvenementFXMLController implements Initializable {
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("Choisir une image");
         fileChooser.setInitialDirectory(
-                new File("C:\\Users\\Tarek\\Desktop\\")
+                new File("C:\\Users\\aaa\\Desktop\\")
         );
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -157,8 +159,10 @@ public class AjoutEvenementFXMLController implements Initializable {
         String type = typeCombo.getSelectionModel().getSelectedItem().toString();
         int max = Integer.parseInt(maxF.getText());
         if (permission == true) {
+            GestionPatient gp=new GestionPatient();
+            Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
             GestionEvenement ge = new GestionEvenement();
-            Evenement e = new Evenement(nom, date, heure, endroit, type, max, url_image, p);
+            Evenement e = new Evenement(nom, date, heure, endroit, type, max, url_image,p );
             ge.ajouterEvenement(e);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsEvenementsFXML.fxml"));
             Parent root;
@@ -174,8 +178,8 @@ public class AjoutEvenementFXMLController implements Initializable {
             details.setRetour(retour);
             int id = ge.dernierEvt();
             details.setId(id);
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsEvenementsFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } else {
             Alert al;
             al = new Alert(Alert.AlertType.ERROR);
@@ -240,24 +244,16 @@ public class AjoutEvenementFXMLController implements Initializable {
     @FXML
     private void redirectBack(MouseEvent event) {
         if (retour.equals("navig")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerEvenementsFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                NaviguerEvenementsFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+                AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("NaviguerEvenementsFXML.fxml"));
+                FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(NaviguerEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (retour.equals("mes")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesEvenementsFXML.fxml"));
-            try {
-                Parent root;
-                root = loader.load();
-                MesEvenementsFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+            try{
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("MesEvenementsFXML.fxml"));
+                FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(MesEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }

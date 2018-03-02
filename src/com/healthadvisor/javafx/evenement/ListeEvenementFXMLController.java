@@ -5,6 +5,7 @@ import com.healthadvisor.service.impl.GestionEvenement;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.prism.impl.Disposer.Record;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -148,13 +149,9 @@ public class ListeEvenementFXMLController implements Initializable {
 
     @FXML
     private void redirectBack(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfacePrincipaleFXML.fxml"));
         try {
-            Parent root;
-            root = loader.load();
-            InterfacePrincipaleFXMLController interf = loader.getController();
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("InterfacePrincipaleFXML.fxml"));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }

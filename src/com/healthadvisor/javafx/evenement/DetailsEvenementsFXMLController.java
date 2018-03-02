@@ -3,6 +3,7 @@ package com.healthadvisor.javafx.evenement;
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.service.impl.GestionEvenement;
 import com.jfoenix.controls.JFXButton;
+import health_advisor.FXMLHomeViewController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,6 +53,18 @@ public class DetailsEvenementsFXMLController implements Initializable {
     private JFXButton modif;
     @FXML
     private JFXButton back;
+    
+    Evenement e=new Evenement();
+
+    public Evenement getE() {
+        return e;
+    }
+
+    public void setE(Evenement e) {
+        this.e = e;
+    }
+    
+    
     
     private int id;
     private String retour;
@@ -136,13 +149,11 @@ public class DetailsEvenementsFXMLController implements Initializable {
 
     @FXML
     private void redirectModif(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifEvenementFXML.fxml"));
         try {
-            Parent root;
-            root = loader.load();
+        
             GestionEvenement ge=new GestionEvenement();
             Evenement evt=ge.rechercherID(id);
-            ModifEvenementFXMLController cnt = loader.getController();
+            ModifEvenementFXMLController cnt = new ModifEvenementFXMLController();
             Date date=evt.getDate();
             cnt.setDateF(evt.getDate());
             cnt.setEndroitF(evt.getEndroit());
@@ -153,8 +164,8 @@ public class DetailsEvenementsFXMLController implements Initializable {
             cnt.setTimeF(evt.getHeure());
             cnt.setTypeCombo(evt.getType());
             cnt.setRetour(retour);
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("ModifEvenementFXML.fxml"));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(ModifEvenementFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -163,24 +174,18 @@ public class DetailsEvenementsFXMLController implements Initializable {
     @FXML
     private void redirectBack(ActionEvent event) {
         if (retour.equals("navig")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerEvenementsFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                NaviguerEvenementsFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+                AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("NaviguerEvenementsFXML.fxml"));
+                FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
+                NaviguerEvenementsFXMLController nav = new NaviguerEvenementsFXMLController();
             } catch (IOException ex) {
                 Logger.getLogger(NaviguerEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (retour.equals("mes")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesEvenementsFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                MesEvenementsFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+                AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("MesEvenementsFXML.fxml"));
+                FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
+                MesEvenementsFXMLController nav = new MesEvenementsFXMLController();
             } catch (IOException ex) {
                 Logger.getLogger(MesEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }

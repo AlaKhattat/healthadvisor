@@ -2,8 +2,10 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import com.healthadvisor.entities.Utilisateur;
 import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.javafx.login_fx.FXMLLoginController;
+import com.healthadvisor.service.impl.GestionUtilisateur;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -483,17 +485,19 @@ result.ifPresent(usernamePassword -> {
                     for(int i=0;i<lst.size();i++){
                         long nbjours=30-DifférenceDates(lst.get(i).getDate_mise());
                          System.err.println("nbjoursNotif"+nbjours);
+                         GestionUtilisateur gu= new GestionUtilisateur();
+                         Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
                         if(nbjours==20){
-                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré dans 20 jours");
+                        SE.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Expiration produit", "Attention votre produit sera expiré dans 20 jours");
                         CreerNotification("Attention votre annonce sera expiré dans 20 jours","Veuillez rennouveller la publication");
                         
                         }
                         else if(nbjours==10){
-                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré dans 10 jours");
+                        SE.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Expiration produit", "Attention votre produit sera expiré dans 10 jours");
                         CreerNotification("Attention votre annonce sera expiré dans 10 jours","Veuillez rennouveller la publication");
                         }
                         else if(nbjours==1){
-                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré demain");
+                        SE.sendMail("healthadvisoresprit@gmail.com", "projetpidev",u.getEmail(), "Expiration produit", "Attention votre produit sera expiré demain");
                         CreerNotification("Attention votre annonce sera expiré demain","Veuillez rennouveller la publication");
                         
                         }

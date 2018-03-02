@@ -111,8 +111,8 @@ if(FXMLLoginController.admin){
             AnchorPane Boutique = FXMLLoader.load(getClass().getResource(Routes.BOUTIQUEADMIN));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
             AnchorPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEADMIN));
-            /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
+            AnchorPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            AnchorPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
             setNode(holderPane,acceuil);
             drawer.setSidePane(sidePane);
@@ -151,7 +151,7 @@ if(FXMLLoginController.admin){
                                 case "sondage":
                                 drawer.close();                                
                                 setNode(holderPane,Sondage);
-                                break;/*/*
+                                break;
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -159,7 +159,7 @@ if(FXMLLoginController.admin){
                             case "article":
                                 drawer.close();                                
                                 setNode(holderPane,Article);
-                                break; */
+                                break; 
                                                           
                         }
                     });
@@ -188,8 +188,8 @@ rendez_vousP.setOpacity(1);
             ScrollPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSEPATIENT));
             ScrollPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEPATIENT));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
-           /* ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
+            AnchorPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            AnchorPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
             setNode(holderPane,recherche);
             drawer.setSidePane(sidePane);
@@ -232,7 +232,7 @@ rendez_vousP.setOpacity(1);
                             case "bienetre":
                                 drawer.close();                                
                                 setNode(holderPane,BienEtre);
-                                break;/*
+                                break;
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -241,7 +241,7 @@ rendez_vousP.setOpacity(1);
                                 drawer.close();                                
                                 setNode(holderPane,Article);
                                 break; 
-                            */
+                            
                                                             
                         }
                     });
@@ -269,8 +269,8 @@ rendez_vousP.setOpacity(1);
             ScrollPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSEPATIENT));
             ScrollPane Sondage = FXMLLoader.load(getClass().getResource(Routes.SONDAGEPATIENT));
             AnchorPane BienEtre = FXMLLoader.load(getClass().getResource(Routes.BIENETRE));
-            /*ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
+            AnchorPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            AnchorPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
             AnchorPane SuivieRDV = FXMLLoader.load(getClass().getResource(Routes.SuivieRDV_M));
 
        
@@ -315,7 +315,7 @@ rendez_vousP.setOpacity(1);
                             case "bienetre":
                                 drawer.close();                                
                                 setNode(holderPane,BienEtre);
-                                break;/*
+                                break;
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -323,7 +323,7 @@ rendez_vousP.setOpacity(1);
                             case "article":
                                 drawer.close();                                
                                 setNode(holderPane,Article);
-                                break; */
+                                break;
                             case "suivierdv":
                                 Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
                                 Medecin m=gm.AfficherMedecinLogin(p.getLogin());
@@ -357,8 +357,8 @@ rendez_vousP.setOpacity(1);
             AnchorPane Geolocalisation = FXMLLoader.load(getClass().getResource(Routes.GEOLOCALISATION));
             AnchorPane Symptome = FXMLLoader.load(getClass().getResource(Routes.SYMPTOME));
             AnchorPane QuestionReponse = FXMLLoader.load(getClass().getResource(Routes.QUESTIONREPONSE));
-/*            ScrollPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
-            ScrollPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));*/
+           AnchorPane Article = FXMLLoader.load(getClass().getResource(Routes.ARTICLE));
+            AnchorPane Evenement = FXMLLoader.load(getClass().getResource(Routes.EVENEMENT));
        
             setNode(holderPane,acceuil);
             drawer.setSidePane(sidePane);
@@ -390,7 +390,7 @@ rendez_vousP.setOpacity(1);
                             case "questionreponse":
                                 drawer.close();                                
                                 setNode(holderPane,QuestionReponse);
-                                break;/*
+                                break;
                             case "evenement":
                                 drawer.close();                                
                                 setNode(holderPane,Evenement);
@@ -398,7 +398,7 @@ rendez_vousP.setOpacity(1);
                             case "article":
                                 drawer.close();                                
                                 setNode(holderPane,Article);
-                                break; */
+                                break; 
                                                           
                         }
                     });

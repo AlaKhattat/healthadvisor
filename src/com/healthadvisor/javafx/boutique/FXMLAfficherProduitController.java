@@ -292,7 +292,7 @@ public class FXMLAfficherProduitController implements Initializable {
             List<Produit> lst_img=new ArrayList<>();
             List<Produit> lst_type=new ArrayList<>();
           System.err.println(prom_maxC+" dfgd  "+prom_minC+"  gdfd "+prix_minC+"  fdgd"+prix_maxC);
-            if(prom_maxC==false || prom_minC==false || prix_minC==false || prix_maxC==false ){
+            if(prom_maxC==false && prom_minC==false && prix_minC==false && prix_maxC==false ){
                 showPopup("Erreur de saisie","veuillez corriger les erreurs et réessayer", 0);
             }
             else{

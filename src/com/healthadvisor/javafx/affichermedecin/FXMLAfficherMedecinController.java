@@ -207,8 +207,8 @@ else
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
-        prdv.setLayoutX(391);
-        prdv.setLayoutY(6);
+        prdv.setLayoutX(254);
+        prdv.setLayoutY(5);
         prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
             if(!FXMLLoginController.docteur && !FXMLLoginController.patient){
@@ -234,12 +234,12 @@ else
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
-        position.setLayoutX(221);
-        position.setLayoutY(6);
+        position.setLayoutX(61);
+        position.setLayoutY(5);
         AfficherPosition(position, m);
-        Rating r=new Rating();
+        /*Rating r=new Rating();
         r.setPartialRating(true);
-        r.setRating(3);
+        r.setRating(3);*/
         Pane p=new Pane();
         p.setPrefWidth(547);
         p.setPrefHeight(49);
@@ -247,7 +247,7 @@ else
         p.setLayoutY(192);
         p.getChildren().add(position);
         p.getChildren().add(prdv);
-        p.getChildren().add(r);
+      //  p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
         nom.setPrefWidth(211);
         nom.setPrefHeight(32);
@@ -310,8 +310,8 @@ else
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
-        prdv.setLayoutX(391);
-        prdv.setLayoutY(6);
+        prdv.setLayoutX(254);
+        prdv.setLayoutY(5);
         prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
             if(!FXMLLoginController.docteur && !FXMLLoginController.patient){
@@ -336,13 +336,13 @@ else
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
-        position.setLayoutX(221);
-        position.setLayoutY(6);
+        position.setLayoutX(61);
+        position.setLayoutY(5);
         AfficherPosition(position, m);
-        Rating r=new Rating();
+        /*Rating r=new Rating();
         r.setPartialRating(true);
         r.setId("rating");
-        r.setRating(3);
+        r.setRating(3);*/
         Pane p=new Pane();
         p.setPrefWidth(547);
         p.setPrefHeight(49);
@@ -350,7 +350,7 @@ else
         p.setLayoutY(192);
         p.getChildren().add(position);
         p.getChildren().add(prdv);
-        p.getChildren().add(r);
+       // p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
         nom.setPrefWidth(211);
         nom.setPrefHeight(32);
@@ -462,8 +462,8 @@ else
         JFXButton prdv=new JFXButton("Prendre RDV");
         prdv.setPrefWidth(142);
         prdv.setPrefHeight(40);
-        prdv.setLayoutX(391);
-        prdv.setLayoutY(6);
+        prdv.setLayoutX(254);
+        prdv.setLayoutY(5);
         prdv.setUserData(m);
         prdv.setOnMouseClicked((event) -> {
             
@@ -484,12 +484,12 @@ else
         JFXButton position=new JFXButton("Afficher Cabinet");
         position.setPrefWidth(156);
         position.setPrefHeight(40);
-        position.setLayoutX(221);
-        position.setLayoutY(6);
+        position.setLayoutX(61);
+        position.setLayoutY(1);
         AfficherPosition(position, m);
-        Rating r=new Rating();
+       /* Rating r=new Rating();
         r.setPartialRating(true);
-        r.setRating(3);
+        r.setRating(3);*/
         Pane p=new Pane();
         p.setPrefWidth(547);
         p.setPrefHeight(49);
@@ -497,7 +497,7 @@ else
         p.setLayoutY(192);
         p.getChildren().add(position);
         p.getChildren().add(prdv);
-        p.getChildren().add(r);
+       // p.getChildren().add(r);
             Label nom=new Label("Dr "+m.getLogin_med());
         nom.setPrefWidth(211);
         nom.setPrefHeight(32);

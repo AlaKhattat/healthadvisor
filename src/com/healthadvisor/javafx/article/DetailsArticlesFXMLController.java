@@ -3,6 +3,7 @@ package com.healthadvisor.javafx.article;
 import com.healthadvisor.entities.Article;
 import com.healthadvisor.service.impl.GestionArticle;
 import com.jfoenix.controls.JFXButton;
+import health_advisor.FXMLHomeViewController;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -69,24 +70,16 @@ public class DetailsArticlesFXMLController implements Initializable {
     @FXML
     private void redirectBack(ActionEvent event) {
         if (retour.equals("navig")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("NaviguerArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                NaviguerArticlesFXMLController nav = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+       AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("NaviguerArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (retour.equals("mes")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MesArticlesFXML.fxml"));
             try {
-                Parent root;
-                root = loader.load();
-                MesArticlesFXMLController mes = loader.getController();
-                Scene scene = anchor.getScene();
-                scene.setRoot(root);
+             AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("MesArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             } catch (IOException ex) {
                 Logger.getLogger(MesArticlesFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -97,10 +90,10 @@ public class DetailsArticlesFXMLController implements Initializable {
     private void redirectModif(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifArticleFXML.fxml"));
         try {
-            Parent root;
-            root = loader.load();
+          
             GestionArticle ga = new GestionArticle();
             Article art = ga.rechercheRef(id);
+            System.out.println("Article"+art);
             ModifArticleFXMLController cnt = loader.getController();
             cnt.setRef(id);
             cnt.setContF(contL.getText());
@@ -110,8 +103,8 @@ public class DetailsArticlesFXMLController implements Initializable {
             cnt.setTitreF(titreL.getText());
             cnt.setRetour(retour);
             //cnt.affichage = true;
-            Scene scene = anchor.getScene();
-            scene.setRoot(root);
+              AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("ModifArticleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException ex) {
             Logger.getLogger(InterfacePrincipaleFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }

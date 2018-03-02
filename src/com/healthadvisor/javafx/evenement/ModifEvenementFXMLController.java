@@ -2,13 +2,16 @@ package com.healthadvisor.javafx.evenement;
 
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionEvenement;
+import com.healthadvisor.service.impl.GestionPatient;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -73,8 +76,9 @@ public class ModifEvenementFXMLController implements Initializable {
     private String retour;
     private boolean permission;
     Date d2 = new Date(1970, 9, 9);
-    Patient p=new Patient(); //SESSION PATIENT
-    @FXML
+            GestionPatient gp=new GestionPatient();
+            Patient p=gp.AfficherPatientCin(FXMLLoginController.Identifiant);
+            @FXML
     private JFXButton modifBut;
     @FXML
     private JFXButton imgBut;
@@ -121,7 +125,7 @@ public class ModifEvenementFXMLController implements Initializable {
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("Choisir une image");
         fileChooser.setInitialDirectory(
-                new File("C:\\Users\\Tarek\\Desktop\\")
+                new File("C:\\Users\\aaa\\Desktop\\")
         );
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -151,11 +155,9 @@ public class ModifEvenementFXMLController implements Initializable {
                     if (url_image == null) {
                         for (Evenement e : ge.afficherEvenement()) {
                             if (e.getId() == this.id) {
-                                ge.modifierEvenement(id, nom, date, heure, endroit, type, max, e.getImage());
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsEvenementsFXML.fxml"));
-                                Parent root;
-                                root = loader.load();
-                                DetailsEvenementsFXMLController details = loader.getController();
+                                ge.modifierEvenement(id, nom, date, heure, endroit, type, max, e.getImage());                                AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsEvenementsFXML.fxml"));
+                                FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
+                                DetailsEvenementsFXMLController details = new DetailsEvenementsFXMLController();
                                 details.setNomLab(nom);
                                 details.setDateLab(date);
                                 details.setHeureLab(heure);
@@ -165,16 +167,14 @@ public class ModifEvenementFXMLController implements Initializable {
                                 details.setImg(e.getImage());
                                 details.setId(e.getId());
                                 details.setRetour(retour);
-                                Scene scene = anchor.getScene();
-                                scene.setRoot(root);
+                                
                             }
                         }
                     } else {
                         ge.modifierEvenement(id, nom, date, heure, endroit, type, max, url_image);
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsEvenementsFXML.fxml"));
-                        Parent root;
-                        root = loader.load();
-                        DetailsEvenementsFXMLController details = loader.getController();
+                        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsEvenementsFXML.fxml"));
+                        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
+                        DetailsEvenementsFXMLController details = new DetailsEvenementsFXMLController();
                         details.setNomLab(nom);
                         details.setDateLab(date);
                         details.setHeureLab(heure);
@@ -184,8 +184,7 @@ public class ModifEvenementFXMLController implements Initializable {
                         details.setImg(url_image);
                         details.setId(id);
                         details.setRetour(retour);
-                        Scene scene = anchor.getScene();
-                        scene.setRoot(root);
+                        
                     }
                 }
             } catch (Exception e) {
@@ -288,12 +287,12 @@ public class ModifEvenementFXMLController implements Initializable {
 
     @FXML
     private void redirectBack(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LireEvenementFXML.fxml"));
         try {
-            Parent root = loader.load();
+            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("LireEvenementFXML.fxml"));
+            FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
             GestionEvenement ge = new GestionEvenement();
             Evenement evt = ge.rechercherID(id);
-            LireEvenementFXMLController lire = loader.getController();
+            LireEvenementFXMLController lire = new LireEvenementFXMLController();
             lire.setDateLab(evt.getDate());
             lire.setEndroitLab(evt.getEndroit());
             lire.setEvt(evt);
@@ -307,8 +306,6 @@ public class ModifEvenementFXMLController implements Initializable {
             lire.setWarning(evt);
             lire.dispoEvent(evt, p);
             lire.ecrireMessage(evt, p);
-            Scene sc = anchor.getScene();
-            sc.setRoot(root);
         } catch (IOException i) {
             Logger.getLogger(LireEvenementFXMLController.class.getName()).log(Level.SEVERE, null, i);
         }

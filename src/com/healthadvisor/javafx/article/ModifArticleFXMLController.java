@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import health_advisor.FXMLHomeViewController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -110,7 +111,7 @@ public class ModifArticleFXMLController implements Initializable {
     private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("Choisir une image");
         fileChooser.setInitialDirectory(
-                new File("C:\\Users\\Tarek\\Desktop\\")
+                new File("C:\\Users\\aaa\\Desktop\\")
         );
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -149,15 +150,14 @@ public class ModifArticleFXMLController implements Initializable {
                                 details.setId(ref);
                                 details.setImgView(url_image);
                                 details.setRetour(retour);
-                                Scene scene = anchor.getScene();
-                                scene.setRoot(root);
+                          AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
                             }
                         }
                     } else {
                         ga.modifierArticle(ref, titre, desc, tag, cont, url_image);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsArticlesFXML.fxml"));
-                        Parent root;
-                        root = loader.load();
+                      ;
                         DetailsArticlesFXMLController details = loader.getController();
                         details.setContL(cont);
                         details.setTitreL(titre);
@@ -166,8 +166,8 @@ public class ModifArticleFXMLController implements Initializable {
                         details.setId(ref);
                         details.setImgView(url_image);
                         details.setRetour(retour);
-                        Scene scene = anchor.getScene();
-                        scene.setRoot(root);
+                            AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("DetailsArticlesFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
                     }
                 }
             } catch (Exception e) {
@@ -318,8 +318,8 @@ public class ModifArticleFXMLController implements Initializable {
             lire.setImg(art.getImage());
             lire.setUrl(art.getImage());
             lire.setRetour(retour);
-            Scene sc = anchor.getScene();
-            sc.setRoot(root);
+                        AnchorPane afficherproduit = FXMLLoader.load(getClass().getResource("LireArticleFXML.fxml"));
+        FXMLHomeViewController.setNode(FXMLHomeViewController.holderPane,afficherproduit);
         } catch (IOException i) {
             Logger.getLogger(LireArticleFXMLController.class.getName()).log(Level.SEVERE, null, i);
         }

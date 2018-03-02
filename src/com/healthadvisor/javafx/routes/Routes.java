@@ -30,8 +30,8 @@ public class Routes {
     public static String SONDAGEPATIENT ="/com/healthadvisor/javafx/sondage/SondageUser.fxml";
     public static String SONDAGEADMIN ="/com/healthadvisor/javafx/sondage/SondageAdmin.fxml";
     public static String BIENETRE ="/com/healthadvisor/javafx/bienetre/FXMLImcView.fxml";
-    public static String EVENEMENT ="/com/healthadvisor/javafx/evenement/NaviguerEvenementsFXML.fxml";
-    public static String ARTICLE ="/com/healthadvisor/javafx/article/NaviguerArticlesFXML.fxml";
+    public static String EVENEMENT ="/com/healthadvisor/javafx/evenement/InterfacePrincipaleFXML.fxml";
+    public static String ARTICLE ="/com/healthadvisor/javafx/article/InterfacePrincipaleFXML.fxml";
     public static String MODIFRDV ="/com/healthadvisor/javafx/modifier_rdv/ModifierRdvFXML.fxml";
     public static String BOUTIQUEADMIN ="/com/healthadvisor/javafx/boutique/FXMLGererProduit_Admin.fxml";
     
