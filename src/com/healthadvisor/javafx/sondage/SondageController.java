@@ -45,7 +45,7 @@ public class SondageController implements Initializable {
     private TableColumn<Sondage, String> columnID;
     
     public static Sondage sondage;
-    public static Patient patient = new Patient("tarek", "pass", "1","");
+    //public static Patient patient = new Patient("tarek", "pass", "1","");
     @FXML
     private Button repondreBtnID;
 

@@ -91,8 +91,10 @@ public class QuestionController implements Initializable {
         
         FilteredList<Question> filteredData = new FilteredList<>(listq, e -> true);
         searchBarID.setOnKeyReleased(e->{
+            try{
             searchBarID.textProperty().addListener((observableValue, oldValue, newValue)->{
                 filteredData.setPredicate((Predicate<? super Question>) q -> {
+                   
                     if (newValue == null || newValue.isEmpty()){
                         return true;
                     }
@@ -112,6 +114,9 @@ public class QuestionController implements Initializable {
             SortedList<Question> sortedQuestion = new SortedList<>(filteredData);
             sortedQuestion.comparatorProperty().bind(tableID.comparatorProperty());
             tableID.setItems(sortedQuestion);
+            }catch(Exception ex){
+                ex.getMessage();
+            }
         });
         
         

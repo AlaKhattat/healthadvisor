@@ -50,8 +50,8 @@ public class QuestionUserController implements Initializable {
     @FXML
     private Button btnPlus;
     public static Question questionStatic;
-    public static Patient patient = new Patient("tarek", "pass", "1","");
-    public static Medecin m = new Medecin("fifi", "Gériatrie", "azerty", "azerty",5,0.0,0.0,"VALIDE", "fifi", "pass", "18","");
+    //public static Patient patient = new Patient("tarek", "pass", "1","");
+    //public static Medecin m = new Medecin("fifi", "Gériatrie", "azerty", "azerty",5,0.0,0.0,"VALIDE", "fifi", "pass", "18","");
 
     /**
      * Initializes the controller class.

@@ -409,7 +409,7 @@ public class FXMLAfficherProduitController implements Initializable {
            grid.setVgap(10);
            grid.setPrefHeight(431);
            grid.setPrefWidth(1000);   
-           grid.setStyle("-fx-background-color:rgba(2, 84, 217, 0.67)");
+           grid.setStyle("-fx-background-color:#64B5F6");
            //configuration scroll
            scroll.setPrefHeight(431);
            scroll.setPrefWidth(1000);

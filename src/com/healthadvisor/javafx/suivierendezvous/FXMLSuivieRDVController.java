@@ -92,7 +92,11 @@ public class FXMLSuivieRDVController implements Initializable {
         nombreRdvEncours.setText(Integer.toString(gr.Rendez_Vous_Encours(FXMLLoginController.pseudo))+" sur "+nombreRdvTotal.getText());
         JourAuj.setText(LocalDate.now().getDayOfWeek().toString());
         dateAujd.setText(LocalDate.now().toString());
+        try{
         progressBar.setProgress(gr.Rendez_Vous_Encours(FXMLLoginController.pseudo)/gr.ListRendez_Vous_Medecin(FXMLLoginController.pseudo).size());
+        }catch(Exception e){
+            e.getMessage();
+               }
         initCol();
         loadData();
                  TableFilter<Rendez_Vous> tableFilterM = new TableFilter<>(tableView);
