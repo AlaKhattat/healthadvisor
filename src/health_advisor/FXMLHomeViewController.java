@@ -432,6 +432,7 @@ rendez_vousP.setOpacity(1);
         FXMLLoginController.Identifiant=null;
         FXMLLoginController.docteur=false;
         FXMLLoginController.patient=false;
+       
         FXMLLoader loader=new FXMLLoader(getClass().getResource(Routes.HOMEVIEW)); 
             Parent root=loader.load();
             Scene s = holderPane1.getScene(); 

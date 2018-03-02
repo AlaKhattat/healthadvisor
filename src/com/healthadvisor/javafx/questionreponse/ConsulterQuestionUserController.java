@@ -112,14 +112,22 @@ public class ConsulterQuestionUserController implements Initializable {
         btnModifier.setUserData(0);
         questionLabel.setText(QuestionUserController.questionStatic.getQuestion());
         
+        if(FXMLLoginController.pseudo.equals(QuestionUserController.questionStatic.getId_patient())){
         //tester temps
         Date d = new Date (QuestionUserController.questionStatic.getDate_publication().getTime());
+       
         if (DifférenceDates(d)>10){
             btnModifier.setOpacity(0);
             errModif.setText("Vous ne pouvez plus modifier cette question car vous avez depassez 10 secondes.");
             errModif.setStyle("-fx-text-fill: #D92A27");
             
         }
+        else{
+            btnModifier.setText("");
+        }}
+        
+        
+        
         GestionMedecin gm=new GestionMedecin();
         GestionPatient gp= new GestionPatient();
         if(FXMLLoginController.docteur){

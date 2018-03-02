@@ -128,9 +128,9 @@ public class ConsulterSondageController implements Initializable {
         String ch="";
         
         GestionStatistiques gs = new GestionStatistiques();
-        test = gs.testReponseDeUserSurSondage(SondageUserController.patient.getLogin(), SondageUserController.sondageStatic.getId());
+        test = gs.testReponseDeUserSurSondage(FXMLLoginController.pseudo, SondageUserController.sondageStatic.getId());
         GestionUserReponse gur = new GestionUserReponse();
-        String x = gur.AfficherUserReponse(SondageUserController.patient.getLogin(), SondageUserController.sondageStatic.getId());
+        String x = gur.AfficherUserReponse(FXMLLoginController.pseudo, SondageUserController.sondageStatic.getId());
         if (test==true){
         
             switch (x){
@@ -157,9 +157,9 @@ public class ConsulterSondageController implements Initializable {
             
             
             
-            int id_ancienne_reponse =  gur.AfficherIdReponseUser(SondageUserController.sondageStatic.getId(),SondageUserController.patient.getLogin());
+            int id_ancienne_reponse =  gur.AfficherIdReponseUser(SondageUserController.sondageStatic.getId(),FXMLLoginController.pseudo);
             int id_nouvelle_reponse = (Integer)g.getSelectedToggle().getUserData();
-            gur.updateUserReponse(SondageUserController.patient.getLogin(),id_ancienne_reponse,id_nouvelle_reponse);
+            gur.updateUserReponse(FXMLLoginController.pseudo,id_ancienne_reponse,id_nouvelle_reponse);
             
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setTitle("Dialogue d'information");
@@ -173,7 +173,7 @@ public class ConsulterSondageController implements Initializable {
         }  
         //FXMLLoginController.pseudo
         else{
-        UserReponse ur = new UserReponse(SondageUserController.patient.getLogin(), (Integer)g.getSelectedToggle().getUserData() );
+        UserReponse ur = new UserReponse(FXMLLoginController.pseudo, (Integer)g.getSelectedToggle().getUserData() );
         GestionReponsesPossibles grp = new GestionReponsesPossibles();
         gur.ajouterUserReponse(ur);
         
