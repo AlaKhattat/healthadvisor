@@ -207,7 +207,7 @@
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <JFXTabPane fx:id="tabRegime" layoutY="166.0" prefHeight="483.0" prefWidth="1004.0" style="-fx-tab-max-height: 25;">
+                        <JFXTabPane fx:id="tabRegime" layoutY="166.0" prefHeight="483.0" prefWidth="1004.0" style="-fx-tab-max-height: 0;">
                            <tabs>
                               <Tab fx:id="suivreRegime1" text="SuivreRegime1/2">
                                  <content>

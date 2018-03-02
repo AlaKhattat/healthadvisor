@@ -155,7 +155,10 @@ public class GestionRegime implements IGestionRegime
               Regime r= new Regime();
               r.setId_regime(result.getString("id_regime"));
                 System.out.println("hjjkhjkhj");
+             if(rechercherRegime(r)!=null)
+             {
               r = rechercherRegime(r);  
+             }
               List<Aliment>aliments = gestion_aliment.rechercherAlimentAvancee(result.getString("nom_aliment"));
              
               if(regimes.contains(r)==false)//check if the diet don't exist
@@ -231,6 +234,7 @@ public class GestionRegime implements IGestionRegime
             if(result!=null)
             {
                 result.next();
+                System.out.println("------type:"+result.getString("type"));
                 r = new Regime(result.getString("id_regime"),Type_Regime.valueOf(result.getString("type")),result.getInt("duree"),result.getString("description_regime"));
                 System.out.println("reg  hgvhbj:"+r);
             }
