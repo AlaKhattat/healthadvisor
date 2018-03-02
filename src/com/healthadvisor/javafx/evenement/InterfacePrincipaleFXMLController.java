@@ -1,5 +1,6 @@
 package com.healthadvisor.javafx.evenement;
 
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 public class InterfacePrincipaleFXMLController implements Initializable {
 
@@ -27,10 +29,19 @@ public class InterfacePrincipaleFXMLController implements Initializable {
     private FontAwesomeIconView gestion;
     @FXML
     private Hyperlink myEvt;
+    @FXML
+    private Rectangle rect;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        FXMLLoginController.admin = true;
+        if(!FXMLLoginController.admin){
+            rect.setOpacity(0);
+            gestion.setOpacity(0);
+        }else{
+            rect.setOpacity(1);
+            gestion.setOpacity(1);
+        }
     }
 
     @FXML

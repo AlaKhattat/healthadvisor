@@ -2,6 +2,7 @@ package com.healthadvisor.javafx.evenement;
 
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionEvenement;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.FileInputStream;
@@ -60,6 +61,12 @@ public class NaviguerEvenementsFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        FXMLLoginController.patient = false;
+        if(!FXMLLoginController.patient && !FXMLLoginController.docteur){
+            ajout.setOpacity(0);
+        }else{
+            ajout.setOpacity(1);
+        }
 
         List<Evenement> liste = new ArrayList<>();
         for (Evenement i : ge.afficherEvenement()) {

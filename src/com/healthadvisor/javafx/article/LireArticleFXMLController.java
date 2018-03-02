@@ -275,4 +275,10 @@ public class LireArticleFXMLController implements Initializable {
         this.retour = retour;
     }
 
+    public FontAwesomeIconView getBack() {
+        return back;
+    }
+    
+    
+
 }

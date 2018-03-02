@@ -23,7 +23,7 @@
          <font>
             <Font name="System Bold" size="50.0" />
          </font></Hyperlink>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dae3ee" height="70.0" layoutX="906.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#dae3ee" height="70.0" layoutX="906.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
       <FontAwesomeIconView fx:id="gestion" fill="#19416f" glyphName="WRENCH" layoutX="922.0" layoutY="57.0" onMouseClicked="#redirectGestion" size="40" />
    </children>
 </AnchorPane>

@@ -25,27 +25,6 @@ public class ListeArticleFXMain extends Application {
         } catch (Exception e) {
         }  
     }
-    
-    public void startModif(Stage primaryStage,int ref, String titre, String desc, String tag, String cont, String img) {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifArticleFXML.fxml"));
-        try {
-            Parent root = loader.load();
-            Scene sc = new Scene(root);
-            stage=new Stage();
-            stage.setScene(sc);
-            ModifArticleFXMLController cnt = loader.getController();
-            cnt.setRef(ref);
-            cnt.setContF(cont);
-            cnt.setImgView(img);
-            cnt.setDescCombo(desc);
-            cnt.setTagsF(tag);
-            cnt.setTitreF(titre);
-            stage.show();
-        } catch (IOException e) {
-        }
-    }
-
 
     public void startAffich(Stage primaryStage, int ref, String titre, String des, String cont, String idmed, String img, double note, String tag) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LireArticleFXML.fxml"));
@@ -60,8 +39,8 @@ public class ListeArticleFXMain extends Application {
             lire.setRating(note);
             lire.setTagsL(tag);
             lire.setImg(img);
-            lire.setUrl(img);  
-            //lire.setAffich(affich);
+            lire.setUrl(img); 
+            lire.getBack().setVisible(false);
             Scene sc = new Scene(root);
             Stage st = new Stage();
             st.setScene(sc);

@@ -47,6 +47,7 @@ public class ListeEvenementFXMain extends Application {
             lire.setEvt(e);
             lire.setImg(url);
             lire.setCreateurLab(createur);
+            lire.getBack().setVisible(false);
             Scene sc = new Scene(root);
             Stage st = new Stage();
             st.setScene(sc);

@@ -3,6 +3,7 @@ package com.healthadvisor.javafx.evenement;
 import com.healthadvisor.entities.Evenement;
 import com.healthadvisor.entities.Evenement_Participants;
 import com.healthadvisor.entities.Patient;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionEvenement;
 import com.healthadvisor.service.impl.GestionEvenementParticipants;
 import com.jfoenix.controls.JFXButton;
@@ -105,6 +106,24 @@ public class LireEvenementFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        FXMLLoginController.admin=true;
+        if(!FXMLLoginController.admin){
+            validCombo.setOpacity(0);
+            validBut.setOpacity(0);
+            warning.setOpacity(1);
+            fleche.setOpacity(1);
+            avert.setOpacity(1);
+            participeBut.setOpacity(1);
+            message.setOpacity(1);
+        }else{
+            validCombo.setOpacity(1);
+            validBut.setOpacity(1);
+            warning.setOpacity(0);
+            fleche.setOpacity(0);
+            avert.setOpacity(0);
+            participeBut.setOpacity(0);
+            message.setOpacity(0);
+        }
         validCombo.getItems().addAll("Valider", "Retirer");
     }
 
@@ -349,6 +368,10 @@ public class LireEvenementFXMLController implements Initializable {
                 Logger.getLogger(MesEvenementsFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public FontAwesomeIconView getBack() {
+        return back;
     }
 
 }
