@@ -20,5 +20,8 @@ public interface IGestionMedecin {
     public Medecin AfficherMedecinLogin(String login);
     public List<Medecin> AfficherMedecinSpecialite(String specialite);
     public List<Medecin> AfficherMedecinAdresse(String adresse);
+    public Medecin AficherMedecinNomPrenom(String nomprenom);
+    public List<Medecin> AfficherMedecinSnomprenom(String nomprenom);
+
 
 }

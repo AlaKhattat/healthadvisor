@@ -32,13 +32,15 @@ public class GestionMedecin implements IGestionMedecin{
     public void AjouterMedecin(Medecin medecin) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into medecin (login_med,specialite,adresse,diplome,rating) "+ " values (?,?,?,?,?)";
+            String sql="Insert into medecin (login,specialite,adresse,diplome,rating,lat_p,long_p) "+ " values (?,?,?,?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,medecin.getLogin());
             preparedStmt.setString(2,medecin.getSpecialite());
             preparedStmt.setString(3,medecin.getAdresse());
             preparedStmt.setString(4,medecin.getDiplome());
             preparedStmt.setInt(5,medecin.getRating());
+            preparedStmt.setDouble(6,medecin.getLat_p());
+            preparedStmt.setDouble(7,medecin.getLong_p());
 
               preparedStmt.executeUpdate();
 
@@ -54,7 +56,7 @@ public class GestionMedecin implements IGestionMedecin{
         try{
                 Statement stm =database.getConnexion().createStatement();
 
-           String sql="UPDATE medecin SET specialite='"+medecin.getSpecialite()+"', adresse='"+medecin.getAdresse()+"', diplome='"+medecin.getDiplome()+"', rating='"+medecin.getRating()+"' WHERE login_med='"+medecin.getLogin_med()+"'";
+           String sql="UPDATE medecin SET specialite='"+medecin.getSpecialite()+"', adresse='"+medecin.getAdresse()+"', diplome='"+medecin.getDiplome()+"', rating='"+medecin.getRating()+"' WHERE login='"+medecin.getLogin_med()+"'";
            stm.executeUpdate(sql);
            System.out.println("Medecin bien modifiÃ©");
            
@@ -67,7 +69,7 @@ public class GestionMedecin implements IGestionMedecin{
     public boolean SupprimerMedecinLogin(String login) {
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="Delete from medecin where login_med='"+login+"'" ;
+            String sql="Delete from medecin where login='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
             return true;
@@ -83,11 +85,11 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -103,10 +105,10 @@ public class GestionMedecin implements IGestionMedecin{
         Medecin med =null;
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN_MED='"+login+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.LOGIN='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
-                 med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
+                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
             }
             
             System.out.println("Recuperation avec succes");
@@ -122,11 +124,11 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.SPECIALITE='"+specialite+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.SPECIALITE like '%"+specialite+"%'" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             
@@ -142,11 +144,49 @@ public class GestionMedecin implements IGestionMedecin{
     ArrayList<Medecin> listmed= new ArrayList<>();
         try {
             Statement stm =database.getConnexion().createStatement();
-            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN_MED=patient.LOGIN_P AND patient.CIN_USER=utilisateur.CIN AND medecin.ADRESSE='"+adresse+"'" ;
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND medecin.ADRESSE='"+adresse+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Medecin med= new Medecin(rs.getString("login_med"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getString("login_p"),rs.getString("password"),rs.getString("rating"));
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+                listmed.add(med);
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listmed;     }
+
+    @Override
+    public Medecin AficherMedecinNomPrenom(String nomprenom) {
+  Medecin med =null;
+        try {
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND concat(utilisateur.NOM,utilisateur.PRENOM)='"+nomprenom+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                 med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
+            }
+            
+            System.out.println("Recuperation avec succes");
+           // stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionMedecin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return med;     }
+
+    @Override
+    public List<Medecin> AfficherMedecinSnomprenom(String nomprenom) {
+        ArrayList<Medecin> listmed= new ArrayList<>();
+        try {
+            Statement stm =database.getConnexion().createStatement();
+            String sql="SELECT * FROM medecin,patient,utilisateur WHERE medecin.LOGIN=patient.LOGIN AND patient.CIN_USER=utilisateur.CIN AND concat(utilisateur.NOM,utilisateur.PRENOM)='"+nomprenom+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()){
+                Medecin med= new Medecin(rs.getString("login"),rs.getString("specialite"),rs.getString("adresse"),rs.getString("diplome"),rs.getInt("rating"),rs.getDouble("lat_p"),rs.getDouble("long_p"),rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listmed.add(med);
             }
             

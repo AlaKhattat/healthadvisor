@@ -158,6 +158,7 @@ public class InfoSante
     {
         //IMC = poids(kg)/(taille*taille)m
         double IMC = info.poids/((Math.pow(info.taille/100,2)));
+        
         return Math.round(IMC*100.0)/100.0;
     }
     public double calculPoidIdeal(InfoSante info)

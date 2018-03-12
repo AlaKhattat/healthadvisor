@@ -20,15 +20,37 @@ public class Medecin extends Patient {
     private String nom;
     private String prenom;
     private String sexe;
+    private Double long_p;
+    private Double lat_p;
 
-    public Medecin(String login_med, String specilaite, String adresse, String diplome, int rating, String login, String password, String cin_user) {
+    public Double getLong_p() {
+        return long_p;
+    }
+
+    public void setLong_p(Double long_p) {
+        this.long_p = long_p;
+    }
+
+    public Double getLat_p() {
+        return lat_p;
+    }
+
+    public void setLat_p(Double lat_p) {
+        this.lat_p = lat_p;
+    }
+
+    public Medecin(String login_med, String specialite, String adresse, String diplome, int rating, Double long_p, Double lat_p, String login, String password, String cin_user) {
         super(login, password, cin_user);
         this.login_med = login_med;
-        this.specialite = specilaite;
+        this.specialite = specialite;
         this.adresse = adresse;
         this.diplome = diplome;
         this.rating = rating;
+        this.long_p = long_p;
+        this.lat_p = lat_p;
     }
+
+
 public Medecin(){}
     public String getLogin_med() {
         return login_med;

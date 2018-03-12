@@ -4,6 +4,7 @@ package com.healthadvisor.javafx.boutique;
 import com.healthadvisor.entities.Produit;
 import static com.healthadvisor.javafx.boutique.FXMLAfficherProduitController.panier;
 import com.healthadvisor.javamail.SendEmail;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -84,7 +85,9 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     private GridPane g;
     private ScrollPane s;
     private String url_image;
+
     ServiceProduit servP=new ServiceProduit();
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,6 +97,8 @@ public class FXMLAfficherProduitPublieController implements Initializable {
         NotificationEmail_Expiration(lst_P);
         //**********************Pour supprimer un produit déja expiré
         SupprimerProduits_Expirés(lst_P);
+        
+
         
         Configurer_GridScroll(grid,scroll);
         for(int i=0;i<lst_P.size();i++)

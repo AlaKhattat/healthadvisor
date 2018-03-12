@@ -60,7 +60,7 @@ public class QuestionController implements Initializable {
     private Button btnConsulter;
     
     public static Question question; 
-    public static Patient patient = new Patient("ahmed", "pass", "1");
+    //public static Patient patient = new Patient("ahmed", "pass", "1");
     @FXML
     private TextField searchBarID;
     @FXML

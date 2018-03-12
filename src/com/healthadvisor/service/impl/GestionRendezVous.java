@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,8 +40,8 @@ public class GestionRendezVous implements IGestionRendezVous{
             String sql="Insert into rendez_vous (date_heure,user_id,med_id,statut) "+" values (?,?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             java.util.Date utilStartDate = rendezvous.getDate_heure();
-            java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-            preparedStmt.setDate(1,sqlStartDate);
+            Timestamp sqlStartDate = new Timestamp(utilStartDate.getTime());
+            preparedStmt.setTimestamp(1,sqlStartDate);
             preparedStmt.setString(2,rendezvous.getPatient_id());
             preparedStmt.setString(3,rendezvous.getMedecin_id());
             preparedStmt.setString(4,rendezvous.getStatut_rendezvous());
@@ -78,7 +79,7 @@ public class GestionRendezVous implements IGestionRendezVous{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getDate("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"));
+                Rendez_Vous rdv= new Rendez_Vous(rs.getInt("id"),rs.getTimestamp("date_heure"),rs.getString("user_id"),rs.getString("med_id"),rs.getString("statut"),rs.getTimestamp("Date_Valid"));
                 listrdv.add(rdv);
             }
             
@@ -127,5 +128,22 @@ return utilisateur.getNom()+" "+utilisateur.getPrenom();
            System.out.println(e.getMessage());
        }      
     return false;}
+
+    @Override
+    public boolean ModifierRendezVousdate(Rendez_Vous rdv) {
+        try{
+           System.out.println("Modification RDV...");
+           Statement stm =database.getConnexion().createStatement();
+           Timestamp t=new Timestamp(rdv.getDate_heure().getTime());
+           String sql="UPDATE rendez_vous SET DATE_HEURE='"+t+"' WHERE id='"+rdv.getId()+"'";
+           stm.executeUpdate(sql);
+           System.out.println("Rendez_vous bien modifiÃ©");
+           return true;
+           
+        }catch(SQLException e){
+           System.err.println(e.getMessage());
+       }      
+            return false;
+    }
     
 }

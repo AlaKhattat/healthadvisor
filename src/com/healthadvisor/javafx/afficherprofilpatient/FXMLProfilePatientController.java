@@ -8,6 +8,7 @@ package com.healthadvisor.javafx.afficherprofilpatient;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.entities.Patient;
 import com.healthadvisor.entities.Utilisateur;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.healthadvisor.service.impl.GestionPatient;
 import com.healthadvisor.service.impl.GestionUtilisateur;
@@ -23,13 +24,22 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import javax.swing.text.html.HTMLEditorKit;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -63,6 +73,8 @@ public class FXMLProfilePatientController implements Initializable {
     String[] sexelist={"Homme","Femme"};
     @FXML
     private JFXTextField numtel;
+    @FXML
+    private Label strenghtP;
 
     /**
      * Initializes the controller class.
@@ -74,7 +86,7 @@ public class FXMLProfilePatientController implements Initializable {
         ObservableList<String> sl=FXCollections.observableArrayList(sexelist);
         sexe.setItems(sl); 
         GestionUtilisateur gu=new GestionUtilisateur();
-        Utilisateur u=gu.AfficherUtilisateurCin("11111111");
+        Utilisateur u=gu.AfficherUtilisateurCin(FXMLLoginController.Identifiant);
         GestionPatient gp=new GestionPatient();
         Patient p=gp.AfficherPatientCin(u.getCin());
         
@@ -101,11 +113,7 @@ String str = sb.toString();
 
     @FXML
     private void modifierPatient(MouseEvent event) {
-        nom.setEditable(true);
-        prenom.setEditable(true);
         email.setEditable(true);
-        date.setEditable(true);
-        sexe.setEditable(true);
         pays.setEditable(true);
         Ville.setEditable(true);       
         login.setEditable(true);
@@ -115,6 +123,23 @@ String str = sb.toString();
 
     @FXML
     private void confirmerPatient(MouseEvent event) {
+           Image img=new Image("/com/healthadvisor/ressources/cancel.png");
+        Notifications notif=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Champs Invalide")
+                    .text("Il faut remplir tous les champs")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle(); 
+            Image img2=new Image("/com/healthadvisor/ressources/checked.png");
+        Notifications notif2=Notifications.create()
+               .graphic(new ImageView(img))
+                    .title("Modification Profile")
+                    .text("Profile Modifié avec succés")
+                    .hideAfter(Duration.seconds(4))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle(); 
+        try{
  String nom=this.nom.getText();
  String prenom=this.prenom.getText();
  String email=this.email.getText();
@@ -130,28 +155,96 @@ String str = sb.toString();
  int num=Integer.parseInt(num_tel);
         GestionUtilisateur gu=new GestionUtilisateur();
         
-        Utilisateur u=new Utilisateur("11111111", nom, prenom, email, date, sexe, pays, ville,num);
+        Utilisateur u=new Utilisateur(FXMLLoginController.Identifiant, nom, prenom, email, date, sexe, pays, ville,num);
         gu.ModifierUtilisateur(u);
         GestionPatient gp=new GestionPatient();
         Patient p=new Patient(login, password, u.getCin());
         gp.ModifierPatient(p);
     
-         Label l=new Label("Modification Avec Succés");
-         JFXPopup pop=new JFXPopup(l);
-         pop.show(confirmer,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
+        
          
          
-        this.nom.setEditable(false);
-        this.prenom.setEditable(false);
         this.email.setEditable(false);
-        this.date.setEditable(false);
-        this.sexe.setEditable(false);
         this.pays.setEditable(false);
         this.Ville.setEditable(false);
         this.login.setEditable(false);
         this.password.setEditable(false);
-        pop.hide();
+        notif2.show();
         confirmer.setOpacity(0);
+          }catch(Exception e){
+        notif.show();
+ 
+        }
+    }
+
+    @FXML
+    private void mdpControl(KeyEvent event) {
+         String password;
+        password = this.password.getText();
+
+        boolean hasLetter = false;
+        boolean hasDigit = false;
+
+        if (password.length() >= 8) {
+            for (int i = 0; i < password.length(); i++) {
+                char x = password.charAt(i);
+                if (Character.isLetter(x)) {
+
+                    hasLetter = true;
+                }
+
+                else if (Character.isDigit(x)) {
+
+                    hasDigit = true;
+                }
+
+                // no need to check further, break the loop
+                if(hasLetter && hasDigit){
+
+                    break;
+                }
+
+            }
+            if (hasLetter && hasDigit) {
+                strenghtP.setStyle("-fx-font-size: 15;\n" +
+" -fx-text-fill: #ADFF2F;");
+                strenghtP.setText("Fort");
+            } else {
+                strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #F39C12;");
+                strenghtP.setText("Faible");
+            }
+        } else {
+            strenghtP.setStyle(" -fx-font-size: 15;\n" +
+" -fx-text-fill: #C70039;");
+                strenghtP.setText("il faut au moins 8 caractères");
+        }
+    }
+
+    @FXML
+    private void telControl(KeyEvent event) {
+             String num=numtel.getText();
+       try{
+       numtel.setFocusColor(Color.BLUE);
+       int numtel=Integer.parseInt(num);
+       }catch(NumberFormatException ex)  {
+       numtel.setFocusColor(Color.RED);
+
+       }
+    }
+
+    @FXML
+    private void emailControl(KeyEvent event) {
+             String masque = "^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
+                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(masque);
+        Matcher controler = pattern.matcher(email.getText());
+        if (controler.matches()){
+        //Ok : la saisie est bonne
+        email.setFocusColor(Color.BLUE);
+        }else{email.setFocusColor(Color.RED);
+        //La c'est pas bon
+        }
     }
     
 }

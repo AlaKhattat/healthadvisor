@@ -130,7 +130,7 @@ else{
                         sb.append("");
                         sb.append(pu.getNum_tel());
                         String str = sb.toString();
-                        String mess="Votre rendez_vous est confirmé le"+dater.toString()+"à 12h30";
+                        String mess="Votre rendez_vous est confirmé le"+dater.toString();
                         String sendsms=ss.sendSms(mess,str);
                 if(sendsms!=null){
                     System.out.println("OK sms");

@@ -15,7 +15,7 @@
     <children>
       <ImageView fitHeight="409.0" fitWidth="789.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../../../../../../../../Desktop/PI%20DEV/images/Dollarphotoclub_84298213.jpg" />
+            <Image url="@Dollarphotoclub_84298213.jpg" />
          </image>
       </ImageView>
       <Label layoutX="188.0" layoutY="41.0" prefHeight="62.0" prefWidth="439.0" text="TROUVEZ VOTRE MEDECIN" textFill="#17125b">
@@ -35,7 +35,7 @@
                      <children>
                         <JFXComboBox fx:id="specialite" labelFloat="true" layoutX="14.0" layoutY="48.0" prefHeight="43.0" prefWidth="375.0" promptText="Spécilaité" />
                         <JFXTextField fx:id="adresse" labelFloat="true" layoutX="429.0" layoutY="65.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
-                        <JFXButton layoutX="609.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
+                        <JFXButton layoutX="609.0" layoutY="132.0" onMouseClicked="#rdvSpecialite" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
                      </children>
                   </AnchorPane>
                </content>
@@ -45,8 +45,8 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <JFXTextField fx:id="adresse2" labelFloat="true" layoutX="416.0" layoutY="43.0" prefHeight="25.0" prefWidth="359.0" promptText="Ou ? (Adresse,Rue,Ville)" />
-                        <JFXButton layoutX="604.0" layoutY="132.0" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
-                        <JFXTextField fx:id="recherche" labelFloat="true" layoutX="36.0" layoutY="44.0" prefHeight="25.0" prefWidth="359.0" promptText="Rechercher Votre Medecin" />
+                        <JFXButton fx:id="rdvNom" layoutX="604.0" layoutY="132.0" onMouseClicked="#rdvNomAction" prefHeight="43.0" prefWidth="161.0" text="Prendre RDV" />
+                        <JFXComboBox fx:id="rechercheNom" labelFloat="true" layoutX="14.0" layoutY="43.0" prefHeight="25.0" prefWidth="328.0" promptText="Entrez le nom  du medecin" />
                      </children></AnchorPane>
                </content>
             </Tab>

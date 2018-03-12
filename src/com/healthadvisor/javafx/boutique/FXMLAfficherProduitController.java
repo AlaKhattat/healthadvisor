@@ -95,6 +95,7 @@ public class FXMLAfficherProduitController implements Initializable {
     GridPane g;
     ScrollPane s;
     public static List<ArrayList> panier=new ArrayList<>();
+    
     @FXML
     private Button btn_passer;
     @FXML

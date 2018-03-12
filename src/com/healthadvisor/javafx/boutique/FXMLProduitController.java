@@ -3,6 +3,7 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import com.healthadvisor.javafx.login_fx.FXMLLoginController;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXTextField;
 import java.awt.Desktop;
@@ -186,7 +187,7 @@ public class FXMLProduitController implements Initializable {
    private static void configureFileChooser(final FileChooser fileChooser){                           
         fileChooser.setTitle("View Pictures");
         fileChooser.setInitialDirectory(
-            new File("C:\\Users\\HABOUB\\Desktop\\")
+            new File("C:\\Users\\aaa\\Desktop\\")
         ); 
         fileChooser.getExtensionFilters().addAll(
                // new FileChooser.ExtensionFilter("All Images", "*.*"),

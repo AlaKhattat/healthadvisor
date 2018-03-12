@@ -20,14 +20,15 @@
         <URL value="@fxmlaffichermedecin.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="41.0" layoutY="71.0" prefHeight="469.0" prefWidth="410.0">
+      <VBox layoutX="41.0" layoutY="71.0" prefHeight="469.0" prefWidth="547.0">
          <children>
-            <AnchorPane prefHeight="241.0" prefWidth="410.0" style="-fx-background-color: #E9EDEE;">
+            <AnchorPane prefHeight="239.0" prefWidth="453.0" style="-fx-background-color: #E9EDEE;">
                <children>
-                  <Pane layoutX="-1.0" layoutY="192.0" prefHeight="49.0" prefWidth="410.0" style="-fx-background-color: #CED5D6;">
+                  <Pane layoutY="192.0" prefHeight="49.0" prefWidth="547.0" style="-fx-background-color: #CED5D6;">
                      <children>
-                        <JFXButton layoutX="254.0" layoutY="5.0" prefHeight="40.0" prefWidth="142.0" ripplerFill="#07123c" stylesheets="@fxmlaffichermedecin.css" text="Prendre RDV" />
+                        <JFXButton layoutX="391.0" layoutY="6.0" prefHeight="40.0" prefWidth="142.0" ripplerFill="#07123c" stylesheets="@fxmlaffichermedecin.css" text="Prendre RDV" />
                         <Rating layoutX="14.0" layoutY="9.0" prefHeight="17.0" prefWidth="154.0" />
+                        <JFXButton layoutX="221.0" layoutY="6.0" prefHeight="40.0" prefWidth="156.0" />
                      </children>
                   </Pane>
                   <Circle fill="#9ef0f2" layoutX="70.0" layoutY="71.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />

@@ -33,7 +33,7 @@ public class GestionPatient implements IGestionPatient{
         try {
             System.out.println("Ajout...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="Insert into patient (login_p,password,cin_user) "+" values (?,?,?)";
+            String sql="Insert into patient (login,password,cin_user) "+" values (?,?,?)";
             PreparedStatement preparedStmt = database.getConnexion().prepareStatement(sql);
             preparedStmt.setString(1,patient.getLogin());
             preparedStmt.setString(2,patient.getPassword());
@@ -53,7 +53,7 @@ public class GestionPatient implements IGestionPatient{
         try{
            System.out.println("Modification Patient...");
            Statement stm =database.getConnexion().createStatement();
-           String sql="UPDATE patient SET login_p='"+patient.getLogin()+"', password='"+patient.getPassword()+"' WHERE cin_user='"+patient.getCin_user()+"'";
+           String sql="UPDATE patient SET login='"+patient.getLogin()+"', password='"+patient.getPassword()+"' WHERE cin_user='"+patient.getCin_user()+"'";
             stm.executeUpdate(sql);
            System.out.println("Patient bien modifiÃ©");
            
@@ -66,7 +66,7 @@ public class GestionPatient implements IGestionPatient{
         try {
             System.out.println("Suppression...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="Delete from patient where login_p='"+login+"'" ;
+            String sql="Delete from patient where login='"+login+"'" ;
             stm.executeUpdate(sql);
             System.out.println("suppression avec succes");
             return true;
@@ -87,7 +87,7 @@ public class GestionPatient implements IGestionPatient{
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()){
-                Patient patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+                Patient patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
                 listp.add(patient);
             }
             
@@ -105,10 +105,10 @@ public class GestionPatient implements IGestionPatient{
         try {
             System.out.println("Recupération...");
             Statement stm =database.getConnexion().createStatement();
-            String sql="select * from patient where login_p='"+login+"'" ;
+            String sql="select * from patient where login='"+login+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-            patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
             System.out.println("Le Patient :"+patient);
             System.out.println("Recuperation avec succes");   
             }
@@ -128,7 +128,7 @@ public class GestionPatient implements IGestionPatient{
             String sql="select * from patient where cin_user='"+cin+"'" ;
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-            patient= new Patient(rs.getString("login_p"),rs.getString("password"),rs.getString("cin_user"));
+            patient= new Patient(rs.getString("login"),rs.getString("password"),rs.getString("cin_user"));
             System.out.println("Recuperation avec succes");   
             }
            

@@ -8,6 +8,9 @@ package com.healthadvisor.javafx.affichermedecin;
 import com.healthadvisor.entities.Medecin;
 import com.healthadvisor.service.impl.GestionMedecin;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -104,20 +107,16 @@ public class AfficherMed extends Application {
   @Override
   public void start(final Stage stage) throws Exception {
 
-    AnchorPane anchor = new AnchorPane();
-    anchor.setPrefWidth(1000);
-    anchor.setPrefHeight(600);
-    anchor.setMinSize(anchor.USE_COMPUTED_SIZE, anchor.USE_COMPUTED_SIZE);
-  
-    ScrollPane p=new ScrollPane();
-    p.setPrefSize(550, 600);
-
-    p.setContent(createPage());
-    anchor.getChildren().add(p);
-    Scene scene = new Scene(anchor);
-    stage.setScene(scene);
-    stage.setTitle("List Medecin");
-    stage.show();
+      FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLafficherdetailsmedecin.fxml"));
+        try {
+            Parent root=loader.load();
+            Scene scene= new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Test Javax");
+            stage.show();
+        } catch (IOException ex) {
+            //Logger.getLogger(PersonneFxMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
   }
   
   public VBox createPageSpécialite(String spec) {
