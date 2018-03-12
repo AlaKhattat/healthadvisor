@@ -9,9 +9,9 @@ import java.util.List;
 public interface InterfaceCommande {
  
     public void AjouterCommande(Commande cmd);
-    public void SupprimerCommande(int num_commande);
+    public void SupprimerCommande(String  ref_commande);
     public void UpdateCommande(Commande cmd);
-    public Commande ConsulterCommande(int num_commande);
+    public Commande ConsulterCommande(String  ref_commande);
     public List<Commande> ConsulterListe_Commandes();
     
 }

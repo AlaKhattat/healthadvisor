@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,10 +33,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class FXMLProduitController implements Initializable {
@@ -83,6 +86,8 @@ public class FXMLProduitController implements Initializable {
     private Button btnInterface_panier;
     @FXML
     private Button btnInterface_Publie;
+    
+    public static String login_user="login";
    
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -90,7 +95,8 @@ public class FXMLProduitController implements Initializable {
        type_p.getItems().addAll("Sante","Bien etre");
        txt_promotion.setText("0");
        txt_quantite.setText("1");
-        
+       
+       
     }    
 
       @FXML
@@ -101,19 +107,18 @@ public class FXMLProduitController implements Initializable {
              float prix_P=Float.parseFloat(prix.getText());
              String url_P=lbl_url.getText();
              String type_P=type_p.getValue();
-             String ID_patient=id_patient.getText();
+             String ID_patient=login_user;//*************héthi lézém nsobha mél variable li bch n7otha awél ma tét7al lapp
              String description=desc.getText();
              float promotion=Float.parseFloat(txt_promotion.getText());
-             System.err.println(promotion);
              int quantite= Integer.parseInt(txt_quantite.getText());
-             System.err.println(quantite);
+             //int signalisation=0;
                      
              DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
              Date date = new Date();
              
              Files.copy(url_source,url_destination, StandardCopyOption.REPLACE_EXISTING);
              
-             Produit p=new Produit(reference,nom_p,prix_P,url_P,type_P,ID_patient,description,date_format.parse(date_format.format(date)),promotion,quantite);
+             Produit p=new Produit(reference,nom_p,prix_P,url_P,type_P,ID_patient,description,date_format.parse(date_format.format(date)),promotion,quantite,0);
              ServiceProduit serP=new ServiceProduit();
              serP.AjouterProduit(p);
          } catch (ParseException ex) {
@@ -228,6 +233,6 @@ public class FXMLProduitController implements Initializable {
         }
     }
 
-    
+   
     
 }

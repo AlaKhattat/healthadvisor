@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Produit {
     
+    private int id_produit;
     private String Reference;
     private String Nom;
     private float prix_vente;
@@ -17,12 +18,14 @@ public class Produit {
     private Date date_mise;
     private float promotion;
     private int quantite;
+    private int signaler;
    
 
     public Produit() {
     }
 
-    public Produit(String Reference, String Nom, float prix_vente, String url_image, String type, String id_user, String description, Date date_mise, float promotion, int quantite) {
+    public Produit(String Reference, String Nom, float prix_vente, String url_image, String type, String id_user, String description, Date date_mise, float promotion, int quantite, int signaler) {
+
         this.Reference = Reference;
         this.Nom = Nom;
         this.prix_vente = prix_vente;
@@ -33,10 +36,18 @@ public class Produit {
         this.date_mise = date_mise;
         this.promotion = promotion;
         this.quantite = quantite;
+        this.signaler = signaler;
     }
 
- 
- 
+    public int getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_produit(int id_produit) {
+        this.id_produit = id_produit;
+    }
+
+
     public String getReference() {
         return Reference;
     }
@@ -117,12 +128,20 @@ public class Produit {
         this.quantite = quantite;
     }
 
-    @Override
-    public String toString() {
-        return "Produit{" + "Reference=" + Reference + ", Nom=" + Nom + ", prix_vente=" + prix_vente + ", url_image=" + url_image + ", type=" + type + ", id_user=" + id_user + ", description=" + description + ", date_mise=" + date_mise + ", promotion=" + promotion + ", quantite=" + quantite + '}';
+    public int getSignaler() {
+        return signaler;
     }
 
-    
+    public void setSignaler(int signaler) {
+        this.signaler = signaler;
+    }
+
+    @Override
+    public String toString() {
+        return "Produit{" + "id_produit=" + id_produit + ", Reference=" + Reference + ", Nom=" + Nom + ", prix_vente=" + prix_vente + ", url_image=" + url_image + ", type=" + type + ", id_user=" + id_user + ", description=" + description + ", date_mise=" + date_mise + ", promotion=" + promotion + ", quantite=" + quantite + ", signaler=" + signaler + '}';
+    }
+
+ 
 
     @Override
     public int hashCode() {

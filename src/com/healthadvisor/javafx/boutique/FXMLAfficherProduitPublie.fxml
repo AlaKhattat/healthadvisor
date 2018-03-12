@@ -3,8 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="pan_publie" prefHeight="573.0" prefWidth="725.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="com.healthadvisor.javafx.boutique.FXMLAfficherProduitPublieController">
+<AnchorPane id="AnchorPane" fx:id="pan_publie" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.healthadvisor.javafx.boutique.FXMLAfficherProduitPublieController">
    <children>
       <Button fx:id="btnInterface_Ajout" layoutX="622.0" layoutY="25.0" mnemonicParsing="false" onAction="#InterfaceAjout" prefHeight="25.0" prefWidth="89.0" text="Ajouter" />
       <Button fx:id="btnInterface_Filtre" layoutX="622.0" layoutY="72.0" mnemonicParsing="false" onAction="#InterfaceFiltre" prefHeight="25.0" prefWidth="89.0" text="Filtre" />

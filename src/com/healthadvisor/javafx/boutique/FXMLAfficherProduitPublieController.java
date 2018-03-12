@@ -2,6 +2,8 @@ package com.healthadvisor.javafx.boutique;
 
 
 import com.healthadvisor.entities.Produit;
+import static com.healthadvisor.javafx.boutique.FXMLAfficherProduitController.panier;
+import com.healthadvisor.javamail.SendEmail;
 import com.healthadvisor.service.impl.ServiceProduit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -16,10 +18,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -30,6 +39,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -48,8 +58,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import javax.imageio.ImageIO;
 
@@ -69,15 +81,20 @@ public class FXMLAfficherProduitPublieController implements Initializable {
     private Desktop desktop = Desktop.getDesktop();
     private ScrollPane scroll =new ScrollPane();
     private GridPane   grid=new GridPane();
-    GridPane g;
-    ScrollPane s;
+    private GridPane g;
+    private ScrollPane s;
     private String url_image;
-    private static String id_user="50"; //la variable de session (de la table de khattout)
+    ServiceProduit servP=new ServiceProduit();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceProduit sp=new ServiceProduit();
-        List<Produit> lst_P=sp.ListProduits_User(id_user);
+   
+        List<Produit> lst_P=servP.ListProduits_User(FXMLProduitController.login_user); //**** je dois la changer avec la variable de login
+        ///*************************pour afficher notif d'un prod un jour avant l'expiration du produit
+        NotificationEmail_Expiration(lst_P);
+        //**********************Pour supprimer un produit déja expiré
+        SupprimerProduits_Expirés(lst_P);
+        
         Configurer_GridScroll(grid,scroll);
         for(int i=0;i<lst_P.size();i++)
             {
@@ -129,7 +146,19 @@ public class FXMLAfficherProduitPublieController implements Initializable {
         Label date_mise=new Label();
         date_mise.setText("Date mise produit: "+p.getDate_mise());
         
-        v1.getChildren().addAll(espace1,espace2,nom_produit,espace3,prix_produit,espace4,date_mise);
+        Label esp6=new Label();
+        esp6.setText("");
+        
+        Label date_expiration=new Label();
+        long nb_jours= (30-DifférenceDates(p.getDate_mise()));
+        if(nb_jours<0){
+            date_expiration.setText("Le produit expire dans 30 jours");
+        }
+        else
+        {
+         date_expiration.setText("Le produit expire dans "+nb_jours+" jours");
+        }
+        v1.getChildren().addAll(espace1,espace2,nom_produit,espace3,prix_produit,espace4,date_mise,esp6,date_expiration);
         grid.add(v1, columnV1, rowV1);
       
      
@@ -151,19 +180,27 @@ public class FXMLAfficherProduitPublieController implements Initializable {
         Label esp3=new Label();
         esp3.setText("");
         
+        HBox h1=new HBox();
+        
         Button Modif_Produit=new Button();
         Modif_Produit.setText("Modifier Produit");
         Modifier_Produit(Modif_Produit,p,url_image);
-         
-         Label esp5=new Label();
-        esp5.setText("");
+       
+        
+        Button btnMAJ_date=new Button();
+        btnMAJ_date.setText("MAJ Date");
+        RenouvellerDate_Publication(btnMAJ_date,p,date_expiration);
+        
+        h1.getChildren().addAll(Modif_Produit,btnMAJ_date);
         
         Button Supp_Produit=new Button();
         Supp_Produit.setText("Supprimer Produit");
         Supprimer_Produit(Supp_Produit, p);
+       
+         Label esp5=new Label();
+        esp5.setText("");
         
-        v2.getChildren().addAll(esp1,nb_produits,esp4,prix_total,esp3,Modif_Produit,esp5,Supp_Produit);
-        
+        v2.getChildren().addAll(esp1,nb_produits,esp4,prix_total,esp3,h1,esp5,Supp_Produit);
         
         grid.add(v2, columnV2, rowV2);
         
@@ -285,7 +322,7 @@ public class FXMLAfficherProduitPublieController implements Initializable {
             dialog.getDialogPane().setContent(grid_pane);
 
 
-// Convert the result to a username-password-pair when the login button is clicked.
+
             dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
                 p.setNom(txt_nom.getText());
@@ -403,5 +440,137 @@ result.ifPresent(usernamePassword -> {
             Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //calculer différence entre 2 date
+    public static long DifférenceDates(Date date_mise){
+        long diff=0,nbjours=0;
+        try {
+            DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
+            Date date = new Date();
+            Date date_sys= date_format.parse(date_format.format(date));
+             diff = date_sys.getTime()-date_mise.getTime();
+             if((30-TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS))<0){
+                 nbjours=TimeUnit.DAYS.convert(30, TimeUnit.MILLISECONDS);
+             }
+             else{
+                 nbjours=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+             }
+            //System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(FXMLAfficherProduitPublieController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return nbjours;
+    }
+  
+    //fonction pour Notifier l'utilisateur chaque semaine aprés la publication du produit pour lui rappeler la date expiration
+    public void NotificationEmail_Expiration(List<Produit> lst)
+    {   
+        SendEmail SE=new SendEmail();
+        Timer time=new Timer(true);
+        System.out.println("liste:"+lst.size());
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(()->{
+                 
+                    for(int i=0;i<lst.size();i++){
+                        long nbjours=30-DifférenceDates(lst.get(i).getDate_mise());
+                         System.err.println("nbjoursNotif"+nbjours);
+                        if(nbjours==20){
+                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré dans 20 jours");
+                        CreerNotification("Attention votre annonce sera expiré dans 20 jours","Veuillez rennouveller la publication");
+                        
+                        }
+                        else if(nbjours==10){
+                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré dans 10 jours");
+                        CreerNotification("Attention votre annonce sera expiré dans 10 jours","Veuillez rennouveller la publication");
+                        }
+                        else if(nbjours==1){
+                        SE.sendMail("habib.hentati@esprit.tn", "motdepasse58633912","habib-hentati@hotmail.com", "Expiration produit", "Attention votre produit sera expiré demain");
+                        CreerNotification("Attention votre annonce sera expiré demain","Veuillez rennouveller la publication");
+                        
+                        }
+              
+             }
+                    time.cancel();
+                    time.purge();
+                    
+                    
+        });
+                 }
+        }, 1,5000);
+        
+        
+    }
+    
+    public void SupprimerProduits_Expirés(List<Produit> lst){
+        Timer time=new Timer();
+        time.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(()->{
+                    for(int i=0;i<lst.size();i++){
+                        long nbjours=30-DifférenceDates(lst.get(i).getDate_mise());
+                        System.err.println("nbjourrrsFonction supp"+nbjours);
+                        if(nbjours==18){
+                        servP.SupprimerProduit(lst.get(i).getReference());
+                        CreerNotification("Date expiration achevée", "L'annonce est supprimée");
+                        Reload();
+            }
+                   
+        }
+                    time.cancel();
+                    time.purge();
+        });
+      }
+        }, 1,5000);
+        
+    }
+    
+     //fonction reload page
+    public void Reload(){
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLAfficherProduitPublie.fxml")); 
+            Parent root=loader.load();
+            Scene s = pan_publie.getScene(); 
+            s.setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLAfficherProduitController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //creer notification
+    public void CreerNotification(String title,String text){
+        Image img=new Image("/com/healthadvisor/ressources/question.png");
+            org.controlsfx.control.Notifications notif=org.controlsfx.control.Notifications.create()
+                    .graphic(new ImageView(img))
+                    .title(title)
+                    .text(text)
+                    .hideAfter(Duration.seconds(5))
+                    .position(Pos.TOP_RIGHT)
+                    .darkStyle();
+            notif.show();
+        
+    }
+    
+    //renouveller la date de publication du produit de 30jours
+    public void RenouvellerDate_Publication(Button btn,Produit p,Label lblNB_jours)
+    {   
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               Date nv_date = new Date();
+                java.sql.Date sqlnv_date = new java.sql.Date(nv_date.getTime());
+                Produit pdt=servP.ConsulterProduit(p.getReference());
+                pdt.setDate_mise(sqlnv_date);
+                servP.UpdateProduit(pdt);
+                lblNB_jours.setText("Le produit expire dans 30 jours");
+                Reload();
+            }
+        }); 
+    }
+    
     
 }

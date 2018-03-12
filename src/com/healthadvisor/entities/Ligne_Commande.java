@@ -4,7 +4,7 @@ package com.healthadvisor.entities;
 
 public class Ligne_Commande {
     
-    private String id_produit;
+    private int id_produit;
     private int id_commande;
     private float prix_commande;
     private int quantite;
@@ -12,20 +12,22 @@ public class Ligne_Commande {
     public Ligne_Commande() {
     }
 
-    public Ligne_Commande(String id_produit, int id_commande, float prix_commande, int quantite) {
+    public Ligne_Commande(int id_produit, int id_commande, float prix_commande, int quantite) {
         this.id_produit = id_produit;
         this.id_commande = id_commande;
         this.prix_commande = prix_commande;
         this.quantite = quantite;
     }
 
-    public String getId_produit() {
+    public int getId_produit() {
         return id_produit;
     }
 
-    public void setId_produit(String id_produit) {
+    public void setId_produit(int id_produit) {
         this.id_produit = id_produit;
     }
+
+   
 
     public int getId_commande() {
         return id_commande;

@@ -1,4 +1,3 @@
-
 package com.healthadvisor.service.impl;
 
 
@@ -23,11 +22,19 @@ public class ServiceCommande implements InterfaceCommande  {
 
     @Override
     public void AjouterCommande(Commande cmd) {
-         String req = "insert into commande(NUMERO_COMMANDE,DATE_PAYEMENT,MODE_PAYEMENT,ID_CLIENT) values("+cmd.getNum_commande()+","+cmd.getDate_commande()+",'"+cmd.getMode_payement()+"','"+cmd.getID_client()+"')"; 
+        
+        java.util.Date date_commande = cmd.getDate_commande();
+        java.sql.Date sqlDate_commande = new java.sql.Date(date_commande.getTime());
+        
         try
-        {
-            Statement stm = db.getConnexion().createStatement();
-            stm.executeUpdate(req);
+        {   Statement stm = db.getConnexion().createStatement();
+            String req = "insert into commande(REFERENCE_COMMANDE,DATE_PAYEMENT,MODE_PAYEMENT,ID_CLIENT) "+" values (?,?,?,?)"; 
+            PreparedStatement preparedStmt = db.getConnexion().prepareStatement(req);
+            preparedStmt.setString(1, cmd.getReference_commande());
+            preparedStmt.setDate(2, sqlDate_commande);
+            preparedStmt.setString(3, cmd.getMode_payement());
+            preparedStmt.setString(4, cmd.getID_client());
+            preparedStmt.executeUpdate();
             System.out.println("ajout commande effectuer avec succes");
         }
         catch(SQLException add)
@@ -36,26 +43,6 @@ public class ServiceCommande implements InterfaceCommande  {
         }
     }
 
-    @Override
-    public void SupprimerCommande(int num_commande) {
-        Commande c=ConsulterCommande(num_commande);
-        if(c.getNum_commande() == 0){
-            System.out.println("Commande n'existe pas");
-        }
-        else{
-                try
-               {
-                PreparedStatement stm = db.getConnexion().prepareStatement("delete from commande where NUMERO_COMMANDE = ?"); 
-                stm.setInt(1,num_commande);
-                stm.executeUpdate();
-                System.out.println("Suppression commande effectue avec succes");
-                }
-                catch(SQLException add)
-                {
-                System.out.println("Echec de suppression de commande"+add.getSQLState());
-                }
-            }
-    }
 
     @Override
     public void UpdateCommande(Commande cmd) {
@@ -83,9 +70,10 @@ public class ServiceCommande implements InterfaceCommande  {
           {
               Commande cmd=new Commande();
               cmd.setNum_commande(s.getInt(1));
-              cmd.setDate_commande(s.getDate(2));
-              cmd.setMode_payement(s.getString(3));
-              cmd.setID_client(s.getString(4));
+              cmd.setReference_commande(s.getString(2));
+              cmd.setDate_commande(s.getDate(3));
+              cmd.setMode_payement(s.getString(4));
+              cmd.setID_client(s.getString(5));
               tabE.add(cmd);
           }
           System.out.println("patientiez en cours d'affichage de la liste des commandes");
@@ -99,20 +87,42 @@ public class ServiceCommande implements InterfaceCommande  {
     }
 
     @Override
-    public Commande ConsulterCommande(int num_commande) {
-        Commande c=new Commande();
+    public void SupprimerCommande(String ref_commande) {
+        Commande c=ConsulterCommande(ref_commande);
+        if(c.getNum_commande() == 0){
+            System.out.println("Commande n'existe pas");
+        }
+        else{
+                try
+               {
+                PreparedStatement stm = db.getConnexion().prepareStatement("delete from commande where REFERENCE_COMMANDE = ?"); 
+                stm.setString(1,ref_commande);
+                stm.executeUpdate();
+                System.out.println("Suppression commande effectue avec succes");
+                }
+                catch(SQLException add)
+                {
+                System.out.println("Echec de suppression de commande"+add.getSQLState());
+                }
+            }
+    }
+
+    @Override
+    public Commande ConsulterCommande(String ref_commande) {
+         Commande c=new Commande();
       try
       {
-          String sql = "select * from commande where NUMERO_COMMANDE = '"+ num_commande +"' ";
+          String sql = "select * from commande where REFERENCE_COMMANDE = '"+ ref_commande +"' ";
           Statement stm = db.getConnexion().createStatement();
           ResultSet s = stm.executeQuery(sql);
           while(s.next())
           {
               Commande cmd=new Commande();
               cmd.setNum_commande(s.getInt(1));
-              cmd.setDate_commande(s.getDate(2));
-              cmd.setMode_payement(s.getString(3));
-              cmd.setID_client(s.getString(4));
+              cmd.setReference_commande(s.getString(2));
+              cmd.setDate_commande(s.getDate(3));
+              cmd.setMode_payement(s.getString(4));
+              cmd.setID_client(s.getString(5));
               c=cmd;
           }
           System.out.println("patientiez en cours d'affichage");
@@ -121,7 +131,6 @@ public class ServiceCommande implements InterfaceCommande  {
       {
           System.out.println("probleme d'affichage ");
       }
-      //System.out.println(tabE.toString());
       return c;
     }
 
